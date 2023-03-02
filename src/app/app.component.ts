@@ -61,5 +61,10 @@ export class AppComponent {
       price: '42.99',
       img: 'assets/plants/image_58.png',
     },
+    {
+      name: 'calathea lietzei',
+      price: '13.99',
+      img: 'assets/plants/image_64.png',
+    },
   ];
 }

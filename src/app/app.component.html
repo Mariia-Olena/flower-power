@@ -22,18 +22,21 @@
       </nav>
     </div>
   </header>
-  <main>
-    <ul class="card__list">
-      <li *ngFor="let plant of plants" class="card__item">
-        <div class="card__img_border">
-          <img class="card__img" [src]="plant.img" />
-        </div>
-        <div class="card__descr">
-          <p class="card__title">{{ plant.name | titlecase }}</p>
-          <p class="card__price">{{ plant.price | currency }}</p>
-          <button class="card__button">ADD TO CART</button>
-        </div>
-      </li>
-    </ul>
-  </main>
+  <div class="container_content">
+    <main class="main">
+      <div class="filter">Filters</div>
+      <ul class="card__list">
+        <li *ngFor="let plant of plants" class="card__item">
+          <div class="card__img_border">
+            <img class="card__img" [src]="plant.img" />
+          </div>
+          <div class="card__descr">
+            <p class="card__title">{{ plant.name | titlecase }}</p>
+            <p class="card__price">{{ plant.price | currency }}</p>
+            <button class="card__button">ADD TO CART</button>
+          </div>
+        </li>
+      </ul>
+    </main>
+  </div>
 </div>
