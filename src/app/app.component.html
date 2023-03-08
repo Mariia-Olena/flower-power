@@ -1,42 +1,73 @@
-<div class="container">
-  <header class="header">
-    <div class="container_content">
-      <nav class="header__nav">
-        <div class="heared__nav_left">
-          <img class="header__logo" src="assets/logo.png" alt="flower power" />
-          <ul class="header__list">
-            <li *ngFor="let item of navBar" class="header__item">
-              <a [routerLink]="item.link" class="header__link">{{
-                item.name | uppercase
-              }}</a>
-            </li>
-          </ul>
-        </div>
-        <ul class="header__list header__list_left">
-          <li *ngFor="let tool of toolBar" class="header__item">
-            <a>
-              <img [src]="tool.iconLink" [alt]="tool.name" />
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <div class="container_content">
-    <main class="main">
-      <div class="filter">Filters</div>
-      <ul class="card__list">
-        <li *ngFor="let plant of plants" class="card__item">
-          <div class="card__img_border">
-            <img class="card__img" [src]="plant.img" />
-          </div>
-          <div class="card__descr">
-            <p class="card__title">{{ plant.name | titlecase }}</p>
-            <p class="card__price">{{ plant.price | currency }}</p>
-            <button class="card__button">ADD TO CART</button>
-          </div>
+<header class="header">
+  <div class="header__message">
+    <p class="header__message__text">
+      Free Shipping on All Orders / 30 Day Healthy Plant Guarantee
+    </p>
+  </div>
+  <div class="container">
+    <nav class="header__nav">
+      <ul class="header__nav__list">
+        <li class="header__nav__logo">
+          <a href="/" class="header__nav__link">
+            <img src="assets/logo.svg" alt="flower power" />
+          </a>
+        </li>
+        <li *ngFor="let item of navBar">
+          <a [routerLink]="item.link" class="header__nav__link"
+            >{{ item.name | uppercase }}
+            <img [src]="item.iconLink" />
+          </a>
         </li>
       </ul>
-    </main>
+      <ul class="header__nav__list header__nav__list_left">
+        <li *ngFor="let tool of toolBar">
+          <a [routerLink]="tool.link">
+            <img [src]="tool.iconLink" [alt]="tool.name" />
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
+</header>
+<div class="container">
+  <main class="main">
+    <h1 class="main__title">ALL PLANTS</h1>
+    <div class="main__view">
+      <div class="main__view__item">
+        Sort by
+        <div class="main__view__item_filter">
+          Best selling
+          <img src="assets/icons/tick.svg" />
+        </div>
+      </div>
+      <div class="main__view__item">
+        View as
+        <button class="main__view__button">
+          <img src="assets/icons/blocks.svg" />
+        </button>
+        <button class="main__view__button">
+          <img src="assets/icons/lines.svg" />
+        </button>
+      </div>
+    </div>
+    <div class="goods">
+      <section class="filter"><div class="filter__text">filter</div></section>
+      <section class="card">
+        <ul class="card__list">
+          <li *ngFor="let plant of plants" class="card__item">
+            <a href="/" class="card__link_img">
+              <img class="card__img" [src]="plant.img" />
+            </a>
+            <div class="card__descr">
+              <a href="/" class="card__descr__title">{{
+                plant.name | titlecase
+              }}</a>
+              <p class="card__descr__price">{{ plant.price | currency }}</p>
+              <button class="card__descr__button">ADD TO CART</button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </main>
 </div>

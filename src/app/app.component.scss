@@ -1,129 +1,165 @@
-//color
-$green: #5f7a34;
-$corn: #efe744;
-$lightGrey: #f6f7f9;
-$greyX: #b6b6b6;
-$darkGreen: #242923;
-$black: #000000;
+@import "../variable-template.scss";
 
-//fonts
-%subHead2 {
-  font-family: Roboto;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0em;
-  color: $black;
-  text-decoration: none;
-}
-
-%fontButton {
-  font-family: Roboto;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 21px;
-  letter-spacing: 0.2em;
-}
-
-//borders
-%card {
-  border: 0.98px solid $greyX;
-}
-
-//button
-%batton {
-  @extend %fontButton;
-  background-color: $corn;
-  border: none;
-  border-radius: 6px;
-  padding: 20px 30px 20px 30px;
-  text-align: center;
-}
-
-ul {
-  list-style-type: none;
-}
-
-.container {
+.wrapper {
   width: 1920px;
   margin-right: auto;
   margin-left: auto;
 }
 
-.container_content {
+.container {
   width: 1530px;
   margin-right: auto;
   margin-left: auto;
 }
 
 .header {
-  height: 80px;
   background-color: $lightGrey;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.header__nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+  &__message {
+    background-color: $green;
+    height: 3.4375em;
+    display: flex;
 
-.heared__nav_left {
-  display: flex;
-  align-items: center;
-}
+    &__text {
+      @extend %subHead1;
+      color: $lightGrey;
+      margin: auto;
+    }
+  }
 
-.header__logo {
-  margin-right: 56px;
-}
+  &__nav {
+    display: flex;
+    height: 5em;
 
-.header__list {
-  margin: 0;
-  padding: 0;
-}
+    &__list {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+      gap: 25px;
+    }
 
-.header__item {
-  display: inline;
-  margin-right: 40px;
+    &__list_left {
+      justify-content: flex-end;
+    }
 
-  &:last-child {
-    margin-right: 0;
+    &__link {
+      @extend %subHead2;
+    }
+
+    &__logo {
+      margin-right: 30px;
+    }
   }
 }
 
-.header__link {
-  @extend %subHead2;
-}
-
 .main {
+  &__title {
+    @extend %header1;
+    height: 6rem;
+    padding-top: 2rem;
+    padding-bottom: 1.25rem;
+    margin-left: 290px;
+  }
+
+  &__view {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.75em;
+    margin-left: 290px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: $lightGrey;
+    border-radius: 6px;
+
+    &__item {
+      @extend %subHead3;
+      display: flex;
+      gap: 20px;
+      align-items: baseline;
+    }
+
+    &__item_filter {
+      @extend %bodyText;
+      margin-left: 20px;
+    }
+
+    &__button {
+      border: none;
+      background-color: transparent;
+    }
+  }
+}
+
+.goods {
   display: flex;
-}
-
-.card__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin: 0;
-  padding: 0;
-  width: 1240px;
-}
-
-.card__img_border {
-  @extend %card;
-  padding: 20px;
-  height: 295px;
-  width: 295px;
-}
-
-.card__button {
-  @extend %batton;
+  padding-top: 20px;
+  justify-content: space-between;
 }
 
 .filter {
-  width: 290px;
-  height: 500px;
   background-color: $lightGrey;
+
+  &__text {
+    width: 290px;
+  }
+}
+
+.card {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1.875rem;
+  }
+
+  &__link_img {
+    @extend %card;
+    padding: 20px;
+    height: 295px;
+    width: 295px;
+  }
+
+  &__descr {
+    border: 1px solid $lightGrey;
+    width: 295px;
+    position: relative;
+    padding-top: 10px;
+
+    &__title {
+      @extend %subHead3;
+    }
+
+    &__price {
+      @extend %subHead1;
+      color: $green;
+      margin-top: 10px;
+      margin-bottom: 40px;
+    }
+
+    &__button {
+      @extend %batton;
+      position: absolute;
+      left: 50%;
+      right: 50%;
+      width: max-content;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+@media (max-width: 1919px) {
+  .container {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 1439px) {
 }
