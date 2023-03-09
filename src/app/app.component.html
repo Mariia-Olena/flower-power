@@ -1,25 +1,23 @@
 <header class="header">
   <div class="header__message">
-    <p class="header__message__text">
-      Free Shipping on All Orders / 30 Day Healthy Plant Guarantee
-    </p>
+    Free Shipping on All Orders / 30 Day Healthy Plant Guarantee
   </div>
   <div class="container">
     <nav class="header__nav">
-      <ul class="header__nav__list">
-        <li class="header__nav__logo">
-          <a href="/" class="header__nav__link">
+      <ul class="header__list">
+        <li class="header__logo">
+          <a href="/" class="header__link">
             <img src="assets/logo.svg" alt="flower power" />
           </a>
         </li>
         <li *ngFor="let item of navBar">
-          <a [routerLink]="item.link" class="header__nav__link"
+          <a [routerLink]="item.link" class="header__link"
             >{{ item.name | uppercase }}
             <img [src]="item.iconLink" />
           </a>
         </li>
       </ul>
-      <ul class="header__nav__list header__nav__list_left">
+      <ul class="header__list header__list_left">
         <li *ngFor="let tool of toolBar">
           <a [routerLink]="tool.link">
             <img [src]="tool.iconLink" [alt]="tool.name" />
@@ -31,21 +29,21 @@
 </header>
 <div class="container">
   <main class="main">
-    <h1 class="main__title">ALL PLANTS</h1>
-    <div class="main__view">
-      <div class="main__view__item">
+    <h1 class="main__title title">ALL PLANTS</h1>
+    <div class="view">
+      <div class="view__container">
         Sort by
-        <div class="main__view__item_filter">
+        <div class="view__item_filter">
           Best selling
           <img src="assets/icons/tick.svg" />
         </div>
       </div>
-      <div class="main__view__item">
+      <div class="view__container">
         View as
-        <button class="main__view__button">
+        <button class="view__button">
           <img src="assets/icons/blocks.svg" />
         </button>
-        <button class="main__view__button">
+        <button class="view__button">
           <img src="assets/icons/lines.svg" />
         </button>
       </div>
@@ -55,19 +53,56 @@
       <section class="card">
         <ul class="card__list">
           <li *ngFor="let plant of plants" class="card__item">
-            <a href="/" class="card__link_img">
+            <a href="/" class="card__link">
               <img class="card__img" [src]="plant.img" />
             </a>
             <div class="card__descr">
-              <a href="/" class="card__descr__title">{{
+              <div class="rating">
+                <img src="assets/icons/star_full.svg" />
+                <img src="assets/icons/star_full.svg" />
+                <img src="assets/icons/star_full.svg" />
+                <img src="assets/icons/star_full.svg" />
+                <img src="assets/icons/star_full.svg" />
+              </div>
+              <a href="/" class="card__plant-name plant-name">{{
                 plant.name | titlecase
               }}</a>
-              <p class="card__descr__price">{{ plant.price | currency }}</p>
-              <button class="card__descr__button">ADD TO CART</button>
+              <p class="card__price price">{{ plant.price | currency }}</p>
+              <ul class="card__number number">
+                <li class="number__item">-</li>
+                <li class="number__item">1</li>
+                <li class="number__item">+</li>
+              </ul>
+              <button class="button card__button">ADD TO CART</button>
             </div>
           </li>
         </ul>
       </section>
     </div>
   </main>
+  <nav class="pagination">
+    <ul class="pagination__list">
+      <li class="pagination__item">
+        <a href="/" class="pagination__link">1</a>
+      </li>
+      <li class="pagination__item">
+        <a href="/" class="pagination__link">2</a>
+      </li>
+      <li class="pagination__item">
+        <a href="/" class="pagination__link">3</a>
+      </li>
+      <li class="pagination__item">
+        <a href="/" class="pagination__link">...</a>
+      </li>
+      <li class="pagination__item">
+        <a href="/" class="pagination__link">15</a>
+      </li>
+      <li class="pagination__item">
+        <a href="/" class="pagination__link"
+          >Next
+          <img src="assets/icons/arrow-right.svg" alt="" />
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>

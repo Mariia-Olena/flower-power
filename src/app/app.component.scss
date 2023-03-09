@@ -10,84 +10,119 @@
   width: 1530px;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 50px;
+}
+
+.title {
+  @extend %header1;
+}
+
+.rating {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.plant-name {
+  @extend %subHead3;
+}
+
+.price {
+  @extend %subHead1;
+  color: $green;
+}
+
+.number {
+  @extend %bodyText;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 4.5rem;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 8px;
+  background-color: $lightGrey;
+  border: 0.2px solid $greyX;
+  border-radius: 6px;
+}
+
+.button {
+  @extend %batton;
 }
 
 .header {
   background-color: $lightGrey;
 
   &__message {
+    @extend %subHead1;
+    color: $lightGrey;
     background-color: $green;
     height: 3.4375em;
     display: flex;
-
-    &__text {
-      @extend %subHead1;
-      color: $lightGrey;
-      margin: auto;
-    }
+    justify-content: center;
+    align-items: center;
   }
 
   &__nav {
     display: flex;
     height: 5em;
+  }
 
-    &__list {
-      display: flex;
-      flex: 1 1 auto;
-      align-items: center;
-      gap: 25px;
-    }
+  &__list {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 25px;
+  }
 
-    &__list_left {
-      justify-content: flex-end;
-    }
+  &__list_left {
+    justify-content: flex-end;
+  }
 
-    &__link {
-      @extend %subHead2;
-    }
+  &__link {
+    @extend %subHead2;
+  }
 
-    &__logo {
-      margin-right: 30px;
-    }
+  &__logo {
+    margin-right: 30px;
   }
 }
 
 .main {
   &__title {
-    @extend %header1;
     height: 6rem;
     padding-top: 2rem;
     padding-bottom: 1.25rem;
     margin-left: 290px;
   }
+}
 
-  &__view {
+.view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3.75em;
+  margin-left: 290px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: $lightGrey;
+  border-radius: 6px;
+
+  &__container {
+    @extend %subHead3;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 3.75em;
-    margin-left: 290px;
-    padding-right: 20px;
-    padding-left: 20px;
-    background-color: $lightGrey;
-    border-radius: 6px;
+    gap: 20px;
+    align-items: baseline;
+  }
 
-    &__item {
-      @extend %subHead3;
-      display: flex;
-      gap: 20px;
-      align-items: baseline;
-    }
+  &__item_filter {
+    @extend %bodyText;
+    margin-left: 20px;
+  }
 
-    &__item_filter {
-      @extend %bodyText;
-      margin-left: 20px;
-    }
-
-    &__button {
-      border: none;
-      background-color: transparent;
-    }
+  &__button {
+    border: none;
+    background-color: transparent;
   }
 }
 
@@ -120,7 +155,7 @@
     margin-bottom: 1.875rem;
   }
 
-  &__link_img {
+  &__link {
     @extend %card;
     padding: 20px;
     height: 295px;
@@ -132,26 +167,44 @@
     width: 295px;
     position: relative;
     padding-top: 10px;
+  }
 
-    &__title {
-      @extend %subHead3;
-    }
+  &__plant-name {
+    display: block;
+    margin-top: 10px;
+  }
 
-    &__price {
-      @extend %subHead1;
-      color: $green;
-      margin-top: 10px;
-      margin-bottom: 40px;
-    }
+  &__price {
+    margin-top: 10px;
+  }
 
-    &__button {
-      @extend %batton;
-      position: absolute;
-      left: 50%;
-      right: 50%;
-      width: max-content;
-      transform: translate(-50%, -50%);
-    }
+  &__number {
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
+
+  &__button {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    width: max-content;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.pagination {
+  @extend %subHead1;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+
+  &__list {
+    display: flex;
+    gap: 25px;
+  }
+
+  &__link {
+    color: $green;
   }
 }
 
