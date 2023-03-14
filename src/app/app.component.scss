@@ -47,7 +47,7 @@
 }
 
 .button {
-  @extend %batton;
+  @extend %button;
 }
 
 .header {
@@ -81,6 +81,12 @@
 
   &__link {
     @extend %subHead2;
+
+    &::after {
+      content: url("../assets/sprite.svg#tick");
+      height: 5px;
+      width: 10px;
+    }
   }
 
   &__logo {
@@ -206,6 +212,21 @@
   &__link {
     color: $green;
   }
+}
+
+.header-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.rating-star {
+  height: 15px;
+  width: 15.71px;
+}
+
+.logo {
+  height: 56px;
+  width: 100px;
 }
 
 @media (max-width: 1919px) {

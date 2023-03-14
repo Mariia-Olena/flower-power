@@ -10,40 +10,18 @@ export class AppComponent {
     {
       name: 'shop',
       link: '',
-      iconLink: 'assets/icons/tick.svg',
     },
     {
       name: 'plant care',
       link: '',
-      iconLink: 'assets/icons/tick.svg',
     },
     {
       name: 'contact us',
       link: '',
-      iconLink: 'assets/icons/tick.svg',
     },
     {
       name: 'business gifting',
       link: '',
-      iconLink: 'assets/icons/tick.svg',
-    },
-  ];
-
-  toolBar = [
-    {
-      name: 'log in',
-      link: '',
-      iconLink: 'assets/icons/log_in.svg',
-    },
-    {
-      name: 'search',
-      link: '',
-      iconLink: 'assets/icons/search.svg',
-    },
-    {
-      name: 'cart',
-      link: '',
-      iconLink: 'assets/icons/cart.svg',
     },
   ];
 

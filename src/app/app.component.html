@@ -7,20 +7,37 @@
       <ul class="header__list">
         <li class="header__logo">
           <a href="/" class="header__link">
-            <img src="assets/logo.svg" alt="flower power" />
+            <svg class="logo">
+              <use xlink:href="assets/sprite.svg#logo"></use>
+            </svg>
           </a>
         </li>
         <li *ngFor="let item of navBar">
-          <a [routerLink]="item.link" class="header__link"
-            >{{ item.name | uppercase }}
-            <img [src]="item.iconLink" />
+          <a [routerLink]="item.link" class="header__link">
+            {{ item.name | uppercase }}
           </a>
         </li>
       </ul>
       <ul class="header__list header__list_left">
-        <li *ngFor="let tool of toolBar">
-          <a [routerLink]="tool.link">
-            <img [src]="tool.iconLink" [alt]="tool.name" />
+        <li>
+          <a href="">
+            <svg class="header-icon">
+              <use xlink:href="assets/sprite.svg#log_in"></use>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <svg class="header-icon">
+              <use xlink:href="assets/sprite.svg#search"></use>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <svg class="header-icon">
+              <use xlink:href="assets/sprite.svg#cart"></use>
+            </svg>
           </a>
         </li>
       </ul>
@@ -58,11 +75,21 @@
             </a>
             <div class="card__descr">
               <div class="rating">
-                <img src="assets/icons/star_full.svg" />
-                <img src="assets/icons/star_full.svg" />
-                <img src="assets/icons/star_full.svg" />
-                <img src="assets/icons/star_full.svg" />
-                <img src="assets/icons/star_full.svg" />
+                <svg class="rating-star">
+                  <use xlink:href="assets/sprite.svg#star_full"></use>
+                </svg>
+                <svg class="rating-star">
+                  <use xlink:href="assets/sprite.svg#star_full"></use>
+                </svg>
+                <svg class="rating-star">
+                  <use xlink:href="assets/sprite.svg#star_full"></use>
+                </svg>
+                <svg class="rating-star">
+                  <use xlink:href="assets/sprite.svg#star_full"></use>
+                </svg>
+                <svg class="rating-star">
+                  <use xlink:href="assets/sprite.svg#star_full"></use>
+                </svg>
               </div>
               <a href="/" class="card__plant-name plant-name">{{
                 plant.name | titlecase
