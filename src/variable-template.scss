@@ -1,10 +1,12 @@
-//color
-$green: #5f7a34;
-$corn: #efe744;
-$lightGrey: #f6f7f9;
-$greyX: #b6b6b6;
-$darkGreen: #242923;
-$black: #000000;
+body {
+  //color
+  --green: #5f7a34;
+  --corn: #efe744;
+  --lightGrey: #f6f7f9;
+  --greyX: #b6b6b6;
+  --darkGreen: #242923;
+  --black: #000000;
+}
 
 //fonts
 
@@ -61,13 +63,13 @@ $black: #000000;
 
 //borders
 %card {
-  border: 0.98px solid $greyX;
+  border: 0.98px solid var(--greyX);
 }
 
 //button
 %button {
   @extend %fontButton;
-  background-color: $corn;
+  background-color: var(--corn);
   border: none;
   border-radius: 6px;
   padding: 20px 30px 20px 30px;

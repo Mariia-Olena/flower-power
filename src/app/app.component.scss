@@ -29,7 +29,7 @@
 
 .price {
   @extend %subHead1;
-  color: $green;
+  color: var(--green);
 }
 
 .number {
@@ -41,8 +41,8 @@
   margin-right: auto;
   margin-left: auto;
   padding: 8px;
-  background-color: $lightGrey;
-  border: 0.2px solid $greyX;
+  background-color: var(--lightGrey);
+  border: 0.2px solid var(--greyX);
   border-radius: 6px;
 }
 
@@ -51,12 +51,12 @@
 }
 
 .header {
-  background-color: $lightGrey;
+  background-color: var(--lightGrey);
 
   &__message {
     @extend %subHead1;
-    color: $lightGrey;
-    background-color: $green;
+    color: var(--lightGrey);
+    background-color: var(--green);
     height: 3.4375em;
     display: flex;
     justify-content: center;
@@ -111,7 +111,7 @@
   margin-left: 290px;
   padding-right: 20px;
   padding-left: 20px;
-  background-color: $lightGrey;
+  background-color: var(--lightGrey);
   border-radius: 6px;
 
   &__container {
@@ -139,7 +139,7 @@
 }
 
 .filter {
-  background-color: $lightGrey;
+  background-color: var(--lightGrey);
 
   &__text {
     width: 290px;
@@ -169,7 +169,7 @@
   }
 
   &__descr {
-    border: 1px solid $lightGrey;
+    border: 1px solid var(--lightGrey);
     width: 295px;
     position: relative;
     padding-top: 10px;
@@ -210,7 +210,7 @@
   }
 
   &__link {
-    color: $green;
+    color: var(--green);
   }
 }
 
