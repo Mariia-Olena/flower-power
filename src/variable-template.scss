@@ -1,11 +1,13 @@
-body {
+:host {
   //color
   --green: #5f7a34;
+  --green-opacity: #5f7a34bf;
   --corn: #efe744;
   --lightGrey: #f6f7f9;
   --greyX: #b6b6b6;
   --darkGreen: #242923;
   --black: #000000;
+  --corn-opacity: #efe744bf;
 }
 
 //fonts
@@ -74,4 +76,9 @@ body {
   border-radius: 6px;
   padding: 20px 30px 20px 30px;
   text-align: center;
+}
+
+@function rem($value) {
+  $remValue: ($value / 16) + rem;
+  @return $remValue;
 }
