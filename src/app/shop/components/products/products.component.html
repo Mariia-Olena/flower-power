@@ -11,20 +11,18 @@
           View as
           <button class="view-button">
             <svg class="view-icon">
-              <use xlink:href="assets/sprite.svg#blocks"></use>
+              <use xlink:href="assets/icons/sprite.svg#blocks"></use>
             </svg>
           </button>
           <button class="view-button">
             <svg class="view-icon">
-              <use xlink:href="assets/sprite.svg#lines"></use>
+              <use xlink:href="assets/icons/sprite.svg#lines"></use>
             </svg>
           </button>
         </div>
       </div>
     </div>
-    <section class="filter">
-      <div class="filter-text">filter</div>
-    </section>
+    <app-filter class="filter"></app-filter>
     <section class="card">
       <ul class="card-list">
         <li *ngFor="let plant of plants" class="card-item">
@@ -32,91 +30,15 @@
             <img class="card-img" [src]="plant.img" [alt]="plant.name" />
           </a>
           <div class="card-descr">
-            <div class="rating">
-              <svg class="rating-star">
-                <use xlink:href="assets/sprite.svg#star_full"></use>
-              </svg>
-              <svg class="rating-star">
-                <use xlink:href="assets/sprite.svg#star_full"></use>
-              </svg>
-              <svg class="rating-star">
-                <use xlink:href="assets/sprite.svg#star_full"></use>
-              </svg>
-              <svg class="rating-star">
-                <use xlink:href="assets/sprite.svg#star_full"></use>
-              </svg>
-              <svg class="rating-star">
-                <use xlink:href="assets/sprite.svg#star_full"></use>
-              </svg>
-            </div>
+            <app-rating></app-rating>
             <a href="/" class="plant-name">{{ plant.name | titlecase }}</a>
             <p class="price">{{ plant.price | currency }}</p>
-            <ul class="number">
-              <li class="number-item">-</li>
-              <li class="number-item">1</li>
-              <li class="number-item">+</li>
-            </ul>
-            <button class="card-button">ADD TO CART</button>
-          </div>
-        </li>
-        <li *ngFor="let plant of plants" class="card-item">
-          <a href="/" class="card-link">
-            <img class="card-img" [src]="plant.img" [alt]="plant.name" />
-          </a>
-          <div class="card-descr">
-            <div class="rating">
-              <svg class="rating-star">
-                <use xlink:href="assets/sprite.svg#star_full"></use>
-              </svg>
-              <svg class="rating-star">
-                <use xlink:href="assets/sprite.svg#star_full"></use>
-              </svg>
-              <svg class="rating-star">
-                <use xlink:href="assets/sprite.svg#star_full"></use>
-              </svg>
-              <svg class="rating-star">
-                <use xlink:href="assets/sprite.svg#star_full"></use>
-              </svg>
-              <svg class="rating-star">
-                <use xlink:href="assets/sprite.svg#star_full"></use>
-              </svg>
-            </div>
-            <a href="/" class="plant-name">{{ plant.name | titlecase }}</a>
-            <p class="price">{{ plant.price | currency }}</p>
-            <ul class="number">
-              <li class="number-item">-</li>
-              <li class="number-item">1</li>
-              <li class="number-item">+</li>
-            </ul>
-            <button class="card-button">ADD TO CART</button>
+            <app-counter></app-counter>
+            <button class="button card-button">ADD TO CART</button>
           </div>
         </li>
       </ul>
     </section>
   </main>
-  <nav class="pagination">
-    <ul class="pagination__list">
-      <li class="pagination__item">
-        <a href="/" class="pagination__link">1</a>
-      </li>
-      <li class="pagination__item">
-        <a href="/" class="pagination__link">2</a>
-      </li>
-      <li class="pagination__item">
-        <a href="/" class="pagination__link">3</a>
-      </li>
-      <li class="pagination__item">
-        <a href="/" class="pagination__link">...</a>
-      </li>
-      <li class="pagination__item">
-        <a href="/" class="pagination__link">15</a>
-      </li>
-      <li class="pagination__item">
-        <a href="/" class="pagination__link"
-          >Next
-          <img src="assets/icons/arrow-right.svg" alt="" />
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <app-pagination></app-pagination>
 </div>

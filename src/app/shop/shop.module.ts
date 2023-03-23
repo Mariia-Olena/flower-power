@@ -9,6 +9,8 @@ import { ShopHomeComponent } from './components/shop-home/shop-home.component';
 import { CartComponent } from './components/cart/cart.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { FilterComponent } from './components/filter/filter.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     CartComponent,
     HomePageComponent,
     NotFoundComponent,
+    FilterComponent,
   ],
-  imports: [CommonModule, ShopRoutingModule],
+  imports: [CommonModule, ShopRoutingModule, SharedModule],
 })
 export class ShopModule {}

@@ -1,10 +1,5 @@
 @import "../../../../assets/style-variables.scss";
 
-.container {
-  max-width: 1530px;
-  margin: 0 auto rem(50);
-}
-
 .main {
   display: grid;
   grid-template-areas:
@@ -59,10 +54,7 @@
 
 .filter {
   grid-area: filter;
-
-  &-text {
-    width: 290px;
-  }
+  width: 290px;
 }
 
 .card {
@@ -84,7 +76,7 @@
   }
 
   &-link {
-    @extend %card;
+    border: 1px solid var(--greyX);
     padding: rem(20);
     max-height: 295px;
     max-width: 295px;
@@ -104,7 +96,6 @@
   }
 
   &-button {
-    @extend %button;
     position: absolute;
     left: 50%;
     right: 50%;
@@ -114,17 +105,6 @@
     &:hover {
       background-color: var(--corn-opacity);
     }
-  }
-}
-
-.rating {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-
-  &-star {
-    height: 15px;
-    width: 15.71px;
   }
 }
 
@@ -141,39 +121,4 @@
   @extend %subHead1;
   color: var(--green);
   margin-top: rem(10);
-}
-
-.number {
-  @extend %bodyText;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  width: 4.5rem;
-  margin: rem(10) auto rem(40) auto;
-  padding: 8px;
-  background-color: var(--lightGrey);
-  border: 0.2px solid var(--greyX);
-  border-radius: 6px;
-}
-
-.pagination {
-  @extend %subHead1;
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-
-  &__list {
-    display: flex;
-    gap: 25px;
-  }
-
-  &__link {
-    color: var(--green);
-  }
-}
-
-@media (max-width: 1919px) {
-  .container {
-    padding: 0 15px;
-  }
 }

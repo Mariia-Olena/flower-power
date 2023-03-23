@@ -13,6 +13,13 @@
   --darkGreen: #242923;
   --black: #000000;
   --corn-opacity: #efe744bf;
+
+  //display width
+  --desktopHD: 1920px;
+  --desktopSD: 1440px;
+  --tabletHD: 1024px;
+  --tabletSD: 768px;
+  --mobile: 375px;
 }
 
 //fonts
@@ -87,19 +94,4 @@
   font-weight: 400;
   line-height: rem(21);
   letter-spacing: 0.2em;
-}
-
-//borders
-%card {
-  border: 1px solid var(--greyX);
-}
-
-//button
-%button {
-  @extend %fontButton;
-  background-color: var(--corn);
-  border: none;
-  border-radius: 6px;
-  padding: 20px 30px 20px 30px;
-  text-align: center;
 }

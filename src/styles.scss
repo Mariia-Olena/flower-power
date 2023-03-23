@@ -180,3 +180,17 @@ button {
   border: none;
   background-color: inherit;
 }
+
+.container {
+  max-width: 1530px;
+  margin: 0 auto;
+}
+
+.button {
+  @extend %fontButton;
+  background-color: var(--corn);
+  border: none;
+  border-radius: 6px;
+  padding: 20px 30px 20px 30px;
+  text-align: center;
+}
