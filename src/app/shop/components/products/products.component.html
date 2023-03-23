@@ -25,17 +25,8 @@
     <app-filter class="filter"></app-filter>
     <section class="card">
       <ul class="card-list">
-        <li *ngFor="let plant of plants" class="card-item">
-          <a href="/" class="card-link">
-            <img class="card-img" [src]="plant.img" [alt]="plant.name" />
-          </a>
-          <div class="card-descr">
-            <app-rating></app-rating>
-            <a href="/" class="plant-name">{{ plant.name | titlecase }}</a>
-            <p class="price">{{ plant.price | currency }}</p>
-            <app-counter></app-counter>
-            <button class="button card-button">ADD TO CART</button>
-          </div>
+        <li *ngFor="let plant of plants">
+          <app-product-card [plant]="plant"></app-product-card>
         </li>
       </ul>
     </section>

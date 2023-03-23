@@ -1,0 +1,12 @@
+<div class="card-item">
+  <a href="/" class="card-link">
+    <img class="card-img" [src]="plant.img" [alt]="plant.name" />
+  </a>
+  <div class="card-descr">
+    <app-rating></app-rating>
+    <a href="/" class="plant-name">{{ plant.name | titlecase }}</a>
+    <p class="price">{{ plant.price | currency }}</p>
+    <app-counter></app-counter>
+    <button class="button card-button">ADD TO CART</button>
+  </div>
+</div>

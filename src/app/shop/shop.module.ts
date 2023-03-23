@@ -11,6 +11,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { SharedModule } from './shared/shared.module';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SharedModule } from './shared/shared.module';
     HomePageComponent,
     NotFoundComponent,
     FilterComponent,
+    ProductCardComponent,
   ],
   imports: [CommonModule, ShopRoutingModule, SharedModule],
 })

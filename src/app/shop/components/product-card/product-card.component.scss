@@ -1,0 +1,58 @@
+@import "../../../../assets/style-variables.scss";
+
+.card {
+  &-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: rem(30);
+  }
+
+  &-link {
+    border: 1px solid var(--greyX);
+    padding: rem(20);
+    max-height: 295px;
+    max-width: 295px;
+  }
+
+  &-img {
+    height: 255px;
+    width: 255px;
+    object-fit: cover;
+  }
+
+  &-descr {
+    border: 1px solid var(--lightGrey);
+    width: 295px;
+    position: relative;
+    padding-top: rem(10);
+  }
+
+  &-button {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    width: max-content;
+    transform: translate(-50%, -50%);
+
+    &:hover {
+      background-color: var(--corn-opacity);
+    }
+  }
+}
+
+.plant-name {
+  @extend %subHead3;
+  display: block;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: rem(10);
+}
+
+.price {
+  @extend %subHead1;
+  color: var(--green);
+  margin-top: rem(10);
+}
