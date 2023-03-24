@@ -4,6 +4,8 @@ import { CounterComponent } from './counter/counter.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { RatingComponent } from './rating/rating.component';
 import { ButtonDirective } from './button/button.directive';
+import { SliderComponent } from './slider/slider.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -11,8 +13,9 @@ import { ButtonDirective } from './button/button.directive';
     PaginationComponent,
     RatingComponent,
     ButtonDirective,
+    SliderComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, SlickCarouselModule],
   exports: [
     CounterComponent,
     PaginationComponent,
