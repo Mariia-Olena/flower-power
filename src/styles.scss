@@ -156,6 +156,8 @@ select {
   vertical-align: middle;
 }
 
+//tag
+
 * {
   box-sizing: border-box;
 }
@@ -181,6 +183,8 @@ button {
   background-color: inherit;
 }
 
+//class
+
 .container {
   max-width: 1530px;
   margin: 0 auto;
@@ -193,4 +197,8 @@ button {
   border-radius: 6px;
   padding: 20px 30px 20px 30px;
   text-align: center;
+
+  &:hover {
+    background-color: var(--corn-opacity);
+  }
 }
