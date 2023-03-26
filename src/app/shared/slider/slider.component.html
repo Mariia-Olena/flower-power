@@ -1,1 +1,26 @@
-
+<div class="slider">
+  <div class="slider-img-container">
+    <div
+      class="slider-item"
+      [ngClass]="{ active: index === currentIndex }"
+      *ngFor="let slide of slides; let index = index"
+    >
+      <img class="slider-img" [src]="slide.url" (click)="changeImg(index)" />
+    </div>
+  </div>
+  <div class="slider-preview">
+    <img class="slider-preview-img" [src]="getCurrentSlideUrl()" alt="" />
+    <div>
+      <button (click)="toPrev()" class="slider-arrow slider-arrow-left">
+        <svg class="slider-svg">
+          <use xlink:href="assets/icons/sprite.svg#arrow-left"></use>
+        </svg>
+      </button>
+      <button (click)="toNext()" class="slider-arrow slider-arrow-right">
+        <svg class="slider-svg">
+          <use xlink:href="assets/icons/sprite.svg#arrow-right"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

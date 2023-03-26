@@ -5,7 +5,6 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { RatingComponent } from './rating/rating.component';
 import { ButtonDirective } from './button/button.directive';
 import { SliderComponent } from './slider/slider.component';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -15,12 +14,13 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     ButtonDirective,
     SliderComponent,
   ],
-  imports: [CommonModule, SlickCarouselModule],
+  imports: [CommonModule],
   exports: [
     CounterComponent,
     PaginationComponent,
     RatingComponent,
     ButtonDirective,
+    SliderComponent,
   ],
 })
 export class SharedModule {}
