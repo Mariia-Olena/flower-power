@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   navBar = [
     {
       name: 'shop',
-      link: '',
+      link: 'products',
     },
     {
       name: 'plant care',

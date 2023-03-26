@@ -1,0 +1,29 @@
+@import "../../../../assets/style-variables.scss";
+
+.main {
+  display: grid;
+  grid-template-areas:
+    "filter title"
+    "filter cards";
+  grid-template-columns: max-content 1fr;
+}
+
+.title {
+  @extend %header1;
+  height: rem(96);
+  padding: rem(30) 0 rem(20);
+
+  &-container {
+    grid-area: title;
+  }
+}
+
+.filter {
+  grid-area: filter;
+  width: 290px;
+}
+
+.cards {
+  grid-area: cards;
+  margin-top: rem(20);
+}

@@ -1,12 +1,16 @@
 <div class="card-item">
-  <a href="/" class="card-link">
+  <a routerLink="id" class="card-link">
     <img class="card-img" [src]="plant.img" [alt]="plant.name" />
   </a>
   <div class="card-descr">
     <app-rating></app-rating>
-    <a href="/" class="plant-name">{{ plant.name | titlecase }}</a>
+    <div class="plant-name">
+      <a routerLink="id">{{ plant.name | titlecase }}</a>
+    </div>
     <p class="price">{{ plant.price | currency }}</p>
-    <app-counter></app-counter>
+    <div class="counter">
+      <app-counter></app-counter>
+    </div>
     <button appButton class="card-button">ADD TO CART</button>
   </div>
 </div>

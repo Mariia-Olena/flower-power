@@ -1,0 +1,55 @@
+<section class="product">
+  <app-slider></app-slider>
+  <div class="product-descr">
+    <h1 class="product-title">Peace Lily Plant - Spathyphyllium</h1>
+    <app-rating></app-rating>
+    <p class="price">{{ 29.99 | currency }}</p>
+    <div class="pot">
+      Size
+      <ul class="pot-list">
+        <li class="pot-item">
+          <button class="pot-button">10'' Pot</button>
+        </li>
+        <li class="pot-item">
+          <button class="pot-button">6'' Pot</button>
+        </li>
+        <li class="pot-item">
+          <button class="pot-button">4'' Pot</button>
+        </li>
+      </ul>
+    </div>
+    <div class="pot">
+      Pot type
+      <ul class="pot-list">
+        <li class="pot-item">
+          <button class="pot-button">White Cylinder</button>
+        </li>
+        <li class="pot-item">
+          <button class="pot-button">Navarro</button>
+        </li>
+        <li class="pot-item">
+          <button class="pot-button">Nursery Pot</button>
+        </li>
+      </ul>
+    </div>
+    <div class="pot">
+      Quantity
+      <app-counter></app-counter>
+    </div>
+    <div class="description">
+      <div class="description-item">
+        <svg class="description-icon">
+          <use xlink:href="assets/icons/sprite.svg#cloud"></use>
+        </svg>
+        <p>Most light conditions</p>
+      </div>
+      <div class="description-item">
+        <svg class="description-icon">
+          <use xlink:href="assets/icons/sprite.svg#smile"></use>
+        </svg>
+        <p>Easy care</p>
+      </div>
+    </div>
+    <button class="product-button button">ADD TO CART</button>
+  </div>
+</section>

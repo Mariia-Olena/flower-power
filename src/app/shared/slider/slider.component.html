@@ -8,8 +8,10 @@
       <img class="slider-img" [src]="slide.url" (click)="changeImg(index)" />
     </div>
   </div>
-  <div class="slider-preview">
-    <img class="slider-preview-img" [src]="getCurrentSlideUrl()" alt="" />
+  <div
+    class="slider-preview"
+    [ngStyle]="{ 'background-image': getCurrentSlideUrl() }"
+  >
     <div>
       <button (click)="toPrev()" class="slider-arrow slider-arrow-left">
         <svg class="slider-svg">

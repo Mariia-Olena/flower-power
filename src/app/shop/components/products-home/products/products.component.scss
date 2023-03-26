@@ -1,0 +1,7 @@
+@import "../../../../../assets/style-variables.scss";
+
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+  gap: rem(20);
+}

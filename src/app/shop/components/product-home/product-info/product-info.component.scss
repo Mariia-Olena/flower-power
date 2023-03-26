@@ -1,0 +1,65 @@
+@import "../../../../../assets/style-variables.scss";
+
+.plantcare {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-areas:
+    "video text"
+    "video charity";
+
+  &-video {
+    grid-area: video;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-text-container {
+    grid-area: text;
+    padding-left: rem(60);
+  }
+
+  &-title {
+    @extend %header2;
+  }
+
+  &-subtitle {
+    @extend %subHead3;
+  }
+
+  &-list {
+    margin-top: rem(45);
+  }
+
+  &-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  &-text {
+    @extend %subHead1;
+    margin: rem(28) 0 rem(28) rem(28);
+  }
+}
+
+.charity {
+  grid-area: charity;
+  text-align: center;
+  margin-top: rem(100);
+
+  &-title {
+    @extend %header2;
+    color: var(--corn);
+  }
+
+  &-text {
+    @extend %boldBodyText;
+    color: var(--green);
+    text-align: justify;
+    margin: rem(50) 0 0 rem(88);
+  }
+
+  &-link {
+    color: var(--green);
+    text-decoration: underline;
+  }
+}
