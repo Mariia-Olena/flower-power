@@ -1,0 +1,32 @@
+<div class="slider">
+  <ngx-slick-carousel
+    #slickModal="slick-carousel"
+    [config]="slideConfig"
+    (init)="slickInit($event)"
+    (breakpoint)="breakpoint($event)"
+    (afterChange)="afterChange($event)"
+    (beforeChange)="beforeChange($event)"
+  >
+    <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+      <img
+        [src]="slide.img"
+        alt=""
+        width="100%"
+        [height]="sliderHeight"
+        class="slider-img"
+      />
+    </div>
+  </ngx-slick-carousel>
+  <div>
+    <button (click)="prev()" class="slider-arrow slider-arrow-left">
+      <svg class="slider-svg">
+        <use xlink:href="assets/icons/sprite.svg#arrow-left"></use>
+      </svg>
+    </button>
+    <button (click)="next()" class="slider-arrow slider-arrow-right">
+      <svg class="slider-svg">
+        <use xlink:href="assets/icons/sprite.svg#arrow-right"></use>
+      </svg>
+    </button>
+  </div>
+</div>

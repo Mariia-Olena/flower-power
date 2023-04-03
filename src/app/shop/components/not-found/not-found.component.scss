@@ -1,8 +1,8 @@
-@import "../../../../assets/style-variables.scss";
+@import "style-variables.scss";
 
 .container {
   display: grid;
-  height: 80vh;
+  height: calc(100vh - var(--headerHeight));
   text-align: center;
 }
 
@@ -44,5 +44,5 @@
   color: var(--green);
   text-decoration: underline;
   align-self: flex-end;
-  padding-bottom: rem(10);
+  margin-top: rem(20);
 }

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductHomeComponent } from './components/product-home/product-home.component';
-import { ProductsHomeComponent } from './components/products-home/products-home.component';
-import { ShopHomeComponent } from './components/shop-home/shop-home.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ProductHomeComponent } from '@product/product-home.component';
+import { ProductsHomeComponent } from '@products/products-home.component';
+import { ShopHomeComponent } from '@shop/shop-home/shop-home.component';
+import { HomePageComponent } from '@shop/home-page/home-page.component';
+import { NotFoundComponent } from '@shop/not-found/not-found.component';
 
 const routes: Routes = [
   {

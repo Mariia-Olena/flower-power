@@ -1,25 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CounterComponent } from './counter/counter.component';
-import { PaginationComponent } from './pagination/pagination.component';
-import { RatingComponent } from './rating/rating.component';
-import { ButtonDirective } from './button/button.directive';
-import { SliderComponent } from './slider/slider.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+
+import { CounterComponent } from '@shared/counter/counter.component';
+import { PaginationComponent } from '@shared/pagination/pagination.component';
+import { RatingComponent } from '@shared/rating/rating.component';
+import { SliderComponent } from '@shared/slider/slider.component';
 
 @NgModule({
   declarations: [
     CounterComponent,
     PaginationComponent,
     RatingComponent,
-    ButtonDirective,
     SliderComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, SlickCarouselModule, ReactiveFormsModule],
   exports: [
     CounterComponent,
     PaginationComponent,
     RatingComponent,
-    ButtonDirective,
     SliderComponent,
   ],
 })

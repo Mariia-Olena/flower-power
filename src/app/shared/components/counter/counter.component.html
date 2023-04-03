@@ -1,0 +1,11 @@
+<form [formGroup]="formGroup">
+  <div class="counter" [formControlName]="'counter'">
+    <div class="counter-item">
+      <button (click)="onRemove()" class="counter-button">-</button>
+    </div>
+    <div class="counter-item">{{ quantity }}</div>
+    <div class="counter-item">
+      <button (click)="onAdd()" class="counter-button">+</button>
+    </div>
+  </div>
+</form>

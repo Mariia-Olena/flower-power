@@ -18,11 +18,17 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
-    "useDefineForClassFields": false
+    "lib": ["es2020", "dom"],
+    "useDefineForClassFields": false,
+    "paths": {
+      "@sharedModule/*": ["src/app/shared/*"],
+      "@shared/*": ["src/app/shared/components/*"],
+      "@shop/*": ["src/app/shop/components/*"],
+      "@productsHome/*": ["src/app/shop/components/products-home/components/*"],
+      "@products/*": ["src/app/shop/components/products-home/*"],
+      "@productHome/*": ["src/app/shop/components/product-home/components/*"],
+      "@product/*": ["src/app/shop/components/product-home/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
