@@ -45,12 +45,6 @@
   }
 }
 
-.price {
-  @extend %subHead1;
-  color: var(--green);
-  margin-top: rem(10);
-}
-
 .pot {
   @extend %bodyTitle;
   margin-top: rem(20);

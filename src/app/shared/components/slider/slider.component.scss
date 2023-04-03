@@ -1,3 +1,5 @@
+@import "style-variables.scss";
+
 :host {
   position: relative;
 }
@@ -43,4 +45,20 @@
 
 .slick-dotted.slick-slider {
   margin-bottom: 0;
+}
+
+.centerMode {
+  padding: 0 rem(10);
+}
+
+.text {
+  margin-top: rem(20);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-title {
+    @extend %subHead3;
+  }
 }

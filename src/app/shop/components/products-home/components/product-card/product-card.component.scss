@@ -48,12 +48,6 @@
   word-wrap: break-word;
 }
 
-.price {
-  @extend %subHead1;
-  color: var(--green);
-  margin-top: rem(10);
-}
-
 .counter {
   margin: rem(10) auto rem(40) auto;
 }

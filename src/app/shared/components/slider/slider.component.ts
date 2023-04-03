@@ -8,6 +8,7 @@ import { SlickCarouselComponent } from 'ngx-slick-carousel';
 })
 export class SliderComponent implements OnInit {
   @Input() sliderHeight = '';
+  @Input() sliderType = '';
   @ViewChild('slickModal') slickModal!: SlickCarouselComponent;
 
   slides = [
@@ -40,12 +41,28 @@ export class SliderComponent implements OnInit {
     },
   ];
 
-  slideConfig = {
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    dots: true,
-    arrows: false,
-  };
+  slideConfig = {};
+
+  addSliderConfig(): {} {
+    if (this.sliderType === 'singleItem') {
+      return {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: false,
+      };
+    }
+
+    if (this.sliderType === 'centerMode') {
+      return {
+        slidesToShow: 3,
+        centerMode: true,
+        centerPadding: '250px',
+      };
+    }
+
+    return {};
+  }
 
   slickInit(e: any) {
     console.log('slick initialized');
@@ -71,5 +88,7 @@ export class SliderComponent implements OnInit {
     this.slickModal.slickPrev();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.slideConfig = this.addSliderConfig();
+  }
 }

@@ -156,6 +156,12 @@ select {
   vertical-align: middle;
 }
 
+//slider
+
+ul.slick-dots {
+  bottom: 10px;
+}
+
 //tag
 
 * {
@@ -203,6 +209,8 @@ button {
   }
 }
 
-ul.slick-dots {
-  bottom: 10px;
+.price {
+  @extend %subHead1;
+  color: var(--green);
+  margin-top: rem(10);
 }
