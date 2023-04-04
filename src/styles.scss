@@ -165,10 +165,18 @@ body {
 }
 
 a {
-  color: $black;
+  color: var(--black);
   text-decoration: none;
+  cursor: pointer;
 }
 
 li {
   list-style-type: none;
+}
+
+button {
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background-color: inherit;
 }

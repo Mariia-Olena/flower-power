@@ -1,10 +1,19 @@
-//color
-$green: #5f7a34;
-$corn: #efe744;
-$lightGrey: #f6f7f9;
-$greyX: #b6b6b6;
-$darkGreen: #242923;
-$black: #000000;
+@function rem($value) {
+  $remValue: ($value / 16) + rem;
+  @return $remValue;
+}
+
+:host {
+  //color
+  --green: #5f7a34;
+  --green-opacity: #5f7a34bf;
+  --corn: #efe744;
+  --lightGrey: #f6f7f9;
+  --greyX: #b6b6b6;
+  --darkGreen: #242923;
+  --black: #000000;
+  --corn-opacity: #efe744bf;
+}
 
 //fonts
 
@@ -12,35 +21,35 @@ $black: #000000;
   font-family: "Bebas Neue";
   font-size: 3rem;
   font-weight: 400;
-  line-height: 58px;
+  line-height: rem(58);
   letter-spacing: 0em;
 }
 
 %header2 {
   font-size: 2.25rem;
   font-weight: 700;
-  line-height: 42px;
+  line-height: rem(42);
   letter-spacing: 0em;
 }
 
 %subHead1 {
   font-size: 1.125rem;
   font-weight: 400;
-  line-height: 21px;
+  line-height: rem(21);
   letter-spacing: 0em;
 }
 
 %subHead2 {
   font-size: 0.875rem;
   font-weight: 400;
-  line-height: 16px;
+  line-height: rem(16);
   letter-spacing: 0em;
 }
 
 %subHead3 {
   font-size: 1.125rem;
   font-weight: 700;
-  line-height: 21px;
+  line-height: rem(21);
   letter-spacing: 0em;
 }
 
@@ -48,26 +57,40 @@ $black: #000000;
   font-family: "Ubuntu";
   font-size: 0.875rem;
   font-weight: 400;
-  line-height: 16px;
+  line-height: rem(16);
+  letter-spacing: 0em;
+}
+
+%bodyTitle {
+  font-family: "Ubuntu";
+  font-weight: 700;
+  font-size: rem(18);
+  line-height: rem(21);
+}
+
+%boldBodyText {
+  font-size: rem(24);
+  font-weight: 700;
+  line-height: rem(28);
   letter-spacing: 0em;
 }
 
 %fontButton {
   font-size: 1rem;
   font-weight: 400;
-  line-height: 21px;
+  line-height: rem(21);
   letter-spacing: 0.2em;
 }
 
 //borders
 %card {
-  border: 0.98px solid $greyX;
+  border: 1px solid var(--greyX);
 }
 
 //button
-%batton {
+%button {
   @extend %fontButton;
-  background-color: $corn;
+  background-color: var(--corn);
   border: none;
   border-radius: 6px;
   padding: 20px 30px 20px 30px;

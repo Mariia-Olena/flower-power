@@ -1,0 +1,46 @@
+<header class="header">
+  <div class="message">
+    Free Shipping on All Orders / 30 Day Healthy Plant Guarantee
+  </div>
+  <div class="container">
+    <nav class="nav">
+      <ul class="list">
+        <li class="logo">
+          <a href="/" class="link">
+            <svg class="logo-icon">
+              <use xlink:href="assets/sprite.svg#logo"></use>
+            </svg>
+          </a>
+        </li>
+        <li *ngFor="let item of navBar" class="item">
+          <a [routerLink]="item.link" class="link">
+            {{ item.name | uppercase }}
+          </a>
+        </li>
+      </ul>
+      <ul class="list list-right">
+        <li>
+          <a href="">
+            <svg class="header-icon">
+              <use xlink:href="assets/sprite.svg#log_in"></use>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <svg class="header-icon">
+              <use xlink:href="assets/sprite.svg#search"></use>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <svg class="header-icon">
+              <use xlink:href="assets/sprite.svg#cart"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
