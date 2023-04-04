@@ -1,1 +1,10 @@
 <router-outlet></router-outlet>
+
+Form
+<form [formGroup]="myForm">
+  <input type="text" formControlName="username">
+  <app-counter formControlName="age"></app-counter>
+</form>
+<br>
+
+<button (click)="logForm()">Submit</button>

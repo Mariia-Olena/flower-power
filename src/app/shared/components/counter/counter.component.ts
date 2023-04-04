@@ -28,9 +28,9 @@ import {
   ],
 })
 export class CounterComponent implements ControlValueAccessor {
-  formGroup = new FormGroup({
-    counter: new FormControl(''),
-  });
+  // formGroup = new FormGroup({
+  //   counter: new FormControl(''),
+  // });
 
   quantity = 0;
 
@@ -79,14 +79,16 @@ export class CounterComponent implements ControlValueAccessor {
     this.disabled = disabled;
   }
 
-  // validate(control: AbstractControl): ValidationErrors | null {
-  //   const quantity = control.value;
-  //   if (quantity <= 0) {
-  //     return {
-  //       mustBePositive: {
-  //         quantity,
-  //       },
-  //     };
-  //   }
-  // }
+  validate(control: AbstractControl): ValidationErrors | null {
+    const quantity = control.value;
+    if (quantity <= 0) {
+      return {
+        mustBePositive: {
+          quantity,
+        },
+      };
+    }
+
+    return  null;
+  }
 }
