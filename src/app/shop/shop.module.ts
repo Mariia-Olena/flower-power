@@ -20,6 +20,7 @@ import { ProductHomeComponent } from '@product/product-home.component';
 import { ProductComponent } from '@productHome/product/product.component';
 import { ProductReviewComponent } from '@productHome/product-review/product-review.component';
 import { ProductInfoComponent } from '@productHome/product-info/product-info.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,12 @@ import { ProductInfoComponent } from '@productHome/product-info/product-info.com
     ProductsHomeComponent,
     ProductViewComponent,
   ],
-  imports: [CommonModule, ShopRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    ShopRoutingModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class ShopModule {}

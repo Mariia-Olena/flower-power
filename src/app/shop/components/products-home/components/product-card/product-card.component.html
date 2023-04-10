@@ -9,7 +9,9 @@
     </div>
     <p class="price">{{ plant.price | currency }}</p>
     <div class="counter">
-      <!-- <app-counter></app-counter> -->
+      <form [formGroup]="counterForm">
+        <app-counter formControlName="quantity"></app-counter>
+      </form>
     </div>
     <button class="button card-button">ADD TO CART</button>
   </div>

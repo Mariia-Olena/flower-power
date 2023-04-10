@@ -36,8 +36,10 @@
     </div>
     <div class="pot">
       Quantity
-      <div>
-        <app-counter></app-counter>
+      <div class="counter">
+        <form [formGroup]="counterForm">
+          <app-counter formControlName="quantity"></app-counter>
+        </form>
       </div>
     </div>
     <div class="description">

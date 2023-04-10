@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-product-card',
@@ -8,6 +9,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProductCardComponent implements OnInit {
   // temporary solution
   @Input() plant: any;
+
+  counterForm: FormGroup = new FormGroup({
+    quantity: new FormControl(0),
+  })
 
   constructor() {}
 
