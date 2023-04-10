@@ -1,1 +1,29 @@
-<p>cart works!</p>
+<div *ngIf="cart.items.length" class="cart">
+  <ul class="product">
+    <li *ngFor="let item of cart.items" class="product-item">
+      <img [src]="item.img" alt="item.name" class="product-img" />
+      <h2 class="product-name">{{ item.name }}</h2>
+      <p class="product-size">{{ item.size }}</p>
+      <p class="product-price">{{ item.price | currency }}</p>
+      <button (click)="removeProduct(item.id)" class="product-button">
+        <svg class="product-icon">
+          <use xlink:href="assets/icons/sprite.svg#trash_can"></use>
+        </svg>
+      </button>
+      <form [formGroup]="counterForm" class="product-counter">
+        <app-counter formControlName="quantity"></app-counter>
+      </form>
+    </li>
+  </ul>
+  <div class="total">
+    <h3 class="total-text">Total</h3>
+    <div class="total-price">{{ getTotalPrice() | currency }}</div>
+  </div>
+</div>
+
+<div *ngIf="!cart.items.length" class="message">
+  <p class="message-text">Your cart is empty</p>
+  <a routerLink="/products">
+    <button class="button message-button">Go shopping</button>
+  </a>
+</div>

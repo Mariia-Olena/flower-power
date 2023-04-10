@@ -5,7 +5,8 @@
   display: inline-flex;
   justify-content: center;
   align-items: baseline;
-  gap: rem(4);
+  gap: rem(10);
+  border: 1px solid var(--greyX);
   border-radius: 6px;
   background-color: var(--lightGrey);
 
