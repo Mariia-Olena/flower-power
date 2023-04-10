@@ -1,4 +1,11 @@
-import { Component, ViewChild, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  OnInit,
+  Input,
+  TemplateRef,
+  ElementRef,
+} from '@angular/core';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 
 @Component({
@@ -7,39 +14,11 @@ import { SlickCarouselComponent } from 'ngx-slick-carousel';
   styleUrls: ['./slider.component.scss'],
 })
 export class SliderComponent implements OnInit {
-  @Input() sliderHeight = '';
+  @Input() slides: any[] = [];
   @Input() sliderType = '';
+  @Input() slideTemplate: TemplateRef<ElementRef<HTMLElement>> | undefined;
+  @Input() options = {};
   @ViewChild('slickModal') slickModal!: SlickCarouselComponent;
-
-  slides = [
-    {
-      img: 'https://images.unsplash.com/photo-1632207691143-643e2a9a9361?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1964&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1620311497344-bce841c9c060?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1617693322135-13831d116f79?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1616500443036-788d60118813?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1616500443036-788d60118813?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1616500443036-788d60118813?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    },
-  ];
 
   slideConfig = {};
 
@@ -50,6 +29,7 @@ export class SliderComponent implements OnInit {
         slidesToScroll: 1,
         dots: true,
         arrows: false,
+        ...this.options,
       };
     }
 
@@ -58,10 +38,11 @@ export class SliderComponent implements OnInit {
         slidesToShow: 3,
         centerMode: true,
         centerPadding: '250px',
+        ...this.options,
       };
     }
 
-    return {};
+    return { ...this.options };
   }
 
   slickInit(e: any) {

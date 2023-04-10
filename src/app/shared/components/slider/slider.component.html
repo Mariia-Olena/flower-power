@@ -1,25 +1,13 @@
-<div class="slider">
+<div class="slider" *ngIf="slideTemplate && slides">
   <ngx-slick-carousel
     #slickModal="slick-carousel"
     [config]="slideConfig"
-    (init)="slickInit($event)"
-    (breakpoint)="breakpoint($event)"
-    (afterChange)="afterChange($event)"
     (beforeChange)="beforeChange($event)"
   >
     <div ngxSlickItem *ngFor="let slide of slides" class="slide">
-      <img
-        [src]="slide.img"
-        alt=""
-        width="100%"
-        [height]="sliderHeight"
-        class="slider-img"
-        class="{{ sliderType }}"
-      />
-      <div *ngIf="sliderType === 'centerMode'" class="text">
-        <p class="text-title">Sansevieria Trio</p>
-        <p class="price">{{ 29.99 | currency }}</p>
-      </div>
+      <ng-container
+        *ngTemplateOutlet="slideTemplate; context: { slideItem: slide }"
+      ></ng-container>
     </div>
   </ngx-slick-carousel>
   <div>

@@ -162,6 +162,15 @@ ul.slick-dots {
   bottom: 10px;
 }
 
+button.slick-next.slick-arrow {
+  position: relative;
+  display: none;
+}
+
+button.slick-next.slick-arrow::before {
+  display: none;
+}
+
 //tag
 
 * {

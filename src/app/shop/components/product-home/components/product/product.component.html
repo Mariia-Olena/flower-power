@@ -1,6 +1,22 @@
 <section class="product">
   <div class="product-slider">
-    <app-slider [sliderHeight]="'700'" [sliderType]="'singleItem'"></app-slider>
+    <app-slider
+      [sliderType]="'singleItem'"
+      [slides]="slides"
+      [slideTemplate]="slideCard"
+    ></app-slider>
+
+    <ng-template #slideCard let-slide="slideItem">
+      <div>
+        <img
+          [src]="slide.img"
+          alt=""
+          width="100%"
+          [height]="700"
+          class="slider-img"
+        />
+      </div>
+    </ng-template>
   </div>
   <div class="product-descr">
     <h1 class="product-title">Peace Lily Plant - Spathyphyllium</h1>
@@ -36,10 +52,8 @@
     </div>
     <div class="pot">
       Quantity
-      <div class="counter">
-        <form [formGroup]="counterForm">
-          <app-counter formControlName="quantity"></app-counter>
-        </form>
+      <div>
+        <app-counter></app-counter>
       </div>
     </div>
     <div class="description">

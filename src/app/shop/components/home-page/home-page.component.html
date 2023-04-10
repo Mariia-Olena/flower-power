@@ -1,1 +1,21 @@
-<app-slider [sliderHeight]="'550'" [sliderType]="'centerMode'"></app-slider>
+<app-slider
+  [sliderType]="'centerMode'"
+  [slides]="slides"
+  [slideTemplate]="slideCard"
+  [sliderType]="'centerMode'"
+></app-slider>
+
+<ng-template #slideCard let-slide="slideItem">
+  <img
+    [src]="slide.img"
+    alt=""
+    width="100%"
+    [height]="550"
+    class="slider-img centerMode"
+  />
+
+  <div class="text">
+    <p class="text-title">Sansevieria Trio</p>
+    <p class="price">{{ 29.99 | currency }}</p>
+  </div>
+</ng-template>
