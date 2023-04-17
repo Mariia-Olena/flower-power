@@ -15,13 +15,6 @@
   --black: #000000;
   --red: #f90a0a99;
 
-  //display width
-  --desktopHD: 1920px;
-  --desktopSD: 1440px;
-  --tabletHD: 1024px;
-  --tabletSD: 768px;
-  --mobile: 375px;
-
   //variables
   --headerHeight: rem(135);
 }
@@ -99,3 +92,10 @@
   line-height: rem(21);
   letter-spacing: 0.2em;
 }
+
+//display width
+$desktopHD: "screen and (max-width: 1920px)";
+$desktopSD: "screen and (max-width: 1440px)";
+$tabletHD: "screen and (max-width: 1024px)";
+$tabletSD: "screen and (max-width: 768px)";
+$mobile: "screen and (max-width: 375px)";

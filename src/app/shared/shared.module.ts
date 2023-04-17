@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
@@ -16,7 +17,13 @@ import { SliderComponent } from '@shared/slider/slider.component';
     RatingComponent,
     SliderComponent,
   ],
-  imports: [CommonModule, SlickCarouselModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SlickCarouselModule,
+  ],
   exports: [
     CounterComponent,
     PaginationComponent,

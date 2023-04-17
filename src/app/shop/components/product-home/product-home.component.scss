@@ -1,0 +1,7 @@
+@import "style-variables.scss";
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 rem(30);
+  }
+}

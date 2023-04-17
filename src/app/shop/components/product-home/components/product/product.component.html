@@ -2,7 +2,7 @@
   <div class="product-slider">
     <app-slider
       [sliderType]="'singleItem'"
-      [slides]="slides"
+      [slides]="plant.slides"
       [slideTemplate]="slideCard"
     ></app-slider>
 
@@ -12,41 +12,28 @@
           [src]="slide.img"
           alt=""
           width="100%"
-          [height]="700"
           class="slider-img"
         />
       </div>
     </ng-template>
   </div>
   <div class="product-descr">
-    <h1 class="product-title">Peace Lily Plant - Spathyphyllium</h1>
+    <h1 class="product-title">{{plant.name}}</h1>
     <app-rating [size]="'medium'"></app-rating>
-    <p class="price">{{ 29.99 | currency }}</p>
+    <p class="price">{{ plant.price | currency }}</p>
     <div class="pot">
       Size
       <ul class="pot-list">
-        <li class="pot-item">
-          <button class="pot-button">10'' Pot</button>
-        </li>
-        <li class="pot-item">
-          <button class="pot-button">6'' Pot</button>
-        </li>
-        <li class="pot-item">
-          <button class="pot-button">4'' Pot</button>
+        <li *ngFor="let number of plant.size" class="pot-item">
+          <button class="pot-button">{{number}}'' Pot</button>
         </li>
       </ul>
     </div>
     <div class="pot">
       Pot type
       <ul class="pot-list">
-        <li class="pot-item">
-          <button class="pot-button">White Cylinder</button>
-        </li>
-        <li class="pot-item">
-          <button class="pot-button">Navarro</button>
-        </li>
-        <li class="pot-item">
-          <button class="pot-button">Nursery Pot</button>
+        <li *ngFor="let type of plant.potType" class="pot-item">
+          <button class="pot-button">{{type}}</button>
         </li>
       </ul>
     </div>
@@ -55,20 +42,6 @@
       <form [formGroup]="counterForm" class="counter">
         <app-counter formControlName="quantity"></app-counter>
       </form>
-    </div>
-    <div class="description">
-      <div class="description-item">
-        <svg class="description-icon">
-          <use xlink:href="assets/icons/sprite.svg#cloud"></use>
-        </svg>
-        <p>Most light conditions</p>
-      </div>
-      <div class="description-item">
-        <svg class="description-icon">
-          <use xlink:href="assets/icons/sprite.svg#smile"></use>
-        </svg>
-        <p>Easy care</p>
-      </div>
     </div>
     <button class="product-button button">ADD TO CART</button>
   </div>

@@ -2,6 +2,7 @@
 
 .slider-img {
   object-fit: cover;
+  height: 550px;
 }
 
 .centerMode {
@@ -17,5 +18,21 @@
 
   &-title {
     @extend %subHead3;
+  }
+}
+
+@media #{$desktopSD} {
+  .container {
+    padding: 0 rem(30);
+  }
+
+  .slider-img {
+    height: 470px;
+  }
+}
+
+@media #{$tabletHD} {
+  .slider-img {
+    height: 330px;
   }
 }

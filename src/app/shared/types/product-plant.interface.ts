@@ -15,7 +15,11 @@ export interface ProductExtraInfo {
   potType: string[];
   rating: number;
   video: string;
-  plantCare: string[];
+  plantCare: {
+    light: string;
+    watering: string;
+    care: string;
+  };
   review: Review[];
 }
 
@@ -24,5 +28,5 @@ export interface Review {
   rating: number;
   comment: string;
   photo: string;
-  itemType: string;
 }
+

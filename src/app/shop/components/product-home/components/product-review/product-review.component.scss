@@ -39,16 +39,6 @@
     text-align: justify;
   }
 
-  &-item-type {
-    @extend %bodyText;
-    color: var(--greyX);
-    margin-top: rem(30);
-
-    &-text {
-      color: var(--black);
-    }
-  }
-
   &-img {
     margin-top: rem(10);
     width: 100%;

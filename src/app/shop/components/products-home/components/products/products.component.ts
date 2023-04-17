@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '@interfaces/product-plant.interface';
+import { ProductsService } from '@services/products.service';
 
 @Component({
   selector: 'app-products',
@@ -6,8 +8,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  constructor() {}
-
   plants = [
     {
       name: 'zamioculcas',
