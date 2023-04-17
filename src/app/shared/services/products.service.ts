@@ -20,4 +20,10 @@ export class ProductsService {
       )
       .pipe(map((value) => value));
   }
+
+  getAllProducts() {
+    return this.http.get<APIproduct>(`${this.baseUrl}/products`, {}).pipe(
+      map((value) => value)
+    );
+  }
 }
