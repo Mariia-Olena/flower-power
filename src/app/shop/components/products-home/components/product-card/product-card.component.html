@@ -1,5 +1,5 @@
 <div class="card-item">
-  <a [routerLink]="plant.id" class="card-link">
+  <a [routerLink]="[plant.id]" class="card-link">
     <img class="card-img" [src]="plant.img" [alt]="plant.name" />
   </a>
   <div class="card-descr">
@@ -16,3 +16,4 @@
     <button class="button card-button">ADD TO CART</button>
   </div>
 </div>
+<div>{{ plant.id }}</div>

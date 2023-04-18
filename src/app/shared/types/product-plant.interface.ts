@@ -1,8 +1,8 @@
 export interface APIproduct {
-  map(arg0: (item: any) => { name: any; img: any; price: any; id: any; }): import("../../shop/components/products-home/components/products/products.component").Plants;
   name: string;
   price: number;
   description: string;
+  id: string;
   extraInfo: any;
 }
 

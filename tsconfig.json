@@ -29,9 +29,9 @@
       "@productsHome/*": ["src/app/shop/components/products-home/components/*"],
       "@products/*": ["src/app/shop/components/products-home/*"],
       "@productHome/*": ["src/app/shop/components/product-home/components/*"],
-      "@product/*": ["src/app/shop/components/product-home/*"],
-      
-    }
+      "@product/*": ["src/app/shop/components/product-home/*"]
+    },
+    "strictPropertyInitialization": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

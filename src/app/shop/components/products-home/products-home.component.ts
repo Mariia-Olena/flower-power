@@ -21,13 +21,6 @@ export class ProductsHomeComponent implements OnInit {
           price: item.price,
           id: item.id,
         });
-
-        return {
-          name: item.name,
-          img: item.extraInfo.image[0],
-          price: item.price,
-          id: item.id,
-        };
       });
     });
   }

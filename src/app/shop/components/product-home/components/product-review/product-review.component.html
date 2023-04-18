@@ -1,7 +1,7 @@
 <section class="review">
   <div class="review-number">
     <app-rating [size]="'medium'"></app-rating>
-    <p>10 Reviews</p>
+    <p>{{plantReview.length}} Reviews</p>
   </div>
   <ul class="review-list">
     <li *ngFor="let review of plantReview" class="review-item">

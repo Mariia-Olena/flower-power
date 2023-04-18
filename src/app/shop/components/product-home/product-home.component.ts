@@ -10,25 +10,11 @@ import { PlantReview } from '@productHome/product-review/product-review.componen
   styleUrls: ['./product-home.component.scss'],
 })
 export class ProductHomeComponent implements OnInit {
-  plant: Plant = {
-    slides: [],
-    name: '',
-    price: 0,
-    size: [],
-    potType: [],
-  };
+  plant: Plant;
 
-  plantInfo: PlantInfo = {
-    name: '',
-    video: '',
-    plantCare: {
-      light: '',
-      watering: '',
-      care: '',
-    },
-  };
+  plantInfo: PlantInfo;
 
-  plantReview: PlantReview[] = [];
+  plantReview: PlantReview[];
 
   constructor(private ProductResponse: ProductsService) {}
 
