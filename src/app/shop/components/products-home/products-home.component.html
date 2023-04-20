@@ -2,13 +2,22 @@
   <main class="main">
     <div class="title-container">
       <h1 class="title">ALL PLANTS</h1>
+
+      <h1>
+        total: {{ total$ | async | currency }}
+      </h1>
       <app-product-view></app-product-view>
     </div>
+
     <div class="filter">
       <app-filter></app-filter>
     </div>
+
     <div class="cards">
-      <app-products [plants]="plants"></app-products>
+      <ng-container *ngIf="plants$ | async as plantsNew">
+        <app-products [plants]="plantsNew"></app-products>
+      </ng-container>
+      <br>
     </div>
   </main>
   <app-pagination></app-pagination>
