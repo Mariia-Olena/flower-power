@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Plants } from '../products/products.component';
+import { PlantCard } from '../products/types/plant.interface';
 
 @Component({
   selector: 'app-product-card',
@@ -9,7 +9,7 @@ import { Plants } from '../products/products.component';
   styleUrls: ['./product-card.component.scss'],
 })
 export class ProductCardComponent implements OnInit {
-  @Input() plant: Plants;
+  @Input() plant: PlantCard;
 
   counterForm: FormGroup = new FormGroup({
     quantity: new FormControl(0),

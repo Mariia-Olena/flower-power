@@ -1,11 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { PlantReview } from './types/plant-review.interface';
 
-export interface PlantReview {
-  name: string;
-  rating: number;
-  comment: string;
-  photo: string;
-}
 
 @Component({
   selector: 'app-product-review',

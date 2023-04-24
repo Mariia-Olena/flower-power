@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { ProductsService } from '@sharedModule/services/products.service';
-import { Plants } from '@productsHome/products/products.component';
+import { PlantCard } from '@productsHome/products/types/plant.interface';
+import { APIproduct } from '@interfaces/product-plant.interface';
 
 @Component({
   selector: 'app-products-home',
@@ -8,24 +10,29 @@ import { Plants } from '@productsHome/products/products.component';
   styleUrls: ['./products-home.component.scss'],
 })
 export class ProductsHomeComponent implements OnInit {
-  plants: Plants[] = [];
+  products$: Observable<APIproduct[]>;
+  plants$: Observable<PlantCard[]>;
 
-  constructor(private productsResponse: ProductsService) {}
+  constructor(private productsService: ProductsService) {}
 
-  fetchData() {
-    this.productsResponse.getAllProducts().subscribe((value) => {
-      value.map((item) => {
-        this.plants.push({
-          name: item.name,
-          img: item.extraInfo.image[0],
-          price: item.price,
-          id: item.id,
+  fetchPlants() {
+    this.products$ = this.productsService.getAllProducts();
+
+    this.plants$ = this.products$.pipe(
+      map((res: APIproduct[]): PlantCard[] => {
+        return res.map((item: APIproduct): PlantCard => {
+          return {
+            name: item.name,
+            img: item.extraInfo.image[0],
+            price: item.price,
+            id: item.id,
+          };
         });
-      });
-    });
+      })
+    );
   }
 
   ngOnInit(): void {
-    this.fetchData();
+    this.fetchPlants();
   }
 }

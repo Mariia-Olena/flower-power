@@ -12,14 +12,23 @@ export interface Product extends APIproduct {
 
 export interface ProductExtraInfo {
   image: string[];
-  size: number[];
-  potType: string[];
+  size: string[];
+  potColor: string[];
   rating: number;
   video: string;
   plantCare: {
-    light: string;
-    watering: string;
-    care: string;
+    light: {
+      title: string;
+      text: string;
+    };
+    watering: {
+      title: string;
+      text: string;
+    };
+    care: {
+      title: string;
+      text: string;
+    };
   };
   review: Review[];
 }
@@ -30,4 +39,3 @@ export interface Review {
   comment: string;
   photo: string;
 }
-

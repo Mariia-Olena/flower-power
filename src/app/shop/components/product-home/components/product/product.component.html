@@ -25,15 +25,15 @@
       Size
       <ul class="pot-list">
         <li *ngFor="let number of plant.size" class="pot-item">
-          <button class="pot-button">{{number}}'' Pot</button>
+          <button class="pot-button">{{number}}cm</button>
         </li>
       </ul>
     </div>
     <div class="pot">
-      Pot type
+      Pot color
       <ul class="pot-list">
-        <li *ngFor="let type of plant.potType" class="pot-item">
-          <button class="pot-button">{{type}}</button>
+        <li *ngFor="let color of plant.potColor" class="pot-item">
+          <button class="pot-button">{{color | lowercase}}</button>
         </li>
       </ul>
     </div>

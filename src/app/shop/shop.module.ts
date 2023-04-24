@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
 import { ShopRoutingModule } from './shop-routing.module';
 import { SharedModule } from '@sharedModule/shared.module';
 
@@ -45,6 +47,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    TooltipModule.forRoot(),
   ],
 })
 export class ShopModule {}

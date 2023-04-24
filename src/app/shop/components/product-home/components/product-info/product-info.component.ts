@@ -1,14 +1,5 @@
-import { Component, Input } from '@angular/core';
-
-export interface PlantInfo {
-  name: string;
-  video: string;
-  plantCare: {
-    light: string;
-    watering: string;
-    care: string;
-  };
-}
+import { Component, Input, OnInit } from '@angular/core';
+import { PlantInfo } from './types/plant-info.interface';
 
 @Component({
   selector: 'app-product-info',
@@ -16,13 +7,5 @@ export interface PlantInfo {
   styleUrls: ['./product-info.component.scss'],
 })
 export class ProductInfoComponent {
-  @Input() plantInfo: PlantInfo = {
-    name: '',
-    video: '',
-    plantCare: {
-      light: '',
-      watering: '',
-      care: '',
-    },
-  };
+  @Input() plantInfo: PlantInfo;
 }

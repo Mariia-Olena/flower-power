@@ -1,13 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-
-export interface Plant {
-  slides: { img: string }[];
-  name: string;
-  price: number;
-  size: number[];
-  potType: string[];
-}
+import { Plant } from './types/plant.interface';
 
 @Component({
   selector: 'app-product',
@@ -19,13 +12,7 @@ export class ProductComponent implements OnInit {
     quantity: new FormControl(0),
   });
 
-  @Input() plant: Plant = {
-    slides: [],
-    name: '',
-    price: 0,
-    size: [],
-    potType: []
-  };
+  @Input() plant: Plant;
 
   constructor() {}
 

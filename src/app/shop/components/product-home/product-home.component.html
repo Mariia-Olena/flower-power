@@ -1,7 +1,13 @@
 <div class="container">
   <main>
-    <app-product [plant]="plant"></app-product>
-    <app-product-info [plantInfo]="plantInfo"></app-product-info>
-    <app-product-review [plantReview]="plantReview"></app-product-review>
+    <ng-container *ngIf="plant$ | async as plant">
+      <app-product [plant]="plant"></app-product>
+    </ng-container>
+    <ng-container *ngIf="plantInfo$ | async as plantInfo">
+      <app-product-info [plantInfo]="plantInfo"></app-product-info>
+    </ng-container>
+    <ng-container *ngIf="plantReview$ | async as plantReview">
+      <app-product-review [plantReview]="plantReview"></app-product-review>
+    </ng-container>
   </main>
 </div>

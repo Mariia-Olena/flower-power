@@ -20,18 +20,23 @@
       </ul>
       <ul class="list list-right">
         <li>
-          <a href="">
+          <button>
             <svg class="header-icon">
               <use xlink:href="assets/icons/sprite.svg#log_in"></use>
             </svg>
-          </a>
+          </button>
         </li>
         <li>
-          <a href="">
+          <button
+            type="button"
+            [tooltip]="tooltip"
+            placement="bottom"
+            triggers="click"
+          >
             <svg class="header-icon">
               <use xlink:href="assets/icons/sprite.svg#search"></use>
             </svg>
-          </a>
+          </button>
         </li>
         <li>
           <a routerLink="cart">
@@ -44,3 +49,7 @@
     </nav>
   </div>
 </header>
+
+<ng-template #tooltip>
+  <app-cart></app-cart>
+</ng-template>

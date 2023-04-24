@@ -8,17 +8,17 @@
     allowfullscreen
   ></iframe>
   <div class="plantcare-text-container">
-    <h2 class="plantcare-title">{{plantInfo.name}} likes</h2>
+    <h2 class="plantcare-title">{{ plantInfo.name }} likes</h2>
     <ul class="plantcare-list">
       <li class="plantcare-item">
         <div class="plantcare-subtitle">
           <svg class="plantcare-icon">
             <use xlink:href="assets/icons/sprite.svg#cloud"></use>
           </svg>
-          Light condition
+          {{ plantInfo.plantCare.light.title }}
         </div>
         <p class="plantcare-text">
-          {{plantInfo.plantCare.light}}
+          {{ plantInfo.plantCare.light.text }}
         </p>
       </li>
       <li class="plantcare-item">
@@ -26,10 +26,10 @@
           <svg class="plantcare-icon">
             <use xlink:href="assets/icons/sprite.svg#moisture"></use>
           </svg>
-          Watering
+          {{ plantInfo.plantCare.watering.title }}
         </div>
         <p class="plantcare-text">
-          {{plantInfo.plantCare.watering}}
+          {{ plantInfo.plantCare.watering.text }}
         </p>
       </li>
       <li class="plantcare-item">
@@ -37,10 +37,10 @@
           <svg class="plantcare-icon">
             <use xlink:href="assets/icons/sprite.svg#smile"></use>
           </svg>
-          Additional care
+          {{ plantInfo.plantCare.care.title }}
         </div>
         <p class="plantcare-text">
-          {{plantInfo.plantCare.care}}
+          {{ plantInfo.plantCare.care.text }}
         </p>
       </li>
     </ul>
@@ -57,3 +57,4 @@
     </p>
   </div>
 </section>
+

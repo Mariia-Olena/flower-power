@@ -1,13 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '@interfaces/product-plant.interface';
-import { ProductsService } from '@services/products.service';
+import { PlantCard } from './types/plant.interface';
 
-export interface Plants {
-  name: string;
-  img: string;
-  price: number;
-  id: string;
-}
+
 
 @Component({
   selector: 'app-products',
@@ -15,7 +9,7 @@ export interface Plants {
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  @Input() plants: Plants[] = [];
+  @Input() plants: PlantCard[] = [];
 
   ngOnInit(): void {}
 }
