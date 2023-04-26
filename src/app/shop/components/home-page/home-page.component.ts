@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { ProductsService } from '@sharedModule/services/products.service';
+import { PlantCard } from '@productsHome/products/types/plant.interface';
+import { APIproduct } from '@interfaces/product-plant.interface';
+
 
 @Component({
   selector: 'app-home-page',
@@ -6,37 +11,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  slides: any = [
-    {
-      img: 'https://images.unsplash.com/photo-1632207691143-643e2a9a9361?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1964&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1620311497344-bce841c9c060?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1617693322135-13831d116f79?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1616500443036-788d60118813?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1616500443036-788d60118813?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1616500443036-788d60118813?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    },
-  ];
+  products$: Observable<APIproduct[]>;
+  plants$: Observable<PlantCard[]>;
 
-  constructor() {}
+  limit: number = 7;
+  currentPage: number = 1;
+  sort: string = '-price'
 
-  ngOnInit(): void {}
+  constructor(private productsService: ProductsService) {}
+
+  changePage(page: number): void {
+    this.currentPage = page;
+    this.fetchPlants();
+  }
+
+  fetchPlants() {
+    this.products$ = this.productsService.getAllProducts(
+      this.limit,
+      this.currentPage,
+      this.sort
+    );
+
+    this.plants$ = this.products$.pipe(
+      map((res: APIproduct[]): PlantCard[] => {
+        return res.map((item: APIproduct): PlantCard => {
+          return {
+            name: item.name,
+            img: item.extraInfo.image[0],
+            price: item.price,
+            id: item.id,
+          };
+        });
+      })
+    );
+  }
+
+  ngOnInit(): void {
+    this.fetchPlants();
+  }
 }

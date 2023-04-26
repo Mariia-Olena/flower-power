@@ -185,6 +185,10 @@ a {
   color: var(--black);
   text-decoration: none;
   cursor: pointer;
+
+  &:hover {
+    color: var(--black);
+  }
 }
 
 li {

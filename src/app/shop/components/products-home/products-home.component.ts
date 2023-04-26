@@ -3,7 +3,6 @@ import { map, Observable } from 'rxjs';
 import { ProductsService } from '@sharedModule/services/products.service';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
 import { APIproduct } from '@interfaces/product-plant.interface';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products-home',
@@ -16,6 +15,7 @@ export class ProductsHomeComponent implements OnInit {
 
   limit: number = 3;
   currentPage: number = 1;
+  sort: string = "-price"
 
   constructor(private productsService: ProductsService) {}
 
@@ -27,7 +27,8 @@ export class ProductsHomeComponent implements OnInit {
   fetchPlants() {
     this.products$ = this.productsService.getAllProducts(
       this.limit,
-      this.currentPage
+      this.currentPage,
+      this.sort
     );
 
     this.plants$ = this.products$.pipe(

@@ -5,7 +5,7 @@
   <div class="card-descr">
     <app-rating [size]="'small'"></app-rating>
     <div class="plant-name">
-      <a routerLink="id">{{ plant.name | titlecase }}</a>
+      <a [routerLink]="[plant.id]">{{ plant.name | titlecase }}</a>
     </div>
     <p class="price">{{ plant.price | currency }}</p>
     <div class="counter">

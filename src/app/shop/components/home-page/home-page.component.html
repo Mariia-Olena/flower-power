@@ -1,15 +1,21 @@
-<app-slider
-  [sliderType]="'centerMode'"
-  [slides]="slides"
-  [slideTemplate]="slideCard"
-  [sliderType]="'centerMode'"
-></app-slider>
+<ng-container *ngIf="plants$ | async as plants">
+  <app-slider
+    [sliderType]="'centerMode'"
+    [slides]="plants"
+    [slideTemplate]="slideCard"
+    [sliderType]="'centerMode'"
+  ></app-slider>
+</ng-container>
 
 <ng-template #slideCard let-slide="slideItem">
-  <img [src]="slide.img" alt="" width="100%" class="slider-img centerMode" />
+  <a routerLink="/products/{{ slide.id }}">
+    <img [src]="slide.img" alt="" width="100%" class="slider-img centerMode" />
+  </a>
 
   <div class="text">
-    <p class="text-title">Sansevieria Trio</p>
-    <p class="price">{{ 29.99 | currency }}</p>
+    <a routerLink="/products/{{ slide.id }}">
+      <p class="text-title">{{ slide.name }}</p>
+    </a>
+    <p class="price">{{ slide.price | currency }}</p>
   </div>
 </ng-template>

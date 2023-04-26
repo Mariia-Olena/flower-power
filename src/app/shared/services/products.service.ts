@@ -17,11 +17,12 @@ export class ProductsService {
     return this.http.get<APIproduct>(`${this.baseUrl}/products/${id}`, {});
   }
 
-  getAllProducts(limit: number, page: number): Observable<APIproduct[]> {
+  getAllProducts(limit: number, page: number, sort: string = ''): Observable<APIproduct[]> {
     return this.http.get<APIproduct[]>(`${this.baseUrl}/products`, {
       params: {
         limit: limit,
         page: page,
+        sort: sort
       },
     });
   }

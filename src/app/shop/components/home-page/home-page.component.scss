@@ -15,10 +15,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   &-title {
     @extend %subHead3;
+    width: fit-content;
+    max-width: 100%;
   }
+}
+
+.price {
+  width: fit-content;
 }
 
 @media #{$desktopSD} {
