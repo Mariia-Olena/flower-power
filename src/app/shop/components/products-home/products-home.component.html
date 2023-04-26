@@ -13,5 +13,7 @@
       </ng-container>
     </div>
   </main>
-  <app-pagination></app-pagination>
+  <ng-container *ngIf="plants$ | async as plants">
+    <app-pagination [limit]="3" [total]="plants.length" [currentPage]="currentPage" (changePage)="changePage($event)"></app-pagination>
+  </ng-container>
 </div>

@@ -3,6 +3,7 @@ import { map, Observable } from 'rxjs';
 import { ProductsService } from '@sharedModule/services/products.service';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
 import { APIproduct } from '@interfaces/product-plant.interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products-home',
@@ -13,10 +14,21 @@ export class ProductsHomeComponent implements OnInit {
   products$: Observable<APIproduct[]>;
   plants$: Observable<PlantCard[]>;
 
+  limit: number = 3;
+  currentPage: number = 1;
+
   constructor(private productsService: ProductsService) {}
 
+  changePage(page: number): void {
+    this.currentPage = page;
+    this.fetchPlants();
+  }
+
   fetchPlants() {
-    this.products$ = this.productsService.getAllProducts();
+    this.products$ = this.productsService.getAllProducts(
+      this.limit,
+      this.currentPage
+    );
 
     this.plants$ = this.products$.pipe(
       map((res: APIproduct[]): PlantCard[] => {

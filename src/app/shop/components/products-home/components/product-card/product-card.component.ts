@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { PlantCard } from '../products/types/plant.interface';
 
 @Component({
@@ -15,11 +14,6 @@ export class ProductCardComponent implements OnInit {
     quantity: new FormControl(0),
   });
 
-  constructor(private activateRoute: ActivatedRoute) {
-    activateRoute.snapshot.params['id'];
-  }
-
   ngOnInit(): void {
-    console.log(this.plant);
   }
 }

@@ -11,6 +11,7 @@ import { PaginationComponent } from '@shared/pagination/pagination.component';
 import { RatingComponent } from '@shared/rating/rating.component';
 import { SliderComponent } from '@shared/slider/slider.component';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
