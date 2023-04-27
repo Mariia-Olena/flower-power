@@ -27,7 +27,6 @@ export class ProductHomeComponent implements OnInit {
   fetchProduct() {
     this.route.params.subscribe(({ id }) => {
       this.product$ = this.productsService.getProduct(id);
-      console.log(this.product$);
     });
 
     this.fetchPlant();

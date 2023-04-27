@@ -28,10 +28,6 @@
         </li>
         <li>
           <button
-            type="button"
-            [tooltip]="tooltip"
-            placement="bottom"
-            triggers="click"
           >
             <svg class="header-icon">
               <use xlink:href="assets/icons/sprite.svg#search"></use>
@@ -39,7 +35,7 @@
           </button>
         </li>
         <li>
-          <a routerLink="cart">
+          <a [ngxTippy]="tooltipTemplate" routerLink="cart">
             <svg class="header-icon">
               <use xlink:href="assets/icons/sprite.svg#cart"></use>
             </svg>
@@ -50,6 +46,6 @@
   </div>
 </header>
 
-<ng-template #tooltip>
+<ng-template #tooltipTemplate>
   <app-cart></app-cart>
 </ng-template>

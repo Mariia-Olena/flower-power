@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CartService } from '@sharedModule/services/cart.service';
 import { Plant } from './types/plant.interface';
 
 @Component({
@@ -14,7 +15,11 @@ export class ProductComponent implements OnInit {
 
   @Input() plant: Plant;
 
-  constructor() {}
+  constructor( private cartService: CartService) {}
+
+  addProductToCart(product: Plant) {
+    this.cartService.addProduct(product)
+  }
 
   ngOnInit(): void {}
 }

@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import { NgxTippyModule } from 'ngx-tippy-wrapper';
 
 import { CounterComponent } from '@shared/counter/counter.component';
 import { PaginationComponent } from '@shared/pagination/pagination.component';
@@ -28,7 +28,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     SlickCarouselModule,
-    TooltipModule.forRoot()
+    NgxTippyModule
   ],
   exports: [
     CounterComponent,
