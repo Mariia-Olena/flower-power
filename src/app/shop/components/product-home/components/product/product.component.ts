@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CartService } from '@sharedModule/services/cart.service';
 import { Plant } from './types/plant.interface';
@@ -14,11 +14,12 @@ export class ProductComponent implements OnInit {
   });
 
   @Input() plant: Plant;
+  @Output() addToCart: EventEmitter<{ count: number }> = new EventEmitter();
 
-  constructor( private cartService: CartService) {}
-
-  addProductToCart(product: Plant) {
-    this.cartService.addProduct(product)
+  addProductToCart() {
+    this.addToCart.emit({ 
+      count: this.counterForm.controls['quantity'].value 
+    });
   }
 
   ngOnInit(): void {}

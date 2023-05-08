@@ -1,7 +1,7 @@
 <section class="plantcare">
   <iframe
     class="plantcare-video"
-    [src]="plantInfo.video"
+    [src]="plantInfo.video | safeUrl"
     title="YouTube video player"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

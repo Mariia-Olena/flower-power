@@ -10,6 +10,10 @@ export interface Product extends APIproduct {
   extraInfo: ProductExtraInfo;
 }
 
+export interface CartProduct extends Product {
+  count: number;
+}
+
 export interface ProductExtraInfo {
   image: string[];
   size: string[];

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 import { ProductsService } from '@services/products.service';
 import { Plant } from '@productHome/product/types/plant.interface';
 import { PlantInfo } from '@productHome/product-info/types/plant-info.interface';
 import { PlantReview } from '@productHome//product-review/types/plant-review.interface';
-import { APIproduct } from '@interfaces/product-plant.interface';
+import { APIproduct, Product } from '@interfaces/product-plant.interface';
+import { CartService } from '@sharedModule/services/cart.service';
 
 @Component({
   selector: 'app-product-home',
@@ -18,15 +19,21 @@ export class ProductHomeComponent implements OnInit {
   plantInfo$: Observable<PlantInfo>;
   plantReview$: Observable<PlantReview[]>;
   product$: Observable<APIproduct>;
+  private product: Product;
 
   constructor(
     private productsService: ProductsService,
-    private route: ActivatedRoute
+    private cartService: CartService,
+    private route: ActivatedRoute,
   ) {}
 
   fetchProduct() {
     this.route.params.subscribe(({ id }) => {
-      this.product$ = this.productsService.getProduct(id);
+      this.product$ = this.productsService.getProduct(id).pipe(
+        tap((value: APIproduct) => {
+          this.product = value;
+        })
+      );
     });
 
     this.fetchPlant();
@@ -72,6 +79,10 @@ export class ProductHomeComponent implements OnInit {
         return [...value.extraInfo.review];
       })
     );
+  }
+
+  addToCart(event: { count: number }) {
+    this.cartService.addProduct(this.product, event.count);
   }
 
   ngOnInit(): void {

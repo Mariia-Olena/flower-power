@@ -12,6 +12,7 @@ import { RatingComponent } from '@shared/rating/rating.component';
 import { SliderComponent } from '@shared/slider/slider.component';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
 import { RouterModule } from '@angular/router';
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RouterModule } from '@angular/router';
     RatingComponent,
     SliderComponent,
     TooltipComponent,
+    SafeUrlPipe
   ],
   imports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { RouterModule } from '@angular/router';
     PaginationComponent,
     RatingComponent,
     SliderComponent,
+    SafeUrlPipe
   ],
 })
 export class SharedModule {}

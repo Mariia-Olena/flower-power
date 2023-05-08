@@ -4,6 +4,7 @@ import { CartService } from '@sharedModule/services/cart.service';
 
 import { Cart, CartItem } from '@sharedModule/types/cart-item.interface';
 import { Plant } from '@shop/product-home/components/product/types/plant.interface';
+import { CartProduct } from '@sharedModule/types/product-plant.interface';
 
 @Component({
   selector: 'app-cart',
@@ -13,13 +14,17 @@ import { Plant } from '@shop/product-home/components/product/types/plant.interfa
 export class CartComponent implements OnInit {
 
   // dataSource: CartItem[] = [];
-  cart: Plant[]
+  cart: CartProduct[]
 
   counterForm: FormGroup = new FormGroup({
     quantity: new FormControl(0),
   });
 
   constructor(private cartService: CartService) {}
+
+  trackByIndex(index: number, item: CartProduct) {
+    return index
+  }
 
   // getTotalPrice(): number {
   //   return this.cart.items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
