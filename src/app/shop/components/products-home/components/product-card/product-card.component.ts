@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlantCard } from '../products/types/plant.interface';
 
 @Component({
@@ -9,11 +8,11 @@ import { PlantCard } from '../products/types/plant.interface';
 })
 export class ProductCardComponent implements OnInit {
   @Input() plant: PlantCard;
+  @Output() addToCart = new EventEmitter<string>();
 
-  counterForm: FormGroup = new FormGroup({
-    quantity: new FormControl(0),
-  });
-
-  ngOnInit(): void {
+  addProductToCart(id: string) {
+    this.addToCart.emit( id );
   }
+
+  ngOnInit(): void {}
 }

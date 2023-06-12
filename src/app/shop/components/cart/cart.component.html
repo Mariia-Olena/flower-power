@@ -1,6 +1,9 @@
 <div *ngIf="cart.length" class="cart">
   <ul class="product">
-    <li *ngFor="let product of cart; let index = index; trackBy: trackByIndex" class="product-item">
+    <li
+      *ngFor="let product of cart; let index = index; trackBy: trackByIndex"
+      class="product-item"
+    >
       <img
         [src]="product.extraInfo.image[0]"
         alt="item.name"
@@ -9,7 +12,7 @@
       <h2 class="product-name">{{ product.name }}</h2>
       <p class="product-size">{{ product.extraInfo.size }}</p>
       <p class="product-price">{{ product.price | currency }}</p>
-      <button class="product-button">
+      <button (click)="removeProduct(product.id)" class="product-button">
         <svg class="product-icon">
           <use xlink:href="assets/icons/sprite.svg#trash_can"></use>
         </svg>
@@ -22,7 +25,7 @@
   </ul>
   <div class="total">
     <h3 class="total-text">Total</h3>
-    <div class="total-price"></div>
+    <div class="total-price">{{ sum | currency }}</div>
   </div>
 </div>
 

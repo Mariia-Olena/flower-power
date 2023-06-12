@@ -8,11 +8,6 @@
       <a [routerLink]="[plant.id]">{{ plant.name | titlecase }}</a>
     </div>
     <p class="price">{{ plant.price | currency }}</p>
-    <div class="counter">
-      <form [formGroup]="counterForm">
-        <app-counter formControlName="quantity"></app-counter>
-      </form>
-    </div>
-    <button class="button card-button">ADD TO CART</button>
+    <button (click)="addProductToCart(plant.id)" class="button card-button">ADD TO CART</button>
   </div>
 </div>

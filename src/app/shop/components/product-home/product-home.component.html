@@ -1,7 +1,7 @@
 <div class="container">
   <main>
     <ng-container *ngIf="plant$ | async as plant">
-      <app-product (addToCart)="addToCart($event)" [plant]="plant"></app-product>
+      <app-product (addToCart)="addToCart()" [plant]="plant"></app-product>
     </ng-container>
     <ng-container *ngIf="plantInfo$ | async as plantInfo">
       <app-product-info [plantInfo]="plantInfo"></app-product-info>

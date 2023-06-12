@@ -1,7 +1,17 @@
 <nav class="pagination">
-  <ul class="pagination__list">
-    <li *ngFor="let page of pages" (click)="changePage.emit(page)" class="pagination__item">
-      <a routerLink="/products" [queryParams]="{page: page}"class="pagination__link">{{page}}</a>
+  <ul class="pagination_list">
+    <li
+      *ngFor="let page of pages"
+      (click)="changePage.emit(page)"
+      class="pagination_item"
+    >
+      <a
+        routerLink="/products"
+        [queryParams]="{ page: page }"
+        class="pagination_link"
+        [ngClass]="{ pagination_link_bold: page === currentPage }"
+        >{{ page }}</a
+      >
     </li>
   </ul>
 </nav>

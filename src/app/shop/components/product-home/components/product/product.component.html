@@ -37,12 +37,6 @@
         </li>
       </ul>
     </div>
-    <div class="pot">
-      Quantity
-      <form [formGroup]="counterForm" class="counter">
-        <app-counter formControlName="quantity"></app-counter>
-      </form>
-    </div>
-    <button (click)="addProductToCart()" class="product-button button">ADD TO CART</button>
+    <button (click)="addToCart.emit()" class="product-button button">ADD TO CART</button>
   </div>
 </section>

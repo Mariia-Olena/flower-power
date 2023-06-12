@@ -27,15 +27,21 @@
           </button>
         </li>
         <li>
-          <button
-          >
+          <button>
             <svg class="header-icon">
               <use xlink:href="assets/icons/sprite.svg#search"></use>
             </svg>
           </button>
         </li>
         <li>
-          <a [ngxTippy]="tooltipTemplate" routerLink="cart">
+          <a
+            [ngxTippy]="tooltipTemplate"
+            [tippyProps]="{
+              interactive: true,
+              placement: 'left-start'
+            }"
+            routerLink="cart"
+          >
             <svg class="header-icon">
               <use xlink:href="assets/icons/sprite.svg#cart"></use>
             </svg>

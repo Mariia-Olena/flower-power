@@ -11,7 +11,7 @@ import { Plant } from '@shop/product-home/components/product/types/plant.interfa
 })
 export class CartService {
   private productsInCart: CartProduct[] = [];
-  private mapProductsInCart: {[key: string] : boolean}
+  private mapProductsInCart: { [key: string]: boolean };
 
   constructor() {}
 
@@ -21,7 +21,15 @@ export class CartService {
     console.log('productsInCart', this.productsInCart);
   }
 
-  showAllProducts() {
+  removeProduct(id: string): void {
+    this.productsInCart = this.productsInCart.filter((item) => item.id !== id )
+  }
+
+  getSum(): number {
+    return this.productsInCart.reduce((acc, item) => acc + (item.price * item.count), 0);
+  }
+
+  showAllProducts(): CartProduct[] {
     return this.productsInCart;
   }
 }

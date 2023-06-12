@@ -10,7 +10,6 @@ import { CounterComponent } from '@shared/counter/counter.component';
 import { PaginationComponent } from '@shared/pagination/pagination.component';
 import { RatingComponent } from '@shared/rating/rating.component';
 import { SliderComponent } from '@shared/slider/slider.component';
-import { TooltipComponent } from './components/tooltip/tooltip.component';
 import { RouterModule } from '@angular/router';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
 
@@ -20,7 +19,6 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     PaginationComponent,
     RatingComponent,
     SliderComponent,
-    TooltipComponent,
     SafeUrlPipe
   ],
   imports: [

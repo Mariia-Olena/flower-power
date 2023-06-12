@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CartService } from '@sharedModule/services/cart.service';
 
-import { Cart, CartItem } from '@sharedModule/types/cart-item.interface';
-import { Plant } from '@shop/product-home/components/product/types/plant.interface';
 import { CartProduct } from '@sharedModule/types/product-plant.interface';
 
 @Component({
@@ -12,9 +10,8 @@ import { CartProduct } from '@sharedModule/types/product-plant.interface';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-
-  // dataSource: CartItem[] = [];
-  cart: CartProduct[]
+  cart: CartProduct[];
+  sum: number = this.cartService.getSum();
 
   counterForm: FormGroup = new FormGroup({
     quantity: new FormControl(0),
@@ -23,20 +20,15 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService) {}
 
   trackByIndex(index: number, item: CartProduct) {
-    return index
+    return index;
   }
 
-  // getTotalPrice(): number {
-  //   return this.cart.items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-  // }
-
-  // removeProduct(id: string): void {
-  //   this.cart.items = this.cart.items.filter((item) => item.id !== id);
-  // }
-
-
+  removeProduct(id: string) {
+    this.cartService.removeProduct(id);
+    this.cart = this.cartService.showAllProducts();
+  }
 
   ngOnInit(): void {
-    this.cart = this.cartService.showAllProducts()
+    this.cart = this.cartService.showAllProducts();
   }
 }

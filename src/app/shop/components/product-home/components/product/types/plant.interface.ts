@@ -4,4 +4,5 @@ export interface Plant {
   price: number;
   size: string[];
   potColor: string[];
+  id: string;
 }

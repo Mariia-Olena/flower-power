@@ -6,12 +6,16 @@
   justify-content: center;
   margin-top: 50px;
 
-  &__list {
+  &_list {
     display: flex;
     gap: 25px;
   }
 
-  &__link {
+  &_link {
     color: var(--green);
+
+    &_bold {
+      font-weight: bold;
+    }
   }
 }

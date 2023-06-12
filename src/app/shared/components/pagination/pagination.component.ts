@@ -22,6 +22,7 @@ export class PaginationComponent implements OnInit {
 
   ngOnInit(): void {
     const pagesCount = Math.ceil(this.total / this.limit);
+    
     this.pages = this.range(1, 5)
   }
 }

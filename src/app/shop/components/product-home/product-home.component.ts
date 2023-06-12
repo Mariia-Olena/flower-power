@@ -52,6 +52,7 @@ export class ProductHomeComponent implements OnInit {
           price: value.price,
           size: value.extraInfo.size,
           potColor: value.extraInfo.potColor,
+          id: value.id
         };
       })
     );
@@ -81,8 +82,8 @@ export class ProductHomeComponent implements OnInit {
     );
   }
 
-  addToCart(event: { count: number }) {
-    this.cartService.addProduct(this.product, event.count);
+  addToCart() {
+    this.cartService.addProduct(this.product);
   }
 
   ngOnInit(): void {
