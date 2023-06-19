@@ -16,18 +16,18 @@ export class ProductsHomeComponent implements OnInit {
 
   private product: Product;
 
-  limit: number = 3;
+  limit: number = 2;
   currentPage: number = 1;
   sort: string = '-price';
 
-  constructor(private productsService: ProductsService, private cartService: CartService) {}
+  constructor(public productsService: ProductsService, private cartService: CartService) {}
 
   changePage(page: number): void {
     this.currentPage = page;
     this.fetchPlants();
   }
 
-  fetchPlants() {
+  fetchPlants() {    
     this.products$ = this.productsService.getAllProducts(
       this.limit,
       this.currentPage,
@@ -58,8 +58,6 @@ export class ProductsHomeComponent implements OnInit {
 
   addToCart(id: string) {
     this.setProduct(id)
-    console.log(this.product);
-    
     this.cartService.addProduct(this.product);
   }
 

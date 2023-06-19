@@ -17,10 +17,10 @@
           <use xlink:href="assets/icons/sprite.svg#trash_can"></use>
         </svg>
       </button>
-      <form [formGroup]="counterForm" class="product-counter">
-        <app-counter [(ngModel)]="cart[index]"></app-counter>
+      <div class="product-counter">
+        <app-counter [(ngModel)]="product.count"></app-counter>
         <p>{{ product.count }}</p>
-      </form>
+      </div>
     </li>
   </ul>
   <div class="total">

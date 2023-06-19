@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, pipe, tap } from 'rxjs';
 
 import { APIproduct } from '../types/product-plant.interface';
 import { environment } from 'src/environments/environment';
@@ -10,6 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductsService {
   private baseUrl = environment.baseUrl;
+  private _allProductsCount: BehaviorSubject<number> = new BehaviorSubject(0);
+  allProductsCount: Observable<number> = this._allProductsCount.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -22,13 +24,21 @@ export class ProductsService {
     page: number,
     sort: string
   ): Observable<APIproduct[]> {
-    return this.http.get<APIproduct[]>(`${this.baseUrl}/products`, {
-      params: {
-        ...(limit && { limit }),
-        // ...(limit ? {limit: limit} : {}),
-        page,
-        sort,
-      },
-    });
+    return this.http
+      .get<APIproduct[]>(`${this.baseUrl}/products`, {
+        observe: 'response',
+        params: {
+          ...(limit && { limit }),
+          // ...(limit ? {limit: limit} : {}),
+          page,
+          sort,
+        },
+      })
+      .pipe(
+        map(({ headers, body }) => {
+          this._allProductsCount.next(+(headers.get('All-Products') || 15));
+          return body || [];
+        })
+      );
   }
 }
