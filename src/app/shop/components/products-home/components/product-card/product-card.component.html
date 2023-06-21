@@ -8,6 +8,6 @@
       <a [routerLink]="[plant.id]">{{ plant.name | titlecase }}</a>
     </div>
     <p class="price">{{ plant.price | currency }}</p>
-    <button (click)="addProductToCart(plant.id)" class="button card-button">ADD TO CART</button>
+    <button (click)="addToCart.emit(plant.id)" class="button card-button">ADD TO CART</button>
   </div>
 </div>

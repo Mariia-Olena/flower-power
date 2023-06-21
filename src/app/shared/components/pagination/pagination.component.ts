@@ -14,27 +14,25 @@ export class PaginationComponent implements OnInit {
   @Output() changePage = new EventEmitter<number>();
 
   pages: number[] = [];
+  pagesCount: number = 1;
+
   pagesToShow(): number[] {
     const currentIndex = this.pages.findIndex(
       (item) => item === this.currentPage
     );
-    
+
     if (currentIndex === 0 || currentIndex === 1) {
       const pages = this.pages.slice(0, 3);
-      pages.push(this.pages.length);
       return pages;
     }
 
-    if (currentIndex === this.pages.length - 1 || currentIndex === this.pages.length - 2) {
-      const pages = this.pages.slice(this.pages.length - 3);
-      pages.unshift(1);
-      return pages;
-    }
-
-    if (1 < currentIndex && currentIndex < this.pages.length - 2) {
+    if (1 < currentIndex && currentIndex < this.pagesCount - 2) {
       const pages = this.pages.slice(currentIndex - 1, currentIndex + 2);
-      pages.unshift(1);
-      pages.push(this.pages.length);
+      return pages;
+    }
+
+    if (currentIndex === this.pagesCount - 1 || currentIndex === this.pagesCount - 2) {
+      const pages = this.pages.slice(this.pagesCount - 3);
       return pages;
     }
 
@@ -44,9 +42,9 @@ export class PaginationComponent implements OnInit {
   constructor() {}
 
   range(): number[] {
-    const pagesCount = Math.ceil(this.total / this.limit);
+    this.pagesCount = Math.ceil(this.total / this.limit);
 
-    return [...Array(pagesCount).keys()].map((elem) => elem + 1);
+    return [...Array(this.pagesCount).keys()].map((elem) => elem + 1);
   }
 
   ngOnInit(): void {

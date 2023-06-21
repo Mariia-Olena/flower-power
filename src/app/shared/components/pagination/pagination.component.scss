@@ -6,16 +6,44 @@
   justify-content: center;
   margin-top: 50px;
 
-  &_list {
+  &-list {
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 25px;
   }
 
-  &_link {
+  &-link {
     color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    &_bold {
+    &-bold {
       font-weight: bold;
     }
+  }
+
+  &-item {
+    color: var(--green);
+  }
+
+  &-dots {
+    cursor: default;
+  }
+
+  &-icon {
+    width: rem(15);
+    height: rem(15);
+    stroke: var(--green);
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+
+  & a svg {
+    stroke: var(--greyX);
   }
 }

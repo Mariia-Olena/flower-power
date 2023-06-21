@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CartService } from '@sharedModule/services/cart.service';
 
@@ -25,10 +25,13 @@ export class CartComponent implements OnInit {
 
   removeProduct(id: string) {
     this.cartService.removeProduct(id);
-    // this.cart = this.cartService.showAllProducts();
   }
 
   ngOnInit(): void {
     this.cart = this.cartService.showAllProducts();
+  }
+
+  updateTotal() {
+    this.sum = this.cartService.getSum();
   }
 }

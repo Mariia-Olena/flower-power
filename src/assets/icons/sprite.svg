@@ -139,9 +139,9 @@
     <path d="M85.596 13.3333C85.0539 11.3728 85.1623 7.56943 87.7643 8.03993C89.9327 8.43202 89.3906 11.5689 88.8485 13.3333" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
   <symbol  viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg" id="arrow-right">
-    <path d="M1 1L11 11L1 21" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1 1L11 11L1 21"  stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
   <svg  viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg" id="arrow-left">
-    <path d="M11 1L1 11L11 21" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M11 1L1 11L11 21"  stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 </svg>

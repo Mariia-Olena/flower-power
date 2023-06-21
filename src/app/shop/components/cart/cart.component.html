@@ -18,8 +18,10 @@
         </svg>
       </button>
       <div class="product-counter">
-        <app-counter [(ngModel)]="product.count"></app-counter>
-        <p>{{ product.count }}</p>
+        <app-counter
+          [(ngModel)]="product.count"
+          (ngModelChange)="updateTotal()"
+        ></app-counter>
       </div>
     </li>
   </ul>

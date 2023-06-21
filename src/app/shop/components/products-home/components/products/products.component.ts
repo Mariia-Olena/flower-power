@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {} from '@angular/core';
 import { PlantCard } from './types/plant.interface';
-
-
 
 @Component({
   selector: 'app-products',
@@ -10,6 +9,7 @@ import { PlantCard } from './types/plant.interface';
 })
 export class ProductsComponent implements OnInit {
   @Input() plants: PlantCard[] = [];
+  @Output() addToCart = new EventEmitter<string>();
 
   ngOnInit(): void {}
 }

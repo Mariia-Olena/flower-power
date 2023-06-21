@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { ProductsService } from '@sharedModule/services/products.service';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
@@ -14,20 +14,24 @@ export class ProductsHomeComponent implements OnInit {
   products$: Observable<APIproduct[]>;
   plants$: Observable<PlantCard[]>;
 
-  private product: Product;
+  private products: APIproduct[];
+  private productInCart: Product;
 
   limit: number = 2;
   currentPage: number = 1;
   sort: string = '-price';
 
-  constructor(public productsService: ProductsService, private cartService: CartService) {}
+  constructor(
+    public productsService: ProductsService,
+    private cartService: CartService
+  ) {}
 
   changePage(page: number): void {
     this.currentPage = page;
     this.fetchPlants();
   }
 
-  fetchPlants() {    
+  fetchPlants() {
     this.products$ = this.productsService.getAllProducts(
       this.limit,
       this.currentPage,
@@ -35,6 +39,9 @@ export class ProductsHomeComponent implements OnInit {
     );
 
     this.plants$ = this.products$.pipe(
+      tap((res: APIproduct[]) => {
+        this.products = res;
+      }),
       map((res: APIproduct[]): PlantCard[] => {
         return res.map((item: APIproduct): PlantCard => {
           return {
@@ -49,16 +56,13 @@ export class ProductsHomeComponent implements OnInit {
   }
 
   setProduct(id: string) {
-    this.productsService.getProduct(id).pipe(
-      tap((value: APIproduct) => {
-        this.product = value;
-      })
-    );
+
   }
 
-  addToCart(id: string) {
-    this.setProduct(id)
-    this.cartService.addProduct(this.product);
+  addToCart(id: any) {
+    this.setProduct(id);
+
+    // this.cartService.addProduct(this.productInCart);
   }
 
   ngOnInit(): void {

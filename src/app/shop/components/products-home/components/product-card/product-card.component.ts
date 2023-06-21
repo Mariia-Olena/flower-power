@@ -10,9 +10,5 @@ export class ProductCardComponent implements OnInit {
   @Input() plant: PlantCard;
   @Output() addToCart = new EventEmitter<string>();
 
-  addProductToCart(id: string) {
-    this.addToCart.emit( id );
-  }
-
   ngOnInit(): void {}
 }

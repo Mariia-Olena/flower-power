@@ -10,7 +10,7 @@
     <div class="cards">
       <ng-container *ngIf="plants$ | async as plants">
         <app-products
-          (addToCart)="addToCart($any($event))"
+        (addToCart)="addToCart($event)"
           [plants]="plants"
         ></app-products>
       </ng-container>
