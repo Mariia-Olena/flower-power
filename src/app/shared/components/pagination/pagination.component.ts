@@ -21,6 +21,10 @@ export class PaginationComponent implements OnInit {
       (item) => item === this.currentPage
     );
 
+    if (this.pagesCount < 6) {
+      return this.pages;
+    }
+
     if (currentIndex === 0 || currentIndex === 1) {
       const pages = this.pages.slice(0, 3);
       return pages;
