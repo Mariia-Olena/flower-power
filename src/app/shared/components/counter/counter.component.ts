@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   NG_VALUE_ACCESSOR,
   ControlValueAccessor,
@@ -6,8 +6,6 @@ import {
   NG_VALIDATORS,
   AbstractControl,
   ValidationErrors,
-  FormGroup,
-  FormControl,
 } from '@angular/forms';
 
 @Component({
@@ -38,7 +36,7 @@ export class CounterComponent implements ControlValueAccessor, Validator {
 
   onAdd() {
     this.markAsTouched();
-    if (!this.disabled) {
+    if (!this.disabled && this.quantity < 10) {
       this.quantity += 1;
       this.onChange(this.quantity);
     }
@@ -46,7 +44,7 @@ export class CounterComponent implements ControlValueAccessor, Validator {
 
   onRemove() {
     this.markAsTouched();
-    if (!this.disabled) {
+    if (!this.disabled && this.quantity > 1) {
       this.quantity -= 1;
       this.onChange(this.quantity);
     }
@@ -78,7 +76,7 @@ export class CounterComponent implements ControlValueAccessor, Validator {
   validate(control: AbstractControl): ValidationErrors | null {
     const quantity = control.value;
     if (quantity <= 0) {
-      this.quantity = 0;
+      this.quantity = 1;
       return {
         mustBePositive: {
           quantity,

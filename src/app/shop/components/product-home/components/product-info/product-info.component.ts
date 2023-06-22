@@ -6,6 +6,8 @@ import { PlantInfo } from './types/plant-info.interface';
   templateUrl: './product-info.component.html',
   styleUrls: ['./product-info.component.scss'],
 })
-export class ProductInfoComponent {
+export class ProductInfoComponent implements OnInit {
   @Input() plantInfo: PlantInfo;
+
+  ngOnInit(): void {}
 }

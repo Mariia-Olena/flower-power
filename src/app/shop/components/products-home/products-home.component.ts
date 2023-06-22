@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { ProductsService } from '@sharedModule/services/products.service';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
@@ -56,13 +56,14 @@ export class ProductsHomeComponent implements OnInit {
   }
 
   setProduct(id: string) {
-
+    this.productInCart = this.products.filter(
+      (product) => product.id === id
+    )[0];
   }
 
   addToCart(id: any) {
     this.setProduct(id);
-
-    // this.cartService.addProduct(this.productInCart);
+    this.cartService.addProduct(this.productInCart);
   }
 
   ngOnInit(): void {
