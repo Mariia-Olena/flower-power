@@ -23,6 +23,7 @@ import { ProductComponent } from '@productHome/product/product.component';
 import { ProductReviewComponent } from '@productHome/product-review/product-review.component';
 import { ProductInfoComponent } from '@productHome/product-info/product-info.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TooltipComponent } from './components/tooltip/tooltip.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProductInfoComponent,
     ProductsHomeComponent,
     ProductViewComponent,
+    TooltipComponent,
   ],
   imports: [
     CommonModule,
