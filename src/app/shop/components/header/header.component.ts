@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxTippyService } from 'ngx-tippy-wrapper';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  constructor( private tippyService: NgxTippyService) {}
 
   navBar = [
     {
@@ -27,5 +28,18 @@ export class HeaderComponent implements OnInit {
     },
   ];
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.tippyService.setDefaultProps({
+      popperOptions: {
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [0, 180]
+            },
+          },
+        ],
+      },
+    });
+  }
 }
