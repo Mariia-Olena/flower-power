@@ -1,5 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from '@sharedModule/services/cart.service';
 
 import { CartProduct } from '@sharedModule/types/product-plant.interface';
@@ -7,15 +6,10 @@ import { CartProduct } from '@sharedModule/types/product-plant.interface';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss'],
+  styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
   cart: CartProduct[];
-  sum: number = this.cartService.getSum();
-
-  counterForm: FormGroup = new FormGroup({
-    quantity: new FormControl(0),
-  });
 
   constructor(private cartService: CartService) {}
 
@@ -27,17 +21,18 @@ export class CartComponent implements OnInit {
     this.cart = this.cartService.showAllProducts();
   }
 
-  updateTotal() {
-    this.sum = this.cartService.getSum();
-  }
-
   removeProduct(id: string) {
     this.cartService.removeProduct(id);
     this.setCart();
-    this.updateTotal();
+    this.getSum()
+  }
+
+  getSum() {
+    return this.cartService.getSum();
   }
 
   ngOnInit(): void {
     this.setCart();
+    this.getSum()
   }
 }

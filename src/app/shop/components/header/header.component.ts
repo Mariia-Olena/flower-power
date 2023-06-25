@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
           {
             name: 'offset',
             options: {
-              offset: [0, 290]
+              offset: [0, 280]
             },
           },
         ],

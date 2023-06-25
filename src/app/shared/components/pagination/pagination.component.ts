@@ -1,12 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NumberValueAccessor } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnChanges {
   @Input() currentPage: number = 1;
   @Input() limit: number = 0;
   @Input() total: number = 0;
@@ -51,7 +50,7 @@ export class PaginationComponent implements OnInit {
     return [...Array(this.pagesCount).keys()].map((elem) => elem + 1);
   }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.pages = this.range();
     this.pagesToShow();
   }

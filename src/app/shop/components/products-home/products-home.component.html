@@ -8,18 +8,18 @@
       <app-filter></app-filter>
     </div>
     <div class="cards">
-      <ng-container *ngIf="plants$ | async as plants">
-        <app-products
-        (addToCart)="addToCart($event)"
+      <ng-container *ngIf="plants1$ | async as plants">
+        <app-products *ngIf="plants.length"
+          (addToCart)="addToCart($event)"
           [plants]="plants"
         ></app-products>
       </ng-container>
     </div>
   </main>
-  <ng-container *ngIf="plants$ | async as plants">
-    <app-pagination
+  <ng-container *ngIf="plants1$ | async as plants">
+    <app-pagination *ngIf="plants.length"
       [limit]="limit"
-      [total]="(productsService.allProductsCount | async) || 1"
+      [total]="(productsService.allProductsCount | async)"
       [currentPage]="currentPage"
       (changePage)="changePage($event)"
     ></app-pagination>

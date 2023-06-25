@@ -172,6 +172,26 @@ button.slick-next.slick-arrow::before {
   display: none;
 }
 
+//tooltip
+
+.tippy {
+  &-box {
+    background-color: #fff;
+    color: black;
+    position: absolute;
+  }
+
+  &-arrow {
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+
+  &-content {
+    padding: 0;
+  }
+}
+
 //tag
 
 * {
@@ -229,14 +249,4 @@ button {
   margin-top: rem(10);
 }
 
-.tippy-box {
-  background-color: #fff;
-  color: black;
-  position: absolute;
-}
 
-.tippy-arrow {
-  width: 0;
-  height: 0;
-  color: transparent;
-}

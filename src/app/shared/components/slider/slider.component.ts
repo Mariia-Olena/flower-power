@@ -61,21 +61,13 @@ export class SliderComponent implements OnInit {
     return { ...this.options };
   }
 
-  slickInit(e: any) {
-    console.log('slick initialized');
-  }
+  slickInit(e: any) {}
 
-  breakpoint(e: any) {
-    console.log('breakpoint');
-  }
+  breakpoint(e: any) {}
 
-  afterChange(e: any) {
-    console.log('afterChange');
-  }
+  afterChange(e: any) {}
 
-  beforeChange(e: any) {
-    console.log('beforeChange');
-  }
+  beforeChange(e: any) {}
 
   next() {
     this.slickModal.slickNext();

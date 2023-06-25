@@ -37,6 +37,7 @@ export class ProductsService {
       .pipe(
         map(({ headers, body }) => {
           this._allProductsCount.next(+(headers.get('All-Products') || 1));
+
           return body || [];
         })
       );

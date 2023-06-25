@@ -20,14 +20,14 @@
       <div class="product-counter">
         <app-counter
           [(ngModel)]="product.count"
-          (ngModelChange)="updateTotal()"
+          (ngModelChange)="getSum()"
         ></app-counter>
       </div>
     </li>
   </ul>
   <div class="total">
     <h3 class="total-text">Total</h3>
-    <div class="total-price">{{ sum | currency }}</div>
+    <div class="total-price">{{ getSum() | currency }}</div>
   </div>
 </div>
 

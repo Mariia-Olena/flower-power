@@ -1,19 +1,16 @@
 <div class="tooltip">
   <div *ngIf="cart.length" class="cart">
     <ul class="product">
-      <li
-        *ngFor="let product of cart; let index = index"
-        class="product-item"
-      >
+      <li *ngFor="let product of cart; let index = index" class="product-item">
         <img
           [src]="product.extraInfo.image[0]"
           [alt]="product.name"
           class="product-img"
         />
         <h2 class="product-name">{{ product.name }}</h2>
-        <p class="product-count">{{product.count}} ×</p>
+        <p class="product-text">price</p>
         <p class="product-price">{{ product.price | currency }}</p>
-  
+        <app-counter [(ngModel)]="product.count" class="product-counter"></app-counter>
       </li>
     </ul>
     <div class="total">
@@ -21,10 +18,12 @@
       <div class="total-price">{{ sum | currency }}</div>
     </div>
   </div>
-  
-  
+
   <div *ngIf="!cart.length" class="message">
     <p class="message-header">Your cart is empty</p>
-    <p class="message-text">look at our catalog and choose <br> the products you like</p>
+    <p class="message-text">
+      look at our catalog and choose <br />
+      the products you like
+    </p>
   </div>
 </div>

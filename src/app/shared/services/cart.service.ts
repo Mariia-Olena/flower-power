@@ -32,6 +32,14 @@ export class CartService {
     );
   }
 
+  get sum(): number {
+    const productsArray = Object.values(this.productsInCart)
+    return productsArray.reduce(
+      (acc, item) => acc + item.price * item.count,
+      0
+    );
+  }
+
   showAllProducts(): CartProduct[] {
     return Object.values(this.productsInCart)
   }

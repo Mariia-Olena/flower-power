@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { ProductsService } from '@sharedModule/services/products.service';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
 import { APIproduct, Product } from '@interfaces/product-plant.interface';
@@ -13,6 +13,7 @@ import { CartService } from '@sharedModule/services/cart.service';
 export class ProductsHomeComponent implements OnInit {
   products$: Observable<APIproduct[]>;
   plants$: Observable<PlantCard[]>;
+  plants1$: BehaviorSubject<PlantCard[]> = new BehaviorSubject<PlantCard[]>([]);
 
   private products: APIproduct[];
   private productInCart: Product;
@@ -53,6 +54,26 @@ export class ProductsHomeComponent implements OnInit {
         });
       })
     );
+
+    this.products$.pipe(
+      tap((res: APIproduct[]) => {
+        console.log('44', res);
+        
+        this.products = res;
+      }),
+      map((res: APIproduct[]): PlantCard[] => {
+        return res.map((item: APIproduct): PlantCard => {
+          return {
+            name: item.name,
+            img: item.extraInfo.image[0],
+            price: item.price,
+            id: item.id,
+          };
+        });
+      })
+    ).subscribe((res: PlantCard[]) => {
+      this.plants1$.next(res)
+    })    
   }
 
   setProduct(id: string) {
