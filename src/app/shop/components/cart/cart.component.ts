@@ -6,12 +6,14 @@ import { CartProduct } from '@sharedModule/types/product-plant.interface';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
   cart: CartProduct[];
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+  ) {}
 
   trackByIndex(index: number, item: CartProduct) {
     return index;
@@ -24,7 +26,7 @@ export class CartComponent implements OnInit {
   removeProduct(id: string) {
     this.cartService.removeProduct(id);
     this.setCart();
-    this.getSum()
+    this.getSum();
   }
 
   getSum() {
@@ -32,7 +34,8 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cartService.setCartFromSessionStorage();
     this.setCart();
-    this.getSum()
+    this.getSum();
   }
 }

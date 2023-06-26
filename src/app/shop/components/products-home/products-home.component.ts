@@ -4,6 +4,7 @@ import { ProductsService } from '@sharedModule/services/products.service';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
 import { APIproduct, Product } from '@interfaces/product-plant.interface';
 import { CartService } from '@sharedModule/services/cart.service';
+import { SessionStorageService } from '@sharedModule/services/session-storage.service';
 
 @Component({
   selector: 'app-products-home',
@@ -12,8 +13,7 @@ import { CartService } from '@sharedModule/services/cart.service';
 })
 export class ProductsHomeComponent implements OnInit {
   products$: Observable<APIproduct[]>;
-  plants$: Observable<PlantCard[]>;
-  plants1$: BehaviorSubject<PlantCard[]> = new BehaviorSubject<PlantCard[]>([]);
+  plants$: BehaviorSubject<PlantCard[]> = new BehaviorSubject<PlantCard[]>([]);
 
   private products: APIproduct[];
   private productInCart: Product;
@@ -24,13 +24,9 @@ export class ProductsHomeComponent implements OnInit {
 
   constructor(
     public productsService: ProductsService,
-    private cartService: CartService
+    private cartService: CartService,
+    private sessionStorageService: SessionStorageService
   ) {}
-
-  changePage(page: number): void {
-    this.currentPage = page;
-    this.fetchPlants();
-  }
 
   fetchPlants() {
     this.products$ = this.productsService.getAllProducts(
@@ -38,27 +34,9 @@ export class ProductsHomeComponent implements OnInit {
       this.currentPage,
       this.sort
     );
-
-    this.plants$ = this.products$.pipe(
-      tap((res: APIproduct[]) => {
-        this.products = res;
-      }),
-      map((res: APIproduct[]): PlantCard[] => {
-        return res.map((item: APIproduct): PlantCard => {
-          return {
-            name: item.name,
-            img: item.extraInfo.image[0],
-            price: item.price,
-            id: item.id,
-          };
-        });
-      })
-    );
-
+    
     this.products$.pipe(
       tap((res: APIproduct[]) => {
-        console.log('44', res);
-        
         this.products = res;
       }),
       map((res: APIproduct[]): PlantCard[] => {
@@ -71,9 +49,15 @@ export class ProductsHomeComponent implements OnInit {
           };
         });
       })
-    ).subscribe((res: PlantCard[]) => {
-      this.plants1$.next(res)
-    })    
+    )
+    .subscribe((res: PlantCard[]) => {
+      this.plants$.next(res);
+    });
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
+    this.fetchPlants();
   }
 
   setProduct(id: string) {
@@ -82,7 +66,7 @@ export class ProductsHomeComponent implements OnInit {
     )[0];
   }
 
-  addToCart(id: any) {
+  addToCart(id: string) {
     this.setProduct(id);
     this.cartService.addProduct(this.productInCart);
   }

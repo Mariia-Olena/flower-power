@@ -21,6 +21,7 @@ export class TooltipComponent implements OnInit, AfterContentChecked {
   }
 
   ngOnInit(): void {
+    this.cartService.setCartFromSessionStorage()
     this.cart = this.cartService.showAllProducts()
   }
 
