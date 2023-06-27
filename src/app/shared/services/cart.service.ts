@@ -40,6 +40,10 @@ export class CartService {
     return Object.values(this.productsInCart)
   }
 
+  getProductsInCart() {
+    return this.productsInCart
+  }
+
   setCartFromSessionStorage() {
     this.productsInCart = this.sessionStorageService.getAll()    
   }

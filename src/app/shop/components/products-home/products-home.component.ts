@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, retry, tap } from 'rxjs';
 import { ProductsService } from '@sharedModule/services/products.service';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
 import { APIproduct, Product } from '@interfaces/product-plant.interface';
 import { CartService } from '@sharedModule/services/cart.service';
-import { SessionStorageService } from '@sharedModule/services/session-storage.service';
 
 @Component({
   selector: 'app-products-home',
@@ -25,7 +24,6 @@ export class ProductsHomeComponent implements OnInit {
   constructor(
     public productsService: ProductsService,
     private cartService: CartService,
-    private sessionStorageService: SessionStorageService
   ) {}
 
   fetchPlants() {
@@ -45,7 +43,7 @@ export class ProductsHomeComponent implements OnInit {
             name: item.name,
             img: item.extraInfo.image[0],
             price: item.price,
-            id: item.id,
+            id: item.id
           };
         });
       })

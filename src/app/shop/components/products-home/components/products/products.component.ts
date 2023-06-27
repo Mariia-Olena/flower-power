@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {} from '@angular/core';
+import { CartProduct } from '@sharedModule/types/product-plant.interface';
 import { PlantCard } from './types/plant.interface';
 
 @Component({

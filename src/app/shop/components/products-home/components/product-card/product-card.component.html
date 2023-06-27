@@ -8,6 +8,14 @@
       <a [routerLink]="[plant.id]">{{ plant.name | titlecase }}</a>
     </div>
     <p class="price">{{ plant.price | currency }}</p>
-    <button (click)="addToCart.emit(plant.id)" class="button card-button">ADD TO CART</button>
+    <button
+      *ngIf="!isProductInCart(plant.id)"
+      (click)="addToCart.emit(plant.id)"
+      class="button card-button"
+    >
+      ADD TO CART
+    </button>
+    <app-counter *ngIf="isProductInCart(plant.id)" class="card-counter"></app-counter>
   </div>
 </div>
+<!-- [(ngModel)]="product.count" -->
