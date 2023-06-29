@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { CartService } from '@sharedModule/services/cart.service';
 
 import { CartProduct } from '@sharedModule/types/product-plant.interface';
@@ -8,17 +8,21 @@ import { CartProduct } from '@sharedModule/types/product-plant.interface';
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.scss'],
 })
-export class TooltipComponent implements OnInit, AfterContentChecked {
+export class TooltipComponent implements OnInit, DoCheck {
   cart: CartProduct[] = [];
   sum: number = 0;
 
   constructor(private cartService: CartService) {}
 
+  changeCount(id: string, count: number): void {
+    this.cartService.changeCount(id, count)
+  }
+
   ngOnInit(): void {
     this.cart = this.cartService.showAllProducts();
   }
 
-  ngAfterContentChecked() {
+  ngDoCheck(): void {
     this.cart = this.cartService.showAllProducts();
     this.sum = this.cartService.getSum();
   }

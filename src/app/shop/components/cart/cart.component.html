@@ -19,8 +19,8 @@
       </button>
       <div class="product-counter">
         <app-counter
-          [(ngModel)]="product.count"
-          (ngModelChange)="getSum()"
+        [ngModel]="product.count"
+        (ngModelChange)="changeCount(product.id, $event)"
         ></app-counter>
       </div>
     </li>

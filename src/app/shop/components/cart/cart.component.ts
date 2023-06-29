@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { CartService } from '@sharedModule/services/cart.service';
 
 import { CartProduct } from '@sharedModule/types/product-plant.interface';
@@ -8,8 +8,8 @@ import { CartProduct } from '@sharedModule/types/product-plant.interface';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit {
-  cart: CartProduct[];
+export class CartComponent implements OnInit, DoCheck {
+  cart: CartProduct[] = [];
 
   constructor(
     private cartService: CartService,
@@ -29,6 +29,11 @@ export class CartComponent implements OnInit {
     this.getSum();
   }
 
+  changeCount(id: string, count: number): void {
+    this.cartService.changeCount(id, count)
+    this.setCart();
+  }
+
   getSum() {
     return this.cartService.getSum();
   }
@@ -36,5 +41,9 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.setCart();
     this.getSum();
+  }
+
+  ngDoCheck(): void {
+    this.setCart();
   }
 }

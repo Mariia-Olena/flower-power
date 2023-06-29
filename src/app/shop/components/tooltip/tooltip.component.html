@@ -10,7 +10,8 @@
         <h2 class="product-name">{{ product.name }}</h2>
         <p class="product-text">price</p>
         <p class="product-price">{{ product.price | currency }}</p>
-        <app-counter [(ngModel)]="product.count" class="product-counter"></app-counter>
+        <app-counter [ngModel]="product.count"
+        (ngModelChange)="changeCount(product.id, $event)" class="product-counter"></app-counter>
       </li>
     </ul>
     <div class="total">

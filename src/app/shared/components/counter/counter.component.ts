@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   NG_VALUE_ACCESSOR,
   ControlValueAccessor,
@@ -26,6 +26,8 @@ import {
   ],
 })
 export class CounterComponent implements ControlValueAccessor, Validator {
+  @Input() max: number = 10;
+
   quantity = 0;
 
   onChange = (quantity: number) => {};
@@ -36,7 +38,7 @@ export class CounterComponent implements ControlValueAccessor, Validator {
 
   onAdd() {
     this.markAsTouched();
-    if (!this.disabled && this.quantity < 10) {
+    if (!this.disabled && this.quantity < this.max) {
       this.quantity += 1;
       this.onChange(this.quantity);
     }
