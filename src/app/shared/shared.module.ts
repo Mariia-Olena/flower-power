@@ -12,6 +12,7 @@ import { RatingComponent } from '@shared/rating/rating.component';
 import { SliderComponent } from '@shared/slider/slider.component';
 import { RouterModule } from '@angular/router';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     PaginationComponent,
     RatingComponent,
     SliderComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     PaginationComponent,
     RatingComponent,
     SliderComponent,
+    SpinnerComponent,
     SafeUrlPipe
   ],
 })

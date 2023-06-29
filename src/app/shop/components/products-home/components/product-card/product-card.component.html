@@ -9,13 +9,17 @@
     </div>
     <p class="price">{{ plant.price | currency }}</p>
     <button
-      *ngIf="!isProductInCart(plant.id)"
+      *ngIf="!plant.isInCart()"
       (click)="addToCart.emit(plant.id)"
       class="button card-button"
     >
       ADD TO CART
     </button>
-    <app-counter *ngIf="isProductInCart(plant.id)" class="card-counter"></app-counter>
+    <app-counter
+      *ngIf="plant.isInCart()"
+      class="card-counter"
+      [ngModel]="plant.count()"
+      (ngModelChange)="plant.counterChange($event)"
+    ></app-counter>
   </div>
 </div>
-<!-- [(ngModel)]="product.count" -->

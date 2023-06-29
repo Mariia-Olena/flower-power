@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, pipe, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 import { APIproduct } from '../types/product-plant.interface';
 import { environment } from 'src/environments/environment';

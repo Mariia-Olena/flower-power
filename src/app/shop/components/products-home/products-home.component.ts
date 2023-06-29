@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, map, Observable, retry, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { ProductsService } from '@sharedModule/services/products.service';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
 import { APIproduct, Product } from '@interfaces/product-plant.interface';
@@ -23,7 +23,7 @@ export class ProductsHomeComponent implements OnInit {
 
   constructor(
     public productsService: ProductsService,
-    private cartService: CartService,
+    private cartService: CartService
   ) {}
 
   fetchPlants() {
@@ -32,25 +32,33 @@ export class ProductsHomeComponent implements OnInit {
       this.currentPage,
       this.sort
     );
-    
-    this.products$.pipe(
-      tap((res: APIproduct[]) => {
-        this.products = res;
-      }),
-      map((res: APIproduct[]): PlantCard[] => {
-        return res.map((item: APIproduct): PlantCard => {
-          return {
-            name: item.name,
-            img: item.extraInfo.image[0],
-            price: item.price,
-            id: item.id
-          };
-        });
-      })
-    )
-    .subscribe((res: PlantCard[]) => {
-      this.plants$.next(res);
-    });
+
+    this.products$
+      .pipe(
+        tap((res: APIproduct[]) => {
+          this.products = res;
+        }),
+        map((res: APIproduct[]): PlantCard[] => {
+          return res.map((item: APIproduct): PlantCard => {
+            return {
+              name: item.name,
+              img: item.extraInfo.image[0],
+              price: item.price,
+              id: item.id,
+              isInCart: (): boolean => {
+                return !!this.cartService.getProductsInCart()[item.id];
+              },
+              count: () => this.cartService.getProductsInCart()[item.id]?.count || 1,
+              counterChange: (count: number): void => {
+                this.cartService.changeCount(item.id, count)
+              }
+            };
+          });
+        })
+      )
+      .subscribe((res: PlantCard[]) => {
+        this.plants$.next(res);
+      });
   }
 
   changePage(page: number): void {
@@ -69,7 +77,11 @@ export class ProductsHomeComponent implements OnInit {
     this.cartService.addProduct(this.productInCart);
   }
 
+  
+
   ngOnInit(): void {
     this.fetchPlants();
+    console.log();
+    
   }
 }

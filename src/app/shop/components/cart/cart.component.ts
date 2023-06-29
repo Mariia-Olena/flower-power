@@ -34,7 +34,6 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cartService.setCartFromSessionStorage();
     this.setCart();
     this.getSum();
   }

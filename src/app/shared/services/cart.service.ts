@@ -3,49 +3,58 @@ import {
   CartProduct,
   Product,
 } from '@sharedModule/types/product-plant.interface';
-import { SessionStorageService } from './session-storage.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private productsInCart: {[id: string]: CartProduct} = {};
+  private productsInCart: { [id: string]: CartProduct } =
+    this.storageService.get('cart') || {};
 
-  constructor(private sessionStorageService: SessionStorageService) {}
+  constructor(private storageService: StorageService) {}
 
   addProduct(product: Product, count: number = 1) {
     if (this.productsInCart[product.id]) {
-      this.productsInCart[product.id].count += 1
+      this.productsInCart[product.id].count += 1;
     } else {
-      this.productsInCart[product.id] = ({ ...product, count });
+      this.productsInCart[product.id] = { ...product, count };
     }
 
-    this.sessionStorageService.set(product.id, this.productsInCart[product.id])
+    this.storageService.set('cart', this.productsInCart);
   }
 
   removeProduct(id: string): void {
     delete this.productsInCart[id];
-    this.sessionStorageService.remove(id)
+    this.storageService.set('cart', this.productsInCart);
   }
 
   getSum(): number {
-    const productsArray = Object.values(this.productsInCart)
+    const productsArray = Object.values(this.productsInCart);
     return productsArray.reduce(
       (acc, item) => acc + item.price * item.count,
       0
     );
   }
 
-  showAllProducts(): CartProduct[] {    
-    return Object.values(this.productsInCart)
+  showAllProducts(): CartProduct[] {
+    return Object.values(this.productsInCart);
   }
 
   getProductsInCart() {
-    return this.productsInCart
+    return this.productsInCart;
   }
 
-  setCartFromSessionStorage() {
-    this.productsInCart = this.sessionStorageService.getAll()    
-  }
+  changeCount(id: string, count: number) {
+    if(this.productsInCart[id] && count === 0) {
+      this.removeProduct(id)
+    }
 
+    if (this.productsInCart[id]) {
+      this.productsInCart[id].count = count;
+      this.storageService.set('cart', this.productsInCart);
+    } else {
+      throw new Error('Product is not in the cart');
+    }
+  }
 }

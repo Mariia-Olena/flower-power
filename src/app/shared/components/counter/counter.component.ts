@@ -44,7 +44,7 @@ export class CounterComponent implements ControlValueAccessor, Validator {
 
   onRemove() {
     this.markAsTouched();
-    if (!this.disabled && this.quantity > 1) {
+    if (!this.disabled && this.quantity > 0) {
       this.quantity -= 1;
       this.onChange(this.quantity);
     }
