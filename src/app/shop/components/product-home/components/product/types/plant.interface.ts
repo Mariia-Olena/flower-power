@@ -5,4 +5,7 @@ export interface Plant {
   size: string[];
   potColor: string[];
   id: string;
+  count?: () => number;
+  isInCart?: () => boolean;
+  counterChange?: (count: number) => void;
 }

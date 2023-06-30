@@ -52,7 +52,14 @@ export class ProductHomeComponent implements OnInit {
           price: value.price,
           size: value.extraInfo.size,
           potColor: value.extraInfo.potColor,
-          id: value.id
+          id: value.id,
+          isInCart: (): boolean => {
+            return !!this.cartService.getProductsInCart()[value.id];
+          },
+          count: () => this.cartService.getProductsInCart()[value.id]?.count || 1,
+          counterChange: (count: number): void => {
+            this.cartService.changeCount(value.id, count)
+          }
         };
       })
     );

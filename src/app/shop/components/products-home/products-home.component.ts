@@ -4,6 +4,7 @@ import { ProductsService } from '@sharedModule/services/products.service';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
 import { APIproduct, Product } from '@interfaces/product-plant.interface';
 import { CartService } from '@sharedModule/services/cart.service';
+import { CartV2Service } from '@sharedModule/services/cart-v2.service';
 
 @Component({
   selector: 'app-products-home',
@@ -23,7 +24,8 @@ export class ProductsHomeComponent implements OnInit {
 
   constructor(
     public productsService: ProductsService,
-    private cartService: CartService
+    private cartService: CartService,
+    private cartV2Service: CartV2Service,
   ) {}
 
   fetchPlants() {
@@ -75,6 +77,7 @@ export class ProductsHomeComponent implements OnInit {
   addToCart(id: string) {
     this.setProduct(id);
     this.cartService.addProduct(this.productInCart);
+    this.cartV2Service.addProduct(this.productInCart);
   }
 
   

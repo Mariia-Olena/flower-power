@@ -37,6 +37,12 @@
         </li>
       </ul>
     </div>
-    <button (click)="addToCart.emit()" class="product-button button">ADD TO CART</button>
+    <button *ngIf="!plant.isInCart()" (click)="addToCart.emit()" class="product-button button">ADD TO CART</button>
+    <app-counter
+      *ngIf="plant.isInCart()"
+      class="product-counter"
+      [ngModel]="plant.count()"
+      (ngModelChange)="plant.counterChange($event)"
+    ></app-counter>
   </div>
 </section>

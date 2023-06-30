@@ -1,5 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { CartService } from '@sharedModule/services/cart.service';
+import { CartV2Service } from '@sharedModule/services/cart-v2.service';
 
 import { CartProduct } from '@sharedModule/types/product-plant.interface';
 
@@ -13,6 +14,7 @@ export class CartComponent implements OnInit, DoCheck {
 
   constructor(
     private cartService: CartService,
+    public cartV2Service: CartV2Service
   ) {}
 
   trackByIndex(index: number, item: CartProduct) {

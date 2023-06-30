@@ -19,8 +19,8 @@
       </button>
       <div class="product-counter">
         <app-counter
-        [ngModel]="product.count"
-        (ngModelChange)="changeCount(product.id, $event)"
+          [ngModel]="product.count"
+          (ngModelChange)="changeCount(product.id, $event)"
         ></app-counter>
       </div>
     </li>
@@ -36,4 +36,12 @@
   <a routerLink="/products">
     <button class="button message-button">Go shopping</button>
   </a>
+</div>
+
+<div>
+  <p *ngFor="let item of cartV2Service.cart$ | async">
+    {{ item.product.name }}-
+    {{ item.count }}
+  </p>
+  <div>{{ cartV2Service.total$ | async | currency}}</div>
 </div>
