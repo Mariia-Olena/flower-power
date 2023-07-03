@@ -1,26 +1,26 @@
 <div class="tooltip">
-  <div *ngIf="cart.length" class="cart">
+  <div  class="cart">
     <ul class="product">
-      <li *ngFor="let product of cart; let index = index" class="product-item">
+      <li *ngFor="let item of cart$ | async; let index = index" class="product-item">
         <img
-          [src]="product.extraInfo.image[0]"
-          [alt]="product.name"
+          [src]="item.product.extraInfo.image[0]"
+          [alt]="item.product.name"
           class="product-img"
         />
-        <h2 class="product-name">{{ product.name }}</h2>
+        <h2 class="product-name">{{ item.product.name }}</h2>
         <p class="product-text">price</p>
-        <p class="product-price">{{ product.price | currency }}</p>
-        <app-counter [ngModel]="product.count"
-        (ngModelChange)="changeCount(product.id, $event)" class="product-counter"></app-counter>
+        <p class="product-price">{{ item.product.price | currency }}</p>
+        <app-counter [ngModel]="item.count"
+        (ngModelChange)="changeCount(item.product.id, $event)" class="product-counter"></app-counter>
       </li>
     </ul>
     <div class="total">
       <h3 class="total-text">Total</h3>
-      <div class="total-price">{{ sum | currency }}</div>
+      <div class="total-price">{{ total$ | async | currency }}</div>
     </div>
   </div>
 
-  <div *ngIf="!cart.length" class="message">
+  <div *ngIf="" class="message">
     <p class="message-header">Your cart is empty</p>
     <p class="message-text">
       look at our catalog and choose <br />

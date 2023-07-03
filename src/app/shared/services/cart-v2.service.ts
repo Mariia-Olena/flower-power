@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  CartProduct,
-  Product,
-} from '@sharedModule/types/product-plant.interface';
+import { Product } from '@sharedModule/types/product-plant.interface';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 
-interface CartItem {
+export interface CartItem {
   product: Product;
   count: number;
   params?: {
@@ -20,22 +17,31 @@ interface CartItem {
 export class CartV2Service {
   private productsInCart: BehaviorSubject<{ [key: string]: CartItem }> =
     new BehaviorSubject(this.storageService.get('cart-v2') || {});
-  
+
   cart$: Observable<CartItem[]> = this.productsInCart.asObservable().pipe(
-    map((value: { [key: string]: CartItem }): CartItem[]  => {
+    map((value: { [key: string]: CartItem }): CartItem[] => {
       return Object.values(value);
     })
   );
 
   total$: Observable<number> = this.cart$.pipe(
-    map((value: CartItem[]): number  => {
+    map((value: CartItem[]): number => {
       return value.reduce((acc: number, curr: CartItem): number => {
-        return acc + curr.count * curr.product.price
-      }, 0)
+        return acc + curr.count * curr.product.price;
+      }, 0);
     })
-  )
+  );
 
   constructor(private storageService: StorageService) {}
+
+  setCart(): Observable<CartItem[]> {
+    return this.cart$;
+  }
+
+  isInCart(id: string): boolean {
+    console.log(!!this.cart$[id]);
+    return !!this.cart$[id];
+  }
 
   addProduct(
     product: Product,
@@ -43,6 +49,7 @@ export class CartV2Service {
     params?: { color: string; size: string }
   ) {
     const productInCart: CartItem = this.productsInCart.getValue()[product.id];
+
     if (productInCart) {
       this.productsInCart.next({
         ...this.productsInCart.getValue(),
@@ -61,37 +68,35 @@ export class CartV2Service {
     this.storageService.set('cart-v2', this.productsInCart.getValue());
   }
 
-  // removeProduct(id: string): void {
-  //   delete this.productsInCart[id];
-  //   this.storageService.set('cart', this.productsInCart);
-  // }
+  removeProduct(id: string): void {
+    const cart = this.productsInCart.getValue();
+    delete cart[id];
+    this.productsInCart.next(cart);
 
-  // getSum(): number {
-  //   const productsArray = Object.values(this.productsInCart);
-  //   return productsArray.reduce(
-  //     (acc, item) => acc + item.price * item.count,
-  //     0
-  //   );
-  // }
+    this.storageService.set('cart-v2', this.productsInCart.getValue());
+  }
 
-  // showAllProducts(): CartProduct[] {
-  //   return Object.values(this.productsInCart);
-  // }
+  changeCount(id: string, count: number) {
+    const productInCart: CartItem = this.productsInCart.getValue()[id];
+
+    if (productInCart && count === 0) {
+      return this.removeProduct(id);
+    }
+
+    if (productInCart) {
+      productInCart.count = count;
+      this.productsInCart.next({
+        ...this.productsInCart.getValue(),
+        [id]: productInCart,
+      });
+
+      this.storageService.set('cart-v2', this.productsInCart.getValue());
+    } else {
+      throw new Error('Product is not in the cart');
+    }
+  }
 
   // getProductsInCart() {
   //   return this.productsInCart;
-  // }
-
-  // changeCount(id: string, count: number) {
-  //   if(this.productsInCart[id] && count === 0) {
-  //     this.removeProduct(id)
-  //   }
-
-  //   if (this.productsInCart[id]) {
-  //     this.productsInCart[id].count = count;
-  //     this.storageService.set('cart', this.productsInCart);
-  //   } else {
-  //     throw new Error('Product is not in the cart');
-  //   }
   // }
 }

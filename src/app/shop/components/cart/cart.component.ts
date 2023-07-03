@@ -1,51 +1,33 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import { CartService } from '@sharedModule/services/cart.service';
-import { CartV2Service } from '@sharedModule/services/cart-v2.service';
-
-import { CartProduct } from '@sharedModule/types/product-plant.interface';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import {
+  CartV2Service,
+  CartItem,
+} from '@sharedModule/services/cart-v2.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit, DoCheck {
-  cart: CartProduct[] = [];
+export class CartComponent implements OnInit {
+  cart$: Observable<CartItem[]>;
+  total$: Observable<number>;
 
   constructor(
-    private cartService: CartService,
-    public cartV2Service: CartV2Service
+    private cartV2Service: CartV2Service
   ) {}
 
-  trackByIndex(index: number, item: CartProduct) {
-    return index;
-  }
-
-  setCart() {
-    this.cart = this.cartService.showAllProducts();
-  }
-
   removeProduct(id: string) {
-    this.cartService.removeProduct(id);
-    this.setCart();
-    this.getSum();
+    this.cartV2Service.removeProduct(id);
   }
 
   changeCount(id: string, count: number): void {
-    this.cartService.changeCount(id, count)
-    this.setCart();
-  }
-
-  getSum() {
-    return this.cartService.getSum();
+    this.cartV2Service.changeCount(id, count);
   }
 
   ngOnInit(): void {
-    this.setCart();
-    this.getSum();
-  }
-
-  ngDoCheck(): void {
-    this.setCart();
+    this.cart$ = this.cartV2Service.setCart();
+    this.total$ = this.cartV2Service.total$;
   }
 }

@@ -1,29 +1,29 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import { CartService } from '@sharedModule/services/cart.service';
-
-import { CartProduct } from '@sharedModule/types/product-plant.interface';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import {
+  CartV2Service,
+  CartItem,
+} from '@sharedModule/services/cart-v2.service';
 
 @Component({
   selector: 'app-tooltip',
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.scss'],
 })
-export class TooltipComponent implements OnInit, DoCheck {
-  cart: CartProduct[] = [];
-  sum: number = 0;
+export class TooltipComponent implements OnInit {
+  cart$: Observable<CartItem[]>;
+  total$: Observable<number>;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartV2Service: CartV2Service
+  ) {}
 
   changeCount(id: string, count: number): void {
-    this.cartService.changeCount(id, count)
+    this.cartV2Service.changeCount(id, count);
   }
 
   ngOnInit(): void {
-    this.cart = this.cartService.showAllProducts();
-  }
-
-  ngDoCheck(): void {
-    this.cart = this.cartService.showAllProducts();
-    this.sum = this.cartService.getSum();
+    this.cart$ = this.cartV2Service.setCart();
+    this.total$ = this.cartV2Service.total$;
   }
 }

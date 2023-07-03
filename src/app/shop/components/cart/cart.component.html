@@ -1,47 +1,39 @@
-<div *ngIf="cart.length" class="cart">
+<div class="cart">
   <ul class="product">
     <li
-      *ngFor="let product of cart; let index = index; trackBy: trackByIndex"
+      *ngFor="let item of cart$ | async"
       class="product-item"
     >
       <img
-        [src]="product.extraInfo.image[0]"
+        [src]="item.product.extraInfo.image[0]"
         alt="item.name"
         class="product-img"
       />
-      <h2 class="product-name">{{ product.name }}</h2>
-      <p class="product-size">{{ product.extraInfo.size }}</p>
-      <p class="product-price">{{ product.price | currency }}</p>
-      <button (click)="removeProduct(product.id)" class="product-button">
+      <h2 class="product-name">{{ item.product.name }}</h2>
+      <p class="product-size">{{ item.product.extraInfo.size }}</p>
+      <p class="product-price">{{ item.product.price | currency }}</p>
+      <button (click)="removeProduct(item.product.id)" class="product-button">
         <svg class="product-icon">
           <use xlink:href="assets/icons/sprite.svg#trash_can"></use>
         </svg>
       </button>
       <div class="product-counter">
         <app-counter
-          [ngModel]="product.count"
-          (ngModelChange)="changeCount(product.id, $event)"
+          [ngModel]="item.count"
+          (ngModelChange)="changeCount(item.product.id, $event)"
         ></app-counter>
       </div>
     </li>
   </ul>
   <div class="total">
     <h3 class="total-text">Total</h3>
-    <div class="total-price">{{ getSum() | currency }}</div>
+    <div class="total-price">{{ total$ | async | currency }}</div>
   </div>
 </div>
 
-<div *ngIf="!cart.length" class="message">
+<div *ngIf="" class="message">
   <p class="message-text">Your cart is empty</p>
   <a routerLink="/products">
     <button class="button message-button">Go shopping</button>
   </a>
-</div>
-
-<div>
-  <p *ngFor="let item of cartV2Service.cart$ | async">
-    {{ item.product.name }}-
-    {{ item.count }}
-  </p>
-  <div>{{ cartV2Service.total$ | async | currency}}</div>
 </div>

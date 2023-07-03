@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductsService {
   private baseUrl = environment.baseUrl;
+
   private _allProductsCount: BehaviorSubject<number> = new BehaviorSubject(0);
   allProductsCount: Observable<number> = this._allProductsCount.asObservable();
 
