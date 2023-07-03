@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '@sharedModule/types/product-plant.interface';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 
 export interface CartItem {
@@ -15,10 +15,10 @@ export interface CartItem {
   providedIn: 'root',
 })
 export class CartV2Service {
-  private productsInCart: BehaviorSubject<{ [key: string]: CartItem }> =
+  private productsInCart$: BehaviorSubject<{ [key: string]: CartItem }> =
     new BehaviorSubject(this.storageService.get('cart-v2') || {});
 
-  cart$: Observable<CartItem[]> = this.productsInCart.asObservable().pipe(
+  private cart$: Observable<CartItem[]> = this.productsInCart$.asObservable().pipe(
     map((value: { [key: string]: CartItem }): CartItem[] => {
       return Object.values(value);
     })
@@ -39,8 +39,11 @@ export class CartV2Service {
   }
 
   isInCart(id: string): boolean {
-    console.log(!!this.cart$[id]);
-    return !!this.cart$[id];
+   return !!this.productsInCart$.getValue()[id]
+  }
+
+  getCount (id: string): number {
+    return this.productsInCart$.getValue()[id].count
   }
 
   addProduct(
@@ -48,36 +51,36 @@ export class CartV2Service {
     count: number = 1,
     params?: { color: string; size: string }
   ) {
-    const productInCart: CartItem = this.productsInCart.getValue()[product.id];
+    const productInCart: CartItem = this.productsInCart$.getValue()[product.id];
 
     if (productInCart) {
-      this.productsInCart.next({
-        ...this.productsInCart.getValue(),
+      this.productsInCart$.next({
+        ...this.productsInCart$.getValue(),
         [product.id]: {
           ...productInCart,
           count: productInCart.count + count,
         },
       });
     } else {
-      this.productsInCart.next({
-        ...this.productsInCart.getValue(),
+      this.productsInCart$.next({
+        ...this.productsInCart$.getValue(),
         [product.id]: { product, count, params },
       });
     }
 
-    this.storageService.set('cart-v2', this.productsInCart.getValue());
+    this.storageService.set('cart-v2', this.productsInCart$.getValue());
   }
 
   removeProduct(id: string): void {
-    const cart = this.productsInCart.getValue();
+    const cart = this.productsInCart$.getValue();
     delete cart[id];
-    this.productsInCart.next(cart);
+    this.productsInCart$.next(cart);
 
-    this.storageService.set('cart-v2', this.productsInCart.getValue());
+    this.storageService.set('cart-v2', this.productsInCart$.getValue());
   }
 
   changeCount(id: string, count: number) {
-    const productInCart: CartItem = this.productsInCart.getValue()[id];
+    const productInCart: CartItem = this.productsInCart$.getValue()[id];
 
     if (productInCart && count === 0) {
       return this.removeProduct(id);
@@ -85,18 +88,15 @@ export class CartV2Service {
 
     if (productInCart) {
       productInCart.count = count;
-      this.productsInCart.next({
-        ...this.productsInCart.getValue(),
+      this.productsInCart$.next({
+        ...this.productsInCart$.getValue(),
         [id]: productInCart,
       });
 
-      this.storageService.set('cart-v2', this.productsInCart.getValue());
+      this.storageService.set('cart-v2', this.productsInCart$.getValue());
     } else {
       throw new Error('Product is not in the cart');
     }
   }
 
-  // getProductsInCart() {
-  //   return this.productsInCart;
-  // }
 }

@@ -7,7 +7,7 @@ import { Plant } from '@productHome/product/types/plant.interface';
 import { PlantInfo } from '@productHome/product-info/types/plant-info.interface';
 import { PlantReview } from '@productHome//product-review/types/plant-review.interface';
 import { APIproduct, Product } from '@interfaces/product-plant.interface';
-import { CartService } from '@sharedModule/services/cart.service';
+import { CartV2Service } from '@sharedModule/services/cart-v2.service';
 
 @Component({
   selector: 'app-product-home',
@@ -23,7 +23,7 @@ export class ProductHomeComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    private cartService: CartService,
+    private cartV2Service: CartV2Service,
     private route: ActivatedRoute,
   ) {}
 
@@ -54,11 +54,11 @@ export class ProductHomeComponent implements OnInit {
           potColor: value.extraInfo.potColor,
           id: value.id,
           isInCart: (): boolean => {
-            return !!this.cartService.getProductsInCart()[value.id];
+            return !!this.cartV2Service.isInCart(value.id);
           },
-          count: () => this.cartService.getProductsInCart()[value.id]?.count || 1,
+          count: () => this.cartV2Service.getCount(value.id) || 1,
           counterChange: (count: number): void => {
-            this.cartService.changeCount(value.id, count)
+            this.cartV2Service.changeCount(value.id, count)
           }
         };
       })
@@ -90,7 +90,7 @@ export class ProductHomeComponent implements OnInit {
   }
 
   addToCart() {
-    this.cartService.addProduct(this.product);
+    this.cartV2Service.addProduct(this.product);
   }
 
   ngOnInit(): void {

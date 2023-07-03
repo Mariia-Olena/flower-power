@@ -3,7 +3,6 @@ import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { ProductsService } from '@sharedModule/services/products.service';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
 import { APIproduct, Product } from '@interfaces/product-plant.interface';
-import { CartService } from '@sharedModule/services/cart.service';
 import { CartV2Service } from '@sharedModule/services/cart-v2.service';
 
 @Component({
@@ -24,7 +23,6 @@ export class ProductsHomeComponent implements OnInit {
 
   constructor(
     public productsService: ProductsService,
-    private cartService: CartService,
     private cartV2Service: CartV2Service,
   ) {}
 
@@ -48,11 +46,11 @@ export class ProductsHomeComponent implements OnInit {
               price: item.price,
               id: item.id,
               isInCart: (): boolean => {
-                return !!this.cartService.getProductsInCart()[item.id];
+                return !!this.cartV2Service.isInCart(item.id);
               },
-              count: () => this.cartService.getProductsInCart()[item.id]?.count || 1,
+              count: () => this.cartV2Service.getCount(item.id) || 1,
               counterChange: (count: number): void => {
-                this.cartService.changeCount(item.id, count)
+                this.cartV2Service.changeCount(item.id, count)
               }
             };
           });
@@ -76,15 +74,10 @@ export class ProductsHomeComponent implements OnInit {
 
   addToCart(id: string) {
     this.setProduct(id);
-    this.cartService.addProduct(this.productInCart);
     this.cartV2Service.addProduct(this.productInCart);
   }
 
-  
-
   ngOnInit(): void {
     this.fetchPlants();
-    console.log();
-    
   }
 }
