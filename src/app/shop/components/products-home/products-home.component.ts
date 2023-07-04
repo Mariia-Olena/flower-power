@@ -19,7 +19,7 @@ export class ProductsHomeComponent implements OnInit {
 
   limit: number = 2;
   currentPage: number = 1;
-  sort: string = '-price';
+  sort: string = 'name';
 
   constructor(
     public productsService: ProductsService,

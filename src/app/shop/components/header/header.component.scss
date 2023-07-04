@@ -67,9 +67,3 @@ svg.header-icon {
   border: 1px solid var(--lightGrey);
 }
 
-
-@media #{$desktopHD} {
-  .container {
-    padding: 0 rem(30);
-  }
-}

@@ -1,0 +1,26 @@
+<section class="info">
+  <div class="container">
+    <ul class="info-list">
+      <li *ngFor="let item of info">
+        <div
+          [style.background-image]="'url(' + item.img + ')'"
+          class="info-img"
+        >
+          <div class="info-box">
+            <p class="info-text">{{ item.text | uppercase }}</p>
+            <h3 class="info-title">{{ item.title }}</h3>
+            <button class="button info-button">
+              {{ item.button | uppercase }}
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="quiz">
+    <div class="quiz-box">
+      <h3 class="quiz-title">Find your perfect plant</h3>
+      <button class="button">START PLANT QUIZ</button>
+    </div>
+  </div>
+</section>

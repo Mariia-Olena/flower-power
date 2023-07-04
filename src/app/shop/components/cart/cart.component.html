@@ -1,9 +1,6 @@
 <div class="cart">
   <ul class="product">
-    <li
-      *ngFor="let item of cart$ | async"
-      class="product-item"
-    >
+    <li *ngFor="let item of cart$ | async" class="product-item">
       <img
         [src]="item.product.extraInfo.image[0]"
         alt="item.name"
@@ -29,11 +26,10 @@
     <h3 class="total-text">Total</h3>
     <div class="total-price">{{ total$ | async | currency }}</div>
   </div>
+  <a routerLink="/order" class="button">CHECKOUT</a>
 </div>
 
 <div *ngIf="" class="message">
   <p class="message-text">Your cart is empty</p>
-  <a routerLink="/products">
-    <button class="button message-button">Go shopping</button>
-  </a>
+  <a routerLink="/products" class="button">Go shopping</a>
 </div>

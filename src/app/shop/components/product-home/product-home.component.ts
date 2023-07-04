@@ -4,6 +4,7 @@ import { map, Observable, tap } from 'rxjs';
 
 import { ProductsService } from '@services/products.service';
 import { Plant } from '@productHome/product/types/plant.interface';
+import { PlantCard } from '@shop/products-home/components/products/types/plant.interface';
 import { PlantInfo } from '@productHome/product-info/types/plant-info.interface';
 import { PlantReview } from '@productHome//product-review/types/plant-review.interface';
 import { APIproduct, Product } from '@interfaces/product-plant.interface';
@@ -19,7 +20,15 @@ export class ProductHomeComponent implements OnInit {
   plantInfo$: Observable<PlantInfo>;
   plantReview$: Observable<PlantReview[]>;
   product$: Observable<APIproduct>;
+
+  products$: Observable<APIproduct[]>;
+  plants$: Observable<PlantCard[]>;
+
   private product: Product;
+
+  limit: number = 7;
+  currentPage: number = 1;
+  sort: string = '-price'
 
   constructor(
     private productsService: ProductsService,
@@ -89,11 +98,33 @@ export class ProductHomeComponent implements OnInit {
     );
   }
 
+  fetchPlants() {
+    this.products$ = this.productsService.getAllProducts(
+      this.limit,
+      this.currentPage,
+      this.sort
+    );
+
+    this.plants$ = this.products$.pipe(
+      map((res: APIproduct[]): PlantCard[] => {
+        return res.map((item: APIproduct): PlantCard => {
+          return {
+            name: item.name,
+            img: item.extraInfo.image[0],
+            price: item.price,
+            id: item.id,
+          };
+        });
+      })
+    );
+  }
+
   addToCart() {
     this.cartV2Service.addProduct(this.product);
   }
 
   ngOnInit(): void {
     this.fetchProduct();
+    this.fetchPlants();
   }
 }

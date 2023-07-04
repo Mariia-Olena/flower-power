@@ -1,0 +1,44 @@
+@import "style-variables.scss";
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: rem(10);
+    margin-top: rem(10);
+  }
+
+  &-label {
+    @extend %subHead2;
+    color: var(--green);
+    display: inline;
+    margin-top: rem(20);
+  }
+
+  &-input {
+    @extend %bodyText;
+    border: 1px solid var(--greyX);
+    border-radius: rem(6);
+    padding: rem(15);
+    width: 100%;
+
+    ::placeholder {
+      color: var(--greyX);
+    }
+  }
+
+  &-button {
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: rem(15);
+  }
+}

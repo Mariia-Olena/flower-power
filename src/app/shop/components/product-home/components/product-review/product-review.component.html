@@ -12,12 +12,11 @@
       <p class="review-text">
         {{review.comment}}
       </p>
-      <img
+      <img *ngIf="review.photo"
         [src]="review.photo"
         alt=""
         class="review-img"
       />
     </li>
   </ul>
-  <button class="review-button button">show more reviews</button>
 </section>

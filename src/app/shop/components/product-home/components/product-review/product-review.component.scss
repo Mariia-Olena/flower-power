@@ -17,14 +17,13 @@
   &-list {
     display: grid;
     gap: rem(20);
-    grid-template-columns: repeat(5, 1fr);
-    align-items: flex-start;
+    grid-template-columns: repeat(5, minmax(295px, 1fr));
+    align-items: start;
     margin-top: rem(20);
   }
 
   &-item {
     background-color: var(--lightGrey);
-    max-width: 295px;
     padding: rem(20);
   }
 

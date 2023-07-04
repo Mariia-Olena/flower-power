@@ -21,9 +21,13 @@ import { ProductViewComponent } from '@productsHome/product-view/product-view.co
 import { ProductHomeComponent } from '@product/product-home.component';
 import { ProductComponent } from '@productHome/product/product.component';
 import { ProductReviewComponent } from '@productHome/product-review/product-review.component';
+import { ProductSliderComponent } from '@productHome/product-slider/product-slider.component';
 import { ProductInfoComponent } from '@productHome/product-info/product-info.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
+import { OrderComponent } from './components/order/order.component';
+import { HomeSliderComponent } from './components/home-page/components/home-slider/home-slider.component';
+import { InfoComponent } from './components/home-page/components/info/info.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
     ProductInfoComponent,
     ProductsHomeComponent,
     ProductViewComponent,
+    ProductSliderComponent,
     TooltipComponent,
+    OrderComponent,
+    HomeSliderComponent,
+    InfoComponent,
   ],
   imports: [
     CommonModule,

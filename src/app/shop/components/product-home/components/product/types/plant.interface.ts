@@ -2,7 +2,10 @@ export interface Plant {
   slides: { img: string }[];
   name: string;
   price: number;
-  size: string[];
+  size: {
+    size: string,
+    coeff: number
+  }[];
   potColor: string[];
   id: string;
   count?: () => number;
