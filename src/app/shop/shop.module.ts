@@ -28,6 +28,7 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
 import { OrderComponent } from './components/order/order.component';
 import { HomeSliderComponent } from './components/home-page/components/home-slider/home-slider.component';
 import { InfoComponent } from './components/home-page/components/info/info.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { InfoComponent } from './components/home-page/components/info/info.compo
     OrderComponent,
     HomeSliderComponent,
     InfoComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,

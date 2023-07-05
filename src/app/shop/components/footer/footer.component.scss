@@ -1,0 +1,90 @@
+@import "style-variables.scss";
+
+.footer {
+  margin-top: rem(30);
+  border-top: 1px solid var(--green);
+
+  &-box {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+
+    &-contacts {
+      gap: rem(5);
+    }
+
+    &-logo {
+      flex-direction: row;
+    }
+  }
+
+  &-item {
+    @extend %bodyText;
+
+    &-bold {
+      font-weight: bold;
+    }
+  }
+
+  &-link {
+    :hover {
+      text-decoration: underline;
+    }
+  }
+
+  &-icon {
+    height: rem(30);
+    fill: none;
+
+    &-facebook {
+      width: rem(17);
+
+      &:hover {
+        fill: #4267b2;
+      }
+    }
+
+    &-instagram {
+      width: rem(30);
+
+      &:hover {
+        fill: #dfd193;
+      }
+    }
+
+    &-twitter {
+      width: rem(33);
+
+      &:hover {
+        fill: #1da1f2;
+      }
+    }
+
+    &-youtube {
+      width: rem(43);
+
+      &:hover {
+        fill: #ff0000;
+      }
+    }
+  }
+}
+
+.logo-icon {
+  width: rem(100);
+  height: rem(56);
+  fill: none;
+
+  &:hover {
+    fill: var(--green-opacity);
+  }
+}
+
+.container {
+  padding: rem(30);
+}
