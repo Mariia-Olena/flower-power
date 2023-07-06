@@ -16,7 +16,10 @@ export interface CartProduct extends Product {
 
 export interface ProductExtraInfo {
   image: string[];
-  size: string[];
+  size: {
+    size: string,
+    coeff: number
+  }[];
   potColor: string[];
   rating: number;
   video: string;

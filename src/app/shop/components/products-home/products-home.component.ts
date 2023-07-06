@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, filter, tap } from 'rxjs';
 import { ProductsService } from '@sharedModule/services/products.service';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
 import { APIproduct, Product } from '@interfaces/product-plant.interface';
 import { CartV2Service } from '@sharedModule/services/cart-v2.service';
+import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
 
 @Component({
   selector: 'app-products-home',
@@ -11,10 +12,8 @@ import { CartV2Service } from '@sharedModule/services/cart-v2.service';
   styleUrls: ['./products-home.component.scss'],
 })
 export class ProductsHomeComponent implements OnInit {
-  products$: Observable<APIproduct[]>;
-  plants$: BehaviorSubject<PlantCard[]> = new BehaviorSubject<PlantCard[]>([]);
+  plants$: BehaviorSubject<PlantCard[]>;
 
-  private products: APIproduct[];
   private productInCart: Product;
 
   limit: number = 2;
@@ -24,50 +23,16 @@ export class ProductsHomeComponent implements OnInit {
   constructor(
     public productsService: ProductsService,
     private cartV2Service: CartV2Service,
+    private ProductsMapper: ProductsMapper
   ) {}
-
-  fetchPlants() {
-    this.products$ = this.productsService.getAllProducts(
-      this.limit,
-      this.currentPage,
-      this.sort
-    );
-
-    this.products$
-      .pipe(
-        tap((res: APIproduct[]) => {
-          this.products = res;
-        }),
-        map((res: APIproduct[]): PlantCard[] => {
-          return res.map((item: APIproduct): PlantCard => {
-            return {
-              name: item.name,
-              img: item.extraInfo.image[0],
-              price: item.price,
-              id: item.id,
-              isInCart: (): boolean => {
-                return !!this.cartV2Service.isInCart(item.id);
-              },
-              count: () => this.cartV2Service.getCount(item.id) || 1,
-              counterChange: (count: number): void => {
-                this.cartV2Service.changeCount(item.id, count)
-              }
-            };
-          });
-        })
-      )
-      .subscribe((res: PlantCard[]) => {
-        this.plants$.next(res);
-      });
-  }
 
   changePage(page: number): void {
     this.currentPage = page;
-    this.fetchPlants();
+    this.ProductsMapper.setPlants(this.limit, this.currentPage, this.sort);
   }
 
   setProduct(id: string) {
-    this.productInCart = this.products.filter(
+    this.productInCart = this.ProductsMapper.products.filter(
       (product) => product.id === id
     )[0];
   }
@@ -78,6 +43,10 @@ export class ProductsHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchPlants();
+    this.plants$ = this.ProductsMapper.setPlants(
+      this.limit,
+      this.currentPage,
+      this.sort
+    );
   }
 }

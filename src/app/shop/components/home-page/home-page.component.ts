@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { ProductsService } from '@sharedModule/services/products.service';
+import { BehaviorSubject } from 'rxjs';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
-import { APIproduct } from '@interfaces/product-plant.interface';
+import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
 
 @Component({
   selector: 'app-home-page',
@@ -31,37 +30,15 @@ export class HomePageComponent implements OnInit {
     }
   ];
 
-  products$: Observable<APIproduct[]>;
-  plants$: Observable<PlantCard[]>;
+  plants$: BehaviorSubject<PlantCard[]>;
 
   limit: number = 7;
   currentPage: number = 1;
-  sort: string = '-price';
+  sort: string = 'price';
 
-  constructor(private productsService: ProductsService) {}
-
-  fetchPlants() {
-    this.products$ = this.productsService.getAllProducts(
-      this.limit,
-      this.currentPage,
-      this.sort
-    );
-
-    this.plants$ = this.products$.pipe(
-      map((res: APIproduct[]): PlantCard[] => {
-        return res.map((item: APIproduct): PlantCard => {
-          return {
-            name: item.name,
-            img: item.extraInfo.image[0],
-            price: item.price,
-            id: item.id,
-          };
-        });
-      })
-    );
-  }
+  constructor(private ProductsMapper: ProductsMapper) {}
 
   ngOnInit(): void {
-    this.fetchPlants();
+    this.plants$ = this.ProductsMapper.setPlants(this.limit, this.currentPage, this.sort);
   }
 }
