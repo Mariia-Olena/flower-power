@@ -24,9 +24,9 @@ export class ProductHomeComponent implements OnInit {
   plantReview$: Observable<PlantReview[]>;
   plants$: BehaviorSubject<PlantCard[]>;
 
-  limit: number = 7;
+  limit: number = 9;
   currentPage: number = 1;
-  sort: string = 'price';
+  sort: string = '-name';
 
   constructor(
     private route: ActivatedRoute,

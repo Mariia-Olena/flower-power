@@ -51,7 +51,7 @@ import { FooterComponent } from './components/footer/footer.component';
     OrderComponent,
     HomeSliderComponent,
     InfoComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

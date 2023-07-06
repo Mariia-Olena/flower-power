@@ -165,12 +165,16 @@ ul.slick-dots {
 
 button.slick-next.slick-arrow {
   position: relative;
+}
+
+button.slick-next.slick-arrow {
   display: none;
 }
 
 button.slick-next.slick-arrow::before {
   display: none;
 }
+
 
 //tooltip
 

@@ -3,10 +3,9 @@
 
   <ng-container *ngIf="plants">
     <app-slider
-      [sliderType]="'centerMode'"
+      [sliderType]="'multipleItems'"
       [slides]="plants"
       [slideTemplate]="slideCard"
-      [sliderType]="'centerMode'"
     ></app-slider>
   </ng-container>
 
@@ -25,7 +24,6 @@
         <p class="text-title">{{ slide.name }}</p>
       </a>
       <p class="price">{{ slide.price | currency }}</p>
-      <button class="button slider-button">ADD TO CART</button>
     </div>
   </ng-template>
 </section>

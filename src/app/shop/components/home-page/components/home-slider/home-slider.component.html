@@ -1,21 +1,55 @@
-<ng-container *ngIf="plants">
-  <app-slider
-    [sliderType]="'centerMode'"
-    [slides]="plants"
-    [slideTemplate]="slideCard"
-    [sliderType]="'centerMode'"
-  ></app-slider>
-</ng-container>
+<section>
+  <div class="background">
+    <ng-container *ngIf="plants">
+      <app-slider
+        [sliderType]="'singleItem'"
+        [slides]="slides"
+        [slideTemplate]="slideMain"
+      ></app-slider>
+    </ng-container>
+  </div>
+
+  <h1 class="title">Our Bestsellers</h1>
+  
+  <div class="slider">
+    <ng-container *ngIf="plants">
+      <app-slider
+        [sliderType]="'centerMode'"
+        [slides]="plants"
+        [slideTemplate]="slideCard"
+      ></app-slider>
+    </ng-container>
+  </div>
+</section>
+
+<ng-template #slideMain let-slide="slideItem">
+  <div class="container UpSlider">
+    <div class="UpSlider-imgBox">
+      <img [src]="slide.img[0]" alt="" width="100%" class="UpSlider-img" />
+      <img [src]="slide.img[1]" alt="" width="100%" class="UpSlider-img" />
+    </div>
+
+    <div class="UpSlider-textBox">
+      <p class="UpSlider-title">{{ slide.name }}</p>
+      <p class="UpSlider-text">{{ slide.text }}</p>
+    </div>
+  </div>
+</ng-template>
 
 <ng-template #slideCard let-slide="slideItem">
   <a routerLink="/products/{{ slide.id }}">
-    <img [src]="slide.img" alt="" width="100%" class="slider-img centerMode" />
+    <img
+      [src]="slide.img"
+      alt=""
+      width="100%"
+      class="slider-img slider-centerMode"
+    />
   </a>
 
-  <div class="text">
+  <div class="slider-text">
     <a routerLink="/products/{{ slide.id }}">
-      <p class="text-title">{{ slide.name }}</p>
+      <p class="slider-title">{{ slide.name }}</p>
     </a>
-    <p class="price">{{ slide.price | currency }}</p>
+    <p class="price slider-price">{{ slide.price | currency }}</p>
   </div>
 </ng-template>

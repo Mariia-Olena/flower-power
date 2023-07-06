@@ -1,6 +1,8 @@
 @import "style-variables.scss";
 
 .info {
+  margin-top: rem(20);
+
   &-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

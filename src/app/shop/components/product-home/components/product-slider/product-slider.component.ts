@@ -8,5 +8,4 @@ import { PlantCard } from '@shop/products-home/components/products/types/plant.i
 })
 export class ProductSliderComponent {
   @Input() plants: PlantCard[];
-  @Output() addToCart = new EventEmitter();
 }

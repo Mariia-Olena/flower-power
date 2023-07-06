@@ -58,6 +58,31 @@ export class SliderComponent implements OnInit {
       };
     }
 
+    if (this.sliderType === 'multipleItems') {
+      return {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        centerPadding: '150px',
+        responsive: [
+          {
+            breakpoint: 1440,
+            settings: {
+              slidesToShow: 3,
+              centerPadding: '100px',
+            },
+          },
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 2,
+              centerPadding: '100px',
+            },
+          },
+        ],
+        ...this.options,
+      };
+    }
+
     return { ...this.options };
   }
 
