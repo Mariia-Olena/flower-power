@@ -1,35 +1,39 @@
-<div class="cart">
-  <ul class="product">
-    <li *ngFor="let item of cart$ | async" class="product-item">
-      <img
-        [src]="item.product.extraInfo.image[0]"
-        alt="item.name"
-        class="product-img"
-      />
-      <h2 class="product-name">{{ item.product.name }}</h2>
-      <p class="product-size">{{ item.product.extraInfo.size }}</p>
-      <p class="product-price">{{ item.product.price | currency }}</p>
-      <button (click)="removeProduct(item.product.id)" class="product-button">
-        <svg class="product-icon">
-          <use xlink:href="assets/icons/sprite.svg#trash_can"></use>
-        </svg>
-      </button>
-      <div class="product-counter">
-        <app-counter
-          [ngModel]="item.count"
-          (ngModelChange)="changeCount(item.product.id, $event)"
-        ></app-counter>
-      </div>
-    </li>
-  </ul>
-  <div class="total">
-    <h3 class="total-text">Total</h3>
-    <div class="total-price">{{ total$ | async | currency }}</div>
+<ng-container *ngIf="(cart$ | async) as cart">
+  <div *ngIf="cart.length; else emptyCart" class="cart">
+    <ul class="product">
+      <li *ngFor="let item of cart" class="product-item">
+        <img
+          [src]="item.product.extraInfo.image[0]"
+          alt="item.name"
+          class="product-img"
+        />
+        <h2 class="product-name">{{ item.product.name }}</h2>
+        <p class="product-size">{{ item.product.extraInfo.size }}</p>
+        <p class="product-price">{{ item.product.price | currency }}</p>
+        <button (click)="removeProduct(item.product.id)" class="product-button">
+          <svg class="product-icon">
+            <use xlink:href="assets/icons/sprite.svg#trash_can"></use>
+          </svg>
+        </button>
+        <div class="product-counter">
+          <app-counter
+            [ngModel]="item.count"
+            (ngModelChange)="changeCount(item.product.id, $event)"
+          ></app-counter>
+        </div>
+      </li>
+    </ul>
+    <div class="total">
+      <h3 class="total-text">Total</h3>
+      <div class="total-price">{{ total$ | async | currency }}</div>
+    </div>
+    <a routerLink="/order" class="button">CHECKOUT</a>
   </div>
-  <a routerLink="/order" class="button">CHECKOUT</a>
-</div>
+</ng-container>
 
-<div *ngIf="" class="message">
-  <p class="message-text">Your cart is empty</p>
-  <a routerLink="/products" class="button">Go shopping</a>
-</div>
+<ng-template #emptyCart>
+  <div class="message">
+    <p class="message-text">Your cart is empty</p>
+    <a routerLink="/products" class="button">Go shopping</a>
+  </div>
+</ng-template>

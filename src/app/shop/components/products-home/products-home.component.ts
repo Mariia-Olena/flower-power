@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, filter, tap } from 'rxjs';
+import { BehaviorSubject, tap, map, Observable } from 'rxjs';
 import { ProductsService } from '@sharedModule/services/products.service';
 import { PlantCard } from '@productsHome/products/types/plant.interface';
 import { APIproduct, Product } from '@interfaces/product-plant.interface';
@@ -12,8 +12,10 @@ import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
   styleUrls: ['./products-home.component.scss'],
 })
 export class ProductsHomeComponent implements OnInit {
-  plants$: BehaviorSubject<PlantCard[]>;
+  products$: Observable<APIproduct[]>;
+  plants$: BehaviorSubject<PlantCard[]> = new BehaviorSubject<PlantCard[]>([]);
 
+  products: APIproduct[] = [];
   private productInCart: Product;
 
   limit: number = 2;
@@ -23,16 +25,35 @@ export class ProductsHomeComponent implements OnInit {
   constructor(
     public productsService: ProductsService,
     private cartV2Service: CartV2Service,
-    private ProductsMapper: ProductsMapper
+    private productsMapper: ProductsMapper
   ) {}
+
+  setPlants(limit: number, currentPage: number, sort: string) {
+    this.products$ = this.productsService.getAllProducts(
+      limit,
+      currentPage,
+      sort
+    );
+
+    this.products$
+      .pipe(
+        tap((res: APIproduct[]) => {
+          this.products = res;
+        }),
+        map((value) => this.productsMapper.mapPlants(value))
+      )
+      .subscribe((res: PlantCard[]) => {
+        this.plants$.next(res);
+      });
+  }
 
   changePage(page: number): void {
     this.currentPage = page;
-    this.ProductsMapper.setPlants(this.limit, this.currentPage, this.sort);
+    this.setPlants(this.limit, this.currentPage, this.sort);
   }
 
   setProduct(id: string) {
-    this.productInCart = this.ProductsMapper.products.filter(
+    this.productInCart = this.products.filter(
       (product) => product.id === id
     )[0];
   }
@@ -43,10 +64,6 @@ export class ProductsHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.plants$ = this.ProductsMapper.setPlants(
-      this.limit,
-      this.currentPage,
-      this.sort
-    );
+    this.setPlants(this.limit, this.currentPage, this.sort);
   }
 }
