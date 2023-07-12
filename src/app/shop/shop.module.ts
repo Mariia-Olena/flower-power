@@ -9,49 +9,54 @@ import { SharedModule } from '@sharedModule/shared.module';
 import { HeaderComponent } from '@shop/header/header.component';
 import { NotFoundComponent } from '@shop/not-found/not-found.component';
 import { HomePageComponent } from '@shop/home-page/home-page.component';
-import { ShopHomeComponent } from '@shop/shop-home/shop-home.component';
+import { ShopPageComponent } from '@shop/shop-page/shop-page.component';
 import { CartComponent } from '@shop/cart/cart.component';
 
-import { ProductsHomeComponent } from '@products/products-home.component';
-import { ProductCardComponent } from '@productsHome/product-card/product-card.component';
-import { ProductsComponent } from '@productsHome/products/products.component';
-import { FilterComponent } from '@productsHome/filter/filter.component';
-import { ProductViewComponent } from '@productsHome/product-view/product-view.component';
+import { ProductsPageComponent } from '@products/products-page.component';
+import { ProductCardComponent } from '@productsPage/product-card/product-card.component';
+import { ProductsComponent } from '@productsPage/products/products.component';
+import { FilterComponent } from '@productsPage/filter/filter.component';
+import { ProductViewComponent } from '@productsPage/product-view/product-view.component';
 
-import { ProductHomeComponent } from '@product/product-home.component';
-import { ProductComponent } from '@productHome/product/product.component';
-import { ProductReviewComponent } from '@productHome/product-review/product-review.component';
-import { ProductSliderComponent } from '@productHome/product-slider/product-slider.component';
-import { ProductInfoComponent } from '@productHome/product-info/product-info.component';
+import { ProductPageComponent } from '@product/product-page.component';
+import { ProductComponent } from '@productPage/product/product.component';
+import { ProductReviewComponent } from '@productPage/product-review/product-review.component';
+import { ProductSliderComponent } from '@productPage/product-slider/product-slider.component';
+import { ProductInfoComponent } from '@productPage/product-info/product-info.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
-import { OrderComponent } from './components/order/order.component';
+import { OrderComponent } from './components/order-page/components/order/order.component';
 import { HomeSliderComponent } from './components/home-page/components/home-slider/home-slider.component';
 import { InfoComponent } from './components/home-page/components/info/info.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { OrderPageComponent } from './components/order-page/order-page.component';
+import { OrderFormComponent } from './components/order-page/components/order-form/order-form.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     ProductsComponent,
     ProductComponent,
-    ShopHomeComponent,
+    ShopPageComponent,
     CartComponent,
     HomePageComponent,
     NotFoundComponent,
     FilterComponent,
     ProductCardComponent,
-    ProductHomeComponent,
+    ProductPageComponent,
     ProductReviewComponent,
     ProductInfoComponent,
-    ProductsHomeComponent,
+    ProductsPageComponent,
     ProductViewComponent,
     ProductSliderComponent,
     TooltipComponent,
     OrderComponent,
     HomeSliderComponent,
     InfoComponent,
-    FooterComponent
+    FooterComponent,
+    OrderPageComponent,
+    OrderFormComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +64,8 @@ import { FooterComponent } from './components/footer/footer.component';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxTippyModule
+    NgxTippyModule,
+    NgxMaskModule.forRoot()
   ],
 })
 export class ShopModule {}

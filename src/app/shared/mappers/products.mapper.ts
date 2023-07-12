@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PlantCard } from '@productsHome/products/types/plant.interface';
+import { PlantCard } from '@productsPage/products/types/plant.interface';
 import { APIproduct } from '@interfaces/product-plant.interface';
 import { CartV2Service } from '@sharedModule/services/cart-v2.service';
 

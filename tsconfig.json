@@ -26,10 +26,10 @@
       "@interfaces/*": ["src/app/shared/types/*"],
       "@services/*": ["src/app/shared/services/*"],
       "@shop/*": ["src/app/shop/components/*"],
-      "@productsHome/*": ["src/app/shop/components/products-home/components/*"],
-      "@products/*": ["src/app/shop/components/products-home/*"],
-      "@productHome/*": ["src/app/shop/components/product-home/components/*"],
-      "@product/*": ["src/app/shop/components/product-home/*"]
+      "@productsPage/*": ["src/app/shop/components/products-page/components/*"],
+      "@products/*": ["src/app/shop/components/products-page/*"],
+      "@productPage/*": ["src/app/shop/components/product-page/components/*"],
+      "@product/*": ["src/app/shop/components/product-page/*"]
     },
     "strictPropertyInitialization": false
   },

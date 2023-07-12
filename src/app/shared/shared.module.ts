@@ -21,7 +21,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     RatingComponent,
     SliderComponent,
     SafeUrlPipe,
-    SpinnerComponent
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +38,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     RatingComponent,
     SliderComponent,
     SpinnerComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
   ],
 })
 export class SharedModule {}

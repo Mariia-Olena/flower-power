@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
 
 import { ProductsService } from '@services/products.service';
-import { Plant } from '@productHome/product/types/plant.interface';
-import { PlantCard } from '@shop/products-home/components/products/types/plant.interface';
-import { PlantInfo } from '@productHome/product-info/types/plant-info.interface';
-import { PlantReview } from '@productHome//product-review/types/plant-review.interface';
+import { Plant } from '@productPage/product/types/plant.interface';
+import { PlantCard } from '@shop/products-page/components/products/types/plant.interface';
+import { PlantInfo } from '@productPage/product-info/types/plant-info.interface';
+import { PlantReview } from '@productPage/product-review/types/plant-review.interface';
 import { APIproduct, Product } from '@interfaces/product-plant.interface';
 import { CartV2Service } from '@sharedModule/services/cart-v2.service';
 import { ProductMapper } from '@sharedModule/mappers/product.mapper';
@@ -14,10 +14,10 @@ import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
 
 @Component({
   selector: 'app-product-home',
-  templateUrl: './product-home.component.html',
-  styleUrls: ['./product-home.component.scss'],
+  templateUrl: './product-page.component.html',
+  styleUrls: ['./product-page.component.scss'],
 })
-export class ProductHomeComponent implements OnInit {
+export class ProductPageComponent implements OnInit {
   product$: Observable<APIproduct>;
   plant$: Observable<Plant>;
   plantInfo$: Observable<PlantInfo>;

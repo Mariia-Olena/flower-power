@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Plant } from '@productHome/product/types/plant.interface';
-import { PlantInfo } from '@productHome/product-info/types/plant-info.interface';
-import { PlantReview } from '@productHome//product-review/types/plant-review.interface';
+import { Plant } from '@productPage/product/types/plant.interface';
+import { PlantInfo } from '@productPage/product-info/types/plant-info.interface';
+import { PlantReview } from '@productPage/product-review/types/plant-review.interface';
 import { APIproduct } from '@interfaces/product-plant.interface';
 import { CartV2Service } from '@sharedModule/services/cart-v2.service';
 

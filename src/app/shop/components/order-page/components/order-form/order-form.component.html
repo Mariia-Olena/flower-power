@@ -1,0 +1,112 @@
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="form">
+  <h4 class="form-label">CONTACT INFORMATION</h4>
+  <div class="form-input">
+    <div class="input-container">
+      <label for="email" class="input-label">Email</label>
+      <input
+        id="email"
+        formControlName="email"
+        [ngClass]="{ invalid: showErrors('email') }"
+        class="input"
+      />
+      <div *ngIf="showErrors('email')" class="input-error">
+        Enter a valid email
+      </div>
+    </div>
+
+    <div class="input-container">
+      <label for="phone" class="input-label">Phone number</label>
+      <input
+        id="phone"
+        formControlName="phone"
+        [mask]="'(000) 000-00-00'"
+        class="input"
+        [ngClass]="{ invalid: showErrors('phone') }"
+      />
+      <div *ngIf="showErrors('phone')" class="input-error">
+        Enter a valid phone number
+      </div>
+    </div>
+
+    <div class="input-container">
+      <label for="firstName" class="input-label">First Name</label>
+      <input
+        id="firstName"
+        formControlName="firstName"
+        class="input"
+        [ngClass]="{ invalid: showErrors('firstName') }"
+      />
+      <div *ngIf="showErrors('firstName')" class="input-error">
+        First name should be longer
+      </div>
+    </div>
+
+    <div class="input-container">
+      <label for="secondName" class="input-label">Second Name</label>
+      <input
+        id="secondName"
+        formControlName="secondName"
+        class="input"
+        [ngClass]="{ invalid: showErrors('secondName') }"
+      />
+      <div *ngIf="showErrors('secondName')" class="input-error">
+        Second name should be longer
+      </div>
+    </div>
+  </div>
+
+  <h4 class="form-label">SHIPPING ADDRESS</h4>
+  <div class="form-input">
+    <div class="input-container">
+      <label for="country" class="input-label">Country</label>
+      <input
+        id="country"
+        formControlName="country"
+        class="input"
+        [ngClass]="{ invalid: showErrors('country') }"
+      />
+      <div *ngIf="showErrors('country')" class="input-error">
+        Country should be longer
+      </div>
+    </div>
+
+    <div class="input-container">
+      <label for="region" class="input-label">Region</label>
+      <input id="region" formControlName="region" class="input" />
+    </div>
+
+    <div class="input-container">
+      <label for="city" class="input-label">City</label>
+      <input
+        id="city"
+        formControlName="city"
+        class="input"
+        [ngClass]="{ invalid: showErrors('city') }"
+      />
+      <div *ngIf="showErrors('city')" class="input-error">
+        City should be longer
+      </div>
+    </div>
+
+    <div class="input-container">
+      <label for="address" class="input-label">Address</label>
+      <input
+        id="address"
+        formControlName="address"
+        class="input"
+        [ngClass]="{ invalid: showErrors('address') }"
+      />
+      <div *ngIf="showErrors('address')" class="input-error">
+        Address should be longer
+      </div>
+    </div>
+  </div>
+
+  <button
+    [disabled]="orderForm.invalid"
+    type="submit"
+    class="button form-button"
+  >
+    COMPLETE PAYMENT
+  </button>
+</form>

@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, tap, map, Observable } from 'rxjs';
 import { ProductsService } from '@sharedModule/services/products.service';
-import { PlantCard } from '@productsHome/products/types/plant.interface';
+import { PlantCard } from '@productsPage/products/types/plant.interface';
 import { APIproduct, Product } from '@interfaces/product-plant.interface';
 import { CartV2Service } from '@sharedModule/services/cart-v2.service';
 import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
 
 @Component({
   selector: 'app-products-home',
-  templateUrl: './products-home.component.html',
-  styleUrls: ['./products-home.component.scss'],
+  templateUrl: './products-page.component.html',
+  styleUrls: ['./products-page.component.scss'],
 })
-export class ProductsHomeComponent implements OnInit {
+export class ProductsPageComponent implements OnInit {
   products$: Observable<APIproduct[]>;
   plants$: BehaviorSubject<PlantCard[]> = new BehaviorSubject<PlantCard[]>([]);
 
