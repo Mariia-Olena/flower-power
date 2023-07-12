@@ -1,1 +1,19 @@
+<div class="order">
+  <ul class="order-list">
+    <li *ngFor="let item of cart" class="order-item">
+      <img
+        [src]="item.product.extraInfo.image[0]"
+        alt="item.name"
+        class="order-img"
+      />
+      <h2 class="order-name">{{ item.product.name }}</h2>
+      <p class="order-size">{{ item.product.extraInfo.size }}</p>
+      <p class="order-price">{{item.count}} × {{ item.product.price | currency }}</p>
+    </li>
+  </ul>
 
+  <div class="total">
+    <h3 class="total-text">Total</h3>
+    <div class="total-price">{{ total | currency }}</div>
+  </div>
+</div>

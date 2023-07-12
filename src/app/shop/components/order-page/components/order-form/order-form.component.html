@@ -19,7 +19,8 @@
       <input
         id="phone"
         formControlName="phone"
-        [mask]="'(000) 000-00-00'"
+
+        value="+"
         class="input"
         [ngClass]="{ invalid: showErrors('phone') }"
       />
@@ -110,3 +111,6 @@
     COMPLETE PAYMENT
   </button>
 </form>
+
+
+        <!-- [mask]="'+00 (000) 000-00-00'" -->

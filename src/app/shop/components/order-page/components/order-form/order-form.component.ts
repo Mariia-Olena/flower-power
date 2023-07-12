@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CartItem } from '@sharedModule/services/cart-v2.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OrderService } from '@sharedModule/services/order.service';
 
@@ -8,11 +9,14 @@ import { OrderService } from '@sharedModule/services/order.service';
   styleUrls: ['./order-form.component.scss'],
 })
 export class OrderFormComponent {
+  @Input() cart: CartItem[];
+
   orderForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [
+    phone: new FormControl('+', [
       Validators.required,
-      Validators.minLength(10),
+      Validators.minLength(13),
+      Validators.maxLength(13),
     ]),
     firstName: new FormControl('', [
       Validators.required,
@@ -42,10 +46,7 @@ export class OrderFormComponent {
   }
 
   onSubmit() {
-    this.orderService.createOrder(this.orderForm)
-
-    console.log(this.orderForm);
-    
+    this.orderService.createOrder(this.orderForm, this.cart)
     // this.orderForm.reset();
   }
 }

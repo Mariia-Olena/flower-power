@@ -1,0 +1,73 @@
+@import "style-variables.scss";
+
+.order {
+  display: flex;
+  flex-direction: column;
+  margin: rem(30) auto 0 auto;
+  max-width: 335px;
+
+  &-list {
+    display: grid;
+    grid-gap: rem(20);
+    grid-template-rows: auto;
+    border-bottom: 1px solid var(--greyX);
+    padding-bottom: rem(20);
+  }
+  
+  &-item {
+    display: grid;
+    grid-template-columns: 125px 125px;
+    grid-template-areas:
+      "img name"
+      "img size "
+      "img price";
+  }
+  
+  &-img {
+    grid-area: img;
+    height: 100%;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+  
+  &-name {
+    @extend %subHead3;
+    grid-area: name;
+    color: var(--green);
+    margin-left: rem(10);
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+  
+  &-size {
+    @extend %subHead2;
+    grid-area: size;
+    color: var(--greyX);
+    margin-top: rem(20);
+    margin-left: rem(10);
+  }
+  
+  &-price {
+    @extend %subHead3;
+    grid-area: price;
+    margin-left: rem(10);
+    margin-bottom: rem(20);
+  }
+  
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: rem(20);
+
+  &-text {
+    @extend %subHead3;
+    color: var(--green);
+  }
+
+  &-price {
+    @extend %subHead3;
+  }
+}

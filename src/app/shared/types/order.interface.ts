@@ -1,14 +1,3 @@
-export interface Order {
-  name: string;
-  phone: string;
-  message: string;
-  products: {
-    quantity: number;
-    name: string;
-    id: string;
-  }[];
-}
-
 export interface APIorder {
   name: string;
   phone: string;
@@ -23,6 +12,18 @@ export interface APIorder {
   id: string;
 }
 
-export interface orderForm {
+export interface Order extends OrderForm {
+  products: OrderProducts[];
+}
 
+export interface OrderForm {
+  name: string;
+  phone: string;
+  message: string;
+}
+
+export interface OrderProducts {
+  quantity: number;
+  name: string;
+  id: string;
 }
