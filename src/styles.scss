@@ -252,6 +252,13 @@ button {
   &:hover {
     background-color: var(--corn-opacity);
   }
+
+  &[disabled]{
+    cursor: auto;
+    background-color: var(--lightGrey);
+    color:  var(--black);
+    text-decoration: line-through;
+  }
 }
 
 .price {

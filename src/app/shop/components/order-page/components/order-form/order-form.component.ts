@@ -14,7 +14,7 @@ export class OrderFormComponent {
 
   orderForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('+', [
+    phone: new FormControl('+38 0', [
       Validators.required,
       Validators.minLength(13),
       Validators.maxLength(13),
@@ -39,7 +39,13 @@ export class OrderFormComponent {
     ]),
   });
 
-  constructor(private orderService: OrderService, private router: Router) {}
+  constructor(private orderService: OrderService, private router: Router) {
+
+  }
+
+  onPhoneNumberChange() {
+    this.orderForm.controls.phone.setValue('+' + this.orderForm.controls.phone.value.replace(/\s/, ''))
+  }
 
   showErrors(formControlName: string) {
     const { dirty, touched, errors } = this.orderForm.controls[formControlName];

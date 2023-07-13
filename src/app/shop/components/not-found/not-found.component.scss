@@ -8,7 +8,7 @@
 
 .not-found {
   position: relative;
-  height: 60vh;
+  height: 45vh;
 }
 
 .img {
@@ -21,7 +21,7 @@
 
 .title {
   @extend %notFound;
-  font-size: 45vh;
+  font-size: 35vh;
   line-height: 0;
   color: #ffffff;
   position: absolute;
@@ -43,6 +43,5 @@
   @extend %bodyText;
   color: var(--green);
   text-decoration: underline;
-  align-self: flex-end;
   margin-top: rem(20);
 }

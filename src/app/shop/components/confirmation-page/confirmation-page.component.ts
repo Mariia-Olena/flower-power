@@ -15,19 +15,14 @@ export class ConfirmationPageComponent implements OnInit {
   constructor(private orderService: OrderService) {}
 
   ngOnInit(): void {
-    this.orderService.response.subscribe(
-      (response: APIorder) => {
-        this.response = response;
-        console.log('response', response);
-      }
-    );
+    this.orderService.response.subscribe((response: APIorder) => {
+      this.response = response;
+      console.log('response', response);
+    });
 
-    this.orderService.error.subscribe(
-      (error: HttpErrorResponse) => {
-        this.error = error;
-        console.log('error', error);
-      }
-    );
+    this.orderService.error.subscribe((error: HttpErrorResponse) => {
+      this.error = error;
+      console.log('error', error);
+    });
   }
-
 }
