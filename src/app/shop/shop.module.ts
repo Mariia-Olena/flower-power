@@ -32,6 +32,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { OrderPageComponent } from './components/order-page/order-page.component';
 import { OrderFormComponent } from './components/order-page/components/order-form/order-form.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { ConfirmationPageComponent } from './components/confirmation-page/confirmation-page.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { NgxMaskModule } from 'ngx-mask';
     InfoComponent,
     FooterComponent,
     OrderPageComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    ConfirmationPageComponent
   ],
   imports: [
     CommonModule,

@@ -13,4 +13,8 @@ export class StorageService {
   get(key: string): any {
     return JSON.parse(sessionStorage.getItem(key));
   }
+
+  clear(): void {
+    sessionStorage.clear()
+  }
 }

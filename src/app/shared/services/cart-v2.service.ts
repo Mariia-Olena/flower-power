@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '@sharedModule/types/product-plant.interface';
-import { BehaviorSubject, filter, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 
 export interface CartItem {
@@ -36,6 +36,11 @@ export class CartV2Service {
 
   setCart(): Observable<CartItem[]> {
     return this.cart$;
+  }
+
+  clearCart() {
+    this.productsInCart$.next({});
+    this.storageService.clear()
   }
 
   isInCart(id: string): boolean {

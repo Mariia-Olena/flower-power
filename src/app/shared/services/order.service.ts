@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CartItem } from '@sharedModule/services/cart-v2.service';
-
+import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import {
   APIorder,
@@ -15,7 +16,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class OrderService {
   private baseUrl = environment.baseUrl;
-  private order: Order;
+  response: EventEmitter<APIorder> = new EventEmitter<APIorder>();
+  error: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>()
 
   constructor(private http: HttpClient) {}
 
@@ -34,26 +36,30 @@ export class OrderService {
       ]);
     }, []);
 
-    this.order = {
+    const order: Order = {
       name: firstName + secondName,
       phone: phone,
       message: `${country}, ${region}, ${city}, ${address}`,
       products: products,
     };
 
-    this.postOrder(this.order)
+    this.postOrder(order);
   }
 
   postOrder(order: Order) {
-    console.log(JSON.stringify(order));
-    
-    this.http.post(`${this.baseUrl}/orders`, JSON.stringify(order)).subscribe(
-      (response) => {
-        console.log('Response:', response);
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
-    );
+    return this.http
+      .post(`${this.baseUrl}/orders`, JSON.stringify(order), {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .subscribe(
+        (response: APIorder) => {
+          this.response.emit(response) 
+        },
+        error => {
+          this.error.emit(error);
+        }
+      );
   }
 }

@@ -8,6 +8,7 @@ import { HomePageComponent } from '@shop/home-page/home-page.component';
 import { NotFoundComponent } from '@shop/not-found/not-found.component';
 import { CartComponent } from '@shop/cart/cart.component';
 import { OrderPageComponent } from '@shop/order-page/order-page.component';
+import { ConfirmationPageComponent } from '@shop/confirmation-page/confirmation-page.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'products', component: ProductsPageComponent },
       { path: 'cart', component: CartComponent },
       { path: 'order', component: OrderPageComponent },
+      { path: 'confirmation', component: ConfirmationPageComponent },
       { path: '', component: HomePageComponent },
       { path: '**', component: NotFoundComponent },
     ],

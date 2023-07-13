@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CartItem } from '@sharedModule/services/cart-v2.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OrderService } from '@sharedModule/services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-form',
@@ -38,7 +39,7 @@ export class OrderFormComponent {
     ]),
   });
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService, private router: Router) {}
 
   showErrors(formControlName: string) {
     const { dirty, touched, errors } = this.orderForm.controls[formControlName];
@@ -47,6 +48,6 @@ export class OrderFormComponent {
 
   onSubmit() {
     this.orderService.createOrder(this.orderForm, this.cart)
-    // this.orderForm.reset();
+    this.router.navigate(['/confirmation'])
   }
 }
