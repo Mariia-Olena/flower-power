@@ -175,7 +175,6 @@ button.slick-next.slick-arrow::before {
   display: none;
 }
 
-
 //tooltip
 
 .tippy {
@@ -204,6 +203,7 @@ button.slick-next.slick-arrow::before {
 
 body {
   font-family: "Roboto", sans-serif;
+  min-height: 100vh;
 }
 
 a {
@@ -235,6 +235,12 @@ button {
   padding: 0 rem(30);
 }
 
+.container-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .button {
   @extend %fontButton;
   background-color: var(--corn);
@@ -253,5 +259,3 @@ button {
   color: var(--green);
   margin-top: rem(10);
 }
-
-

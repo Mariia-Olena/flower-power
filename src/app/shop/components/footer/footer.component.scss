@@ -3,6 +3,8 @@
 .footer {
   margin-top: rem(30);
   border-top: 1px solid var(--green);
+  position: sticky;
+  top: 100%;
 
   &-box {
     display: flex;
