@@ -29,8 +29,7 @@ export class ProductsService {
       .get<APIproduct[]>(`${this.baseUrl}/products`, {
         observe: 'response',
         params: {
-          ...(limit && { limit }),
-          // ...(limit ? {limit: limit} : {}),
+          ...(limit ? {limit: limit} : {}),
           page,
           sort,
         },

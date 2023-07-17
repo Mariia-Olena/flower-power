@@ -55,31 +55,3 @@
     margin-top: rem(50);
   }
 }
-
-.error {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-
-  &-img {
-    height: rem(400);
-    object-fit: cover;
-  }
-
-  &-title {
-    @extend %header2;
-  }
-
-  &-text {
-    @extend %subHead1;
-    margin-top: rem(10);
-  }
-
-  &-link {
-    @extend %bodyText;
-    color: var(--green);
-    text-decoration: underline;
-    margin-top: rem(20);
-  }
-}

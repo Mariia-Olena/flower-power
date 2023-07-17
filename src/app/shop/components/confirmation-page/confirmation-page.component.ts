@@ -1,28 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrderService } from '@sharedModule/services/order.service';
-import { APIorder } from '@sharedModule/types/order.interface';
-import { HttpErrorResponse } from '@angular/common/http';
+import { StorageService } from '@sharedModule/services/storage.service';
 
 @Component({
   selector: 'app-confirmation-page',
   templateUrl: './confirmation-page.component.html',
   styleUrls: ['./confirmation-page.component.scss'],
 })
-export class ConfirmationPageComponent implements OnInit {
-  response: APIorder;
-  error: HttpErrorResponse;
+export class ConfirmationPageComponent implements OnInit, OnDestroy {
+  id: string;
 
-  constructor(private orderService: OrderService) {}
+  constructor(
+    private orderService: OrderService,
+    private storage: StorageService
+  ) {}
 
   ngOnInit(): void {
-    this.orderService.response.subscribe((response: APIorder) => {
-      this.response = response;
-      console.log('response', response);
-    });
+    this.id = this.orderService.getCurrentOrder().id;
+  }
 
-    this.orderService.error.subscribe((error: HttpErrorResponse) => {
-      this.error = error;
-      console.log('error', error);
-    });
+  ngOnDestroy(): void {
+    this.orderService.resetCurrentOrder();
+    this.storage.remove('order');
   }
 }

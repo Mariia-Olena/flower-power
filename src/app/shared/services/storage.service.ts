@@ -14,7 +14,15 @@ export class StorageService {
     return JSON.parse(sessionStorage.getItem(key));
   }
 
-  clear(): void {
-    sessionStorage.clear()
+  remove(key: string): void {
+    sessionStorage.removeItem(key)
+  }
+
+  setToLocalStorage(key: string, data: any): void {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  getFromLocalStorage(key: string): any {
+    return JSON.parse(localStorage.getItem(key));
   }
 }

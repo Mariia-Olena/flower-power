@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input,  Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PlantCard } from '@shop/products-page/components/products/types/plant.interface';
 
 @Component({

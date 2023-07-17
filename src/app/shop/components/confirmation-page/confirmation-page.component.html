@@ -1,11 +1,14 @@
-<div *ngIf="1" class="response">
+<div class="response">
   <div>
-    <img src="https://images.unsplash.com/photo-1532611322744-369123d95bd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="response-img">
+    <img
+      src="https://images.unsplash.com/photo-1532611322744-369123d95bd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+      class="response-img"
+    />
     <h1 class="response-title">Thank you for shopping!</h1>
   </div>
-  
+
   <h2 class="response-subtitle">
-    Your order number is <span class="response-order">11111</span>
+    Your order number is <span class="response-order">{{ id }}</span>
   </h2>
   <div class="response-box">
     <h2 class="response-subtitle">What's next?</h2>
@@ -21,17 +24,8 @@
       the payment to the e-mail address provided.
     </p>
   </div>
-  <button class="button response-button"><a routerLink="/">Go to the home page</a></button>
-  
+  <button class="button response-button">
+    <a routerLink="/">Go to the home page</a>
+  </button>
 </div>
 
-<div *ngIf="error" class="error">
-  <img
-    src="assets/images/confirmation_error.png"
-    alt="dead plants"
-    class="error-img"
-  />
-  <h1 class="error-title">Something went wrong 😔</h1>
-  <p class="error-text">Try refreshing the page, or try again later.</p>
-  <a class="error-link" routerLink="/">Go to the home page</a>
-</div>

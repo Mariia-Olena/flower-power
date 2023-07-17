@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CartItem } from '@sharedModule/services/cart-v2.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import {
   APIorder,
@@ -10,18 +8,20 @@ import {
   OrderProducts,
 } from '@sharedModule/types/order.interface';
 import { FormGroup } from '@angular/forms';
+import { BehaviorSubject, tap } from 'rxjs';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
   private baseUrl = environment.baseUrl;
-  response: EventEmitter<APIorder> = new EventEmitter<APIorder>();
-  error: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>()
+  private currentOrder = new BehaviorSubject<APIorder>(this.storage.get('order'));
+  showModal = false;
+  
+  constructor(private http: HttpClient, private storage: StorageService) {}
 
-  constructor(private http: HttpClient) {}
-
-  createOrder(orderForm: FormGroup, orderProducts: CartItem[]): void {
+  createOrder(orderForm: FormGroup, orderProducts: CartItem[]): Order {
     const { phone, firstName, secondName, country, region, city, address } =
       orderForm.value;
 
@@ -36,14 +36,12 @@ export class OrderService {
       ]);
     }, []);
 
-    const order: Order = {
+    return {
       name: firstName + secondName,
       phone: phone,
       message: `${country}, ${region}, ${city}, ${address}`,
       products: products,
     };
-
-    this.postOrder(order);
   }
 
   postOrder(order: Order) {
@@ -53,13 +51,19 @@ export class OrderService {
           'Content-Type': 'application/json',
         },
       })
-      .subscribe(
-        (response: APIorder) => {
-          this.response.emit(response) 
-        },
-        error => {
-          this.error.emit(error);
-        }
+      .pipe(
+        tap((response: APIorder) => {
+          this.currentOrder.next(response);
+          this.storage.set('order', response)
+        })
       );
+  }
+
+  getCurrentOrder() {
+    return this.currentOrder.getValue()
+  }
+
+  resetCurrentOrder() {
+    this.currentOrder.next(null)
   }
 }

@@ -13,7 +13,7 @@
     border-bottom: 1px solid var(--greyX);
     padding-bottom: rem(20);
   }
-  
+
   &-item {
     display: grid;
     grid-template-columns: 125px 125px;
@@ -22,7 +22,7 @@
       "img size "
       "img price";
   }
-  
+
   &-img {
     grid-area: img;
     height: 100%;
@@ -30,7 +30,7 @@
     aspect-ratio: 1 / 1;
     object-fit: cover;
   }
-  
+
   &-name {
     @extend %subHead3;
     grid-area: name;
@@ -39,7 +39,7 @@
     max-width: 100%;
     word-wrap: break-word;
   }
-  
+
   &-size {
     @extend %subHead2;
     grid-area: size;
@@ -47,14 +47,13 @@
     margin-top: rem(20);
     margin-left: rem(10);
   }
-  
+
   &-price {
     @extend %subHead3;
     grid-area: price;
     margin-left: rem(10);
     margin-bottom: rem(20);
   }
-  
 }
 
 .total {

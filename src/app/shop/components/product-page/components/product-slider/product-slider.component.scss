@@ -2,24 +2,20 @@
 
 .slider {
   margin-top: rem(50);
-}
 
-.title {
-  @extend %header1;
-  text-align: center;
-}
+  &-title {
+    @extend %header1;
+    text-align: center;
+  }
 
-.slider-button {
-  margin-top: rem(20);
-}
+  &-button {
+    margin-top: rem(20);
+  }
 
-.slider-img {
-  object-fit: cover;
-  height: 550px;
-}
-
-.centerMode {
-  padding: 0 rem(10);
+  &-img {
+    object-fit: cover;
+    height: 550px;
+  }
 }
 
 .text {
@@ -35,8 +31,8 @@
   }
 }
 
-.price {
-  width: fit-content;
+.centerMode {
+  padding: 0 rem(10);
 }
 
 @media #{$desktopSD} {

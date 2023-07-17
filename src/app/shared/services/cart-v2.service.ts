@@ -18,11 +18,13 @@ export class CartV2Service {
   private productsInCart$: BehaviorSubject<{ [key: string]: CartItem }> =
     new BehaviorSubject(this.storageService.get('cart-v2') || {});
 
-  private cart$: Observable<CartItem[]> = this.productsInCart$.asObservable().pipe(
-    map((value: { [key: string]: CartItem }): CartItem[] => {
-      return Object.values(value);
-    })
-  );
+  private cart$: Observable<CartItem[]> = this.productsInCart$
+    .asObservable()
+    .pipe(
+      map((value: { [key: string]: CartItem }): CartItem[] => {
+        return Object.values(value);
+      })
+    );
 
   total$: Observable<number> = this.cart$.pipe(
     map((value: CartItem[]): number => {
@@ -38,17 +40,21 @@ export class CartV2Service {
     return this.cart$;
   }
 
+  hasProductsInCart(): boolean {
+    return !!Object.keys(this.productsInCart$.getValue()).length;
+  }
+
   clearCart() {
     this.productsInCart$.next({});
-    this.storageService.clear()
+    this.storageService.remove('cart-v2');
   }
 
   isInCart(id: string): boolean {
-   return !!this.productsInCart$.getValue()[id]
+    return !!this.productsInCart$.getValue()[id];
   }
 
-  getCount (id: string): number {
-    return this.productsInCart$.getValue()[id].count
+  getCount(id: string): number {
+    return this.productsInCart$.getValue()[id].count;
   }
 
   addProduct(
@@ -103,5 +109,4 @@ export class CartV2Service {
       throw new Error('Product is not in the cart');
     }
   }
-
 }

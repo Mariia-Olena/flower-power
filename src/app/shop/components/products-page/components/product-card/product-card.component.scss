@@ -28,6 +28,17 @@
     padding-top: rem(10);
   }
 
+  &-name {
+    @extend %subHead3;
+    display: block;
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: rem(10);
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+
   &-button {
     position: absolute;
     left: 50%;
@@ -45,16 +56,6 @@
   }
 }
 
-.plant-name {
-  @extend %subHead3;
-  display: block;
-  width: fit-content;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: rem(10);
-  max-width: 100%;
-  word-wrap: break-word;
-}
 .price {
   margin-bottom: rem(40);
 }

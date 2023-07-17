@@ -1,4 +1,9 @@
 <div *ngIf="cart$ | async as cart" class="container">
-  <app-order-form [cart]="cart"></app-order-form>
+  <app-order-form [cart]="cart" ></app-order-form>
   <app-order [cart]="cart" [total]="total$ | async"></app-order>
+  <app-spinner></app-spinner>
 </div>
+
+<ng-container *ngIf="orderService.showModal">
+  <app-modal></app-modal>
+</ng-container>

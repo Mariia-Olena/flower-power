@@ -1,0 +1,17 @@
+<div (click)="closeModal()" class="error">
+  <div class="error-box">
+    <button class="error-button">
+      <svg class="error-icon">
+        <use xlink:href="assets/icons/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <img
+      src="assets/images/confirmation_error.png"
+      alt="dead plants"
+      class="error-img"
+    />
+    <h1 class="error-title">Something went wrong 😔</h1>
+    <p class="error-text">Try refreshing the page, or try again later.</p>
+    <a class="error-link" routerLink="/">Go to the home page</a>
+  </div>
+</div>

@@ -60,11 +60,6 @@ export class ProductPageComponent implements OnInit {
     );
   }
 
-  // Doesn't work in this way
-  // setPlant(): void {
-  //   this.plant$ = this.product$.pipe(map(this.productMapper.mapPlant));
-  // }
-
   setPlantInfo(): void {
     this.plantInfo$ = this.product$.pipe(map(this.productMapper.mapPlantInfo));
   }

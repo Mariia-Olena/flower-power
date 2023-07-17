@@ -2,46 +2,45 @@
 
 .container {
   display: grid;
-  height: calc(100vh - var(--headerHeight));
   text-align: center;
 }
 
-.not-found {
+.error {
   position: relative;
   height: 45vh;
-}
 
-.img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 100%;
-}
+  &-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+  }
 
-.title {
-  @extend %notFound;
-  font-size: 35vh;
-  line-height: 0;
-  color: #ffffff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+  &-title {
+    @extend %notFound;
+    font-size: 35vh;
+    line-height: 0;
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-.sub-title {
-  @extend %header2;
-}
+  &-subtitle {
+    @extend %header2;
+  }
 
-.text {
-  @extend %subHead1;
-  margin-top: rem(10);
-}
+  &-text {
+    @extend %subHead1;
+    margin-top: rem(10);
+  }
 
-.link {
-  @extend %bodyText;
-  color: var(--green);
-  text-decoration: underline;
-  margin-top: rem(20);
+  &-link {
+    @extend %bodyText;
+    color: var(--green);
+    text-decoration: underline;
+    margin-top: rem(20);
+  }
 }
