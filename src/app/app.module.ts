@@ -6,13 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from '@sharedModule/shared.module';
 import { LoadingInterceptor } from '@sharedModule/loading.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, SharedModule],
-  providers: [{
-    provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
-  }],
+  imports: [BrowserModule, AppRoutingModule, SharedModule, BrowserAnimationsModule],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

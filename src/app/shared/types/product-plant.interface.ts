@@ -4,6 +4,7 @@ export interface APIproduct {
   description: string;
   id: string;
   extraInfo: any;
+  createdAt: string;
 }
 
 export interface Product extends APIproduct {
