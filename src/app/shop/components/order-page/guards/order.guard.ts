@@ -24,7 +24,7 @@ export class OrderGuard implements CanActivate {
     | boolean
     | UrlTree {
     return (
-      this.cartService.hasProductsInCart() || this.router.createUrlTree([''])
+      this.cartService.hasProductsInCart() || this.router.navigate([''])
     );
   }
 }

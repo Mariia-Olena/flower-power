@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule} from '@angular/material/sort';
 import {MatListModule} from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {MatListModule} from '@angular/material/list';
     MatCardModule,
     MatTableModule,
     MatSortModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatFormFieldModule,
@@ -28,7 +30,8 @@ import {MatListModule} from '@angular/material/list';
     MatCardModule,
     MatTableModule,
     MatSortModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ],
 })
 export class MaterialModule {}

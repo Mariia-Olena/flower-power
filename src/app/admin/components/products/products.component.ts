@@ -33,7 +33,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getAllProducts() {
-    this.products$ = this.productsService.getAllProducts(10, 1, 'name').pipe(
+    return this.productsService.getAllProducts(10, 1, 'name').pipe(
       map((res: APIproduct[]) => {
         return res.map((product: APIproduct) => {
           return {
@@ -56,8 +56,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllProducts();
-    this.products$.subscribe((value) => {
+    this.getAllProducts().subscribe((value) => {
       this.dataSource.data = value;
     });
   }

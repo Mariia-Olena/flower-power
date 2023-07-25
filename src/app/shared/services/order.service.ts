@@ -17,7 +17,7 @@ import { StorageService } from './storage.service';
 export class OrderService {
   private baseUrl = environment.baseUrl;
   private currentOrder = new BehaviorSubject<APIorder>(this.storage.get('order'));
-  showModal = false;
+  showModal = new BehaviorSubject<boolean>(false);
   
   constructor(private http: HttpClient, private storage: StorageService) {}
 

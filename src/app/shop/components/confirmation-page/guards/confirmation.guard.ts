@@ -24,8 +24,7 @@ export class ConfirmationGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      console.log();
       
-    return !!this.orderService.getCurrentOrder() || this.router.createUrlTree(['']);
+    return !!this.orderService.getCurrentOrder() || this.router.navigate(['']);
   }
 }

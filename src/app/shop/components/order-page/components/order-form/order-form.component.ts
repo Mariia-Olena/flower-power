@@ -68,7 +68,7 @@ export class OrderFormComponent implements OnInit {
           );
       },
       (error) => {
-        this.orderService.showModal = true;
+        this.orderService.showModal.next(true);
       }
     );
   }
@@ -83,7 +83,7 @@ export class OrderFormComponent implements OnInit {
       region,
       city,
       address,
-    } = this.storage.getFromLocalStorage('orderForm');
+    } = (this.storage.getFromLocalStorage('orderForm') || {});
 
     this.orderForm.patchValue({
       email,

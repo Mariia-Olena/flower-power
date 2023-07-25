@@ -4,6 +4,6 @@
   <app-spinner></app-spinner>
 </div>
 
-<ng-container *ngIf="orderService.showModal">
+<ng-container *ngIf="orderService.showModal.getValue()">
   <app-modal></app-modal>
 </ng-container>

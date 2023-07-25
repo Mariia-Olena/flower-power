@@ -14,7 +14,7 @@ export class ModalComponent implements OnInit {
   }
 
   closeModal() {
-    this.orderService.showModal = false;
+    this.orderService.showModal.next(false);
   }
 
   ngOnInit(): void {

@@ -26,6 +26,6 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.orderService.showModal = false;
+    this.orderService.showModal.next(false);
   }
 }
