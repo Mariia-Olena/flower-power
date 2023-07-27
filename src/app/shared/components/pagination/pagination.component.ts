@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -14,6 +21,8 @@ export class PaginationComponent implements OnChanges {
 
   pages: number[] = [];
   pagesCount: number = 1;
+
+  constructor() {}
 
   pagesToShow(): number[] {
     const currentIndex = this.pages.findIndex(
@@ -34,15 +43,16 @@ export class PaginationComponent implements OnChanges {
       return pages;
     }
 
-    if (currentIndex === this.pagesCount - 1 || currentIndex === this.pagesCount - 2) {
+    if (
+      currentIndex === this.pagesCount - 1 ||
+      currentIndex === this.pagesCount - 2
+    ) {
       const pages = this.pages.slice(this.pagesCount - 3);
       return pages;
     }
 
     return this.pages;
   }
-
-  constructor() {}
 
   range(): number[] {
     this.pagesCount = Math.ceil(this.total / this.limit);

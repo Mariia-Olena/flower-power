@@ -37,7 +37,7 @@ export class OrderService {
     }, []);
 
     return {
-      name: firstName + secondName,
+      name: firstName + ' ' + secondName,
       phone: phone,
       message: `${country}, ${region}, ${city}, ${address}`,
       products: products,
