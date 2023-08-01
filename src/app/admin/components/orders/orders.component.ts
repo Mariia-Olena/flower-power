@@ -5,27 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { map, Observable } from 'rxjs';
 import { AdminService } from '../../services/admin.service';
-
-interface Order {
-  id: string;
-  name: string;
-  phone: string;
-  created: string;
-}
-
-interface OrderAPI {
-  name: string;
-  phone: string;
-  message: string;
-  products: {
-    quantity: number;
-    id: string;
-    name: string;
-  }[];
-  createdAt: string;
-  updatedAt: string;
-  id: string;
-}
+import { Order, OrderAPI } from '../../types/admin.interface';
 
 @Component({
   selector: 'app-orders',

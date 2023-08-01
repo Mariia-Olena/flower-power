@@ -3,15 +3,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from '@sharedModule/services/storage.service';
 import { BehaviorSubject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-
-interface LogInCredentials {
-  username: string;
-  password: string;
-}
-
-interface LogInResponse {
-  access_token: string;
-}
+import { LogInCredentials, LogInResponse } from '../types/login.interface';
 
 @Injectable({
   providedIn: 'root',

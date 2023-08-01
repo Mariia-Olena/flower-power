@@ -21,6 +21,7 @@ export class ProductsPageComponent implements OnInit {
   limit: number = 2;
   currentPage: number = 1;
   sort: string = 'name';
+  filter: string = '';
 
   constructor(
     public productsService: ProductsService,
@@ -28,11 +29,12 @@ export class ProductsPageComponent implements OnInit {
     private productsMapper: ProductsMapper
   ) {}
 
-  setPlants(limit: number, currentPage: number, sort: string) {
+  setPlants(limit: number, currentPage: number, sort: string, filter: string) {
     this.products$ = this.productsService.getAllProducts(
       limit,
       currentPage,
-      sort
+      sort,
+      filter
     );
 
     this.products$
@@ -49,7 +51,7 @@ export class ProductsPageComponent implements OnInit {
 
   changePage(page: number): void {
     this.currentPage = page;
-    this.setPlants(this.limit, this.currentPage, this.sort);
+    this.setPlants(this.limit, this.currentPage, this.sort, this.filter);
   }
 
   setProduct(id: string) {
@@ -64,6 +66,6 @@ export class ProductsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setPlants(this.limit, this.currentPage, this.sort);
+    this.setPlants(this.limit, this.currentPage, this.sort, this.filter);
   }
 }

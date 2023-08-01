@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-content>
+    <form
+      (submit)="onSubmit()"
+      (submit)="toolbar.emit($event)"
+      [formGroup]="toolbarForm"
+      class="toolbar"
+    >
+      <div class="toolbar-container">
+        <mat-form-field>
+          <mat-label>Search</mat-label>
+          <input matInput formControlName="searchValue" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>By</mat-label>
+          <mat-select formControlName="searchName">
+            <mat-option *ngFor="let option of options" [value]="option">{{
+              option
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="toolbar-container">
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <mat-select formControlName="filterValue">
+            <mat-option *ngFor="let option of options" [value]="option">{{
+              option
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>By</mat-label>
+          <input matInput formControlName="filterName" />
+        </mat-form-field>
+      </div>
+      <button mat-flat-button color="primary" class="toolbar-button">
+        Apply
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

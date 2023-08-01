@@ -24,7 +24,7 @@ export class ProductsService {
     limit: number,
     page: number,
     sort: string,
-    filter?: string
+    filter: string
   ): Observable<APIproduct[]> {
     return this.http
       .get<APIproduct[]>(`${this.baseUrl}/products`, {
@@ -33,7 +33,7 @@ export class ProductsService {
           ...(limit ? {limit: limit} : {}),
           page,
           sort,
-          filter
+          ...(filter ? {filter: filter} : {}),
         },
       })
       .pipe(

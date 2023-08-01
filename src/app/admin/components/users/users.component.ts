@@ -5,20 +5,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { map, Observable } from 'rxjs';
 import { AdminService } from '../../services/admin.service';
+import {User, UserAPI} from '../../types/admin.interface';
 
-interface User {
-  id: string;
-  name: string;
-  created: string;
-}
-
-interface UserAPI {
-  username: string;
-  password: string;
-  createdAt: string;
-  updatedAt: string;
-  id: string;
-}
 
 @Component({
   selector: 'app-users',

@@ -31,6 +31,7 @@ export class ProductPageComponent implements OnInit {
   limit: number = 9;
   currentPage: number = 1;
   sort: string = '-name';
+  filter: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -74,11 +75,12 @@ export class ProductPageComponent implements OnInit {
     this.cartV2Service.addProduct(this.product);
   }
 
-  setPlants(limit: number, currentPage: number, sort: string) {
+  setPlants(limit: number, currentPage: number, sort: string, filter: string) {
     this.products$ = this.productsService.getAllProducts(
       limit,
       currentPage,
-      sort
+      sort,
+      filter
     );
 
     this.plants$ = this.products$.pipe(
@@ -92,7 +94,8 @@ export class ProductPageComponent implements OnInit {
     this.setPlants(
       this.limit,
       this.currentPage,
-      this.sort
+      this.sort,
+      this.filter
     );
   }
 }

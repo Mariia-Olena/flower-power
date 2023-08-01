@@ -17,17 +17,19 @@ export class HomePageComponent implements OnInit {
   limit: number = 7;
   currentPage: number = 1;
   sort: string = 'price';
+  filter: string = '';
 
   constructor(
     private productsMapper: ProductsMapper,
     private productsService: ProductsService
   ) {}
 
-  setPlants(limit: number, currentPage: number, sort: string) {
+  setPlants(limit: number, currentPage: number, sort: string, filter: string) {
     this.products$ = this.productsService.getAllProducts(
       limit,
       currentPage,
-      sort
+      sort,
+      filter
     );
 
     this.plants$ = this.products$.pipe(
@@ -36,6 +38,6 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setPlants(this.limit, this.currentPage, this.sort);
+    this.setPlants(this.limit, this.currentPage, this.sort, this.filter);
   }
 }
