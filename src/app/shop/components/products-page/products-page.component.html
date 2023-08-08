@@ -21,7 +21,7 @@
     <app-pagination
       *ngIf="plants.length"
       [limit]="limit"
-      [total]="productsService.allProductsCount | async"
+      [total]="productsService.itemsCount$ | async"
       [currentPage]="currentPage"
       (changePage)="changePage($event)"
     ></app-pagination>

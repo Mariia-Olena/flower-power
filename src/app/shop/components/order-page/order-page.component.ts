@@ -4,7 +4,7 @@ import {
   CartV2Service,
   CartItem,
 } from '@sharedModule/services/cart-v2.service';
-import { OrderService } from '@sharedModule/services/order.service';
+import { OrdersService } from '@sharedModule/services/entities/orders.service';
 
 @Component({
   selector: 'app-order-page',
@@ -17,7 +17,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private cartV2Service: CartV2Service,
-    public orderService: OrderService
+    public ordersService: OrdersService
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +26,6 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.orderService.showModal.next(false);
+    this.ordersService.showModal.next(false);
   }
 }

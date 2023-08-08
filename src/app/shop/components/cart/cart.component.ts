@@ -14,9 +14,7 @@ export class CartComponent implements OnInit {
   cart$: Observable<CartItem[]>;
   total$: Observable<number>;
 
-  constructor(
-    private cartV2Service: CartV2Service
-  ) {}
+  constructor(private cartV2Service: CartV2Service) {}
 
   removeProduct(id: string) {
     this.cartV2Service.removeProduct(id);

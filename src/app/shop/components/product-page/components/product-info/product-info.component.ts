@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PlantInfo } from './types/plant-info.interface';
+import { PlantInfo } from '@productPage/product-info/types/plant-info.interface';
 
 @Component({
   selector: 'app-product-info',

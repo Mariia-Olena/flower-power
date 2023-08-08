@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PlantReview } from './types/plant-review.interface';
-
+import { PlantReview } from '@productPage/product-review/types/plant-review.interface';
 
 @Component({
   selector: 'app-product-review',

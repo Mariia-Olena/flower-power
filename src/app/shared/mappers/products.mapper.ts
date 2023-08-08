@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PlantCard } from '@productsPage/products/types/plant.interface';
-import { APIproduct } from '@interfaces/product-plant.interface';
+import { APIproduct } from '@sharedModule/services/entities/types/product.interface';
 import { CartV2Service } from '@sharedModule/services/cart-v2.service';
 
 @Injectable({

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { PlantCard } from '@productsPage/products/types/plant.interface';
-import { APIproduct } from '@interfaces/product-plant.interface';
+import { APIproduct } from '@sharedModule/services/entities/types/product.interface';
 import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
-import { ProductsService } from '@services/products.service';
+import { ProductsService } from '@sharedModule/services/entities/products.service';
 
 @Component({
   selector: 'app-home-page',
@@ -25,7 +25,7 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   setPlants(limit: number, currentPage: number, sort: string, filter: string) {
-    this.products$ = this.productsService.getAllProducts(
+    this.products$ = this.productsService.getAll(
       limit,
       currentPage,
       sort,

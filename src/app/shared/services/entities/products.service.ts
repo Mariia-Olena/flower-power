@@ -1,26 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-
-import { APIproduct } from '../types/product-plant.interface';
+import { APIproduct, ProductAdmin } from './types/product.interface';
 import { environment } from 'src/environments/environment';
+import { BasedCrudHttpService } from './based-crud-http.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductsService {
+export class ProductsService extends BasedCrudHttpService<APIproduct, ProductAdmin> {
   private baseUrl = environment.baseUrl;
+  private _itemsCount$: BehaviorSubject<number> = new BehaviorSubject(0);
+  itemsCount$: Observable<number> = this._itemsCount$.asObservable();
 
-  private _allProductsCount: BehaviorSubject<number> = new BehaviorSubject(0);
-  allProductsCount: Observable<number> = this._allProductsCount.asObservable();
+  constructor(private http: HttpClient) {
+    super()
+  }
 
-  constructor(private http: HttpClient) {}
-
-  getProduct(id: string): Observable<APIproduct> {
+  getOne(id: string): Observable<APIproduct> {
     return this.http.get<APIproduct>(`${this.baseUrl}/products/${id}`, {});
   }
 
-  getAllProducts(
+  getAll(
     limit: number,
     page: number,
     sort: string,
@@ -30,18 +31,22 @@ export class ProductsService {
       .get<APIproduct[]>(`${this.baseUrl}/products`, {
         observe: 'response',
         params: {
-          ...(limit ? {limit: limit} : {}),
+          ...(limit ? { limit: limit } : {}),
           page,
           sort,
-          ...(filter ? {filter: filter} : {}),
+          ...(filter ? { filter: filter } : {}),
         },
       })
       .pipe(
         map(({ headers, body }) => {
-          this._allProductsCount.next(+(headers.get('All-Products') || 1));
+          this._itemsCount$.next(+(headers.get('items-count') || 1));
 
           return body || [];
         })
       );
   }
+
+  create(body: APIproduct) {};
+  update(body: APIproduct) {};
+  remove(id: string) {};
 }

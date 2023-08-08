@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CartItem } from '@sharedModule/services/cart-v2.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { OrderService } from '@sharedModule/services/order.service';
+import { OrdersService } from '@sharedModule/services/entities/orders.service';
 import { Router } from '@angular/router';
 import { StorageService } from '@sharedModule/services/storage.service';
 
@@ -41,7 +41,7 @@ export class OrderFormComponent implements OnInit {
   });
 
   constructor(
-    private orderService: OrderService,
+    private ordersService: OrdersService,
     private router: Router,
     private storage: StorageService
   ) {}
@@ -58,8 +58,8 @@ export class OrderFormComponent implements OnInit {
   }
 
   onSubmit() {
-    const order = this.orderService.createOrder(this.orderForm, this.cart);
-    this.orderService.postOrder(order).subscribe(
+    const order = this.ordersService.setUpOrder(this.orderForm, this.cart);
+    this.ordersService.create(order).subscribe(
       (res) => {
         this.router.navigate(['confirmation']),
           this.storage.setToLocalStorage(
@@ -68,7 +68,7 @@ export class OrderFormComponent implements OnInit {
           );
       },
       (error) => {
-        this.orderService.showModal.next(true);
+        this.ordersService.showModal.next(true);
       }
     );
   }
@@ -83,7 +83,7 @@ export class OrderFormComponent implements OnInit {
       region,
       city,
       address,
-    } = (this.storage.getFromLocalStorage('orderForm') || {});
+    } = this.storage.getFromLocalStorage('orderForm') || {};
 
     this.orderForm.patchValue({
       email,

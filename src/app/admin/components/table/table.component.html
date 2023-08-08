@@ -2,7 +2,7 @@
   mat-table
   [dataSource]="dataSource"
   matSort
-  (matSortChange)="announceSortChange($event)"
+  (matSortChange)="sortChange.emit($event)"
   class="mat-elevation-z8"
 >
   <ng-container

@@ -1,0 +1,16 @@
+<app-toolbar (toolbar)="onSubmit($event)" [options]="options"></app-toolbar>
+<app-table
+  [dataSource]="dataSource"
+  [displayedColumns]="displayedColumns"
+  (sortChange)="announceSortChange($event)"
+  
+></app-table>
+<mat-paginator
+  [length]="params.length"
+  [pageSize]="params.limit"
+  [pageIndex]="params.pageIndex"
+  [showFirstLastButtons]="true"
+  [hidePageSize]="true"
+  (page)="handlePageEvent($event)"
+>
+</mat-paginator>

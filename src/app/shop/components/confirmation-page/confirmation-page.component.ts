@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { OrderService } from '@sharedModule/services/order.service';
+import { OrdersService } from '@sharedModule/services/entities/orders.service';
 import { StorageService } from '@sharedModule/services/storage.service';
 
 @Component({
@@ -11,16 +11,16 @@ export class ConfirmationPageComponent implements OnInit, OnDestroy {
   id: string;
 
   constructor(
-    private orderService: OrderService,
+    private ordersService: OrdersService,
     private storage: StorageService
   ) {}
 
   ngOnInit(): void {
-    this.id = this.orderService.getCurrentOrder().id;
+    this.id = this.ordersService.getCurrentOrder().id;
   }
 
   ngOnDestroy(): void {
-    this.orderService.resetCurrentOrder();
+    this.ordersService.resetCurrentOrder();
     this.storage.remove('order');
   }
 }

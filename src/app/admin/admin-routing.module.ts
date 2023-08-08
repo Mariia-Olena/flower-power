@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminPageComponent } from './components/admin-page/admin-page.component';
-import { OrdersComponent } from './components/orders/orders.component';
-import { ProductsComponent } from './components/products/products.component';
-import { UsersComponent } from './components/users/users.component';
+
+import { AdminPageComponent } from '@admin/components/admin-page/admin-page.component';
+import { OrdersComponent } from '@admin/components/entities/orders/orders.component';
+import { ProductsComponent } from '@admin/components/entities/products/products.component';
+import { UsersComponent } from '@admin/components/entities/users/users.component';
 
 const routes: Routes = [
   {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService } from '@sharedModule/services/order.service';
+import { OrdersService } from '@sharedModule/services/entities/orders.service';
 
 @Component({
   selector: 'app-modal',
@@ -7,14 +7,14 @@ import { OrderService } from '@sharedModule/services/order.service';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements OnInit {
-  constructor(public orderService: OrderService) {}
+  constructor(public ordersService: OrdersService) {}
 
   blockScroll() {
     document.body.style.overflow = 'hidden';
   }
 
   closeModal() {
-    this.orderService.showModal.next(false);
+    this.ordersService.showModal.next(false);
   }
 
   ngOnInit(): void {

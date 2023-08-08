@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PlantCard } from '@shop/products-page/components/products/types/plant.interface';
+import { PlantCard } from '@productsPage/products/types/plant.interface';
 
 @Component({
   selector: 'app-product-slider',

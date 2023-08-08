@@ -1,18 +1,17 @@
+export interface ProductAdmin {
+  id: string;
+  name: string;
+  price: number;
+  created: string;
+}
+
 export interface APIproduct {
   name: string;
   price: number;
   description: string;
   id: string;
-  extraInfo: any;
-  createdAt: string;
-}
-
-export interface Product extends APIproduct {
   extraInfo: ProductExtraInfo;
-}
-
-export interface CartProduct extends Product {
-  count: number;
+  createdAt: string;
 }
 
 export interface ProductExtraInfo {

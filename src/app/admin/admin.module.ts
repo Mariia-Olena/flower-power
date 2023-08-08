@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { AdminRoutingModule } from './admin-routing.module';
-import { MaterialModule } from './modules/material/material.module';
-import { AdminPageComponent } from './components/admin-page/admin-page.component';
-import { UsersComponent } from './components/users/users.component';
-import { ProductsComponent } from './components/products/products.component';
-import { OrdersComponent } from './components/orders/orders.component';
-import { SharedModule } from '@sharedModule/shared.module';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TableComponent } from './components/table/table.component';
+
+import { SharedModule } from '@sharedModule/shared.module';
+import { AdminRoutingModule } from '@admin/admin-routing.module';
+import { MaterialModule } from '@admin/modules/material/material.module';
+import { AdminPageComponent } from '@admin/components/admin-page/admin-page.component';
+import { UsersComponent } from '@admin/components/entities/users/users.component';
+import { ProductsComponent } from '@admin/components/entities/products/products.component';
+import { OrdersComponent } from '@admin/components/entities/orders/orders.component';
+import { ToolbarComponent } from '@admin/components/toolbar/toolbar.component';
+import { TableComponent } from '@admin/components/table/table.component';
 
 
 @NgModule({

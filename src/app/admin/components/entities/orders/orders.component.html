@@ -2,12 +2,14 @@
 <app-table
   [dataSource]="dataSource"
   [displayedColumns]="displayedColumns"
+  (sortChange)="announceSortChange($event)"
 ></app-table>
 <mat-paginator
-  [length]="length"
-  [pageSize]="limit"
-  [pageIndex]="pageIndex"
+  [length]="params.length"
+  [pageSize]="params.limit"
+  [pageIndex]="params.pageIndex"
   [showFirstLastButtons]="true"
+  [hidePageSize]="true"
   (page)="handlePageEvent($event)"
 >
 </mat-paginator>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, tap, map, Observable } from 'rxjs';
-import { ProductsService } from '@sharedModule/services/products.service';
+import { ProductsService } from '@sharedModule/services/entities/products.service';
 import { PlantCard } from '@productsPage/products/types/plant.interface';
-import { APIproduct, Product } from '@interfaces/product-plant.interface';
+import { APIproduct } from '@sharedModule/services/entities/types/product.interface';
 import { CartV2Service } from '@sharedModule/services/cart-v2.service';
 import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
 
@@ -16,7 +16,7 @@ export class ProductsPageComponent implements OnInit {
   plants$: BehaviorSubject<PlantCard[]> = new BehaviorSubject<PlantCard[]>([]);
 
   products: APIproduct[] = [];
-  private productInCart: Product;
+  private productInCart: APIproduct;
 
   limit: number = 2;
   currentPage: number = 1;
@@ -30,7 +30,7 @@ export class ProductsPageComponent implements OnInit {
   ) {}
 
   setPlants(limit: number, currentPage: number, sort: string, filter: string) {
-    this.products$ = this.productsService.getAllProducts(
+    this.products$ = this.productsService.getAll(
       limit,
       currentPage,
       sort,

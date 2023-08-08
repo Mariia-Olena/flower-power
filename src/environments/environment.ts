@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://hys-fe-course-api-mariia-olena.vercel.app'
+  baseUrl: 'https://hys-api-mariia-olena.vercel.app'
 };
 
 /*

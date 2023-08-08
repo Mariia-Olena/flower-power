@@ -2,15 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
 
-import { ProductsService } from '@services/products.service';
-import { Plant } from '@productPage/product/types/plant.interface';
-import { PlantCard } from '@shop/products-page/components/products/types/plant.interface';
-import { PlantInfo } from '@productPage/product-info/types/plant-info.interface';
-import { PlantReview } from '@productPage/product-review/types/plant-review.interface';
-import { APIproduct, Product } from '@interfaces/product-plant.interface';
+import { ProductsService } from '@sharedModule/services/entities/products.service';
 import { CartV2Service } from '@sharedModule/services/cart-v2.service';
 import { ProductMapper } from '@sharedModule/mappers/product.mapper';
 import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
+import { Plant } from '@productPage/product/types/plant.interface';
+import { PlantCard } from '@productsPage/products/types/plant.interface';
+import { PlantInfo } from '@productPage/product-info/types/plant-info.interface';
+import { PlantReview } from '@productPage/product-review/types/plant-review.interface';
+import { APIproduct } from '@sharedModule/services/entities/types/product.interface';
+import { CartProduct } from '@sharedModule/types/cart.interface';
 
 @Component({
   selector: 'app-product-home',
@@ -26,7 +27,7 @@ export class ProductPageComponent implements OnInit {
   products$: Observable<APIproduct[]>;
   plants$: Observable<PlantCard[]>;
 
-  product: Product;
+  product: APIproduct;
 
   limit: number = 9;
   currentPage: number = 1;
@@ -43,7 +44,7 @@ export class ProductPageComponent implements OnInit {
 
   getPlant() {
     this.route.params.subscribe(({ id }) => {
-      this.product$ = this.productsService.getProduct(id).pipe(
+      this.product$ = this.productsService.getOne(id).pipe(
         tap((value: APIproduct) => {
           this.product = value;
         })
@@ -76,7 +77,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   setPlants(limit: number, currentPage: number, sort: string, filter: string) {
-    this.products$ = this.productsService.getAllProducts(
+    this.products$ = this.productsService.getAll(
       limit,
       currentPage,
       sort,

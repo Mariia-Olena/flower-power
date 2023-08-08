@@ -6,15 +6,14 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { OrderService } from '@sharedModule/services/order.service';
+import { OrdersService } from '@sharedModule/services/entities/orders.service';
 import { Observable } from 'rxjs';
-import { APIorder } from '@sharedModule/types/order.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfirmationGuard implements CanActivate {
-  constructor(private orderService: OrderService, private router: Router) {}
+  constructor(private ordersService: OrdersService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -24,7 +23,6 @@ export class ConfirmationGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      
-    return !!this.orderService.getCurrentOrder() || this.router.navigate(['']);
+    return !!this.ordersService.getCurrentOrder() || this.router.navigate(['']);
   }
 }

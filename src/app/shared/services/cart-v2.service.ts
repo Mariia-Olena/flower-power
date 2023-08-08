@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Product } from '@sharedModule/types/product-plant.interface';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { StorageService } from './storage.service';
+import { APIproduct } from '@sharedModule/services/entities/types/product.interface';
+
 
 export interface CartItem {
-  product: Product;
+  product: APIproduct;
   count: number;
   params?: {
     color: string;
@@ -58,7 +59,7 @@ export class CartV2Service {
   }
 
   addProduct(
-    product: Product,
+    product: APIproduct,
     count: number = 1,
     params?: { color: string; size: string }
   ) {

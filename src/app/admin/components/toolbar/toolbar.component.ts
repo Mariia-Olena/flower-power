@@ -1,6 +1,6 @@
+import { ToolbarService } from '@admin/services/toolbar.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -18,9 +18,9 @@ export class ToolbarComponent {
     filterName: new FormControl('', []),
   });
 
-  constructor(private adminService: AdminService) {}
+  constructor(private toolbarService: ToolbarService) {}
 
   onSubmit() {
-    this.adminService.toolbar$.next(this.toolbarForm.getRawValue());
+    this.toolbarService.toolbar$.next(this.toolbarForm.getRawValue());
   }
 }

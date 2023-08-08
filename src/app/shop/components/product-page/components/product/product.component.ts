@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Plant } from './types/plant.interface';
+import { Plant } from '@productPage/product/types/plant.interface';
 
 @Component({
   selector: 'app-product',

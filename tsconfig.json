@@ -24,13 +24,14 @@
     "paths": {
       "@sharedModule/*": ["src/app/shared/*"],
       "@shared/*": ["src/app/shared/components/*"],
-      "@interfaces/*": ["src/app/shared/types/*"],
       "@services/*": ["src/app/shared/services/*"],
       "@shop/*": ["src/app/shop/components/*"],
       "@productsPage/*": ["src/app/shop/components/products-page/components/*"],
       "@products/*": ["src/app/shop/components/products-page/*"],
       "@productPage/*": ["src/app/shop/components/product-page/components/*"],
-      "@product/*": ["src/app/shop/components/product-page/*"]
+      "@product/*": ["src/app/shop/components/product-page/*"],
+      "@admin/*": ["src/app/admin/*"],
+      "@login/*": ["src/app/admin/modules/login/*"]
     },
     "strictPropertyInitialization": false
   },
