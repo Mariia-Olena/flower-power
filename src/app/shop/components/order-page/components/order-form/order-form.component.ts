@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CartItem } from '@sharedModule/services/cart-v2.service';
+import { CartItem } from '@sharedModule/services/cart.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OrdersService } from '@sharedModule/services/entities/orders.service';
 import { Router } from '@angular/router';

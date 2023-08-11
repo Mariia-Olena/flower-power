@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { PlantCard } from '@productsPage/products/types/plant.interface';
+import { PlantCard } from '@sharedModule/services/entities/types/product.interface';
 import { APIproduct } from '@sharedModule/services/entities/types/product.interface';
 import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
 import { ProductsService } from '@sharedModule/services/entities/products.service';

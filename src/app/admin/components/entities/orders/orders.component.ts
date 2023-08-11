@@ -1,28 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { OrdersService } from '@sharedModule/services/entities/orders.service';
-import { OrderAdmin, APIorder } from '@services/entities/types/order.interface';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { BasedCrudComponent } from '@sharedModule/services/entities/based-crud.component';
-import { Toolbar } from '@admin/components/toolbar/types/toolbar.interface';
+import { OrderAdmin, APIorder } from '@sharedModule/services/entities/types/order.interface';
+import { BasedCrudComponent } from '@admin/components/entities/based-crud.component';
+import { ToolbarService } from '@admin/services/toolbar.service';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss'],
 })
-export class OrdersComponent
-  extends BasedCrudComponent<APIorder, OrderAdmin>
-  implements OnInit
-{
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  items$: Observable<OrderAdmin[]> = new Observable<OrderAdmin[]>(null);
-  toolbar$ = new BehaviorSubject<Toolbar>(null);
-
+export class OrdersComponent extends BasedCrudComponent<APIorder, OrderAdmin> {
   options = [
     'name',
     'price',
@@ -32,7 +19,6 @@ export class OrdersComponent
     'updatedAt',
   ];
   displayedColumns: string[] = ['id', 'name', 'phone', 'created'];
-  dataSource: MatTableDataSource<any>;
   params = {
     limit: 10,
     pageIndex: 0,
@@ -42,9 +28,8 @@ export class OrdersComponent
     length: 1,
   };
 
-  constructor(private ordersService: OrdersService) {
-    super(ordersService);
-    this.dataSource = new MatTableDataSource<any>();
+  constructor(private ordersService: OrdersService, private toolBarService: ToolbarService) {
+    super(ordersService, toolBarService);
   }
 
   mapEntityData(res: APIorder[]): OrderAdmin[] {
@@ -59,16 +44,7 @@ export class OrdersComponent
     });
   }
 
-  ngOnInit(): void {
-    this.setData(
-      this.params.limit,
-      this.params.currentPage,
-      this.params.sort,
-      this.params.filter
-    );
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+  getToolbarValue(searchValue: string): string {
+    return `name;${searchValue}`
   }
 }

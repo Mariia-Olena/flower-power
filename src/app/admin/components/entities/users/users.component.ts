@@ -1,28 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { BasedCrudComponent } from '@sharedModule/services/entities/based-crud.component';
+import { Component } from '@angular/core';
+import { BasedCrudComponent } from '@admin/components/entities/based-crud.component';
 import { UsersService } from '@sharedModule/services/entities/users.service';
 import { UserAdmin, APIuser } from '@sharedModule/services/entities/types/user.interface';
-import { Toolbar } from '@admin/components/toolbar/types/toolbar.interface';
+import { ToolbarService } from '@admin/services/toolbar.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent
-  extends BasedCrudComponent<APIuser, UserAdmin>
-  implements OnInit
-{
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  items$: Observable<UserAdmin[]> = new Observable<UserAdmin[]>(null);
-  toolbar$ = new BehaviorSubject<Toolbar>(null);
-
+export class UsersComponent extends BasedCrudComponent<APIuser, UserAdmin> {
   options = [
     'name',
     'price',
@@ -32,7 +19,6 @@ export class UsersComponent
     'updatedAt',
   ];
   displayedColumns: string[] = ['id', 'name', 'created'];
-  dataSource: MatTableDataSource<any>;
   params = {
     limit: 10,
     pageIndex: 0,
@@ -42,9 +28,8 @@ export class UsersComponent
     length: 1,
   };
 
-  constructor(private usersService: UsersService) {
-    super(usersService);
-    this.dataSource = new MatTableDataSource<any>();
+  constructor(private usersService: UsersService, private toolBarService: ToolbarService) {
+    super(usersService, toolBarService);
   }
 
   mapEntityData(res: APIuser[]): UserAdmin[] {
@@ -57,16 +42,7 @@ export class UsersComponent
     });
   }
 
-  ngOnInit(): void {
-    this.setData(
-      this.params.limit,
-      this.params.currentPage,
-      this.params.sort,
-      this.params.filter
-    );
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+  getToolbarValue(searchValue: string): string {
+    return `username;${searchValue}`
   }
 }

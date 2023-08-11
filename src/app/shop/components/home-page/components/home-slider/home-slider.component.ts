@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PlantCard } from '@shop/products-page/components/products/types/plant.interface';
+import { PlantCard } from '@sharedModule/services/entities/types/product.interface';
 
 @Component({
   selector: 'app-home-slider',

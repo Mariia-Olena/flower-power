@@ -1,9 +1,12 @@
-<app-toolbar (toolbar)="onSubmit($event)" [options]="options"></app-toolbar>
+<app-toolbar
+  (toolbar)="onSubmit($event)"
+  [options]="options"
+  [tooltip]="'Search only by username'"
+></app-toolbar>
 <app-table
   [dataSource]="dataSource"
   [displayedColumns]="displayedColumns"
   (sortChange)="announceSortChange($event)"
-  
 ></app-table>
 <mat-paginator
   [length]="params.length"

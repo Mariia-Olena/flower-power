@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, tap, map, Observable } from 'rxjs';
+
 import { ProductsService } from '@sharedModule/services/entities/products.service';
-import { PlantCard } from '@productsPage/products/types/plant.interface';
-import { APIproduct } from '@sharedModule/services/entities/types/product.interface';
-import { CartV2Service } from '@sharedModule/services/cart-v2.service';
+import { CartService } from '@sharedModule/services/cart.service';
+import { APIproduct, PlantCard } from '@sharedModule/services/entities/types/product.interface';
 import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
 
 @Component({
@@ -25,7 +25,7 @@ export class ProductsPageComponent implements OnInit {
 
   constructor(
     public productsService: ProductsService,
-    private cartV2Service: CartV2Service,
+    private cartService: CartService,
     private productsMapper: ProductsMapper
   ) {}
 
@@ -62,7 +62,7 @@ export class ProductsPageComponent implements OnInit {
 
   addToCart(id: string) {
     this.setProduct(id);
-    this.cartV2Service.addProduct(this.productInCart);
+    this.cartService.addProduct(this.productInCart);
   }
 
   ngOnInit(): void {

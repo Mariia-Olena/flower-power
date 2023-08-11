@@ -1,28 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductsService } from '@sharedModule/services/entities/products.service';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { BasedCrudComponent } from '@sharedModule/services/entities/based-crud.component';
-import { APIproduct, ProductAdmin } from '@sharedModule/services/entities/types/product.interface';
-import { Toolbar } from '@admin/components/toolbar/types/toolbar.interface';
+import { BasedCrudComponent } from '@admin/components/entities/based-crud.component';
+import {
+  APIproduct,
+  ProductAdmin,
+} from '@sharedModule/services/entities/types/product.interface';
+import { ToolbarService } from '@admin/services/toolbar.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent
-  extends BasedCrudComponent<APIproduct, ProductAdmin>
-  implements OnInit
-{
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  items$: Observable<ProductAdmin[]> = new Observable<ProductAdmin[]>(null);
-  toolbar$ = new BehaviorSubject<Toolbar>(null);
-
+export class ProductsComponent extends BasedCrudComponent<APIproduct,ProductAdmin> {
   options = [
     'name',
     'price',
@@ -32,7 +22,6 @@ export class ProductsComponent
     'updatedAt',
   ];
   displayedColumns: string[] = ['id', 'name', 'price', 'created', 'edit'];
-  dataSource: MatTableDataSource<any>;
   params = {
     limit: 5,
     pageIndex: 0,
@@ -42,9 +31,8 @@ export class ProductsComponent
     length: 1,
   };
 
-  constructor(private productsService: ProductsService) {
-    super(productsService);
-    this.dataSource = new MatTableDataSource<any>();
+  constructor(private productsService: ProductsService, private toolBarService: ToolbarService) {
+    super(productsService, toolBarService);
   }
 
   mapEntityData(res: APIproduct[]): ProductAdmin[] {
@@ -58,16 +46,7 @@ export class ProductsComponent
     });
   }
 
-  ngOnInit(): void {
-    this.setData(
-      this.params.limit,
-      this.params.currentPage,
-      this.params.sort,
-      this.params.filter
-    );
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+  getToolbarValue(searchValue: string): string {
+    return `name;${searchValue}`
   }
 }

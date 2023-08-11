@@ -1,10 +1,3 @@
-export interface OrderAdmin {
-  id: string;
-  name: string;
-  phone: string;
-  created: string;
-}
-
 export interface APIorder {
   name: string;
   phone: string;
@@ -17,4 +10,27 @@ export interface APIorder {
   createdAt: string;
   updatedAt: string;
   id: string;
+}
+
+export interface OrderAdmin {
+  id: string;
+  name: string;
+  phone: string;
+  created: string;
+}
+
+export interface OrderForm {
+  name: string;
+  phone: string;
+  message: string;
+}
+
+export interface OrderProducts {
+  quantity: number;
+  name: string;
+  id: string;
+}
+
+export interface Order extends OrderForm {
+  products: OrderProducts[];
 }

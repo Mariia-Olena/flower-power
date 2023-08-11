@@ -3,15 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
 
 import { ProductsService } from '@sharedModule/services/entities/products.service';
-import { CartV2Service } from '@sharedModule/services/cart-v2.service';
+import { CartService } from '@sharedModule/services/cart.service';
 import { ProductMapper } from '@sharedModule/mappers/product.mapper';
 import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
-import { Plant } from '@productPage/product/types/plant.interface';
-import { PlantCard } from '@productsPage/products/types/plant.interface';
-import { PlantInfo } from '@productPage/product-info/types/plant-info.interface';
-import { PlantReview } from '@productPage/product-review/types/plant-review.interface';
-import { APIproduct } from '@sharedModule/services/entities/types/product.interface';
-import { CartProduct } from '@sharedModule/types/cart.interface';
+import { APIproduct, ProductReview, PlantInfo, PlantCard, Plant } from '@sharedModule/services/entities/types/product.interface';
 
 @Component({
   selector: 'app-product-home',
@@ -22,7 +17,7 @@ export class ProductPageComponent implements OnInit {
   product$: Observable<APIproduct>;
   plant$: Observable<Plant>;
   plantInfo$: Observable<PlantInfo>;
-  plantReview$: Observable<PlantReview[]>;
+  plantReview$: Observable<ProductReview[]>;
 
   products$: Observable<APIproduct[]>;
   plants$: Observable<PlantCard[]>;
@@ -37,7 +32,7 @@ export class ProductPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
-    private cartV2Service: CartV2Service,
+    private cartService: CartService,
     private productMapper: ProductMapper,
     private productsMapper: ProductsMapper
   ) {}
@@ -73,7 +68,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   addToCart(): void {
-    this.cartV2Service.addProduct(this.product);
+    this.cartService.addProduct(this.product);
   }
 
   setPlants(limit: number, currentPage: number, sort: string, filter: string) {
@@ -92,11 +87,6 @@ export class ProductPageComponent implements OnInit {
   ngOnInit(): void {
     this.getPlant();
 
-    this.setPlants(
-      this.limit,
-      this.currentPage,
-      this.sort,
-      this.filter
-    );
+    this.setPlants(this.limit, this.currentPage, this.sort, this.filter);
   }
 }

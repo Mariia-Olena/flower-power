@@ -1,11 +1,16 @@
+import { Toolbar } from '@admin/components/toolbar/types/toolbar.interface';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToolbarService {
-  toolbar$ = new BehaviorSubject(null);
+  toolbar$ = new BehaviorSubject<Toolbar>({
+    searchValue: '',
+    filterValue: '',
+    filterName: '',
+  });
 
-  constructor() { }
+  constructor() {}
 }

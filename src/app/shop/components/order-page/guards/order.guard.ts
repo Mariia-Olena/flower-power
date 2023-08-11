@@ -6,14 +6,14 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { CartV2Service } from '@sharedModule/services/cart-v2.service';
+import { CartService } from '@sharedModule/services/cart.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderGuard implements CanActivate {
-  constructor(private cartService: CartV2Service, private router: Router) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,8 +23,6 @@ export class OrderGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return (
-      this.cartService.hasProductsInCart() || this.router.navigate([''])
-    );
+    return this.cartService.hasProductsInCart() || this.router.navigate(['']);
   }
 }

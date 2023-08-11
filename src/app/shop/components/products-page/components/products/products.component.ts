@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import {} from '@angular/core';
-import { PlantCard } from './types/plant.interface';
+
+import { PlantCard } from '@sharedModule/services/entities/types/product.interface';
 
 @Component({
   selector: 'app-products',

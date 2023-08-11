@@ -2,20 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { BasedCrudHttpService } from './based-crud-http.service';
-import { APIuser, UserAdmin } from './types/user.interface';
+import { BasedCrudHttpService } from '@sharedModule/types/based-crud-http-service.interface';
+import { APIuser, UserAdmin } from '@sharedModule/services/entities/types/user.interface';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService extends BasedCrudHttpService<APIuser, UserAdmin> {
+export class UsersService implements BasedCrudHttpService<APIuser, UserAdmin> {
   private baseUrl = environment.baseUrl;
   private _itemsCount$: BehaviorSubject<number> = new BehaviorSubject(0);
   itemsCount$: Observable<number> = this._itemsCount$.asObservable();
 
   constructor(private http: HttpClient) {
-    super()
   }
 
   getOne(id: string): Observable<APIuser> {

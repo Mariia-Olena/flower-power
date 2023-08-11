@@ -9,11 +9,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class ToolbarComponent {
   @Input() options: string[];
+  @Input() tooltip: string
   @Output() toolbar = new EventEmitter<Event>();
 
   toolbarForm = new FormGroup({
     searchValue: new FormControl('', []),
-    searchName: new FormControl('', []),
     filterValue: new FormControl('', []),
     filterName: new FormControl('', []),
   });
@@ -21,6 +21,8 @@ export class ToolbarComponent {
   constructor(private toolbarService: ToolbarService) {}
 
   onSubmit() {
+    console.log(this.toolbarForm.getRawValue());
+    
     this.toolbarService.toolbar$.next(this.toolbarForm.getRawValue());
   }
 }

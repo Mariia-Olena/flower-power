@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PlantReview } from '@productPage/product-review/types/plant-review.interface';
+import { ProductReview } from '@sharedModule/services/entities/types/product.interface';
 
 @Component({
   selector: 'app-product-review',
@@ -7,5 +7,5 @@ import { PlantReview } from '@productPage/product-review/types/plant-review.inte
   styleUrls: ['./product-review.component.scss'],
 })
 export class ProductReviewComponent {
-  @Input() plantReview: PlantReview[] = [];
+  @Input() plantReview: ProductReview[] = [];
 }

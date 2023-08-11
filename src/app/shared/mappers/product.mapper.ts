@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Plant } from '@productPage/product/types/plant.interface';
-import { PlantInfo } from '@productPage/product-info/types/plant-info.interface';
-import { PlantReview } from '@productPage/product-review/types/plant-review.interface';
+import { Plant, PlantInfo, ProductReview } from '@sharedModule/services/entities/types/product.interface';
 import { APIproduct } from '@sharedModule/services/entities/types/product.interface';
-import { CartV2Service } from '@sharedModule/services/cart-v2.service';
+import { CartService } from '@sharedModule/services/cart.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductMapper {
-  constructor(
-    private cartV2Service: CartV2Service
-  ) {}
+  constructor(private cartService: CartService) {}
 
   mapPlant(value: APIproduct): Plant {
     return {
@@ -24,11 +20,11 @@ export class ProductMapper {
       potColor: value.extraInfo.potColor,
       id: value.id,
       isInCart: (): boolean => {
-        return !!this.cartV2Service.isInCart(value.id);
+        return !!this.cartService.isInCart(value.id);
       },
-      count: () => this.cartV2Service.getCount(value.id) || 1,
+      count: () => this.cartService.getCount(value.id) || 1,
       counterChange: (count: number): void => {
-        this.cartV2Service.changeCount(value.id, count);
+        this.cartService.changeCount(value.id, count);
       },
     };
   }
@@ -45,7 +41,7 @@ export class ProductMapper {
     };
   }
 
-  mapPlantReview(value: APIproduct): PlantReview[] {
+  mapPlantReview(value: APIproduct): ProductReview[] {
     return [...value.extraInfo.review];
   }
 }

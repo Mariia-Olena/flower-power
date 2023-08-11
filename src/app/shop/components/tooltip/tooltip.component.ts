@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  CartV2Service,
-  CartItem,
-} from '@sharedModule/services/cart-v2.service';
+
+import { CartService, CartItem } from '@sharedModule/services/cart.service';
 
 @Component({
   selector: 'app-tooltip',
@@ -14,16 +12,14 @@ export class TooltipComponent implements OnInit {
   cart$: Observable<CartItem[]>;
   total$: Observable<number>;
 
-  constructor(
-    private cartV2Service: CartV2Service
-  ) {}
+  constructor(private cartService: CartService) {}
 
   changeCount(id: string, count: number): void {
-    this.cartV2Service.changeCount(id, count);
+    this.cartService.changeCount(id, count);
   }
 
   ngOnInit(): void {
-    this.cart$ = this.cartV2Service.setCart();
-    this.total$ = this.cartV2Service.total$;
+    this.cart$ = this.cartService.setCart();
+    this.total$ = this.cartService.total$;
   }
 }
