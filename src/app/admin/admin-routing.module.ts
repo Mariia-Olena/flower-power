@@ -5,6 +5,8 @@ import { AdminPageComponent } from '@admin/components/admin-page/admin-page.comp
 import { OrdersComponent } from '@admin/components/entities/orders/orders.component';
 import { ProductsComponent } from '@admin/components/entities/products/products.component';
 import { UsersComponent } from '@admin/components/entities/users/users.component';
+import { EditComponent } from './components/crud-buttons/edit/edit.component';
+import { AddComponent } from './components/crud-buttons/add/add.component';
 
 const routes: Routes = [
   {
@@ -15,6 +17,8 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'orders', component: OrdersComponent },
       { path: 'products', component: ProductsComponent },
+      { path: 'add', component: AddComponent },
+      { path: 'edit', component: EditComponent },
     ],
   },
 ];

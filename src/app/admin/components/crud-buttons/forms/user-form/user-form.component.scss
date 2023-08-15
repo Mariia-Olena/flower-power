@@ -1,0 +1,18 @@
+@import "style-variables.scss";
+
+h1 {
+  @extend %header2;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}

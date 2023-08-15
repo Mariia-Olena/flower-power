@@ -1,0 +1,35 @@
+@import "style-variables.scss";
+
+h1 {
+  @extend %header2;
+}
+
+h2 {
+  margin: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: rem(700);
+}
+
+.sub-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(30);
+}
+
+.sub-form {
+  display: flex;
+  gap: rem(10);
+}

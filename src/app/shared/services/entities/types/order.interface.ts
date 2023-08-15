@@ -17,6 +17,7 @@ export interface OrderAdmin {
   name: string;
   phone: string;
   created: string;
+  updated: string;
 }
 
 export interface OrderForm {

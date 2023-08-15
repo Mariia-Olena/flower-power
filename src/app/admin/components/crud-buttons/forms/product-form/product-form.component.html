@@ -1,0 +1,195 @@
+<div class="wrapper">
+  <h1>Edit product</h1>
+  <form [formGroup]="productForm" class="form">
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+
+    <ng-container [formGroup]="productForm.controls.extraInfo">
+    <ng-container formArrayName="image">
+      <div class="sub-wrapper">
+        <h2>Images</h2>
+        <button color="primary" mat-icon-button (click)="addImage()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <ng-container
+        *ngFor="let imageForm of image.controls; let i = index"
+      >
+        <div [formGroup]="imageForm" class="sub-form">
+
+          <mat-form-field>
+            <mat-label>Image url</mat-label>
+            <input matInput formControlName="imageUrl" />
+          </mat-form-field>
+
+          <button color="warn" mat-icon-button (click)="delete('image', i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-container formArrayName="size">
+      <div class="sub-wrapper">
+        <h2>Size</h2>
+        <button color="primary" mat-icon-button (click)="addSize()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <ng-container
+        *ngFor="let sizeForm of size.controls; let i = index"
+      >
+        <div [formGroup]="sizeForm" class="sub-form">
+
+          <mat-form-field>
+            <mat-label>Size</mat-label>
+            <input matInput formControlName="size" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Coefficient</mat-label>
+            <input matInput formControlName="coeff" />
+          </mat-form-field>
+
+          <button color="warn" mat-icon-button (click)="delete( 'size' ,i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-container formArrayName="potColor">
+      <div class="sub-wrapper">
+        <h2>Pot Color</h2>
+        <button color="primary" mat-icon-button (click)="addPotColor()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <ng-container
+        *ngFor="let potColorForm of potColor.controls; let i = index"
+      >
+        <div [formGroup]="potColorForm" class="sub-form">
+
+          <mat-form-field>
+            <mat-label>Pot Color</mat-label>
+            <input matInput formControlName="potColor" />
+          </mat-form-field>
+
+          <button color="warn" mat-icon-button (click)="delete('potColor', i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <mat-form-field>
+      <mat-label>Rating</mat-label>
+      <input matInput formControlName="rating" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Video</mat-label>
+      <input matInput formControlName="video" />
+    </mat-form-field>
+
+    <ng-container [formGroup]="productForm.controls.extraInfo.controls.plantCare">
+      <h2>Plant Care</h2>
+      <ng-container [formGroup]="productForm.controls.extraInfo.controls.plantCare.controls.watering">
+        <h3>Watering</h3>
+
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Text</mat-label>
+          <input matInput formControlName="text" />
+        </mat-form-field>
+      </ng-container>
+
+      <ng-container [formGroup]="productForm.controls.extraInfo.controls.plantCare.controls.light">
+        <h3>Light</h3>
+
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Text</mat-label>
+          <input matInput formControlName="text" />
+        </mat-form-field>
+      </ng-container>
+
+      <ng-container [formGroup]="productForm.controls.extraInfo.controls.plantCare.controls.care">
+        <h3>Care</h3>
+
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Text</mat-label>
+          <input matInput formControlName="text" />
+        </mat-form-field>
+      </ng-container>
+    </ng-container>
+
+    <ng-container formArrayName="review">
+      <div class="sub-wrapper">
+        <h2>Review</h2>
+        <button color="primary" mat-icon-button (click)="addReview()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <ng-container
+        *ngFor="let reviewForm of review.controls; let i = index"
+      >
+        <div [formGroup]="reviewForm" class="sub-form">
+
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Rating</mat-label>
+            <input matInput formControlName="rating" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Comment</mat-label>
+            <input matInput formControlName="comment" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Photo</mat-label>
+            <input matInput formControlName="photo" />
+          </mat-form-field>
+
+          <button color="warn" mat-icon-button (click)="delete( 'review' ,i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </ng-container>
+    </ng-container>
+
+  </ng-container>
+    <button mat-flat-button color="primary" type="submit">Submit</button>
+  </form>
+</div>

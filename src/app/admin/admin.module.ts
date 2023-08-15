@@ -11,6 +11,11 @@ import { ProductsComponent } from '@admin/components/entities/products/products.
 import { OrdersComponent } from '@admin/components/entities/orders/orders.component';
 import { ToolbarComponent } from '@admin/components/toolbar/toolbar.component';
 import { TableComponent } from '@admin/components/table/table.component';
+import { EditComponent } from '@admin/components/crud-buttons/edit/edit.component';
+import { AddComponent } from '@admin/components/crud-buttons/add/add.component';
+import { ProductFormComponent } from '@admin/components/crud-buttons/forms/product-form/product-form.component';
+import { OrderFormComponent } from '@admin/components/crud-buttons/forms/order-form/order-form.component';
+import { UserFormComponent } from '@admin/components/crud-buttons/forms/user-form/user-form.component';
 
 
 @NgModule({
@@ -20,7 +25,12 @@ import { TableComponent } from '@admin/components/table/table.component';
     ProductsComponent,
     OrdersComponent,
     ToolbarComponent,
-    TableComponent
+    TableComponent,
+    EditComponent,
+    AddComponent,
+    ProductFormComponent,
+    OrderFormComponent,
+    UserFormComponent
   ],
   imports: [
     CommonModule,

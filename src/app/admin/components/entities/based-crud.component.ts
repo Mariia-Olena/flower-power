@@ -1,4 +1,10 @@
-import { AfterViewInit, Directive, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Directive,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { map, Observable, BehaviorSubject } from 'rxjs';
 import { Sort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
@@ -8,6 +14,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { BasedCrudHttpService } from '@sharedModule/types/based-crud-http-service.interface';
 import { Toolbar } from '@admin/components/toolbar/types/toolbar.interface';
 import { ToolbarService } from '@admin/services/toolbar.service';
+import { Router } from '@angular/router';
 
 @Directive()
 export abstract class BasedCrudComponent<APIentity, Entity>
@@ -16,12 +23,9 @@ export abstract class BasedCrudComponent<APIentity, Entity>
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  @Input() toolbar: Toolbar;
+
   items$: Observable<Entity[]> = new Observable<Entity[]>(null);
-  toolbar$: BehaviorSubject<Toolbar> = new BehaviorSubject<Toolbar>({
-    searchValue: '',
-    filterValue: '',
-    filterName: '',
-  });
 
   dataSource: MatTableDataSource<any>;
 
@@ -36,10 +40,7 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     length: number;
   };
 
-  constructor(
-    private entityService: BasedCrudHttpService<APIentity, Entity>,
-    private toolbarService: ToolbarService
-  ) {
+  constructor(private entityService: BasedCrudHttpService<APIentity, Entity>, private entityRouter: Router) {
     this.dataSource = new MatTableDataSource<any>();
   }
 
@@ -78,8 +79,18 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     );
   }
 
-  onSubmit(event: Event) {
-    const { searchValue } = this.toolbar$.getValue();
+  setData(limit: number, page: number, sort: string, filter: string) {
+    this.setAll(limit, page, sort, filter);
+    this.entityService.itemsCount$.subscribe((value) => {
+      this.params.length = value;
+    });
+    this.items$.subscribe((value) => {
+      this.dataSource.data = value;
+    });
+  }
+
+  onSubmit(toolbar: Toolbar) {
+    const { searchValue, filterValue } = toolbar;
     const search = this.getToolbarValue(searchValue);
 
     this.setData(
@@ -102,14 +113,8 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     );
   }
 
-  setData(limit: number, page: number, sort: string, filter: string) {
-    this.setAll(limit, page, sort, filter);
-    this.entityService.itemsCount$.subscribe((value) => {
-      this.params.length = value;
-    });
-    this.items$.subscribe((value) => {
-      this.dataSource.data = value;
-    });
+  onButtonClick(button: string) {
+    this.entityRouter.navigate([`admin/${button}`])
   }
 
   ngOnInit(): void {
@@ -119,8 +124,6 @@ export abstract class BasedCrudComponent<APIentity, Entity>
       this.params.sort,
       this.params.filter
     );
-
-    this.toolbar$ = this.toolbarService.toolbar$;
   }
 
   ngAfterViewInit() {

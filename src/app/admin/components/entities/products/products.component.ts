@@ -6,6 +6,9 @@ import {
   ProductAdmin,
 } from '@sharedModule/services/entities/types/product.interface';
 import { ToolbarService } from '@admin/services/toolbar.service';
+import { ProductFilter } from '@sharedModule/filters/product.filter';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -14,12 +17,10 @@ import { ToolbarService } from '@admin/services/toolbar.service';
 })
 export class ProductsComponent extends BasedCrudComponent<APIproduct,ProductAdmin> {
   options = [
-    'name',
-    'price',
-    'description',
-    'author',
-    'createdAt',
-    'updatedAt',
+    'Price more than',
+    'Price less than',
+    'Newer than',
+    'Older than'
   ];
   displayedColumns: string[] = ['id', 'name', 'price', 'created', 'edit'];
   params = {
@@ -31,8 +32,8 @@ export class ProductsComponent extends BasedCrudComponent<APIproduct,ProductAdmi
     length: 1,
   };
 
-  constructor(private productsService: ProductsService, private toolBarService: ToolbarService) {
-    super(productsService, toolBarService);
+  constructor(private productsService: ProductsService, private productFilterService: ProductFilter,  private router: Router) {
+    super(productsService, router);
   }
 
   mapEntityData(res: APIproduct[]): ProductAdmin[] {
@@ -49,4 +50,6 @@ export class ProductsComponent extends BasedCrudComponent<APIproduct,ProductAdmi
   getToolbarValue(searchValue: string): string {
     return `name;${searchValue}`
   }
+
+
 }

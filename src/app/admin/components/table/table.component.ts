@@ -16,6 +16,7 @@ export class TableComponent {
     sort: 'name',
     filter: '',
     length: 1,
-  }
-  @Output() sortChange = new EventEmitter()
+  };
+  @Output() sortChange = new EventEmitter();
+  @Output() onButtonClick = new EventEmitter<string>();
 }
