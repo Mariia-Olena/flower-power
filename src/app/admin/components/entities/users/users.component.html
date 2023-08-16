@@ -4,6 +4,7 @@
   [tooltip]="'Search only by username'"
 ></app-toolbar>
 <app-table
+(onButtonClick)="onButtonClick('users', $event)"
   [dataSource]="dataSource"
   [displayedColumns]="displayedColumns"
   (sortChange)="announceSortChange($event)"

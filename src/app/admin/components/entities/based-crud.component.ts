@@ -115,9 +115,12 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     );
   }
 
-  onButtonClick(component: string, event: any[]) {
-console.log(component, event);
-
+  onButtonClick(component: string, event: { button: string; id: string }) {
+    if (event.id) {
+      this.entityRouter.navigate([`/admin/${component}/${event.button}/${event.id}`])
+    } else {
+      this.entityRouter.navigate([`/admin/${component}/${event.button}`])
+    }
   }
 
   ngOnInit(): void {

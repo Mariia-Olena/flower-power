@@ -18,10 +18,9 @@ export class TableComponent {
     length: 1,
   };
   @Output() sortChange = new EventEmitter();
-  @Output() onButtonClick = new EventEmitter<any[]>();
+  @Output() onButtonClick = new EventEmitter<{ button: string; id: string }>();
 
-  editButtonClicked(id: string) {
-    console.log(id);
-    
+  onClick(button: string, id?: string) {
+    this.onButtonClick.emit({ button, id });
   }
 }

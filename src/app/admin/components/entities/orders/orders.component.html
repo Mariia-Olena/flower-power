@@ -4,6 +4,7 @@
   [tooltip]="'Search only by name and phone'"
 ></app-toolbar>
 <app-table
+  (onButtonClick)="onButtonClick('orders', $event)"
   [dataSource]="dataSource"
   [displayedColumns]="displayedColumns"
   (sortChange)="announceSortChange($event)"

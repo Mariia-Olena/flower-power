@@ -14,6 +14,7 @@ import { TableComponent } from '@admin/components/table/table.component';
 import { ProductAddEditComponent } from '@admin/components/add-edit/product-add-edit/product-add-edit.component';
 import { OrderAddEditComponent } from './components/add-edit/order-add-edit/order-add-edit.component';
 import { UserAddEditComponent } from './components/add-edit/user-add-edit/user-add-edit.component';
+import { DeleteModalComponent } from './components/delete-modal/delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UserAddEditComponent } from './components/add-edit/user-add-edit/user-a
     ProductAddEditComponent,
     OrderAddEditComponent,
     UserAddEditComponent,
+    DeleteModalComponent,
   ],
   imports: [
     CommonModule,

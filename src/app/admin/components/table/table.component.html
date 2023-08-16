@@ -26,15 +26,11 @@
         <button
           mat-icon-button
           color="primary"
-          (click)="editButtonClicked(element.id)"
+          (click)="onClick('edit', element.id)"
         >
           <mat-icon>edit</mat-icon>
         </button>
-        <button
-          mat-icon-button
-          color="warn"
-          (click)="editButtonClicked(element.id)"
-        >
+        <button mat-icon-button color="warn" (click)="onClick('delete', element.id)">
           <mat-icon>delete</mat-icon>
         </button>
       </ng-container>
@@ -47,7 +43,7 @@
 </table>
 
 <ng-template #headerTemplate>
-  <button mat-icon-button color="primary">
+  <button mat-icon-button color="primary" (click)="onClick('add')">
     <mat-icon>add</mat-icon>
   </button>
 </ng-template>
