@@ -1,6 +1,7 @@
 <div class="wrapper">
   <h1>Edit user</h1>
 <form [formGroup]="userForm" class="form">
+  <mat-card>
   <mat-form-field>
     <mat-label>Username</mat-label>
     <input matInput formControlName="username">
@@ -9,5 +10,7 @@
     <mat-label>Password</mat-label>
     <input matInput formControlName="password">
   </mat-form-field>
+</mat-card>
+  <button mat-flat-button color="primary" type="submit" class="submit-button">Submit</button>
 </form>
 </div>

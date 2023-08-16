@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { AddEditComponent } from '../add-edit.component';
 
 @Component({
   selector: 'app-product-form',
-  templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.scss'],
+  templateUrl: './product-add-edit.component.html',
+  styleUrls: ['./product-add-edit.component.scss'],
 })
-export class ProductFormComponent {
+export class ProductAddEditComponent
+  extends AddEditComponent
+  implements OnInit
+{
   productForm = new FormGroup({
     name: new FormControl('', []),
     price: new FormControl('', []),
@@ -44,17 +48,11 @@ export class ProductFormComponent {
   }
 
   get potColor() {
-    return this.productForm.controls.extraInfo.controls[
-      'potColor'
-    ] as FormArray;
+    return this.productForm.controls.extraInfo.controls['potColor'] as FormArray;
   }
 
   get review() {
     return this.productForm.controls.extraInfo.controls['review'] as FormArray;
-  }
-
-  delete(controlName: string, index: number) {
-    this[controlName].removeAt(index);
   }
 
   addImage() {
@@ -93,4 +91,10 @@ export class ProductFormComponent {
     this.review.push(reviewForm);
   }
 
+  ngOnInit(): void {
+    this.addImage();
+    this.addSize();
+    this.addPotColor();
+    this.addReview();
+  }
 }

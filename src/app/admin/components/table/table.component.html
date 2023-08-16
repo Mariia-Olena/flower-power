@@ -13,26 +13,32 @@
       mat-header-cell
       *matHeaderCellDef
       mat-sort-header
+      [disabled]="column === 'edit'"
       sortActionDescription="Sort by {{ column }}"
     >
       <ng-container *ngIf="!last; else headerTemplate">
         {{ column | uppercase }}
       </ng-container>
     </th>
+
     <td mat-cell *matCellDef="let element">
-      <ng-container *ngIf="!last; else editTemplate">
-        <ng-container
-          *ngIf="
-            column === 'updated' || column === 'created';
-            else columnTemplate
-          "
+      <ng-container *ngIf="column === 'edit'">
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="editButtonClicked(element.id)"
         >
-          {{ element[column] | date : "fullDate" }}
-        </ng-container>
-        <ng-template #columnTemplate>
-          {{ element[column] }}
-        </ng-template>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="editButtonClicked(element.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
       </ng-container>
+      {{ element[column] }}
     </td>
   </ng-container>
 
@@ -41,31 +47,7 @@
 </table>
 
 <ng-template #headerTemplate>
-  <button
-    mat-mini-fab
-    color="primary"
-    aria-label="Example icon button with a menu icon"
-    (click)="onButtonClick.emit('add')"
-  >
+  <button mat-icon-button color="primary">
     <mat-icon>add</mat-icon>
-  </button>
-</ng-template>
-
-<ng-template #editTemplate>
-  <button
-  (click)="onButtonClick.emit('edit')"
-    mat-mini-fab
-    color="accent"
-    aria-label="Example icon button with a menu icon"
-  >
-    <mat-icon>edit</mat-icon>
-  </button>
-  <button
-    (click)="onButtonClick.emit('delete')"
-    mat-mini-fab
-    color="warn"
-    aria-label="Example icon button with a menu icon"
-  >
-    <mat-icon>delete</mat-icon>
   </button>
 </ng-template>

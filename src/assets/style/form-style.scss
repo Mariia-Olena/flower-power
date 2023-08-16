@@ -1,0 +1,97 @@
+@import "style-variables.scss";
+
+h1 {
+  @extend %header2;
+}
+
+h2 {
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+  margin-bottom: rem(5);
+  &::before {
+    content: '• ';
+  }
+}
+
+mat-card {
+  padding: rem(10);
+  margin-top: rem(10);
+}
+
+mat-divider {
+  margin-bottom: rem(22);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.submit-button {
+  margin-top: rem(10);
+}
+
+.add-button {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.delete-button {
+  margin-left: rem(-10);
+}
+
+.field {
+  width: 100%;
+}
+
+.field-half {
+  width: 50%;
+}
+
+.full {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: rem(10);
+}
+
+.half {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: rem(10);
+}
+
+.gap {
+  display: flex;
+  gap: rem(10);
+}
+
+.two-rows {
+  display: grid;
+  gap: rem(10);
+  grid-template-columns: 2fr 0.1fr;
+  grid-template-areas:
+    "first button"
+    "second button";
+}
+
+.first {
+  grid-area: first;
+}
+
+.second {
+  grid-area: second;
+}
+
+.icon {
+  grid-area: button;
+  align-self: center;
+}

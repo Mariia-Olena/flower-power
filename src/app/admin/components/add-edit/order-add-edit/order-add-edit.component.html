@@ -1,0 +1,69 @@
+<div class="wrapper">
+  <h1>Edit order</h1>
+  <form [formGroup]="orderForm" class="form">
+    <mat-card>
+      <h2>Customer Information:</h2>
+
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Message</mat-label>
+        <input matInput formControlName="message" />
+      </mat-form-field>
+    </mat-card>
+
+    <ng-container formArrayName="products">
+      <mat-card>
+        <h2>Products:</h2>
+        <ng-container
+          *ngFor="let productForm of products.controls; let i = index"
+        >
+          <div [formGroup]="getControl('products', i)" class="two-rows">
+            <div class="first gap">
+              <mat-form-field class="field-half">
+                <mat-label>Quantity</mat-label>
+                <input matInput formControlName="quantity" />
+              </mat-form-field>
+              <mat-form-field class="field-half">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" />
+              </mat-form-field>
+            </div>
+            <mat-form-field class="second">
+              <mat-label>Id</mat-label>
+              <input matInput formControlName="id" />
+            </mat-form-field>
+            <button
+              color="warn"
+              mat-icon-button
+              (click)="delete('products', i)"
+              class="delete-button icon"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+        </ng-container>
+        <button
+          color="primary"
+          mat-icon-button
+          (click)="addProduct()"
+          class="add-button"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-card>
+    </ng-container>
+    <button mat-flat-button color="primary" type="submit" class="submit-button">
+      Submit
+    </button>
+  </form>
+</div>

@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { map, Observable, BehaviorSubject } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Sort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,7 +13,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { BasedCrudHttpService } from '@sharedModule/types/based-crud-http-service.interface';
 import { Toolbar } from '@admin/components/toolbar/types/toolbar.interface';
-import { ToolbarService } from '@admin/services/toolbar.service';
 import { Router } from '@angular/router';
 
 @Directive()
@@ -40,7 +39,10 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     length: number;
   };
 
-  constructor(private entityService: BasedCrudHttpService<APIentity, Entity>, private entityRouter: Router) {
+  constructor(
+    private entityService: BasedCrudHttpService<APIentity, Entity>,
+    private entityRouter: Router
+  ) {
     this.dataSource = new MatTableDataSource<any>();
   }
 
@@ -113,8 +115,9 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     );
   }
 
-  onButtonClick(button: string) {
-    this.entityRouter.navigate([`admin/${button}`])
+  onButtonClick(component: string, event: any[]) {
+console.log(component, event);
+
   }
 
   ngOnInit(): void {

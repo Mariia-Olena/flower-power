@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { AddEditComponent } from '../add-edit.component';
 
 @Component({
   selector: 'app-order-form',
-  templateUrl: './order-form.component.html',
-  styleUrls: ['./order-form.component.scss'],
+  templateUrl: './order-add-edit.component.html',
+  styleUrls: ['./order-add-edit.component.scss'],
 })
-export class OrderFormComponent {
+export class OrderAddEditComponent extends AddEditComponent implements OnInit {
   orderForm = new FormGroup({
     name: new FormControl('', []),
     phone: new FormControl('', []),
@@ -14,7 +15,7 @@ export class OrderFormComponent {
     products: new FormArray([]),
   });
 
-  get products() {
+  get products(): FormArray {
     return this.orderForm.controls['products'] as FormArray;
   }
 
@@ -28,7 +29,7 @@ export class OrderFormComponent {
     this.products.push(productForm);
   }
 
-  deleteProduct(index: number) {
-    this.products.removeAt(index);
+  ngOnInit(): void {
+    this.addProduct();
   }
 }

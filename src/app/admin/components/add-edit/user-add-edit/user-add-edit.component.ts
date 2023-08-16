@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AddEditComponent } from '../add-edit.component';
 
 @Component({
   selector: 'app-user-form',
-  templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  templateUrl: './user-add-edit.component.html',
+  styleUrls: ['./user-add-edit.component.scss'],
 })
-export class UserFormComponent {
+export class UserAddEditComponent extends AddEditComponent {
   userForm = new FormGroup({
     username: new FormControl('', []),
     password: new FormControl('', []),
-})
+  });
 }

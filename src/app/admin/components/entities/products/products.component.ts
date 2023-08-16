@@ -8,7 +8,7 @@ import {
 import { ToolbarService } from '@admin/services/toolbar.service';
 import { ProductFilter } from '@sharedModule/filters/product.filter';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',

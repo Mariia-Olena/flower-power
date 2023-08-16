@@ -35,7 +35,6 @@ import { ProductReviewComponent } from '@productPage/product-review/product-revi
 import { ProductSliderComponent } from '@productPage/product-slider/product-slider.component';
 import { ProductInfoComponent } from '@productPage/product-info/product-info.component';
 
-
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -61,7 +60,7 @@ import { ProductInfoComponent } from '@productPage/product-info/product-info.com
     OrderPageComponent,
     OrderFormComponent,
     ConfirmationPageComponent,
-    ModalComponent
+    ModalComponent,
   ],
   imports: [
     CommonModule,
@@ -70,7 +69,7 @@ import { ProductInfoComponent } from '@productPage/product-info/product-info.com
     FormsModule,
     ReactiveFormsModule,
     NgxTippyModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
   ],
 })
 export class ShopModule {}

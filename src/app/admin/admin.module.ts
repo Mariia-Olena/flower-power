@@ -11,12 +11,9 @@ import { ProductsComponent } from '@admin/components/entities/products/products.
 import { OrdersComponent } from '@admin/components/entities/orders/orders.component';
 import { ToolbarComponent } from '@admin/components/toolbar/toolbar.component';
 import { TableComponent } from '@admin/components/table/table.component';
-import { EditComponent } from '@admin/components/crud-buttons/edit/edit.component';
-import { AddComponent } from '@admin/components/crud-buttons/add/add.component';
-import { ProductFormComponent } from '@admin/components/crud-buttons/forms/product-form/product-form.component';
-import { OrderFormComponent } from '@admin/components/crud-buttons/forms/order-form/order-form.component';
-import { UserFormComponent } from '@admin/components/crud-buttons/forms/user-form/user-form.component';
-
+import { ProductAddEditComponent } from '@admin/components/add-edit/product-add-edit/product-add-edit.component';
+import { OrderAddEditComponent } from './components/add-edit/order-add-edit/order-add-edit.component';
+import { UserAddEditComponent } from './components/add-edit/user-add-edit/user-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -26,18 +23,16 @@ import { UserFormComponent } from '@admin/components/crud-buttons/forms/user-for
     OrdersComponent,
     ToolbarComponent,
     TableComponent,
-    EditComponent,
-    AddComponent,
-    ProductFormComponent,
-    OrderFormComponent,
-    UserFormComponent
+    ProductAddEditComponent,
+    OrderAddEditComponent,
+    UserAddEditComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
     SharedModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}
