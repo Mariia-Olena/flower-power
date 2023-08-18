@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ProductsService } from '@sharedModule/services/entities/products.service';
+import {
+  APIproduct,
+  ProductAdmin,
+} from '@sharedModule/services/entities/types/product.interface';
+import { tap } from 'rxjs';
 import { AddEditComponent } from '../add-edit.component';
 
 @Component({
@@ -7,10 +14,10 @@ import { AddEditComponent } from '../add-edit.component';
   templateUrl: './product-add-edit.component.html',
   styleUrls: ['./product-add-edit.component.scss'],
 })
-export class ProductAddEditComponent
-  extends AddEditComponent
-  implements OnInit
-{
+export class ProductAddEditComponent extends AddEditComponent<
+  APIproduct,
+  ProductAdmin
+> {
   productForm = new FormGroup({
     name: new FormControl('', []),
     price: new FormControl('', []),
@@ -39,6 +46,13 @@ export class ProductAddEditComponent
     }),
   });
 
+  constructor(
+    private productsService: ProductsService,
+    private route: ActivatedRoute
+  ) {
+    super(productsService, route);
+  }
+
   get image() {
     return this.productForm.controls.extraInfo.controls['image'] as FormArray;
   }
@@ -48,7 +62,9 @@ export class ProductAddEditComponent
   }
 
   get potColor() {
-    return this.productForm.controls.extraInfo.controls['potColor'] as FormArray;
+    return this.productForm.controls.extraInfo.controls[
+      'potColor'
+    ] as FormArray;
   }
 
   get review() {
@@ -91,10 +107,20 @@ export class ProductAddEditComponent
     this.review.push(reviewForm);
   }
 
-  ngOnInit(): void {
+  setFieldsUpfront(): void {
     this.addImage();
     this.addSize();
     this.addPotColor();
     this.addReview();
+    this.get();
+  }
+
+  get() {
+    console.log('get 1');
+    this.productsService.getOne('90e339fc-736f-4200-957c-d5fa51c3f0cc').pipe(
+      tap((value: APIproduct)=> {
+        console.log('get 2', value);
+      })
+    )
   }
 }

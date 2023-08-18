@@ -1,40 +1,37 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { APIproduct, ProductAdmin } from '@sharedModule/services/entities/types/product.interface';
+import {
+  APIproduct,
+  ProductAdmin,
+} from '@sharedModule/services/entities/types/product.interface';
 import { environment } from 'src/environments/environment';
-import { BasedCrudHttpService } from '@sharedModule/types/based-crud-http-service.interface';
+import {
+  BasedCrudHttpService,
+  ParamsHttp,
+} from '@sharedModule/types/based-crud-http-service.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductsService implements BasedCrudHttpService<APIproduct, ProductAdmin> {
+export class ProductsService
+  implements BasedCrudHttpService<APIproduct, ProductAdmin>
+{
   private baseUrl = environment.baseUrl;
   private _itemsCount$: BehaviorSubject<number> = new BehaviorSubject(0);
   itemsCount$: Observable<number> = this._itemsCount$.asObservable();
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getOne(id: string): Observable<APIproduct> {
     return this.http.get<APIproduct>(`${this.baseUrl}/products/${id}`, {});
   }
 
-  getAll(
-    limit: number,
-    page: number,
-    sort: string,
-    filter: string
-  ): Observable<APIproduct[]> {
+  getAll(params: ParamsHttp): Observable<APIproduct[]> {
     return this.http
       .get<APIproduct[]>(`${this.baseUrl}/products`, {
         observe: 'response',
-        params: {
-          ...(limit ? { limit: limit } : {}),
-          page,
-          sort,
-          ...(filter ? { filter: filter } : {}),
-        },
+        params: this.setParams(params),
       })
       .pipe(
         map(({ headers, body }) => {
@@ -45,7 +42,22 @@ export class ProductsService implements BasedCrudHttpService<APIproduct, Product
       );
   }
 
-  create(body: APIproduct) {};
-  update(body: APIproduct) {};
-  remove(id: string) {};
+  setParams(params: ParamsHttp): HttpParams {
+    let httpParams = new HttpParams()
+      .append('limit', params.limit.toString())
+      .append('page', params.page.toString())
+      .append('sort', params.sort);
+
+    if (params.filter.length > 0) {
+      params.filter.forEach((item) => {
+        httpParams = httpParams.append('filter', `${item[0]};${item[1]}`);
+      });
+    }
+
+    return httpParams;
+  }
+
+  create(body: APIproduct) {}
+  update(body: APIproduct) {}
+  remove(id: string) {}
 }

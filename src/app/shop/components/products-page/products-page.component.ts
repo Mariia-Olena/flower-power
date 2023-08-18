@@ -3,8 +3,12 @@ import { BehaviorSubject, tap, map, Observable } from 'rxjs';
 
 import { ProductsService } from '@sharedModule/services/entities/products.service';
 import { CartService } from '@sharedModule/services/cart.service';
-import { APIproduct, PlantCard } from '@sharedModule/services/entities/types/product.interface';
+import {
+  APIproduct,
+  PlantCard,
+} from '@sharedModule/services/entities/types/product.interface';
 import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
+import { ParamsHttp } from '@sharedModule/types/based-crud-http-service.interface';
 
 @Component({
   selector: 'app-products-home',
@@ -18,10 +22,12 @@ export class ProductsPageComponent implements OnInit {
   products: APIproduct[] = [];
   private productInCart: APIproduct;
 
-  limit: number = 2;
-  currentPage: number = 1;
-  sort: string = 'name';
-  filter: string = '';
+  params: ParamsHttp = {
+    limit: 2,
+    page: 1,
+    sort: '-name',
+    filter: [],
+  };
 
   constructor(
     public productsService: ProductsService,
@@ -29,13 +35,8 @@ export class ProductsPageComponent implements OnInit {
     private productsMapper: ProductsMapper
   ) {}
 
-  setPlants(limit: number, currentPage: number, sort: string, filter: string) {
-    this.products$ = this.productsService.getAll(
-      limit,
-      currentPage,
-      sort,
-      filter
-    );
+  setPlants(params: ParamsHttp) {
+    this.products$ = this.productsService.getAll(params);
 
     this.products$
       .pipe(
@@ -50,8 +51,8 @@ export class ProductsPageComponent implements OnInit {
   }
 
   changePage(page: number): void {
-    this.currentPage = page;
-    this.setPlants(this.limit, this.currentPage, this.sort, this.filter);
+    this.params.page = page;
+    this.setPlants(this.params);
   }
 
   setProduct(id: string) {
@@ -66,6 +67,6 @@ export class ProductsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setPlants(this.limit, this.currentPage, this.sort, this.filter);
+    this.setPlants(this.params);
   }
 }

@@ -20,9 +20,9 @@
   <ng-container *ngIf="plants$ | async as plants">
     <app-pagination
       *ngIf="plants.length"
-      [limit]="limit"
+      [limit]="params.limit"
       [total]="productsService.itemsCount$ | async"
-      [currentPage]="currentPage"
+      [currentPage]="params.page"
       (changePage)="changePage($event)"
     ></app-pagination>
   </ng-container>

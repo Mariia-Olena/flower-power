@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CartItem } from '@sharedModule/services/cart.service';
-import { HttpClient } from '@angular/common/http';
-import { APIorder, Order, OrderProducts } from '@sharedModule/services/entities/types/order.interface';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import {
+  APIorder,
+  Order,
+  OrderProducts,
+} from '@sharedModule/services/entities/types/order.interface';
 import { FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable, tap, map } from 'rxjs';
 import { StorageService } from '../storage.service';
-import { BasedCrudHttpService } from '@sharedModule/types/based-crud-http-service.interface';
+import {
+  BasedCrudHttpService,
+  ParamsHttp,
+} from '@sharedModule/types/based-crud-http-service.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -57,21 +64,11 @@ export class OrdersService implements BasedCrudHttpService<APIorder, Order> {
     return this.http.get<APIorder>(`${this.baseUrl}/orders/${id}`, {});
   }
 
-  getAll(
-    limit: number,
-    page: number,
-    sort: string,
-    filter: string
-  ): Observable<APIorder[]> {
+  getAll(params: ParamsHttp): Observable<APIorder[]> {
     return this.http
       .get<APIorder[]>(`${this.baseUrl}/orders`, {
         observe: 'response',
-        params: {
-          ...(limit ? { limit: limit } : {}),
-          page,
-          sort,
-          ...(filter ? { filter: filter } : {}),
-        },
+        params: this.setParams(params),
       })
       .pipe(
         map(({ headers, body }) => {
@@ -95,6 +92,21 @@ export class OrdersService implements BasedCrudHttpService<APIorder, Order> {
           this.storage.set('order', response);
         })
       );
+  }
+
+  setParams(params: ParamsHttp): HttpParams {
+    let httpParams = new HttpParams()
+      .append('limit', params.limit.toString())
+      .append('page', params.page.toString())
+      .append('sort', params.sort);
+
+    if (params.filter.length > 0) {
+      params.filter.forEach((item) => {
+        httpParams = httpParams.append('filter', `${item[0]};${item[1]}`);
+      });
+    }
+
+    return httpParams;
   }
 
   update(body: APIorder): void {}

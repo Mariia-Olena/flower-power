@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { BasedCrudComponent } from '@admin/components/entities/based-crud.component';
 import { UsersService } from '@sharedModule/services/entities/users.service';
-import { UserAdmin, APIuser } from '@sharedModule/services/entities/types/user.interface';
-import { ToolbarService } from '@admin/services/toolbar.service';
+import {
+  UserAdmin,
+  APIuser,
+} from '@sharedModule/services/entities/types/user.interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-  export class UsersComponent extends BasedCrudComponent<APIuser, UserAdmin> {
+export class UsersComponent extends BasedCrudComponent<APIuser, UserAdmin> {
   options = [
     'name',
     'price',
@@ -23,9 +25,9 @@ import { Router } from '@angular/router';
   params = {
     limit: 10,
     pageIndex: 0,
-    currentPage: 1,
+    page: 1,
     sort: 'name',
-    filter: '',
+    filter: [],
     length: 1,
   };
 
@@ -43,7 +45,7 @@ import { Router } from '@angular/router';
     });
   }
 
-  getToolbarValue(searchValue: string): string {
-    return `username;${searchValue}`
+  getToolbarValue(searchValue: string): string[][] {
+    return [['username', searchValue]];
   }
 }

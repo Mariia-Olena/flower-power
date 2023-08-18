@@ -1,19 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { OrdersService } from '@sharedModule/services/entities/orders.service';
 import { AddEditComponent } from '../add-edit.component';
+import { ActivatedRoute } from '@angular/router';
+import { APIorder, OrderAdmin } from '@sharedModule/services/entities/types/order.interface';
 
 @Component({
   selector: 'app-order-form',
   templateUrl: './order-add-edit.component.html',
   styleUrls: ['./order-add-edit.component.scss'],
 })
-export class OrderAddEditComponent extends AddEditComponent implements OnInit {
+export class OrderAddEditComponent extends AddEditComponent<APIorder, OrderAdmin> {
   orderForm = new FormGroup({
     name: new FormControl('', []),
     phone: new FormControl('', []),
     message: new FormControl('', []),
     products: new FormArray([]),
   });
+
+  constructor(private ordersService: OrdersService, private route: ActivatedRoute) {
+    super(ordersService, route)
+  }
 
   get products(): FormArray {
     return this.orderForm.controls['products'] as FormArray;
@@ -29,7 +36,7 @@ export class OrderAddEditComponent extends AddEditComponent implements OnInit {
     this.products.push(productForm);
   }
 
-  ngOnInit(): void {
+  setFieldsUpfront(): void {
     this.addProduct();
   }
 }

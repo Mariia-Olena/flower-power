@@ -5,34 +5,32 @@ import {
   APIproduct,
   ProductAdmin,
 } from '@sharedModule/services/entities/types/product.interface';
-import { ToolbarService } from '@admin/services/toolbar.service';
-import { ProductFilter } from '@sharedModule/filters/product.filter';
-import { Observable } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent extends BasedCrudComponent<APIproduct,ProductAdmin> {
-  options = [
-    'Price more than',
-    'Price less than',
-    'Newer than',
-    'Older than'
-  ];
+export class ProductsComponent extends BasedCrudComponent<
+  APIproduct,
+  ProductAdmin
+> {
+  options = ['Price more than', 'Price less than', 'Newer than', 'Older than'];
   displayedColumns: string[] = ['id', 'name', 'price', 'created', 'edit'];
   params = {
     limit: 5,
     pageIndex: 0,
-    currentPage: 1,
+    page: 1,
     sort: 'name',
-    filter: 'aloe',
+    filter: [],
     length: 1,
   };
 
-  constructor(private productsService: ProductsService, private productFilterService: ProductFilter,  private router: Router) {
+  constructor(
+    private productsService: ProductsService,
+    private router: Router
+  ) {
     super(productsService, router);
   }
 
@@ -47,9 +45,7 @@ export class ProductsComponent extends BasedCrudComponent<APIproduct,ProductAdmi
     });
   }
 
-  getToolbarValue(searchValue: string): string {
-    return `name;${searchValue}`
+  getToolbarValue(searchValue: string): string[][] {
+    return [['name', searchValue], ['description', searchValue]];
   }
-
-
 }

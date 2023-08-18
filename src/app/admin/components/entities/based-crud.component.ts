@@ -11,9 +11,17 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { BasedCrudHttpService } from '@sharedModule/types/based-crud-http-service.interface';
+import {
+  BasedCrudHttpService,
+  ParamsHttp,
+} from '@sharedModule/types/based-crud-http-service.interface';
 import { Toolbar } from '@admin/components/toolbar/types/toolbar.interface';
 import { Router } from '@angular/router';
+
+export interface Params extends ParamsHttp {
+  pageIndex: number;
+  length: number;
+}
 
 @Directive()
 export abstract class BasedCrudComponent<APIentity, Entity>
@@ -30,14 +38,7 @@ export abstract class BasedCrudComponent<APIentity, Entity>
 
   abstract options: string[];
   abstract displayedColumns: string[];
-  abstract params: {
-    limit: number;
-    pageIndex: number;
-    currentPage: number;
-    sort: string;
-    filter: string;
-    length: number;
-  };
+  abstract params: Params;
 
   constructor(
     private entityService: BasedCrudHttpService<APIentity, Entity>,
@@ -49,40 +50,40 @@ export abstract class BasedCrudComponent<APIentity, Entity>
   announceSortChange(sortState: Sort) {
     if (sortState.direction === 'desc') {
       this.params.sort = `+${sortState.active}`;
-      this.setData(
-        this.params.limit,
-        this.params.currentPage,
-        this.params.sort,
-        this.params.filter
-      );
+      this.setData({
+        limit: this.params.limit,
+        page: this.params.page,
+        sort: this.params.sort,
+        filter: this.params.filter,
+      });
       return;
     }
 
     if (sortState.direction === 'asc') {
       this.params.sort = `-${sortState.active}`;
-      this.setData(
-        this.params.limit,
-        this.params.currentPage,
-        this.params.sort,
-        this.params.filter
-      );
+      this.setData({
+        limit: this.params.limit,
+        page: this.params.page,
+        sort: this.params.sort,
+        filter: this.params.filter,
+      });
       return;
     }
   }
 
   abstract mapEntityData(res: APIentity[]): Entity[];
-  abstract getToolbarValue(searchValue: string): string;
+  abstract getToolbarValue(searchValue: string): string[][];
 
-  setAll(limit: number, page: number, sort: string, filter: string): void {
-    this.items$ = this.entityService.getAll(limit, page, sort, filter).pipe(
+  setAll(params: ParamsHttp): void {
+    this.items$ = this.entityService.getAll(params).pipe(
       map((res: APIentity[]) => {
         return this.mapEntityData(res);
       })
     );
   }
 
-  setData(limit: number, page: number, sort: string, filter: string) {
-    this.setAll(limit, page, sort, filter);
+  setData(params: ParamsHttp) {
+    this.setAll(params);
     this.entityService.itemsCount$.subscribe((value) => {
       this.params.length = value;
     });
@@ -95,41 +96,49 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     const { searchValue, filterValue } = toolbar;
     const search = this.getToolbarValue(searchValue);
 
-    this.setData(
-      this.params.limit,
-      this.params.currentPage,
-      this.params.sort,
-      search
-    );
+    this.setData({
+      limit: this.params.limit,
+      page: this.params.page,
+      sort: this.params.sort,
+      filter: search,
+    });
   }
 
   handlePageEvent(pageEvent: PageEvent) {
     this.params.pageIndex = pageEvent.pageIndex;
-    this.params.currentPage = pageEvent.pageIndex + 1;
-
-    this.setData(
-      this.params.limit,
-      this.params.currentPage,
-      this.params.sort,
-      this.params.filter
-    );
+    this.params.page = pageEvent.pageIndex + 1;
+    this.updateUrl();
+    this.setData({
+      limit: this.params.limit,
+      page: this.params.page,
+      sort: this.params.sort,
+      filter: this.params.filter,
+    });
   }
 
   onButtonClick(component: string, event: { button: string; id: string }) {
     if (event.id) {
-      this.entityRouter.navigate([`/admin/${component}/${event.button}/${event.id}`])
+      this.entityRouter.navigate([
+        `/admin/${component}/${event.button}/${event.id}`,
+      ]);
     } else {
-      this.entityRouter.navigate([`/admin/${component}/${event.button}`])
+      this.entityRouter.navigate([`/admin/${component}/${event.button}`]);
     }
   }
 
+  updateUrl(): void {
+    this.entityRouter.navigate([], {
+      queryParams: { page: this.params.page },
+    });
+  }
+
   ngOnInit(): void {
-    this.setData(
-      this.params.limit,
-      this.params.currentPage,
-      this.params.sort,
-      this.params.filter
-    );
+    this.setData({
+      limit: this.params.limit,
+      page: this.params.page,
+      sort: this.params.sort,
+      filter: this.params.filter,
+    });
   }
 
   ngAfterViewInit() {
