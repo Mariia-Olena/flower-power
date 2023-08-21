@@ -14,9 +14,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import {
   BasedCrudHttpService,
   ParamsHttp,
-} from '@sharedModule/types/based-crud-http-service.interface';
+} from '@sharedModule/services/entities/based-crud-http-service';
 import { Toolbar } from '@admin/components/toolbar/types/toolbar.interface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ActionConfig } from '../table/table.component';
 
 export interface Params extends ParamsHttp {
   pageIndex: number;
@@ -36,13 +37,37 @@ export abstract class BasedCrudComponent<APIentity, Entity>
 
   dataSource: MatTableDataSource<any>;
 
-  abstract options: string[];
+  actionConfig: ActionConfig[] = [
+    {
+      name: 'edit',
+      onClick: (id: string) => {
+        this.entityRouter.navigate([`${id}`], {
+          relativeTo: this.entityRoute,
+        });
+      },
+      icon: 'edit',
+      color: 'primary',
+      disabled: () => false,
+    },
+    {
+      name: 'remove',
+      onClick: (id: string) => {
+        this.entityService.remove(id);
+      },
+      icon: 'delete',
+      color: 'warn',
+      disabled: () => false,
+    },
+  ];
+
+  abstract options: {search: string[]; filter: string[]};
   abstract displayedColumns: string[];
   abstract params: Params;
 
   constructor(
     private entityService: BasedCrudHttpService<APIentity, Entity>,
-    private entityRouter: Router
+    private entityRouter: Router,
+    private entityRoute: ActivatedRoute
   ) {
     this.dataSource = new MatTableDataSource<any>();
   }
@@ -72,7 +97,6 @@ export abstract class BasedCrudComponent<APIentity, Entity>
   }
 
   abstract mapEntityData(res: APIentity[]): Entity[];
-  abstract getToolbarValue(searchValue: string): string[][];
 
   setAll(params: ParamsHttp): void {
     this.items$ = this.entityService.getAll(params).pipe(
@@ -93,8 +117,8 @@ export abstract class BasedCrudComponent<APIentity, Entity>
   }
 
   onSubmit(toolbar: Toolbar) {
-    const { searchValue, filterValue } = toolbar;
-    const search = this.getToolbarValue(searchValue);
+    const { searchValue, searchName, filterValue, filterName } = toolbar;
+    const search = this.getToolbarValue(searchName, searchValue);
 
     this.setData({
       limit: this.params.limit,
@@ -116,20 +140,20 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     });
   }
 
-  onButtonClick(component: string, event: { button: string; id: string }) {
-    if (event.id) {
-      this.entityRouter.navigate([
-        `/admin/${component}/${event.button}/${event.id}`,
-      ]);
-    } else {
-      this.entityRouter.navigate([`/admin/${component}/${event.button}`]);
-    }
+  onAddButtonClick(event: Event) {
+    this.entityRouter.navigate(['add'], {
+      relativeTo: this.entityRoute,
+    });
   }
 
   updateUrl(): void {
     this.entityRouter.navigate([], {
       queryParams: { page: this.params.page },
     });
+  }
+
+  getToolbarValue(searchName: string, searchValue: string): string[] {
+    return [searchName, searchValue];
   }
 
   ngOnInit(): void {

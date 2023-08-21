@@ -1,6 +1,12 @@
 @import "style-variables.scss";
 
 .toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form {
   display: grid;
   grid-template-columns: 3fr 3fr 1fr;
   gap: rem(20);
@@ -13,5 +19,9 @@
   &-button {
     align-self: center;
     width: rem(100);
+  }
+
+  .add-button {
+    align-self: center;
   }
 }

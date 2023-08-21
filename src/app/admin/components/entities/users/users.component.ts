@@ -5,7 +5,7 @@ import {
   UserAdmin,
   APIuser,
 } from '@sharedModule/services/entities/types/user.interface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -13,14 +13,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent extends BasedCrudComponent<APIuser, UserAdmin> {
-  options = [
-    'name',
-    'price',
-    'description',
-    'author',
-    'createdAt',
-    'updatedAt',
-  ];
+  options = {
+    search: ['username'],
+    filter: [
+      'name',
+      'price',
+      'description',
+      'author',
+      'createdAt',
+      'updatedAt',
+    ],
+  };
   displayedColumns: string[] = ['id', 'name', 'created', 'edit'];
   params = {
     limit: 10,
@@ -31,8 +34,12 @@ export class UsersComponent extends BasedCrudComponent<APIuser, UserAdmin> {
     length: 1,
   };
 
-  constructor(private usersService: UsersService, private router: Router) {
-    super(usersService, router);
+  constructor(
+    private usersService: UsersService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    super(usersService, router, route);
   }
 
   mapEntityData(res: APIuser[]): UserAdmin[] {
@@ -43,9 +50,5 @@ export class UsersComponent extends BasedCrudComponent<APIuser, UserAdmin> {
         created: user.createdAt,
       };
     });
-  }
-
-  getToolbarValue(searchValue: string): string[][] {
-    return [['username', searchValue]];
   }
 }

@@ -1,36 +1,40 @@
 <mat-card>
-  <mat-card-content>
-    <form
-      (submit)="onSubmit()"
-      [formGroup]="toolbarForm"
-      class="toolbar"
-    >
-      <div class="toolbar-container">
-        <mat-form-field
-          [matTooltip]="tooltip"
-          matTooltipPosition="right"
-        >
+  <mat-card-content class="toolbar">
+    <form (submit)="onSubmit()" [formGroup]="toolbarForm" class="form">
+      <div class="form-container">
+        <mat-form-field>
           <mat-label>Search</mat-label>
           <input matInput formControlName="searchValue" />
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>By</mat-label>
+          <mat-select formControlName="searchName">
+            <mat-option *ngFor="let option of options.search" [value]="option">{{
+              option
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <div class="toolbar-container">
+      <div class="form-container">
         <mat-form-field>
           <mat-label>Filter</mat-label>
-          <mat-select formControlName="filterValue">
-            <mat-option *ngFor="let option of options" [value]="option">{{
+          <mat-select formControlName="filterName">
+            <mat-option *ngFor="let option of options.filter" [value]="option">{{
               option
             }}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field>
           <mat-label>By</mat-label>
-          <input matInput formControlName="filterName" />
+          <input matInput formControlName="filterValue" />
         </mat-form-field>
       </div>
-      <button mat-flat-button color="primary" class="toolbar-button">
+      <button mat-flat-button color="primary" class="form-button">
         Apply
       </button>
     </form>
+    <button (click)="onAddButtonClick.emit($event)" mat-flat-button color="primary" class="add-button">
+      Add {{ item }}
+    </button>
   </mat-card-content>
 </mat-card>

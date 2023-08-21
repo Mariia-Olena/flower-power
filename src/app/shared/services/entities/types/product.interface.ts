@@ -5,6 +5,14 @@ export interface APIproduct {
   id: string;
   extraInfo: ProductExtraInfo;
   createdAt: string;
+  updatedAt: string;
+}
+
+export interface Product {
+  name: string;
+  price: number;
+  description: string;
+  extraInfo: ProductExtraInfo;
 }
 
 export interface ProductExtraInfo {

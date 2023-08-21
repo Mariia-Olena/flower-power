@@ -1,12 +1,13 @@
 <app-toolbar
   (toolbar)="onSubmit($event)"
+  (onAddButtonClick)="onAddButtonClick($event)"
   [options]="options"
-  [tooltip]="'Search only by name and phone'"
+  [item]="'order'"
 ></app-toolbar>
 <app-table
-  (onButtonClick)="onButtonClick('orders', $event)"
   [dataSource]="dataSource"
   [displayedColumns]="displayedColumns"
+  [actionConfig]="actionConfig"
   (sortChange)="announceSortChange($event)"
 ></app-table>
 <mat-paginator

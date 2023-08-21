@@ -13,7 +13,7 @@ import {
   PlantCard,
   Plant,
 } from '@sharedModule/services/entities/types/product.interface';
-import { ParamsHttp } from '@sharedModule/types/based-crud-http-service.interface';
+import { ParamsHttp } from '@sharedModule/services/entities/based-crud-http-service';
 
 @Component({
   selector: 'app-product-home',

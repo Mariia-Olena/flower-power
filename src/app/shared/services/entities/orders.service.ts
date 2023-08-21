@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { CartItem } from '@sharedModule/services/cart.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {
   APIorder,
   Order,
@@ -13,21 +12,20 @@ import { StorageService } from '../storage.service';
 import {
   BasedCrudHttpService,
   ParamsHttp,
-} from '@sharedModule/types/based-crud-http-service.interface';
+} from '@sharedModule/services/entities/based-crud-http-service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class OrdersService implements BasedCrudHttpService<APIorder, Order> {
-  private baseUrl = environment.baseUrl;
-  private _itemsCount$: BehaviorSubject<number> = new BehaviorSubject(0);
-  itemsCount$: Observable<number> = this._itemsCount$.asObservable();
+export class OrdersService extends BasedCrudHttpService<APIorder, Order> {
   private currentOrder = new BehaviorSubject<APIorder>(
     this.storage.get('order')
   );
   showModal = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, private storage: StorageService) {}
+  constructor(private http: HttpClient, private storage: StorageService) {
+    super();
+  }
 
   setUpOrder(orderForm: FormGroup, orderProducts: CartItem[]): Order {
     const { phone, firstName, secondName, country, region, city, address } =
@@ -79,9 +77,9 @@ export class OrdersService implements BasedCrudHttpService<APIorder, Order> {
       );
   }
 
-  create(order: Order): Observable<APIorder> {
+  create(body: Order): Observable<APIorder> {
     return this.http
-      .post(`${this.baseUrl}/orders`, JSON.stringify(order), {
+      .post(`${this.baseUrl}/orders`, JSON.stringify(body), {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -94,21 +92,19 @@ export class OrdersService implements BasedCrudHttpService<APIorder, Order> {
       );
   }
 
-  setParams(params: ParamsHttp): HttpParams {
-    let httpParams = new HttpParams()
-      .append('limit', params.limit.toString())
-      .append('page', params.page.toString())
-      .append('sort', params.sort);
-
-    if (params.filter.length > 0) {
-      params.filter.forEach((item) => {
-        httpParams = httpParams.append('filter', `${item[0]};${item[1]}`);
-      });
-    }
-
-    return httpParams;
+  update(body: Order, id: string): Observable<APIorder> {
+    return this.http.put<APIorder>(
+      `${this.baseUrl}/orders/${id}`,
+      JSON.stringify(body),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
   }
 
-  update(body: APIorder): void {}
-  remove(id: string): void {}
+  remove(id: string): Observable<APIorder> {
+    return this.http.delete<APIorder>(`${this.baseUrl}/orders/${id}`, {});
+  }
 }

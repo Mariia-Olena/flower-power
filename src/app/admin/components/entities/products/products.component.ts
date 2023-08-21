@@ -5,7 +5,7 @@ import {
   APIproduct,
   ProductAdmin,
 } from '@sharedModule/services/entities/types/product.interface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -16,7 +16,10 @@ export class ProductsComponent extends BasedCrudComponent<
   APIproduct,
   ProductAdmin
 > {
-  options = ['Price more than', 'Price less than', 'Newer than', 'Older than'];
+  options = {
+    search: ['name', 'description', 'price'],
+    filter: ['Price more than', 'Price less than', 'Newer than', 'Older than'],
+  };
   displayedColumns: string[] = ['id', 'name', 'price', 'created', 'edit'];
   params = {
     limit: 5,
@@ -29,9 +32,10 @@ export class ProductsComponent extends BasedCrudComponent<
 
   constructor(
     private productsService: ProductsService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    super(productsService, router);
+    super(productsService, router, route);
   }
 
   mapEntityData(res: APIproduct[]): ProductAdmin[] {
@@ -43,9 +47,5 @@ export class ProductsComponent extends BasedCrudComponent<
         created: product.createdAt,
       };
     });
-  }
-
-  getToolbarValue(searchValue: string): string[][] {
-    return [['name', searchValue], ['description', searchValue]];
   }
 }

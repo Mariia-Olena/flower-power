@@ -1,25 +1,23 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { map, Observable } from 'rxjs';
 import {
   BasedCrudHttpService,
   ParamsHttp,
-} from '@sharedModule/types/based-crud-http-service.interface';
+} from '@sharedModule/services/entities/based-crud-http-service';
 import {
   APIuser,
+  User,
   UserAdmin,
 } from '@sharedModule/services/entities/types/user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService implements BasedCrudHttpService<APIuser, UserAdmin> {
-  private baseUrl = environment.baseUrl;
-  private _itemsCount$: BehaviorSubject<number> = new BehaviorSubject(0);
-  itemsCount$: Observable<number> = this._itemsCount$.asObservable();
-
-  constructor(private http: HttpClient) {}
+export class UsersService extends BasedCrudHttpService<APIuser, UserAdmin> {
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   getOne(id: string): Observable<APIuser> {
     return this.http.get<APIuser>(`${this.baseUrl}/users/${id}`, {});
@@ -39,22 +37,31 @@ export class UsersService implements BasedCrudHttpService<APIuser, UserAdmin> {
       );
   }
 
-  setParams(params: ParamsHttp): HttpParams {
-    let httpParams = new HttpParams()
-      .append('limit', params.limit.toString())
-      .append('page', params.page.toString())
-      .append('sort', params.sort);
-
-    if (params.filter.length > 0) {
-      params.filter.forEach((item) => {
-        httpParams = httpParams.append('filter', `${item[0]};${item[1]}`);
-      });
-    }
-
-    return httpParams;
+  create(body: User): Observable<APIuser> {
+    return this.http.post<APIuser>(
+      `${this.baseUrl}/users`,
+      JSON.stringify(body),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
   }
 
-  create(body: APIuser) {}
-  update(body: APIuser) {}
-  remove(id: string) {}
+  update(body: User, id: string): Observable<APIuser> {
+    return this.http.put<APIuser>(
+      `${this.baseUrl}/users/${id}`,
+      JSON.stringify(body),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
+
+  remove(id: string): Observable<APIuser> {
+    return this.http.delete<APIuser>(`${this.baseUrl}/users/${id}`, {});
+  }
 }

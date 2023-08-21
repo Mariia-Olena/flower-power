@@ -5,7 +5,8 @@ import {
   APIorder,
 } from '@sharedModule/services/entities/types/order.interface';
 import { BasedCrudComponent } from '@admin/components/entities/based-crud.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ActionConfig } from '@admin/components/table/table.component';
 
 @Component({
   selector: 'app-orders',
@@ -13,14 +14,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent extends BasedCrudComponent<APIorder, OrderAdmin> {
-  options = [
-    'name',
-    'price',
-    'description',
-    'author',
-    'createdAt',
-    'updatedAt',
-  ];
+  options = {
+    search: ['name', 'phone'],
+    filter: [
+      'name',
+      'price',
+      'description',
+      'author',
+      'createdAt',
+      'updatedAt',
+    ],
+  };
   displayedColumns: string[] = [
     'id',
     'name',
@@ -37,9 +41,18 @@ export class OrdersComponent extends BasedCrudComponent<APIorder, OrderAdmin> {
     filter: [],
     length: 1,
   };
+  override actionConfig: ActionConfig[] = [
+    ...this.actionConfig,
+    {
+    name: 'confirm',
+    onClick: (id: string) => console.log(id),
+    icon: 'check_circle_outline',
+    color: 'primary',
+    disabled: () => false
+  }]
 
-  constructor(private ordersService: OrdersService, private router: Router) {
-    super(ordersService, router);
+  constructor(private ordersService: OrdersService, private router: Router, private route: ActivatedRoute) {
+    super(ordersService, router, route);
   }
 
   mapEntityData(res: APIorder[]): OrderAdmin[] {
@@ -55,7 +68,5 @@ export class OrdersComponent extends BasedCrudComponent<APIorder, OrderAdmin> {
     });
   }
 
-  getToolbarValue(searchValue: string): string[][] {
-    return [['name', searchValue], ['phone', searchValue]];
-  }
+  
 }

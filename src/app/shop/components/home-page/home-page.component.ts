@@ -4,7 +4,7 @@ import { PlantCard } from '@sharedModule/services/entities/types/product.interfa
 import { APIproduct } from '@sharedModule/services/entities/types/product.interface';
 import { ProductsMapper } from '@sharedModule/mappers/products.mapper';
 import { ProductsService } from '@sharedModule/services/entities/products.service';
-import { ParamsHttp } from '@sharedModule/types/based-crud-http-service.interface';
+import { ParamsHttp } from '@sharedModule/services/entities/based-crud-http-service';
 
 @Component({
   selector: 'app-home-page',

@@ -1,7 +1,7 @@
 import { Directive, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { BasedCrudHttpService } from '@sharedModule/types/based-crud-http-service.interface';
+import { BasedCrudHttpService } from '@sharedModule/services/entities/based-crud-http-service';
 import { tap, Observable } from 'rxjs';
 
 @Directive()
@@ -28,19 +28,29 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
   getItem(): void {
     this.entityRoute.params.subscribe(({ id }) => {
       console.log(id);
-      
-      this.item$ = this.entityService.getOne(id).pipe(
-        tap((value: APIentity) => { 
-          console.log(value);
-          this.item = value;
-        })
-      );
+
+      this.entityService
+        .getOne(id)
+        .pipe(
+          tap((value: APIentity) => {
+            console.log(value);
+            this.item = value;
+          })
+        )
+        .subscribe();
     });
   }
 
-  ngOnInit(): void {
-    this.name = this.entityRoute.snapshot.url[1].path;
+  setName(): void {
+    if (this.entityRoute.snapshot.params['id']) {
+      this.name = 'edit';
+    } else {
+      this.name = 'add';
+    }
+  }
 
+  ngOnInit(): void {
+    this.setName();
     this.getItem();
     this.setFieldsUpfront();
   }

@@ -1,4 +1,3 @@
-import { ToolbarService } from '@admin/services/toolbar.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Toolbar } from './types/toolbar.interface';
@@ -9,20 +8,22 @@ import { Toolbar } from './types/toolbar.interface';
   styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent {
-  @Input() options: string[];
-  @Input() tooltip: string
+  @Input() options: {
+    search: string[];
+    filter: string[];
+  };
+  @Input() item: string;
   @Output() toolbar = new EventEmitter<Toolbar>();
+  @Output() onAddButtonClick = new EventEmitter<Event>();
 
   toolbarForm = new FormGroup({
     searchValue: new FormControl('', []),
+    searchName: new FormControl('', []),
     filterValue: new FormControl('', []),
     filterName: new FormControl('', []),
   });
 
-  constructor(private toolbarService: ToolbarService) {}
-
   onSubmit() {
-    const toolbarValue = this.toolbarForm.getRawValue()
-    this.toolbar.emit(toolbarValue)
+    this.toolbar.emit(this.toolbarForm.getRawValue());
   }
 }
