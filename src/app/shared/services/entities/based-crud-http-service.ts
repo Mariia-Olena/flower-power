@@ -13,12 +13,13 @@ export abstract class BasedCrudHttpService<APIentity, Entity> {
   protected baseUrl = environment.baseUrl;
   protected _itemsCount$: BehaviorSubject<number> = new BehaviorSubject(0);
   itemsCount$: Observable<number> = this._itemsCount$.asObservable();
+  showModal = new BehaviorSubject<boolean>(false);
 
   abstract getOne(id: string): Observable<APIentity>;
   abstract getAll(params: ParamsHttp): Observable<APIentity[]>;
   abstract create(body: APIentity): Observable<APIentity>;
   abstract update(body: APIentity, id: string): Observable<APIentity>;
-  abstract remove(id: string): Observable<APIentity>;
+  abstract remove(id: string): void;
 
   setParams(params: ParamsHttp): HttpParams {
     return new HttpParams()

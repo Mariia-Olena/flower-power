@@ -51,7 +51,7 @@ export class OrdersComponent extends BasedCrudComponent<APIorder, OrderAdmin> {
     disabled: () => false
   }]
 
-  constructor(private ordersService: OrdersService, private router: Router, private route: ActivatedRoute) {
+  constructor(public ordersService: OrdersService, private router: Router, private route: ActivatedRoute) {
     super(ordersService, router, route);
   }
 

@@ -1,6 +1,6 @@
 <div class="wrapper">
   <h1>{{ name | titlecase }} product</h1>
-  <form [formGroup]="productForm" class="form">
+  <form [formGroup]="form" class="form">
     <mat-card>
       <h2>Main Information:</h2>
 
@@ -18,8 +18,20 @@
         <mat-label>Description</mat-label>
         <input matInput formControlName="description" />
       </mat-form-field>
+
+      <ng-container [formGroup]="form.controls.extraInfo">
+        <mat-form-field>
+          <mat-label>Rating</mat-label>
+          <input matInput formControlName="rating" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Video</mat-label>
+          <input matInput formControlName="video" />
+        </mat-form-field>
+      </ng-container>
     </mat-card>
-    <ng-container [formGroup]="productForm.controls.extraInfo">
+    <ng-container [formGroup]="form.controls.extraInfo">
       <ng-container formArrayName="image">
         <mat-card>
           <h2>Images:</h2>
@@ -130,26 +142,15 @@
           </button>
         </mat-card>
       </ng-container>
-      <mat-card>
-        <h2>Pot Color:</h2>
-        <mat-form-field>
-          <mat-label>Rating</mat-label>
-          <input matInput formControlName="rating" />
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>Video</mat-label>
-          <input matInput formControlName="video" />
-        </mat-form-field>
-      </mat-card>
+  
       <ng-container
-        [formGroup]="productForm.controls.extraInfo.controls.plantCare"
+        [formGroup]="form.controls.extraInfo.controls.plantCare"
       >
         <mat-card>
           <h2>Plant Care:</h2>
           <ng-container
             [formGroup]="
-              productForm.controls.extraInfo.controls.plantCare.controls
+              form.controls.extraInfo.controls.plantCare.controls
                 .watering
             "
           >
@@ -169,7 +170,7 @@
 
           <ng-container
             [formGroup]="
-              productForm.controls.extraInfo.controls.plantCare.controls.light
+              form.controls.extraInfo.controls.plantCare.controls.light
             "
           >
             <h3>Light</h3>
@@ -188,7 +189,7 @@
 
           <ng-container
             [formGroup]="
-              productForm.controls.extraInfo.controls.plantCare.controls.care
+              form.controls.extraInfo.controls.plantCare.controls.care
             "
           >
             <h3>Care</h3>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { APIuser, UserAdmin } from '@sharedModule/services/entities/types/user.interface';
@@ -11,7 +11,7 @@ import { AddEditComponent } from '../add-edit.component';
   styleUrls: ['./user-add-edit.component.scss'],
 })
 export class UserAddEditComponent extends AddEditComponent<APIuser, UserAdmin> {
-  userForm = new FormGroup({
+  form = new FormGroup({
     username: new FormControl('', []),
     password: new FormControl('', []),
   });
@@ -21,4 +21,6 @@ export class UserAddEditComponent extends AddEditComponent<APIuser, UserAdmin> {
   }
 
   setFieldsUpfront(): void {}
+
+  setForm(): void {}
 }

@@ -11,7 +11,7 @@ import { APIorder, OrderAdmin } from '@sharedModule/services/entities/types/orde
   styleUrls: ['./order-add-edit.component.scss'],
 })
 export class OrderAddEditComponent extends AddEditComponent<APIorder, OrderAdmin> {
-  orderForm = new FormGroup({
+  form = new FormGroup({
     name: new FormControl('', []),
     phone: new FormControl('', []),
     message: new FormControl('', []),
@@ -23,7 +23,7 @@ export class OrderAddEditComponent extends AddEditComponent<APIorder, OrderAdmin
   }
 
   get products(): FormArray {
-    return this.orderForm.controls['products'] as FormArray;
+    return this.form.controls['products'] as FormArray;
   }
 
   addProduct() {
@@ -39,4 +39,7 @@ export class OrderAddEditComponent extends AddEditComponent<APIorder, OrderAdmin
   setFieldsUpfront(): void {
     this.addProduct();
   }
+
+  setForm(): void {}
+
 }

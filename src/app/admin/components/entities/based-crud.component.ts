@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Directive,
   Input,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -26,7 +27,7 @@ export interface Params extends ParamsHttp {
 
 @Directive()
 export abstract class BasedCrudComponent<APIentity, Entity>
-  implements OnInit, AfterViewInit
+  implements OnInit, AfterViewInit, OnDestroy
 {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -36,6 +37,8 @@ export abstract class BasedCrudComponent<APIentity, Entity>
   items$: Observable<Entity[]> = new Observable<Entity[]>(null);
 
   dataSource: MatTableDataSource<any>;
+  
+  id: string;
 
   actionConfig: ActionConfig[] = [
     {
@@ -52,7 +55,8 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     {
       name: 'remove',
       onClick: (id: string) => {
-        this.entityService.remove(id);
+        this.entityService.showModal.next(true);
+        this.id = id;
       },
       icon: 'delete',
       color: 'warn',
@@ -60,7 +64,21 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     },
   ];
 
-  abstract options: {search: string[]; filter: string[]};
+  confirm(confirmation: boolean, id: string) {
+    if (confirmation && id) {
+      this.entityService.remove(id);
+      this.setData({
+        limit: this.params.limit,
+        page: this.params.page,
+        sort: this.params.sort,
+        filter: this.params.filter,
+      });
+    }
+
+    this.entityService.showModal.next(false);
+  }
+
+  abstract options: { search: string[]; filter: string[] };
   abstract displayedColumns: string[];
   abstract params: Params;
 
@@ -167,5 +185,9 @@ export abstract class BasedCrudComponent<APIentity, Entity>
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  ngOnDestroy(): void {
+    this.entityService.showModal.next(false);
   }
 }

@@ -1,1 +1,13 @@
-<p>delete-modal works!</p>
+<div class="modal">
+  <mat-card class="modal-box">
+    <mat-card-title class="modal-text">Are you sure?</mat-card-title>
+    <mat-card-content class="modal-text">
+      Do you really want to delete this {{ item }}?<br> This process cannot be
+      undone.
+    </mat-card-content>
+    <mat-card-content class="modal-buttons">
+      <button (click)="confirmation.emit(false)" mat-flat-button color="primary">Cancel</button>
+      <button (click)="confirmation.emit(true)" mat-flat-button color="warn">Confirm</button>
+    </mat-card-content>
+  </mat-card>
+</div>

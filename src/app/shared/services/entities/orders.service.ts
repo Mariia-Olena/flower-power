@@ -21,8 +21,7 @@ export class OrdersService extends BasedCrudHttpService<APIorder, Order> {
   private currentOrder = new BehaviorSubject<APIorder>(
     this.storage.get('order')
   );
-  showModal = new BehaviorSubject<boolean>(false);
-
+  
   constructor(private http: HttpClient, private storage: StorageService) {
     super();
   }
@@ -104,7 +103,7 @@ export class OrdersService extends BasedCrudHttpService<APIorder, Order> {
     );
   }
 
-  remove(id: string): Observable<APIorder> {
-    return this.http.delete<APIorder>(`${this.baseUrl}/orders/${id}`, {});
+  remove(id: string): void {
+    this.http.delete<APIorder>(`${this.baseUrl}/orders/${id}`, {}).subscribe();
   }
 }

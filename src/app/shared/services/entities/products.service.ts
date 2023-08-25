@@ -65,7 +65,7 @@ export class ProductsService extends BasedCrudHttpService<
     );
   }
 
-  remove(id: string): Observable<APIproduct> {
-    return this.http.delete<APIproduct>(`${this.baseUrl}/products/${id}`, {});
+  remove(id: string): void {
+    this.http.delete<APIproduct>(`${this.baseUrl}/products/${id}`, {}).subscribe();
   }
 }

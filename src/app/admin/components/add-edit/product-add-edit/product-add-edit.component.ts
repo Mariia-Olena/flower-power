@@ -6,7 +6,6 @@ import {
   APIproduct,
   ProductAdmin,
 } from '@sharedModule/services/entities/types/product.interface';
-import { tap } from 'rxjs';
 import { AddEditComponent } from '../add-edit.component';
 
 @Component({
@@ -18,7 +17,7 @@ export class ProductAddEditComponent extends AddEditComponent<
   APIproduct,
   ProductAdmin
 > {
-  productForm = new FormGroup({
+  form = new FormGroup({
     name: new FormControl('', []),
     price: new FormControl('', []),
     description: new FormControl('', []),
@@ -54,21 +53,19 @@ export class ProductAddEditComponent extends AddEditComponent<
   }
 
   get image() {
-    return this.productForm.controls.extraInfo.controls['image'] as FormArray;
+    return this.form.controls.extraInfo.controls['image'] as FormArray;
   }
 
   get size() {
-    return this.productForm.controls.extraInfo.controls['size'] as FormArray;
+    return this.form.controls.extraInfo.controls['size'] as FormArray;
   }
 
   get potColor() {
-    return this.productForm.controls.extraInfo.controls[
-      'potColor'
-    ] as FormArray;
+    return this.form.controls.extraInfo.controls['potColor'] as FormArray;
   }
 
   get review() {
-    return this.productForm.controls.extraInfo.controls['review'] as FormArray;
+    return this.form.controls.extraInfo.controls['review'] as FormArray;
   }
 
   addImage() {
@@ -107,20 +104,51 @@ export class ProductAddEditComponent extends AddEditComponent<
     this.review.push(reviewForm);
   }
 
-  setFieldsUpfront(): void {
-    this.addImage();
-    this.addSize();
-    this.addPotColor();
-    this.addReview();
-    this.get();
+  setFieldsUpfront(item?: APIproduct): void {
+    if (item) {
+      for (let i = 0; i < item.extraInfo.image.length; i++) {
+        this.addImage();
+      }
+    }
+
+    if (item) {
+      for (let i = 0; i < item.extraInfo.size.length; i++) {
+        this.addSize();
+      }
+    }
+
+    if (item) {
+      for (let i = 0; i < item.extraInfo.potColor.length; i++) {
+        this.addPotColor();
+      }
+    }
+
+    if (item) {
+      for (let i = 0; i < item.extraInfo.review.length; i++) {
+        this.addReview();
+      }
+    }
   }
 
-  get() {
-    console.log('get 1');
-    this.productsService.getOne('90e339fc-736f-4200-957c-d5fa51c3f0cc').pipe(
-      tap((value: APIproduct)=> {
-        console.log('get 2', value);
-      })
-    )
+  setForm(): void {
+    this.form.controls.name.patchValue(this.item.name);
+    this.form.controls.price.patchValue(this.item.price.toString());
+    this.form.controls.description.patchValue(this.item.description);
+    this.form.controls.extraInfo.controls.rating.patchValue(this.item.extraInfo.rating.toString());
+    this.form.controls.extraInfo.controls.video.patchValue(this.item.extraInfo.video);
+    this.image.patchValue(this.setFormArray(this.item.extraInfo.image, 'imageUrl'));
+    this.potColor.patchValue(this.setFormArray(this.item.extraInfo.potColor, 'potColor'));
+    this.form.controls.extraInfo.controls.plantCare.controls.watering.patchValue(this.item.extraInfo.plantCare.watering);
+    this.form.controls.extraInfo.controls.plantCare.controls.light.patchValue(this.item.extraInfo.plantCare.light);
+    this.form.controls.extraInfo.controls.plantCare.controls.care.patchValue(this.item.extraInfo.plantCare.care);
+    this.size.patchValue(this.item.extraInfo.size);
+    this.review.patchValue(this.item.extraInfo.review);
+  }
+
+  setFormArray(array: string[], name: string): { name: string }[] {
+    return array.reduce((acc, item) => {
+      acc.push({ [name]: item });
+      return acc;
+    }, []);
   }
 }

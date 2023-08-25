@@ -31,7 +31,7 @@ export class ProductsComponent extends BasedCrudComponent<
   };
 
   constructor(
-    private productsService: ProductsService,
+    public productsService: ProductsService,
     private router: Router,
     private route: ActivatedRoute
   ) {

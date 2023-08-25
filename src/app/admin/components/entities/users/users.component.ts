@@ -35,7 +35,7 @@ export class UsersComponent extends BasedCrudComponent<APIuser, UserAdmin> {
   };
 
   constructor(
-    private usersService: UsersService,
+    public usersService: UsersService,
     private router: Router,
     private route: ActivatedRoute
   ) {

@@ -61,7 +61,7 @@ export class UsersService extends BasedCrudHttpService<APIuser, UserAdmin> {
     );
   }
 
-  remove(id: string): Observable<APIuser> {
-    return this.http.delete<APIuser>(`${this.baseUrl}/users/${id}`, {});
+  remove(id: string): void {
+    this.http.delete<APIuser>(`${this.baseUrl}/users/${id}`, {}).subscribe();
   }
 }

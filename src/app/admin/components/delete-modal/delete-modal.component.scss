@@ -1,0 +1,39 @@
+@import "style-variables.scss";
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+
+  z-index: 1;
+
+  &-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    background-color: white;
+    width: rem(400);
+    padding: rem(20);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+
+  &-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-top: rem(16);
+    width: 100%;
+  }
+
+  &-text {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+}

@@ -35,6 +35,6 @@ import { DeleteModalComponent } from './components/delete-modal/delete-modal.com
     MaterialModule,
     SharedModule,
     ReactiveFormsModule,
-  ],
+  ]
 })
 export class AdminModule {}
