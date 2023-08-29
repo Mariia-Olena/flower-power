@@ -22,5 +22,7 @@ export class UserAddEditComponent extends AddEditComponent<APIuser, UserAdmin> {
 
   setFieldsUpfront(): void {}
 
-  setForm(): void {}
+  setValueInForm(): void {
+    this.form.patchValue(this.item)
+  }
 }

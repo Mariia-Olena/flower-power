@@ -1,3 +1,4 @@
+import { LoginComponent } from '@admin/modules/login/components/login/login.component';
 import { Directive, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +19,7 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
 
   abstract setFieldsUpfront(item?: APIentity): void;
 
-  abstract setForm(): void;
+  abstract setValueInForm(): void;
 
   getControl(array: string, index: number): FormGroup {
     return this[array].controls[index] as FormGroup;
@@ -36,25 +37,27 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
     }
   }
 
+  setValueInFormArray(array: string[], name: string): { name: string }[] {
+    return array.reduce((acc, item) => {
+      acc.push({ [name]: item });
+      return acc;
+    }, []);
+  }
+
   ngOnInit(): void {
     this.setName();
 
-    this.entityRoute.data
-      .pipe(
-        map((obj: { [key: string]: APIentity }) => {
-          for (const key in obj) {
-            if (obj.hasOwnProperty(key)) {
-              this.item = obj[key];
-            }
+    this.entityRoute.data.pipe(
+      map((obj: { [key: string]: APIentity }) => {
+        for (const key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            this.item = obj[key];
           }
-        })
-      )
-      .subscribe();
+        }
+      })).subscribe();
 
-    this.setFieldsUpfront(this.item);
+    this.setFieldsUpfront(this.item)
 
-    if (this.entityRoute.snapshot.params['id']) {
-      this.setForm();
-    }
+    this.entityRoute.snapshot.params['id'] && this.setValueInForm();
   }
 }

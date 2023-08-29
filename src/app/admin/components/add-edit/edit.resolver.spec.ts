@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EditResolver } from './edit.resolver';
+import { EditResolver } from './edit-resolvers/product-edit.resolver';
 
 describe('EditResolver', () => {
   let resolver: EditResolver;

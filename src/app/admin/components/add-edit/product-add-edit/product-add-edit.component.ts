@@ -105,39 +105,30 @@ export class ProductAddEditComponent extends AddEditComponent<
   }
 
   setFieldsUpfront(item?: APIproduct): void {
-    if (item) {
-      for (let i = 0; i < item.extraInfo.image.length; i++) {
-        this.addImage();
-      }
+    if (!item) {
+      this.addImage()
+      this.addSize()
+      this.addPotColor()
+      this.addReview()
+      return
     }
 
-    if (item) {
-      for (let i = 0; i < item.extraInfo.size.length; i++) {
-        this.addSize();
-      }
-    }
-
-    if (item) {
-      for (let i = 0; i < item.extraInfo.potColor.length; i++) {
-        this.addPotColor();
-      }
-    }
-
-    if (item) {
-      for (let i = 0; i < item.extraInfo.review.length; i++) {
-        this.addReview();
-      }
+    if(item && item.extraInfo) {
+      item.extraInfo.image.forEach(item => this.addImage())
+      item.extraInfo.size.forEach(item => this.addSize())
+      item.extraInfo.potColor.forEach(item => this.addPotColor())
+      item.extraInfo.review.forEach(item => this.addReview())
     }
   }
 
-  setForm(): void {
+  setValueInForm(): void {
     this.form.controls.name.patchValue(this.item.name);
     this.form.controls.price.patchValue(this.item.price.toString());
     this.form.controls.description.patchValue(this.item.description);
     this.form.controls.extraInfo.controls.rating.patchValue(this.item.extraInfo.rating.toString());
     this.form.controls.extraInfo.controls.video.patchValue(this.item.extraInfo.video);
-    this.image.patchValue(this.setFormArray(this.item.extraInfo.image, 'imageUrl'));
-    this.potColor.patchValue(this.setFormArray(this.item.extraInfo.potColor, 'potColor'));
+    this.image.patchValue(this.setValueInFormArray(this.item.extraInfo.image, 'imageUrl'));
+    this.potColor.patchValue(this.setValueInFormArray(this.item.extraInfo.potColor, 'potColor'));
     this.form.controls.extraInfo.controls.plantCare.controls.watering.patchValue(this.item.extraInfo.plantCare.watering);
     this.form.controls.extraInfo.controls.plantCare.controls.light.patchValue(this.item.extraInfo.plantCare.light);
     this.form.controls.extraInfo.controls.plantCare.controls.care.patchValue(this.item.extraInfo.plantCare.care);
@@ -145,10 +136,4 @@ export class ProductAddEditComponent extends AddEditComponent<
     this.review.patchValue(this.item.extraInfo.review);
   }
 
-  setFormArray(array: string[], name: string): { name: string }[] {
-    return array.reduce((acc, item) => {
-      acc.push({ [name]: item });
-      return acc;
-    }, []);
-  }
 }

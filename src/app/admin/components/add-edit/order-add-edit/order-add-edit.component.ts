@@ -36,10 +36,16 @@ export class OrderAddEditComponent extends AddEditComponent<APIorder, OrderAdmin
     this.products.push(productForm);
   }
 
-  setFieldsUpfront(): void {
-    this.addProduct();
+  setFieldsUpfront(item?: APIorder): void {
+    if (!item) {
+      this.addProduct();
+      return
+    }
+
+    item.products.forEach(item => this.addProduct())
   }
 
-  setForm(): void {}
-
+  setValueInForm(): void {
+    this.form.patchValue(this.item)
+  }
 }
