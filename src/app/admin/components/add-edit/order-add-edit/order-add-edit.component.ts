@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdersService } from '@sharedModule/services/entities/orders.service';
 import { AddEditComponent } from '../add-edit.component';
 import { ActivatedRoute } from '@angular/router';
@@ -12,8 +12,8 @@ import { APIorder, OrderAdmin } from '@sharedModule/services/entities/types/orde
 })
 export class OrderAddEditComponent extends AddEditComponent<APIorder, OrderAdmin> {
   form = new FormGroup({
-    name: new FormControl('', []),
-    phone: new FormControl('', []),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    phone: new FormControl('', [Validators.required, Validators.pattern(/\+380\d{9}/)]),
     message: new FormControl('', []),
     products: new FormArray([]),
   });
@@ -28,9 +28,9 @@ export class OrderAddEditComponent extends AddEditComponent<APIorder, OrderAdmin
 
   addProduct() {
     const productForm = new FormGroup({
-      quantity: new FormControl('', []),
-      name: new FormControl('', []),
-      id: new FormControl('', []),
+      quantity: new FormControl('', [Validators.required, Validators.min(1), Validators.pattern(/^[1-9]\d*$/)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      id: new FormControl('', [Validators.required]),
     });
 
     this.products.push(productForm);

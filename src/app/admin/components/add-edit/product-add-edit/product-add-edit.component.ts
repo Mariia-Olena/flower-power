@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '@sharedModule/services/entities/products.service';
 import {
@@ -18,27 +18,27 @@ export class ProductAddEditComponent extends AddEditComponent<
   ProductAdmin
 > {
   form = new FormGroup({
-    name: new FormControl('', []),
-    price: new FormControl('', []),
-    description: new FormControl('', []),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    price: new FormControl('', [Validators.required, Validators.min(1), Validators.max(999999), Validators.pattern(/^[1-9]\d*\.\d{2}$/)]),
+    description: new FormControl('', [Validators.required, Validators.minLength(15)]),
     extraInfo: new FormGroup({
       image: new FormArray([]),
       size: new FormArray([]),
       potColor: new FormArray([]),
-      rating: new FormControl('', []),
-      video: new FormControl('', []),
+      rating: new FormControl('', [Validators.required, Validators.min(0), Validators.max(5), Validators.pattern(/^[0-9.]+$/)]),
+      video: new FormControl('', [Validators.required, Validators.pattern(/^https:\/\/www\.youtube\.com\/.*/)]),
       plantCare: new FormGroup({
         watering: new FormGroup({
-          title: new FormControl('', []),
-          text: new FormControl('', []),
+          title: new FormControl('', [Validators.required, Validators.minLength(3)]),
+          text: new FormControl('', [Validators.required, Validators.minLength(3)]),
         }),
         light: new FormGroup({
-          title: new FormControl('', []),
-          text: new FormControl('', []),
+          title: new FormControl('', [Validators.required, Validators.minLength(3)]),
+          text: new FormControl('', [Validators.required, Validators.minLength(3)]),
         }),
         care: new FormGroup({
-          title: new FormControl('', []),
-          text: new FormControl('', []),
+          title: new FormControl('', [Validators.required, Validators.minLength(3)]),
+          text: new FormControl('', [Validators.required, Validators.minLength(3)]),
         }),
       }),
       review: new FormArray([]),
@@ -70,7 +70,7 @@ export class ProductAddEditComponent extends AddEditComponent<
 
   addImage() {
     const imageForm = new FormGroup({
-      imageUrl: new FormControl('', []),
+      imageUrl: new FormControl('', [Validators.required]),
     });
 
     this.image.push(imageForm);
@@ -78,8 +78,8 @@ export class ProductAddEditComponent extends AddEditComponent<
 
   addSize() {
     const sizeForm = new FormGroup({
-      size: new FormControl('', []),
-      coeff: new FormControl('', []),
+      size: new FormControl('', [Validators.required, Validators.pattern(/^[0-9-]+$/)]),
+      coeff: new FormControl('', [Validators.required, Validators.pattern(/^[0-9.]+$/)]),
     });
 
     this.size.push(sizeForm);
@@ -87,7 +87,7 @@ export class ProductAddEditComponent extends AddEditComponent<
 
   addPotColor() {
     const potColorForm = new FormGroup({
-      potColor: new FormControl('', []),
+      potColor: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
     });
 
     this.potColor.push(potColorForm);
@@ -95,9 +95,9 @@ export class ProductAddEditComponent extends AddEditComponent<
 
   addReview() {
     const reviewForm = new FormGroup({
-      name: new FormControl('', []),
-      rating: new FormControl('', []),
-      comment: new FormControl('', []),
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      rating: new FormControl('', [Validators.required, Validators.min(0), Validators.max(5), Validators.pattern(/^[0-9.]+$/)]),
+      comment: new FormControl('', [Validators.required, Validators.minLength(3)]),
       photo: new FormControl('', []),
     });
 
@@ -135,5 +135,4 @@ export class ProductAddEditComponent extends AddEditComponent<
     this.size.patchValue(this.item.extraInfo.size);
     this.review.patchValue(this.item.extraInfo.review);
   }
-
 }

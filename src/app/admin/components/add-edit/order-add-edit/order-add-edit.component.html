@@ -1,4 +1,5 @@
 <div class="wrapper">
+  <div>{{form.valid}}</div>
   <h1>{{ name | titlecase }} order</h1>
   <form [formGroup]="form" class="form">
     <mat-card>
@@ -7,11 +8,23 @@
       <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" />
+        <mat-error *ngIf="form.controls.name.errors?.['required']">
+          Name is required
+        </mat-error>
+        <mat-error *ngIf="form.controls.name.errors?.['minlength']">
+          Name must be at least 3 characters long
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Phone</mat-label>
         <input matInput formControlName="phone" />
+        <mat-error *ngIf="form.controls.phone.errors?.['required']">
+          Phone number is required
+        </mat-error>
+        <mat-error *ngIf="form.controls.phone.errors?.['pattern']">
+          Phone number must start with a "+380" and be valid
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -31,15 +44,33 @@
               <mat-form-field class="field-half">
                 <mat-label>Quantity</mat-label>
                 <input matInput formControlName="quantity" />
+                <mat-error *ngIf="products.controls[i].get('quantity').errors?.['required']">
+                  Quantity is required
+                </mat-error>
+                <mat-error *ngIf="products.controls[i].get('quantity').errors?.['pattern']">
+                  Please enter a valid quantity
+                </mat-error>
+                <mat-error *ngIf="products.controls[i].get('quantity').errors?.['min']">
+                  Quantity must be at least 1
+                </mat-error>
               </mat-form-field>
               <mat-form-field class="field-half">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" />
+                <mat-error *ngIf="products.controls[i].get('name').errors?.['required']">
+                  Name is required
+                </mat-error>
+                <mat-error *ngIf="products.controls[i].get('name').errors?.['minlength']">
+                  Name must be at least 3 characters long
+                </mat-error>
               </mat-form-field>
             </div>
             <mat-form-field class="second">
               <mat-label>Id</mat-label>
               <input matInput formControlName="id" />
+              <mat-error *ngIf="products.controls[i].get('id').errors?.['required']">
+                ID is required
+              </mat-error>
             </mat-form-field>
             <button
               color="warn"

@@ -15,6 +15,6 @@ export class ProductEditResolver implements Resolve<APIproduct> {
   constructor(private router: Router, private productsService: ProductsService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<APIproduct> {
-    return this.productsService.getOne(route.params?.['id'])
+    return this.productsService.getOne(route.params?.['id']);
   }
 }

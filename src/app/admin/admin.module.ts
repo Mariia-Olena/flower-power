@@ -12,9 +12,9 @@ import { OrdersComponent } from '@admin/components/entities/orders/orders.compon
 import { ToolbarComponent } from '@admin/components/toolbar/toolbar.component';
 import { TableComponent } from '@admin/components/table/table.component';
 import { ProductAddEditComponent } from '@admin/components/add-edit/product-add-edit/product-add-edit.component';
-import { OrderAddEditComponent } from './components/add-edit/order-add-edit/order-add-edit.component';
-import { UserAddEditComponent } from './components/add-edit/user-add-edit/user-add-edit.component';
-import { DeleteModalComponent } from './components/delete-modal/delete-modal.component';
+import { OrderAddEditComponent } from '@admin/components/add-edit/order-add-edit/order-add-edit.component';
+import { UserAddEditComponent } from '@admin/components/add-edit/user-add-edit/user-add-edit.component';
+import { DeleteModalComponent } from '@admin/components/delete-modal/delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { DeleteModalComponent } from './components/delete-modal/delete-modal.com
     ProductAddEditComponent,
     OrderAddEditComponent,
     UserAddEditComponent,
-    DeleteModalComponent,
+    DeleteModalComponent
   ],
   imports: [
     CommonModule,

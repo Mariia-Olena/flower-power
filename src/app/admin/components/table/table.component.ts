@@ -4,7 +4,7 @@ import { Action } from 'rxjs/internal/scheduler/Action';
 
 export interface ActionConfig {
   name: string;
-  onClick: (id: string) => void;
+  onClick: (id: string, name: string) => void;
   icon: string;
   color: string;
   disabled: () => boolean;
@@ -22,7 +22,7 @@ export class TableComponent {
 
   @Output() sortChange = new EventEmitter();
 
-  onActionClick(button: ActionConfig, element: {id: string}) {    
-    button.onClick && button.onClick(element.id)
+  onActionClick(button: ActionConfig, element) {    
+    button.onClick && button.onClick(element.id, element.name)
   }
 }

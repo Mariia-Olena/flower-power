@@ -27,7 +27,7 @@ export interface Params extends ParamsHttp {
 
 @Directive()
 export abstract class BasedCrudComponent<APIentity, Entity>
-  implements OnInit, AfterViewInit, OnDestroy
+  implements OnInit, OnDestroy
 {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -37,8 +37,12 @@ export abstract class BasedCrudComponent<APIentity, Entity>
   items$: Observable<Entity[]> = new Observable<Entity[]>(null);
 
   dataSource: MatTableDataSource<any>;
-  
-  id: string;
+
+  showModal = {
+    value: false,
+    id: '',
+    name: ''
+  }
 
   actionConfig: ActionConfig[] = [
     {
@@ -54,9 +58,10 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     },
     {
       name: 'remove',
-      onClick: (id: string) => {
-        this.entityService.showModal.next(true);
-        this.id = id;
+      onClick: (id: string, name: string) => {
+        this.showModal.value = true;
+        this.showModal.id = id;
+        this.showModal.name = name;
       },
       icon: 'delete',
       color: 'warn',
@@ -75,7 +80,7 @@ export abstract class BasedCrudComponent<APIentity, Entity>
       });
     }
 
-    this.entityService.showModal.next(false);
+    this.showModal.value = false;
   }
 
   abstract options: { search: string[]; filter: string[] };
@@ -92,7 +97,7 @@ export abstract class BasedCrudComponent<APIentity, Entity>
 
   announceSortChange(sortState: Sort) {
     if (sortState.direction === 'desc') {
-      this.params.sort = `+${sortState.active}`;
+      this.params.sort = sortState.active;
       this.setData({
         limit: this.params.limit,
         page: this.params.page,
@@ -183,9 +188,9 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     });
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }
+  // ngAfterViewInit() {
+  //   // this.dataSource.sort = this.sort;
+  // }
 
   ngOnDestroy(): void {
     this.entityService.showModal.next(false);

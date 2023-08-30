@@ -20,6 +20,6 @@
 >
 </mat-paginator>
 
-<ng-container *ngIf="ordersService.showModal.getValue()">
-  <app-delete-modal [item]="'order'" (confirmation)="confirm($event, id)"></app-delete-modal>
+<ng-container *ngIf="showModal.value">
+  <app-delete-modal [item]="{name: 'order', value: showModal.name}" (confirmation)="confirm($event, showModal.id)"></app-delete-modal>
 </ng-container>

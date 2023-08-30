@@ -3,7 +3,7 @@ import { Directive, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BasedCrudHttpService } from '@sharedModule/services/entities/based-crud-http-service';
-import { tap, map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 
 @Directive()
 export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
