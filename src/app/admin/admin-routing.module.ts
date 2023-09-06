@@ -8,9 +8,9 @@ import { UsersComponent } from '@admin/components/entities/users/users.component
 import { ProductAddEditComponent } from '@admin/components/add-edit/product-add-edit/product-add-edit.component';
 import { UserAddEditComponent } from '@admin/components/add-edit/user-add-edit/user-add-edit.component';
 import { OrderAddEditComponent } from '@admin/components/add-edit/order-add-edit/order-add-edit.component';
-import { UserEditResolver } from '@admin/components/add-edit/edit-resolvers/user-edit.resolver';
-import { OrderEditResolver } from '@admin/components/add-edit/edit-resolvers/order-edit.resolver';
-import { ProductEditResolver } from '@admin/components/add-edit/edit-resolvers/product-edit.resolver';
+import { UserEditResolver } from '@admin/components/add-edit/user-add-edit/user-edit.resolver';
+import { OrderEditResolver } from '@admin/components/add-edit/order-add-edit/order-edit.resolver';
+import { ProductEditResolver } from '@admin/components/add-edit/product-add-edit/product-edit.resolver';
 
 const routes: Routes = [
   {
