@@ -207,13 +207,13 @@ export class ProductAddEditComponent extends AddEditComponent<
     price = +price;
     extraInfo.rating = +extraInfo.rating;
 
-    extraInfo.review.forEach((item, index) => {
-      extraInfo.review[index].rating = +item.rating;
-    });
+    // extraInfo.review.forEach((item, index) => {
+    //   extraInfo.review[index].rating = +item.rating;
+    // });
 
-    extraInfo.size.forEach((item, index) => {
-      extraInfo.size[index].coeff = +item.coeff;
-    });
+    // extraInfo.size.forEach((item, index) => {
+    //   extraInfo.size[index].coeff = +item.coeff;
+    // });
 
     extraInfo.image.forEach((item, index) => {
       extraInfo.image[index] = item.imageUrl;

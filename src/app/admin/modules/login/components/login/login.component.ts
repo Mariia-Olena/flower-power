@@ -19,7 +19,7 @@ export class LoginComponent {
   onSubmit() {
     this.authService.logIn(this.loginForm.getRawValue()).subscribe({
       next: () => {
-        this.router.navigate(['admin']);
+        this.router.navigate(['admin/products']);
       },
       error: (error) => {
         this.loginForm.setErrors({ credentials: true });
