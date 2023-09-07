@@ -3,6 +3,7 @@ import { BasedCrudComponent } from '@admin/components/entities/based-crud.compon
 import { UsersService } from '@sharedModule/services/entities/users.service';
 import {
   UserAdmin,
+  User,
   APIuser,
 } from '@sharedModule/services/entities/types/user.interface';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent extends BasedCrudComponent<APIuser, UserAdmin> {
+export class UsersComponent extends BasedCrudComponent<APIuser, User, UserAdmin> {
   options = {
     search: ['username'],
     filter: [

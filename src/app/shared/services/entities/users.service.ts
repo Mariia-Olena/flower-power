@@ -7,14 +7,13 @@ import {
 } from '@sharedModule/services/entities/based-crud-http-service';
 import {
   APIuser,
-  User,
-  UserAdmin,
+  User
 } from '@sharedModule/services/entities/types/user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService extends BasedCrudHttpService<APIuser, UserAdmin> {
+export class UsersService extends BasedCrudHttpService<APIuser, User> {
   constructor(private http: HttpClient) {
     super();
   }
@@ -61,7 +60,7 @@ export class UsersService extends BasedCrudHttpService<APIuser, UserAdmin> {
     );
   }
 
-  remove(id: string): void {
-    this.http.delete<APIuser>(`${this.baseUrl}/users/${id}`, {}).subscribe();
+  remove(id: string): Observable<APIuser> {
+    return this.http.delete<APIuser>(`${this.baseUrl}/users/${id}`, {});
   }
 }

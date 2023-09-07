@@ -17,9 +17,9 @@ export abstract class BasedCrudHttpService<APIentity, Entity> {
 
   abstract getOne(id: string): Observable<APIentity>;
   abstract getAll(params: ParamsHttp): Observable<APIentity[]>;
-  abstract create(body: APIentity): Observable<APIentity>;
+  abstract create(body: Entity): Observable<APIentity>;
   abstract update(body: APIentity, id: string): Observable<APIentity>;
-  abstract remove(id: string): void;
+  abstract remove(id: string): Observable<APIentity>;
 
   setParams(params: ParamsHttp): HttpParams {
     return new HttpParams()

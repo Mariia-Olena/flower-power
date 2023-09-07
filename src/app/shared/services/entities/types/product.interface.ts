@@ -81,8 +81,8 @@ export interface Plant extends PlantMethods {
   name: string;
   price: number;
   size: {
-    size: string,
-    coeff: number
+    size: string;
+    coeff: number;
   }[];
   potColor: string[];
   id: string;

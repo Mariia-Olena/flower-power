@@ -1,7 +1,6 @@
 <div class="wrapper">
-  <div>{{form.valid}}</div>
   <h1>{{ name | titlecase }} order</h1>
-  <form [formGroup]="form" class="form">
+  <form [formGroup]="form" (submit)="onSubmit(getFormValue())" class="form">
     <mat-card>
       <h2>Customer Information:</h2>
 
@@ -22,7 +21,7 @@
         <mat-error *ngIf="form.controls.phone.errors?.['required']">
           Phone number is required
         </mat-error>
-        <mat-error *ngIf="form.controls.phone.errors?.['pattern']">
+        <mat-error *ngIf="form.controls.phone.errors?.['pattern'] || form.controls.phone.errors?.['maxlength']">
           Phone number must start with a "+380" and be valid
         </mat-error>
       </mat-form-field>

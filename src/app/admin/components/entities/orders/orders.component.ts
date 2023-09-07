@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { OrdersService } from '@sharedModule/services/entities/orders.service';
 import {
-  OrderAdmin,
   APIorder,
+  Order,
+  OrderAdmin
 } from '@sharedModule/services/entities/types/order.interface';
 import { BasedCrudComponent } from '@admin/components/entities/based-crud.component';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,7 +14,7 @@ import { ActionConfig } from '@admin/components/table/table.component';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss'],
 })
-export class OrdersComponent extends BasedCrudComponent<APIorder, OrderAdmin> {
+export class OrdersComponent extends BasedCrudComponent<APIorder, Order, OrderAdmin> {
   options = {
     search: ['name', 'phone'],
     filter: [

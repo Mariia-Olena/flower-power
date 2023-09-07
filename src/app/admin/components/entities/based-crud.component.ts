@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { Sort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -26,7 +26,7 @@ export interface Params extends ParamsHttp {
 }
 
 @Directive()
-export abstract class BasedCrudComponent<APIentity, Entity>
+export abstract class BasedCrudComponent<APIentity, Entity, EntityAdmin>
   implements OnInit, OnDestroy
 {
   @ViewChild(MatSort) sort: MatSort;
@@ -34,15 +34,15 @@ export abstract class BasedCrudComponent<APIentity, Entity>
 
   @Input() toolbar: Toolbar;
 
-  items$: Observable<Entity[]> = new Observable<Entity[]>(null);
+  items$: Observable<EntityAdmin[]> = new Observable<EntityAdmin[]>(null);
 
   dataSource: MatTableDataSource<any>;
 
   showModal = {
     value: false,
     id: '',
-    name: ''
-  }
+    name: '',
+  };
 
   actionConfig: ActionConfig[] = [
     {
@@ -71,12 +71,13 @@ export abstract class BasedCrudComponent<APIentity, Entity>
 
   confirm(confirmation: boolean, id: string) {
     if (confirmation && id) {
-      this.entityService.remove(id);
-      this.setData({
-        limit: this.params.limit,
-        page: this.params.page,
-        sort: this.params.sort,
-        filter: this.params.filter,
+      this.entityService.remove(id).subscribe((res) => {
+        this.setData({
+          limit: this.params.limit,
+          page: this.params.page,
+          sort: this.params.sort,
+          filter: this.params.filter,
+        });
       });
     }
 
@@ -119,7 +120,7 @@ export abstract class BasedCrudComponent<APIentity, Entity>
     }
   }
 
-  abstract mapEntityData(res: APIentity[]): Entity[];
+  abstract mapEntityData(res: APIentity[]): EntityAdmin[];
 
   setAll(params: ParamsHttp): void {
     this.items$ = this.entityService.getAll(params).pipe(

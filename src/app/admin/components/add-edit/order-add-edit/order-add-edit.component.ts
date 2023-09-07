@@ -3,17 +3,17 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdersService } from '@sharedModule/services/entities/orders.service';
 import { AddEditComponent } from '../add-edit.component';
 import { ActivatedRoute } from '@angular/router';
-import { APIorder, OrderAdmin } from '@sharedModule/services/entities/types/order.interface';
+import { APIorder, Order } from '@sharedModule/services/entities/types/order.interface';
 
 @Component({
   selector: 'app-order-form',
   templateUrl: './order-add-edit.component.html',
   styleUrls: ['./order-add-edit.component.scss'],
 })
-export class OrderAddEditComponent extends AddEditComponent<APIorder, OrderAdmin> {
+export class OrderAddEditComponent extends AddEditComponent<APIorder, Order> {
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    phone: new FormControl('', [Validators.required, Validators.pattern(/\+380\d{9}/)]),
+    phone: new FormControl('', [Validators.required, Validators.pattern(/\+380\d{9}/), Validators.maxLength(13)]),
     message: new FormControl('', []),
     products: new FormArray([]),
   });

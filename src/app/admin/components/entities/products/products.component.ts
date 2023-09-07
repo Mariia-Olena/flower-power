@@ -4,6 +4,7 @@ import { BasedCrudComponent } from '@admin/components/entities/based-crud.compon
 import {
   APIproduct,
   ProductAdmin,
+  Product
 } from '@sharedModule/services/entities/types/product.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,6 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProductsComponent extends BasedCrudComponent<
   APIproduct,
+  Product,
   ProductAdmin
 > {
   options = {

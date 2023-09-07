@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import {
   APIproduct,
-  Product,
-  ProductAdmin,
+  Product
 } from '@sharedModule/services/entities/types/product.interface';
 import {
   BasedCrudHttpService,
@@ -16,7 +15,7 @@ import {
 })
 export class ProductsService extends BasedCrudHttpService<
   APIproduct,
-  ProductAdmin
+  Product
 > {
   constructor(private http: HttpClient) {
     super();
@@ -65,7 +64,7 @@ export class ProductsService extends BasedCrudHttpService<
     );
   }
 
-  remove(id: string): void {
-    this.http.delete<APIproduct>(`${this.baseUrl}/products/${id}`, {}).subscribe();
+  remove(id: string): Observable<APIproduct> {
+   return this.http.delete<APIproduct>(`${this.baseUrl}/products/${id}`, {});
   }
 }

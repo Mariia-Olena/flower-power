@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { APIuser, UserAdmin } from '@sharedModule/services/entities/types/user.interface';
+import { APIuser, User } from '@sharedModule/services/entities/types/user.interface';
 import { UsersService } from '@sharedModule/services/entities/users.service';
 import { AddEditComponent } from '../add-edit.component';
 
@@ -10,7 +10,7 @@ import { AddEditComponent } from '../add-edit.component';
   templateUrl: './user-add-edit.component.html',
   styleUrls: ['./user-add-edit.component.scss'],
 })
-export class UserAddEditComponent extends AddEditComponent<APIuser, UserAdmin> {
+export class UserAddEditComponent extends AddEditComponent<APIuser, User> {
   form = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.minLength(3)]),
     password: new FormControl('', [Validators.required, Validators.minLength(3)]),

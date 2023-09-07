@@ -103,7 +103,7 @@ export class OrdersService extends BasedCrudHttpService<APIorder, Order> {
     );
   }
 
-  remove(id: string): void {
-    this.http.delete<APIorder>(`${this.baseUrl}/orders/${id}`, {}).subscribe();
+  remove(id: string): Observable<APIorder> {
+    return this.http.delete<APIorder>(`${this.baseUrl}/orders/${id}`, {});
   }
 }

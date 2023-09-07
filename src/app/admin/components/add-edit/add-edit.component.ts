@@ -3,7 +3,7 @@ import { Directive, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BasedCrudHttpService } from '@sharedModule/services/entities/based-crud-http-service';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 
 @Directive()
 export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
@@ -44,10 +44,23 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
     }, []);
   }
 
+  getFormValue(): Entity {
+    return this.form.getRawValue()
+  }
+
+  onSubmit(body: Entity) {
+    this.entityService.create(body).subscribe(
+      (res) => {
+        this.form.reset()
+      }
+    )
+  }
+
   ngOnInit(): void {
     this.setName();
 
     this.entityRoute.data.pipe(
+      take(1),
       map((obj: { [key: string]: APIentity }) => {
         for (const key in obj) {
           if (obj.hasOwnProperty(key)) {
