@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdersService } from '@sharedModule/services/entities/orders.service';
 import { AddEditComponent } from '../add-edit.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APIorder, Order } from '@sharedModule/services/entities/types/order.interface';
 
 @Component({
@@ -11,6 +11,8 @@ import { APIorder, Order } from '@sharedModule/services/entities/types/order.int
   styleUrls: ['./order-add-edit.component.scss'],
 })
 export class OrderAddEditComponent extends AddEditComponent<APIorder, Order> {
+  url = 'orders';
+
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     phone: new FormControl('', [Validators.required, Validators.pattern(/\+380\d{9}/), Validators.maxLength(13)]),
@@ -18,8 +20,8 @@ export class OrderAddEditComponent extends AddEditComponent<APIorder, Order> {
     products: new FormArray([]),
   });
 
-  constructor(private ordersService: OrdersService, private route: ActivatedRoute) {
-    super(ordersService, route)
+  constructor(private ordersService: OrdersService, private route: ActivatedRoute, private router: Router) {
+    super(ordersService, route, router)
   }
 
   get products(): FormArray {
@@ -42,7 +44,7 @@ export class OrderAddEditComponent extends AddEditComponent<APIorder, Order> {
       return
     }
 
-    item.products.forEach(item => this.addProduct())
+    item.products.map(item => this.addProduct())
   }
 
   setValueInForm(): void {

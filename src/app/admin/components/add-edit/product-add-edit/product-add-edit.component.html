@@ -28,7 +28,7 @@
           Price must not be greater than 999999
         </mat-error>
         <mat-error *ngIf="form.controls.price.errors?.['pattern']">
-          Price must be in this format 0.00
+          Price must be in this 00 or 0.00 format
         </mat-error>
       </mat-form-field>
 
@@ -448,10 +448,10 @@
   <button mat-flat-button color="primary" type="submit" class="submit-button">
     Submit
   </button>
-  <button mat-flat-button color="warn" class="submit-button">
+  <button (click)="onCancelButton()" mat-flat-button color="warn" class="submit-button">
     Cancel
   </button>
-  <button mat-flat-button color="accent" class="submit-button">
+  <button (click)="onResetButton()" mat-flat-button color="accent" class="submit-button">
     Reset
   </button>
 </div>

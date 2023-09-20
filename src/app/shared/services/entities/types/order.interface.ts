@@ -20,18 +20,15 @@ export interface OrderAdmin {
   updated: string;
 }
 
-export interface OrderForm {
-  name: string;
-  phone: string;
-  message: string;
-}
-
 export interface OrderProducts {
   quantity: number;
   name: string;
   id: string;
 }
 
-export interface Order extends OrderForm {
+export interface Order {
+  name: string;
+  phone: string;
+  message: string;
   products: OrderProducts[];
 }

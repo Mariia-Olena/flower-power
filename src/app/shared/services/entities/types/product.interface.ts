@@ -87,3 +87,22 @@ export interface Plant extends PlantMethods {
   potColor: string[];
   id: string;
 }
+
+export interface ProductForm {
+  name: string;
+  price: string;
+  description: string;
+  id: string;
+  extraInfo: {
+    image: {imageUrl: string}[];
+  size: {
+    size: string;
+    coeff: string;
+  }[];
+  potColor: {potColor: string}[];
+  rating: string ;
+  video: string;
+  plantCare: ProductCare;
+  review: ProductReview[];
+  }
+}

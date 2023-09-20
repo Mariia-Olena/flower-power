@@ -10,7 +10,7 @@
   [actionConfig]="actionConfig"
   (sortChange)="announceSortChange($event)"
 ></app-table>
-<mat-paginator
+<mat-paginator class="mat-paginator"
   [length]="params.length"
   [pageSize]="params.limit"
   [pageIndex]="params.pageIndex"

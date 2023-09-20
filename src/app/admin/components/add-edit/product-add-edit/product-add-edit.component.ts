@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '@sharedModule/services/entities/products.service';
 import {
   APIproduct,
-  Product,
+  Product, ProductForm
 } from '@sharedModule/services/entities/types/product.interface';
 import { AddEditComponent } from '../add-edit.component';
 
@@ -17,13 +17,15 @@ export class ProductAddEditComponent extends AddEditComponent<
   APIproduct,
   Product
 > {
+  url = 'products';
+
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     price: new FormControl('', [
       Validators.required,
       Validators.min(1),
       Validators.max(999999),
-      Validators.pattern(/^[1-9]\d*\.\d{2}$/),
+      Validators.pattern(/^\d+(\.\d{1,2})?$/),
     ]),
     description: new FormControl('', [
       Validators.required,
@@ -81,9 +83,10 @@ export class ProductAddEditComponent extends AddEditComponent<
 
   constructor(
     private productsService: ProductsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
-    super(productsService, route);
+    super(productsService, route, router);
   }
 
   get image() {
@@ -165,10 +168,10 @@ export class ProductAddEditComponent extends AddEditComponent<
     }
 
     if (item && item.extraInfo) {
-      item.extraInfo.image.forEach((item) => this.addImage());
-      item.extraInfo.size.forEach((item) => this.addSize());
-      item.extraInfo.potColor.forEach((item) => this.addPotColor());
-      item.extraInfo.review.forEach((item) => this.addReview());
+      item.extraInfo.image.map((item) => this.addImage());
+      item.extraInfo.size.map((item) => this.addSize());
+      item.extraInfo.potColor.map((item) => this.addPotColor());
+      item.extraInfo.review.map((item) => this.addReview());
     }
   }
 
@@ -207,19 +210,19 @@ export class ProductAddEditComponent extends AddEditComponent<
     price = +price;
     extraInfo.rating = +extraInfo.rating;
 
-    // extraInfo.review.forEach((item, index) => {
-    //   extraInfo.review[index].rating = +item.rating;
-    // });
+    extraInfo.review.map((item, index) => {
+      extraInfo.review[index].rating = +item.rating;
+    });
 
-    // extraInfo.size.forEach((item, index) => {
-    //   extraInfo.size[index].coeff = +item.coeff;
-    // });
+    extraInfo.size.map((item, index) => {
+      extraInfo.size[index].coeff = +item.coeff;
+    });
 
-    extraInfo.image.forEach((item, index) => {
+    extraInfo.image.map((item, index) => {
       extraInfo.image[index] = item.imageUrl;
     });
 
-    extraInfo.potColor.forEach((item, index) => {
+    extraInfo.potColor.map((item, index) => {
       extraInfo.potColor[index] = item.potColor;
     });
 
