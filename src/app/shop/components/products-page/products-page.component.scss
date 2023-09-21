@@ -3,7 +3,7 @@
 .main {
   display: grid;
   grid-template-areas:
-    "filter title"
+    ". title"
     "filter cards";
   grid-template-columns: max-content 1fr;
 }

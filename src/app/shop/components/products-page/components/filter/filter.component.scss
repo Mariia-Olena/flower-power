@@ -1,0 +1,53 @@
+@import "style-variables.scss";
+
+.filter {
+  &-list {
+    display: flex;
+    flex-direction: column;
+    gap: rem(10);
+    margin-top: rem(20);
+  }
+
+  &-title {
+    @extend %subHead3;
+    padding-left: rem(30);
+  }
+
+  &-text {
+    @extend %subHead1;
+  }
+}
+
+.container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: rem(20);
+  width: rem(20);
+  border: solid 1px var(--greyX);
+  border-radius: 2px;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: var( --corn-opacity);
+}
+
+.container input:checked ~ .checkmark {
+  background-color: var( --corn);
+  border-color: var( --corn);
+}

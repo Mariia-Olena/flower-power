@@ -23,7 +23,7 @@ export class ProductsPageComponent implements OnInit {
   private productInCart: APIproduct;
 
   params: ParamsHttp = {
-    limit: 2,
+    limit: 6,
     page: 1,
     sort: '-name',
     filter: [],
