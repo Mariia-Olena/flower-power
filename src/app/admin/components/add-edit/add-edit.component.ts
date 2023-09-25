@@ -1,4 +1,3 @@
-import { leadingComment } from '@angular/compiler';
 import { Directive, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,7 +18,7 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
     private entityRouter: Router
   ) {}
 
-  abstract setFieldsUpfront(item?: APIentity): void;
+  abstract setFieldsUpfront(): void;
 
   abstract setValueInForm(): void;
 
@@ -33,8 +32,8 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
 
   setName(): void {
     this.entityRoute.snapshot.params['id']
-      ? (this.name = 'edit')
-      : (this.name = 'add');
+      ? (this.name = 'edit') && (this.isEditPage = true)
+      : (this.name = 'add') && (this.isEditPage = false);
   }
 
   setValueInFormArray(array: string[], name: string): { name: string }[] {
@@ -44,38 +43,30 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
     }, []);
   }
 
-  getFormValue(): Entity {
+  getFormValue() {
     return this.form.getRawValue();
   }
 
-  onResetButton() {
-    this.setValueInForm();
-  }
-
   onCancelButton() {
-    this.entityRouter.navigate([`/admin/${this.url}`])
+    this.entityRouter.navigate([`/admin/${this.url}`]);
   }
 
   onSubmit(body: Entity) {
-    if (this.name === 'add') {
-      this.entityService.create(body).subscribe((res: APIentity) => {
-        
-      });
+    if (!this.isEditPage && this.form.valid) {
+      this.entityService.create(body).subscribe((res: APIentity) => {});
     }
 
-    if (this.name === 'edit') {
-      this.entityService.update(body, this.entityRoute.snapshot.params['id']).subscribe((res: APIentity) => {
-        
-      });
+    if (this.isEditPage && this.form.valid) {
+      this.entityService
+        .update(body, this.entityRoute.snapshot.params['id'])
+        .subscribe((res: APIentity) => {});
     }
-
-    this.entityRouter.navigate([`/admin/${this.url}`])
   }
 
   ngOnInit(): void {
     this.setName();
 
-    this.name === 'edit' &&
+    this.isEditPage &&
       this.entityRoute.data
         .pipe(
           take(1),
@@ -89,16 +80,17 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
             return null;
           })
         )
-        .subscribe((data) => {
-          data
-            ? (this.item = data)
-            : this.entityRouter.navigate([`/admin/${this.url}`]);
-        });
+        .subscribe(
+          (data) => {
+            data
+              ? (this.item = data)
+              : this.entityRouter.navigate([`/admin/${this.url}`]);
+          },
+          (error) => {}
+        );
 
-    this.setFieldsUpfront(this.item);
+    this.setFieldsUpfront();
 
     this.entityRoute.snapshot.params['id'] && this.setValueInForm();
-
-    this.name === 'edit' ? this.isEditPage = true : this.isEditPage = false;
   }
 }

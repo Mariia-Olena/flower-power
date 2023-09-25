@@ -92,8 +92,14 @@
         </button>
       </mat-card>
     </ng-container>
-    <button mat-flat-button color="primary" type="submit" class="submit-button">
-      Submit
-    </button>
+    <div class="buttons">
+      <button mat-flat-button color="primary" type="submit" [disabled]="this.form.touched && !this.form.valid">Submit</button>
+      <button (click)="onCancelButton()" mat-flat-button color="warn">
+        Cancel
+      </button>
+      <button (click)="onResetButton()" mat-flat-button color="accent">
+        Reset
+      </button>
+    </div>
   </form>
 </div>

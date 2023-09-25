@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '@sharedModule/services/entities/products.service';
 import {
   APIproduct,
-  Product, ProductForm
+  Product,
+  ProductForm,
 } from '@sharedModule/services/entities/types/product.interface';
 import { AddEditComponent } from '../add-edit.component';
 
@@ -132,7 +133,7 @@ export class ProductAddEditComponent extends AddEditComponent<
     const potColorForm = new FormGroup({
       potColor: new FormControl('', [
         Validators.required,
-        Validators.pattern(/^[a-zA-Z]+$/),
+        Validators.pattern(/^[a-zA-Z\s]+$/),
       ]),
     });
 
@@ -158,20 +159,19 @@ export class ProductAddEditComponent extends AddEditComponent<
     this.review.push(reviewForm);
   }
 
-  setFieldsUpfront(item?: APIproduct): void {
-    if (!item) {
+  setFieldsUpfront(): void {
+    if (!this.item) {
       this.addImage();
       this.addSize();
       this.addPotColor();
       this.addReview();
-      return;
     }
 
-    if (item && item.extraInfo) {
-      item.extraInfo.image.map((item) => this.addImage());
-      item.extraInfo.size.map((item) => this.addSize());
-      item.extraInfo.potColor.map((item) => this.addPotColor());
-      item.extraInfo.review.map((item) => this.addReview());
+    if (this.item && this.item.extraInfo) {
+      this.item.extraInfo.image.map((item) => this.addImage());
+      this.item.extraInfo.size.map((item) => this.addSize());
+      this.item.extraInfo.potColor.map((item) => this.addPotColor());
+      this.item.extraInfo.review.map((item) => this.addReview());
     }
   }
 
@@ -204,33 +204,33 @@ export class ProductAddEditComponent extends AddEditComponent<
     this.review.patchValue(this.item.extraInfo.review);
   }
 
-  transformFormValue(formValue): Product {
+  transformFormValue(formValue: ProductForm): Product {
     let { name, price, description, extraInfo } = formValue;
-
-    price = +price;
-    extraInfo.rating = +extraInfo.rating;
-
-    extraInfo.review.map((item, index) => {
-      extraInfo.review[index].rating = +item.rating;
-    });
-
-    extraInfo.size.map((item, index) => {
-      extraInfo.size[index].coeff = +item.coeff;
-    });
-
-    extraInfo.image.map((item, index) => {
-      extraInfo.image[index] = item.imageUrl;
-    });
-
-    extraInfo.potColor.map((item, index) => {
-      extraInfo.potColor[index] = item.potColor;
-    });
 
     return {
       name,
-      price,
+      price: +price,
       description,
-      extraInfo,
+      extraInfo: {
+        ...extraInfo,
+        rating: +extraInfo.rating,
+        review: extraInfo.review.map((item) => ({
+          ...item,
+          rating: +item.rating,
+        })),
+        size: extraInfo.size.map((item) => ({ ...item, coeff: +item.coeff })),
+        image: extraInfo.image.map((item) => item.imageUrl),
+        potColor: extraInfo.potColor.map((item) => item.potColor),
+      },
     };
+  }
+
+  onResetButton() {
+    this.image.clear();
+    this.size.clear();
+    this.potColor.clear();
+    this.review.clear();
+    this.setFieldsUpfront();
+    this.setValueInForm();
   }
 }

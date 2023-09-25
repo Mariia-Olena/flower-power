@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import {
   APIproduct,
   Product
@@ -22,7 +22,9 @@ export class ProductsService extends BasedCrudHttpService<
   }
 
   getOne(id: string): Observable<APIproduct> {
-    return this.http.get<APIproduct>(`${this.baseUrl}/products/${id}`, {});
+    return this.http.get<APIproduct>(`${this.baseUrl}/products/${id}`, {}).pipe(
+      // catchError()
+    );
   }
 
   getAll(params: ParamsHttp): Observable<APIproduct[]> {

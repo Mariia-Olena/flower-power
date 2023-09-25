@@ -4,3 +4,11 @@
 .form {
   width: rem(400);
 }
+
+.buttons {
+  display: flex;
+  gap: rem(10);
+  position: fixed;
+  top: rem(20);
+  right: rem(20);
+}

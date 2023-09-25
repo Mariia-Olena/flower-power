@@ -40,4 +40,9 @@ export class UserAddEditComponent extends AddEditComponent<APIuser, User> {
   setValueInForm(): void {
     this.form.patchValue(this.item);
   }
+
+  onResetButton() {
+    this.form.reset();
+    this.setValueInForm();
+  }
 }

@@ -1,6 +1,10 @@
 <div class="wrapper">
   <h1>{{ name | titlecase }} product</h1>
-  <form [formGroup]="form" (submit)="onSubmit(transformFormValue(getFormValue()))" class="form">
+  <form
+    [formGroup]="form"
+    (submit)="onSubmit(transformFormValue(getFormValue()))"
+    class="form"
+  >
     <mat-card>
       <h2>Main Information:</h2>
 
@@ -365,10 +369,14 @@
                 <mat-form-field class="field">
                   <mat-label>Name</mat-label>
                   <input matInput formControlName="name" />
-                  <mat-error *ngIf="review.controls[i].get('name').errors?.['required']">
+                  <mat-error
+                    *ngIf="review.controls[i].get('name').errors?.['required']"
+                  >
                     Name is required
                   </mat-error>
-                  <mat-error *ngIf="review.controls[i].get('name').errors?.['minlength']">
+                  <mat-error
+                    *ngIf="review.controls[i].get('name').errors?.['minlength']"
+                  >
                     Name must be at least 3 characters long
                   </mat-error>
                 </mat-form-field>
@@ -377,35 +385,39 @@
                   <mat-label>Rating</mat-label>
                   <input matInput formControlName="rating" />
                   <mat-error
-                  *ngIf="review.controls[i].get('rating').errors?.['required']"
-                >
-                  Rating is required
-                </mat-error>
-                <mat-error
-                  *ngIf="review.controls[i].get('rating').errors?.['min']"
-                >
-                  Rating must not be less than 0
-                </mat-error>
-                <mat-error
-                  *ngIf="review.controls[i].get('rating').errors?.['max']"
-                >
-                  Rating must not be greater than 5
-                </mat-error>
-                <mat-error
-                  *ngIf="review.controls[i].get('rating').errors?.['pattern']"
-                >
-                  Please enter a valid rating
-                </mat-error>
+                    *ngIf="review.controls[i].get('rating').errors?.['required']"
+                  >
+                    Rating is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="review.controls[i].get('rating').errors?.['min']"
+                  >
+                    Rating must not be less than 0
+                  </mat-error>
+                  <mat-error
+                    *ngIf="review.controls[i].get('rating').errors?.['max']"
+                  >
+                    Rating must not be greater than 5
+                  </mat-error>
+                  <mat-error
+                    *ngIf="review.controls[i].get('rating').errors?.['pattern']"
+                  >
+                    Please enter a valid rating
+                  </mat-error>
                 </mat-form-field>
               </div>
               <div class="half second">
                 <mat-form-field class="field">
                   <mat-label>Comment</mat-label>
                   <input matInput formControlName="comment" />
-                  <mat-error *ngIf="review.controls[i].get('comment').errors?.['required']">
+                  <mat-error
+                    *ngIf="review.controls[i].get('comment').errors?.['required']"
+                  >
                     Comment is required
                   </mat-error>
-                  <mat-error *ngIf="review.controls[i].get('comment').errors?.['minlength']">
+                  <mat-error
+                    *ngIf="review.controls[i].get('comment').errors?.['minlength']"
+                  >
                     Comment must be at least 3 characters long
                   </mat-error>
                 </mat-form-field>
@@ -438,20 +450,16 @@
         </mat-card>
       </ng-container>
     </ng-container>
-    <button mat-flat-button color="primary" type="submit" class="submit-button">
-      Submit
-    </button>
+    <div class="buttons">
+      <button mat-flat-button color="primary" type="submit" [disabled]="this.form.touched && !this.form.valid">Submit</button>
+      <button (click)="onCancelButton()" mat-flat-button color="warn">
+        Cancel
+      </button>
+      <button (click)="onResetButton()" mat-flat-button color="accent">
+        Reset
+      </button>
+    </div>
   </form>
 </div>
 
-<div class="buttons">
-  <button mat-flat-button color="primary" type="submit" class="submit-button">
-    Submit
-  </button>
-  <button (click)="onCancelButton()" mat-flat-button color="warn" class="submit-button">
-    Cancel
-  </button>
-  <button (click)="onResetButton()" mat-flat-button color="accent" class="submit-button">
-    Reset
-  </button>
-</div>
+
