@@ -4,8 +4,8 @@
       <li class="filter-title">{{ keyValuePair.key | titlecase }}</li>
       <li *ngFor="let option of keyValuePair.value" class="filter-text">
         <label class="container">{{ option }}
-          <input type="checkbox" />
-          <span class="checkmark"></span>
+          <input type="checkbox" (click)="checkFilter(option)"/>
+          <span class="checkmark" [ngClass]="{'checked': selectedFilters.has(option)}" ></span>
         </label>
       </li>
     </ng-container>

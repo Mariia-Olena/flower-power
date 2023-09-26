@@ -4,6 +4,16 @@
       <h1 class="title">ALL PLANTS</h1>
       <app-product-view></app-product-view>
     </div>
+    <div class="selected-filters">
+      <ul class="selected-filters-list">
+        <li *ngFor="let filter of selectedFilters" class="selected-filters-item">
+          <div>
+            {{ filter }}
+            <button (click)="checkFilter(filter)" class="selected-filters-button">✖</button>
+          </div>
+        </li>
+      </ul>
+    </div>
     <div class="filter">
       <app-filter></app-filter>
     </div>

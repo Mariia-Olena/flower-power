@@ -35,6 +35,12 @@ export class ProductsPageComponent implements OnInit {
     private productsMapper: ProductsMapper
   ) {}
 
+  selectedFilters = this.productsService.selectedFilters
+
+  checkFilter(name: string) {
+    this.productsService.checkFilter(name)
+  }
+
   setPlants(params: ParamsHttp) {
     this.products$ = this.productsService.getAll(params);
 

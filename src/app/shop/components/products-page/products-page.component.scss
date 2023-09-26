@@ -4,6 +4,7 @@
   display: grid;
   grid-template-areas:
     ". title"
+    "filter selected-filters"
     "filter cards";
   grid-template-columns: max-content 1fr;
 }
@@ -23,8 +24,32 @@
   width: 290px;
 }
 
+.selected-filters {
+  grid-area: selected-filters;
+}
+
 .cards {
   grid-area: cards;
   margin-top: rem(20);
 }
 
+.selected-filters {
+  margin-top: rem(20);
+
+  &-list {
+    display: flex;
+    gap: rem(15)
+  }
+
+  &-item {
+    background-color: var(--lightGrey);
+    padding: rem(3);
+    padding-left: rem(8);
+    border-radius: 2px;
+  }
+
+  &-button {
+    color: var(--form-red);
+    padding: rem(5);
+  }
+}

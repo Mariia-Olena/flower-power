@@ -47,7 +47,7 @@
   background-color: var( --corn-opacity);
 }
 
-.container input:checked ~ .checkmark {
+.checked {
   background-color: var( --corn);
   border-color: var( --corn);
 }

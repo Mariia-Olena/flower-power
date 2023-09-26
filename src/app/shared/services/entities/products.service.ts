@@ -21,6 +21,14 @@ export class ProductsService extends BasedCrudHttpService<
     super();
   }
 
+  selectedFilters = new Set<string>;
+
+  checkFilter(name: string) {
+    this.selectedFilters.has(name)
+      ? this.selectedFilters.delete(name)
+      : this.selectedFilters.add(name);
+  }
+
   getOne(id: string): Observable<APIproduct> {
     return this.http.get<APIproduct>(`${this.baseUrl}/products/${id}`, {}).pipe(
       // catchError()
