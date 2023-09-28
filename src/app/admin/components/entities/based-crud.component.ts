@@ -189,10 +189,6 @@ export abstract class BasedCrudComponent<APIentity, Entity, EntityAdmin>
     });
   }
 
-  // ngAfterViewInit() {
-  //   // this.dataSource.sort = this.sort;
-  // }
-
   ngOnDestroy(): void {
     this.entityService.showModal.next(false);
   }

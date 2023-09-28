@@ -66,3 +66,7 @@ svg.header-icon {
 .tooltip {
   border: 1px solid var(--lightGrey);
 }
+
+svg.header-icon.not-work-yet {
+  stroke: var(--grey);
+}

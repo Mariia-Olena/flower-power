@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterContentChecked,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Plant } from '@sharedModule/services/entities/types/product.interface';
 
 @Component({
@@ -7,9 +15,18 @@ import { Plant } from '@sharedModule/services/entities/types/product.interface';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-
   @Input() plant: Plant;
   @Output() addToCart = new EventEmitter();
 
-  ngOnInit(): void {}
+  plantParams = {
+    size: '',
+    coeff: 1,
+    potColor: '',
+  };
+
+  ngOnInit(): void {
+    this.plantParams.size = this.plant.size[0].size
+    this.plantParams.coeff = this.plant.size[0].coeff
+    this.plantParams.potColor = this.plant.potColor[0]
+  }
 }

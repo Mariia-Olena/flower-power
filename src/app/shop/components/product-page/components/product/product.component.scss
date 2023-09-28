@@ -34,7 +34,7 @@
     margin-top: rem(40);
     width: max-content;
 
-    &:hover {
+    &:hover:not([disabled]) {
       background-color: var(--corn-opacity);
     }
   }
@@ -80,6 +80,10 @@
 
 .counter {
   margin-top: rem(5);
+}
+
+.selected {
+  background-color: var(--corn);
 }
 
 @media (min-width: 768px) {
