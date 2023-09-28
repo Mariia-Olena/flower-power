@@ -7,7 +7,7 @@ import {
   Product,
   ProductForm,
 } from '@sharedModule/services/entities/types/product.interface';
-import { AddEditComponent } from '../add-edit.component';
+import { AddEditComponent } from '@admin/components/add-edit/add-edit.component';
 
 @Component({
   selector: 'app-product-form',

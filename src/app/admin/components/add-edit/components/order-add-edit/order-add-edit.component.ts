@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdersService } from '@sharedModule/services/entities/orders.service';
-import { AddEditComponent } from '../add-edit.component';
+import { AddEditComponent } from '@admin/components/add-edit/add-edit.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   APIorder,

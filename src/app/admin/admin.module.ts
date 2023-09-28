@@ -11,9 +11,9 @@ import { ProductsComponent } from '@admin/components/entities/products/products.
 import { OrdersComponent } from '@admin/components/entities/orders/orders.component';
 import { ToolbarComponent } from '@admin/components/toolbar/toolbar.component';
 import { TableComponent } from '@admin/components/table/table.component';
-import { ProductAddEditComponent } from '@admin/components/add-edit/product-add-edit/product-add-edit.component';
-import { OrderAddEditComponent } from '@admin/components/add-edit/order-add-edit/order-add-edit.component';
-import { UserAddEditComponent } from '@admin/components/add-edit/user-add-edit/user-add-edit.component';
+import { ProductAddEditComponent } from '@admin/components/add-edit/components/product-add-edit/product-add-edit.component';
+import { OrderAddEditComponent } from '@admin/components/add-edit/components/order-add-edit/order-add-edit.component';
+import { UserAddEditComponent } from '@admin/components/add-edit/components/user-add-edit/user-add-edit.component';
 import { DeleteModalComponent } from '@admin/components/delete-modal/delete-modal.component';
 
 @NgModule({

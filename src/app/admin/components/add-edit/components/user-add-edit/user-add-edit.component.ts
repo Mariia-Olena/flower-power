@@ -6,7 +6,7 @@ import {
   User,
 } from '@sharedModule/services/entities/types/user.interface';
 import { UsersService } from '@sharedModule/services/entities/users.service';
-import { AddEditComponent } from '../add-edit.component';
+import { AddEditComponent } from '@admin/components/add-edit/add-edit.component';
 
 @Component({
   selector: 'app-user-form',
@@ -45,4 +45,5 @@ export class UserAddEditComponent extends AddEditComponent<APIuser, User> {
     this.form.reset();
     this.setValueInForm();
   }
+
 }

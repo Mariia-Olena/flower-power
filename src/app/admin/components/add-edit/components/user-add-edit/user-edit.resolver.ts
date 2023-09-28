@@ -5,7 +5,7 @@ import {
   APIuser,
   User,
 } from '@sharedModule/services/entities/types/user.interface';
-import { EditResolver } from '../edit.resolver';
+import { EditResolver } from '@admin/components/add-edit/edit.resolver';
 
 @Injectable({
   providedIn: 'root',

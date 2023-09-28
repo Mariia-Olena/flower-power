@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Action } from 'rxjs/internal/scheduler/Action';
 
 export interface ActionConfig {
   name: string;

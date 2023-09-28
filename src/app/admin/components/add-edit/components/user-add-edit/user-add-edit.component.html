@@ -24,13 +24,19 @@
       </mat-form-field>
     </mat-card>
     <div class="buttons">
-      <button mat-flat-button color="primary" type="submit" [disabled]="this.form.touched && !this.form.valid">Submit</button>
-      <button (click)="onCancelButton()" mat-flat-button color="warn">
-        Cancel
-      </button>
-      <button (click)="onResetButton()" mat-flat-button color="accent">
-        Reset
-      </button>
+      <ng-container *ngFor="let button of buttons">
+        <button
+          mat-flat-button
+          [color]="button.color"
+          [disabled]="button.disabled()"
+          (click)="button.onClick()"
+          [ngStyle]="
+            button.name === 'reset' && name === 'add' ? { display: 'none' } : {}
+          "
+        >
+          {{ button.name }}
+        </button>
+      </ng-container>
     </div>
   </form>
 </div>

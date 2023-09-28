@@ -4,6 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BasedCrudHttpService } from '@sharedModule/services/entities/based-crud-http-service';
 import { map, take } from 'rxjs';
 
+interface Buttons {
+  name: string;
+  onClick: () => void;
+  color: string;
+  disabled: () => boolean;
+}
+
 @Directive()
 export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
   abstract url: string;
@@ -11,6 +18,33 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
   name: string;
   item: APIentity;
   isEditPage: boolean;
+
+  buttons: Buttons[] = [
+    {
+      name: 'submit',
+      onClick: () => {
+        this.onSubmit(this.getFormValue())
+      },
+      color: 'primary',
+      disabled: () => this.form.touched && !this.form.valid,
+    },
+    {
+      name: 'reset',
+      onClick: () => {
+        this.onResetButton()
+      },
+      color: 'accent',
+      disabled: () => !this.form.dirty,
+    },
+    {
+      name: 'cancel',
+      onClick: () => {
+        this.onCancelButton()
+      },
+      color: 'warn',
+      disabled: () => false,
+    },
+  ];
 
   constructor(
     private entityService: BasedCrudHttpService<APIentity, Entity>,
@@ -21,6 +55,8 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
   abstract setFieldsUpfront(): void;
 
   abstract setValueInForm(): void;
+
+  abstract onResetButton(): void;
 
   getControl(array: string, index: number): FormGroup {
     return this[array].controls[index] as FormGroup;
@@ -61,6 +97,8 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
         .update(body, this.entityRoute.snapshot.params['id'])
         .subscribe((res: APIentity) => {});
     }
+
+    this.form.markAllAsTouched();
   }
 
   ngOnInit(): void {

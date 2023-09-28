@@ -5,12 +5,12 @@ import { AdminPageComponent } from '@admin/components/admin-page/admin-page.comp
 import { OrdersComponent } from '@admin/components/entities/orders/orders.component';
 import { ProductsComponent } from '@admin/components/entities/products/products.component';
 import { UsersComponent } from '@admin/components/entities/users/users.component';
-import { ProductAddEditComponent } from '@admin/components/add-edit/product-add-edit/product-add-edit.component';
-import { UserAddEditComponent } from '@admin/components/add-edit/user-add-edit/user-add-edit.component';
-import { OrderAddEditComponent } from '@admin/components/add-edit/order-add-edit/order-add-edit.component';
-import { UserEditResolver } from '@admin/components/add-edit/user-add-edit/user-edit.resolver';
-import { OrderEditResolver } from '@admin/components/add-edit/order-add-edit/order-edit.resolver';
-import { ProductEditResolver } from '@admin/components/add-edit/product-add-edit/product-edit.resolver';
+import { ProductAddEditComponent } from '@admin/components/add-edit/components/product-add-edit/product-add-edit.component';
+import { UserAddEditComponent } from '@admin/components/add-edit/components/user-add-edit/user-add-edit.component';
+import { OrderAddEditComponent } from '@admin/components/add-edit/components/order-add-edit/order-add-edit.component';
+import { UserEditResolver } from '@admin/components/add-edit/components/user-add-edit/user-edit.resolver';
+import { OrderEditResolver } from '@admin/components/add-edit/components/order-add-edit/order-edit.resolver';
+import { ProductEditResolver } from '@admin/components/add-edit/components/product-add-edit/product-edit.resolver';
 
 const routes: Routes = [
   {

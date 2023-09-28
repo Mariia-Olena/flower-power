@@ -5,7 +5,7 @@ import {
   APIorder,
   Order,
 } from '@sharedModule/services/entities/types/order.interface';
-import { EditResolver } from '../edit.resolver';
+import { EditResolver } from '@admin/components/add-edit/edit.resolver';
 
 @Injectable({
   providedIn: 'root',
