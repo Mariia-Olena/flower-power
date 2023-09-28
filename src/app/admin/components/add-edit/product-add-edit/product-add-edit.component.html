@@ -451,7 +451,14 @@
       </ng-container>
     </ng-container>
     <div class="buttons">
-      <button mat-flat-button color="primary" type="submit" [disabled]="this.form.touched && !this.form.valid">Submit</button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="this.form.touched && !this.form.valid"
+      >
+        Submit
+      </button>
       <button (click)="onCancelButton()" mat-flat-button color="warn">
         Cancel
       </button>
@@ -461,5 +468,4 @@
     </div>
   </form>
 </div>
-
 

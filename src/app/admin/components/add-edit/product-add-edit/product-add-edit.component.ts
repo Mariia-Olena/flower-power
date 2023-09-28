@@ -80,7 +80,8 @@ export class ProductAddEditComponent extends AddEditComponent<
       }),
       review: new FormArray([]),
     }),
-  });
+    
+  }, [Validators.required]);
 
   constructor(
     private productsService: ProductsService,
@@ -109,7 +110,7 @@ export class ProductAddEditComponent extends AddEditComponent<
   addImage() {
     const imageForm = new FormGroup({
       imageUrl: new FormControl('', [Validators.required]),
-    });
+    }, [Validators.required]);
 
     this.image.push(imageForm);
   }

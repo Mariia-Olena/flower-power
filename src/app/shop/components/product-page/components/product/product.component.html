@@ -8,24 +8,27 @@
 
     <ng-template #slideCard let-slide="slideItem">
       <div>
-        <img
-          [src]="slide.img"
-          alt=""
-          width="100%"
-          class="slider-img"
-        />
+        <img [src]="slide.img" alt="" width="100%" class="slider-img" />
       </div>
     </ng-template>
   </div>
   <div class="product-descr">
-    <h1 class="product-title">{{plant.name}}</h1>
+    <h1 class="product-title">{{ plant.name }}</h1>
     <app-rating [size]="'medium'"></app-rating>
-    <p class="price">{{ plant.price | currency }}</p>
+    <p class="price">{{ plant.price * plantParams.coeff | currency }}</p>
     <div class="pot">
       Size
       <ul class="pot-list">
         <li *ngFor="let number of plant.size" class="pot-item">
-          <button class="pot-button">{{number.size}}cm</button>
+          <button
+            (click)="
+              plantParams.coeff = number.coeff; plantParams.size = number.size
+            "
+            [ngClass]="{ selected: plantParams.size === number.size }"
+            class="pot-button"
+          >
+            {{ number.size }}cm
+          </button>
         </li>
       </ul>
     </div>
@@ -33,11 +36,24 @@
       Pot color
       <ul class="pot-list">
         <li *ngFor="let color of plant.potColor" class="pot-item">
-          <button class="pot-button">{{color | lowercase}}</button>
+          <button
+            (click)="plantParams.potColor = color"
+            [ngClass]="{ selected: plantParams.potColor === color }"
+            class="pot-button"
+          >
+            {{ color | lowercase }}
+          </button>
         </li>
       </ul>
     </div>
-    <button *ngIf="!plant.isInCart()" (click)="addToCart.emit(plant.id)" class="product-button button">ADD TO CART</button>
+    <button
+      *ngIf="!plant.isInCart()"
+      (click)="addToCart.emit(plant.id)"
+      class="product-button button"
+    >
+      ADD TO CART
+    </button>
+
     <app-counter
       *ngIf="plant.isInCart()"
       [ngModel]="plant.count()"
