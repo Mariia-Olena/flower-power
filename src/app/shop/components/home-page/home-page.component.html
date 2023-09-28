@@ -1,0 +1,7 @@
+<main class="main">
+  <ng-container *ngIf="plants$ | async as plants">
+    <app-home-slider [plants]="plants"></app-home-slider>
+  </ng-container>
+  <app-info></app-info>
+  <app-spinner></app-spinner>
+</main>

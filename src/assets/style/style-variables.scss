@@ -1,0 +1,101 @@
+@function rem($value) {
+  $remValue: calc($value / 16) + rem;
+  @return $remValue;
+}
+
+:host {
+  //color
+  --green: #5f7a34;
+  --green-opacity: #5f7a34bf;
+  --corn: #efe744;
+  --corn-opacity: #efe744bf;
+  --lightGrey: #f6f7f9;
+  --greyX: #b6b6b6;
+  --darkGreen: #242923;
+  --black: #000000;
+  --white: #fff;
+  --form-red: #f13939;
+  --form-green: #5F7A42;
+  --form-grey: #BFBFBF
+}
+
+//fonts
+
+%notFound {
+  font-size: rem(500);
+  font-weight: 900;
+  line-height: rem(586);
+  letter-spacing: 0em;
+}
+
+%header1 {
+  font-family: "Bebas Neue";
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: rem(58);
+  letter-spacing: 0em;
+}
+
+%header2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: rem(42);
+  letter-spacing: 0em;
+}
+
+%subHead1 {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: rem(21);
+  letter-spacing: 0em;
+}
+
+%subHead2 {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: rem(16);
+  letter-spacing: 0em;
+}
+
+%subHead3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: rem(21);
+  letter-spacing: 0em;
+}
+
+%bodyText {
+  font-family: "Ubuntu";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: rem(16);
+  letter-spacing: 0em;
+}
+
+%bodyTitle {
+  font-family: "Ubuntu";
+  font-weight: 700;
+  font-size: rem(18);
+  line-height: rem(21);
+}
+
+%boldBodyText {
+  font-size: rem(24);
+  font-weight: 700;
+  line-height: rem(28);
+  letter-spacing: 0em;
+}
+
+%fontButton {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: rem(21);
+  letter-spacing: 0.2em;
+}
+
+//display width
+$desktopHD: "screen and (max-width: 1920px)";
+$desktopSD: "screen and (max-width: 1440px)";
+$tabletHD: "screen and (max-width: 1024px)";
+$tabletSD: "screen and (max-width: 768px)";
+$mobile: "screen and (max-width: 375px)";

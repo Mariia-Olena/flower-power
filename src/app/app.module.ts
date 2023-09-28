@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { ProductsComponent } from './products/products.component';
-import { ProductComponent } from './product/product.component';
+import { SharedModule } from '@sharedModule/shared.module';
+import { LoadingInterceptor } from '@sharedModule/interceptors/loading.interceptor';
+import { TokenInterceptor } from '@admin/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, SharedModule, BrowserAnimationsModule],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

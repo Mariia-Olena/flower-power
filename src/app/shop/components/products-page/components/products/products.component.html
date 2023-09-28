@@ -1,0 +1,9 @@
+<section>
+  <ul class="card-list">
+    <li *ngFor="let plant of plants">
+      <app-product-card (addToCart)="addToCart.emit($event)" [plant]="plant"></app-product-card>
+    </li>
+  </ul>
+</section>
+
+

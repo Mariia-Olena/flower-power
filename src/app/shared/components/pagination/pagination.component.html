@@ -1,0 +1,69 @@
+<nav class="pagination">
+  <ul class="pagination-list">
+    <li [ngClass]="{ disabled: currentPage === 1 }"  (click)="changePage.emit(currentPage - 1)" class="pagination-item">
+      <a
+        routerLink="/products"
+        [queryParams]="{ page: currentPage - 1 }"
+        class="pagination-link"
+      >
+        <svg class="pagination-icon">
+          <use xlink:href="assets/icons/sprite.svg#arrow-left"></use>
+        </svg>
+      </a>
+    </li>
+
+    <li *ngIf="currentPage > 2 && pagesCount > 5" (click)="changePage.emit(1)" class="pagination-item">
+      <a
+        routerLink="/products"
+        [queryParams]="{ page: 1 }"
+        class="pagination-link"
+        [ngClass]="{ 'pagination-link-bold': currentPage === 1 }"
+        >{{ 1 }}</a
+      >
+    </li>
+
+    <li *ngIf="currentPage > 3 && pagesCount > 5" class="pagination-item pagination-dots">
+      ...
+    </li>
+
+    <li
+      *ngFor="let page of pagesToShow()"
+      (click)="changePage.emit(page)"
+      class="pagination-item"
+    >
+      <a
+        routerLink="/products"
+        [queryParams]="{ page: page }"
+        class="pagination-link"
+        [ngClass]="{ 'pagination-link-bold': page === currentPage }"
+        >{{ page }}</a
+      >
+    </li>
+
+    <li *ngIf="currentPage < pagesCount - 2 && pagesCount > 5" class="pagination-item pagination-dots">
+      ...
+    </li>
+
+    <li *ngIf="currentPage < pagesCount - 1 && pagesCount > 5" (click)="changePage.emit(pagesCount)" class="pagination-item">
+      <a
+        routerLink="/products"
+        [queryParams]="{ page: pagesCount }"
+        class="pagination-link"
+        [ngClass]="{ 'pagination-link-bold': currentPage === pagesCount }"
+        >{{ pagesCount }}</a
+      >
+    </li>
+
+    <li [ngClass]="{ disabled: currentPage === pagesCount }" (click)="changePage.emit(currentPage + 1)" class="pagination-item">
+      <a
+        routerLink="/products"
+        [queryParams]="{ page: currentPage + 1 }"
+        class="pagination-link"
+      >
+        <svg class="pagination-icon">
+          <use xlink:href="assets/icons/sprite.svg#arrow-right"></use>
+        </svg>
+      </a>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,105 @@
+<div class="wrapper">
+  <h1>{{ name | titlecase }} order</h1>
+  <form [formGroup]="form" (submit)="onSubmit(getFormValue())" class="form">
+    <mat-card>
+      <h2>Customer Information:</h2>
+
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="form.controls.name.errors?.['required']">
+          Name is required
+        </mat-error>
+        <mat-error *ngIf="form.controls.name.errors?.['minlength']">
+          Name must be at least 3 characters long
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" />
+        <mat-error *ngIf="form.controls.phone.errors?.['required']">
+          Phone number is required
+        </mat-error>
+        <mat-error *ngIf="form.controls.phone.errors?.['pattern'] || form.controls.phone.errors?.['maxlength']">
+          Phone number must start with a "+380" and be valid
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Message</mat-label>
+        <input matInput formControlName="message" />
+      </mat-form-field>
+    </mat-card>
+
+    <ng-container formArrayName="products">
+      <mat-card>
+        <h2>Products:</h2>
+        <ng-container
+          *ngFor="let productForm of products.controls; let i = index"
+        >
+          <div [formGroup]="getControl('products', i)" class="two-rows">
+            <div class="first gap">
+              <mat-form-field class="field-half">
+                <mat-label>Quantity</mat-label>
+                <input matInput formControlName="quantity" />
+                <mat-error *ngIf="products.controls[i].get('quantity').errors?.['required']">
+                  Quantity is required
+                </mat-error>
+                <mat-error *ngIf="products.controls[i].get('quantity').errors?.['pattern']">
+                  Please enter a valid quantity
+                </mat-error>
+                <mat-error *ngIf="products.controls[i].get('quantity').errors?.['min']">
+                  Quantity must be at least 1
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="field-half">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" />
+                <mat-error *ngIf="products.controls[i].get('name').errors?.['required']">
+                  Name is required
+                </mat-error>
+                <mat-error *ngIf="products.controls[i].get('name').errors?.['minlength']">
+                  Name must be at least 3 characters long
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <mat-form-field class="second">
+              <mat-label>Id</mat-label>
+              <input matInput formControlName="id" />
+              <mat-error *ngIf="products.controls[i].get('id').errors?.['required']">
+                ID is required
+              </mat-error>
+            </mat-form-field>
+            <button
+              color="warn"
+              mat-icon-button
+              (click)="delete('products', i)"
+              class="delete-button icon"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+        </ng-container>
+        <button
+          color="primary"
+          mat-icon-button
+          (click)="addProduct()"
+          class="add-button"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-card>
+    </ng-container>
+    <div class="buttons">
+      <button mat-flat-button color="primary" type="submit" [disabled]="this.form.touched && !this.form.valid">Submit</button>
+      <button (click)="onCancelButton()" mat-flat-button color="warn">
+        Cancel
+      </button>
+      <button (click)="onResetButton()" mat-flat-button color="accent">
+        Reset
+      </button>
+    </div>
+  </form>
+</div>

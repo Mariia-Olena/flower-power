@@ -1,0 +1,29 @@
+<section class="slider">
+  <h2 class="slider-title">Why not try?</h2>
+
+  <ng-container *ngIf="plants">
+    <app-slider
+      [sliderType]="'multipleItems'"
+      [slides]="plants"
+      [slideTemplate]="slideCard"
+    ></app-slider>
+  </ng-container>
+
+  <ng-template #slideCard let-slide="slideItem">
+    <a routerLink="/products/{{ slide.id }}" target="self">
+      <img
+        [src]="slide.img"
+        alt=""
+        width="100%"
+        class="slider-img centerMode"
+      />
+    </a>
+
+    <div class="text">
+      <a routerLink="/products/{{ slide.id }}" target="self">
+        <p class="text-title">{{ slide.name }}</p>
+      </a>
+      <p class="price">{{ slide.price | currency }}</p>
+    </div>
+  </ng-template>
+</section>

@@ -1,0 +1,40 @@
+<div class="container">
+  <main class="main">
+    <div class="title-container">
+      <h1 class="title">ALL PLANTS</h1>
+      <app-product-view></app-product-view>
+    </div>
+    <div class="selected-filters">
+      <ul class="selected-filters-list">
+        <li *ngFor="let filter of selectedFilters" class="selected-filters-item">
+          <div>
+            {{ filter }}
+            <button (click)="checkFilter(filter)" class="selected-filters-button">✖</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="filter">
+      <app-filter></app-filter>
+    </div>
+    <div class="cards">
+      <ng-container *ngIf="plants$ | async as plants">
+        <app-products
+          *ngIf="plants.length"
+          (addToCart)="addToCart($event)"
+          [plants]="plants"
+        ></app-products>
+      </ng-container>
+    </div>
+  </main>
+  <ng-container *ngIf="plants$ | async as plants">
+    <app-pagination
+      *ngIf="plants.length"
+      [limit]="params.limit"
+      [total]="productsService.itemsCount$ | async"
+      [currentPage]="params.page"
+      (changePage)="changePage($event)"
+    ></app-pagination>
+  </ng-container>
+  <app-spinner></app-spinner>
+</div>

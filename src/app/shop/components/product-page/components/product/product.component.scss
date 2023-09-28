@@ -1,0 +1,89 @@
+@import "style-variables.scss";
+
+.slider-img {
+  object-fit: cover;
+  height: 700px;
+}
+
+.product {
+  display: grid;
+  grid-template-columns: 50% 1fr;
+  gap: rem(20);
+  border: 1px solid var(--greyX);
+  margin: rem(50) 0;
+  padding: rem(20);
+
+  &-slider {
+    height: 700px;
+  }
+
+  &-descr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--lightGrey);
+  }
+
+  &-title {
+    @extend %header1;
+    text-align: center;
+  }
+
+  &-button {
+    margin-top: rem(40);
+    width: max-content;
+
+    &:hover {
+      background-color: var(--corn-opacity);
+    }
+  }
+
+  &-counter {
+    margin-top: rem(40);
+  }
+}
+
+.rating {
+  margin-top: rem(10);
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  &-star {
+    height: 19px;
+    width: 20px;
+  }
+}
+
+.pot {
+  @extend %bodyTitle;
+  margin-top: rem(20);
+  text-align: center;
+
+  &-list {
+    margin-top: rem(5);
+    display: flex;
+    gap: rem(20);
+  }
+
+  &-button {
+    @extend %bodyText;
+    padding: rem(8) rem(10);
+    background-color: var(--white);
+    border-radius: 6px;
+
+    &:hover {
+      background-color: var(--corn-opacity);
+    }
+  }
+}
+
+.counter {
+  margin-top: rem(5);
+}
+
+@media (min-width: 768px) {
+  .product {
+    margin-top: rem(30);
+  }
+}

@@ -1,11 +1,12 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
+
 {
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
@@ -16,12 +17,23 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ]
+    "lib": ["es2020", "dom"],
+    "useDefineForClassFields": false,
+    "paths": {
+      "@sharedModule/*": ["src/app/shared/*"],
+      "@shared/*": ["src/app/shared/components/*"],
+      "@services/*": ["src/app/shared/services/*"],
+      "@shop/*": ["src/app/shop/components/*"],
+      "@productsPage/*": ["src/app/shop/components/products-page/components/*"],
+      "@products/*": ["src/app/shop/components/products-page/*"],
+      "@productPage/*": ["src/app/shop/components/product-page/components/*"],
+      "@product/*": ["src/app/shop/components/product-page/*"],
+      "@admin/*": ["src/app/admin/*"],
+      "@login/*": ["src/app/admin/modules/login/*"]
+    },
+    "strictPropertyInitialization": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

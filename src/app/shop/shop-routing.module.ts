@@ -1,17 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductsComponent } from '../products/products.component';
-import { ProductComponent } from '../product/product.component';
-import { ShopHomeComponent } from './shop-home/shop-home.component';
+import { ShopPageComponent } from '@shop/shop-page/shop-page.component';
+import { HomePageComponent } from '@shop/home-page/home-page.component';
+import { NotFoundComponent } from '@shop/not-found/not-found.component';
+import { CartComponent } from '@shop/cart/cart.component';
+import { OrderPageComponent } from '@shop/order-page/order-page.component';
+import { ConfirmationPageComponent } from '@shop/confirmation-page/confirmation-page.component';
+import { ConfirmationGuard } from '@shop/confirmation-page/guards/confirmation.guard';
+import { OrderGuard } from '@shop/order-page/guards/order.guard';
+import { ProductsPageComponent } from '@products/products-page.component';
+import { ProductPageComponent } from '@product/product-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ShopHomeComponent,
+    component: ShopPageComponent,
+
     children: [
-      { path: 'products/1', component: ProductComponent },
-      { path: 'products', component: ProductsComponent },
+      { path: 'products/:id', component: ProductPageComponent },
+      { path: 'products', component: ProductsPageComponent },
+      { path: 'cart', component: CartComponent },
+      { path: 'order', component: OrderPageComponent, canActivate: [OrderGuard] },
+      { path: 'confirmation', component: ConfirmationPageComponent, canActivate: [ConfirmationGuard] },
+      { path: '', component: HomePageComponent },
+      { path: '**', component: NotFoundComponent },
     ],
   },
 ];

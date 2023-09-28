@@ -1,0 +1,49 @@
+@import "style-variables.scss";
+
+.pagination {
+  @extend %subHead1;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+
+  &-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+  }
+
+  &-link {
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-bold {
+      font-weight: bold;
+    }
+  }
+
+  &-item {
+    color: var(--green);
+  }
+
+  &-dots {
+    cursor: default;
+  }
+
+  &-icon {
+    width: rem(15);
+    height: rem(15);
+    stroke: var(--green);
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+
+  & a svg {
+    stroke: var(--greyX);
+  }
+}

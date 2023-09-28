@@ -1,0 +1,16 @@
+@import "style-variables.scss";
+
+.counter {
+  @extend %bodyText;
+  display: inline-flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: rem(10);
+  border: 1px solid var(--greyX);
+  border-radius: 6px;
+  background-color: var(--lightGrey);
+
+  &-button {
+    padding: rem(8);
+  }
+}

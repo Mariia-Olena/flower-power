@@ -1,0 +1,17 @@
+<div class="container">
+  <main>
+    <ng-container *ngIf="plant$ | async as plant">
+      <app-product (addToCart)="addToCart()" [plant]="plant"></app-product>
+    </ng-container>
+    <ng-container *ngIf="plantInfo$ | async as plantInfo">
+      <app-product-info [plantInfo]="plantInfo"></app-product-info>
+    </ng-container>
+    <ng-container *ngIf="plantReview$ | async as plantReview">
+      <app-product-review [plantReview]="plantReview"></app-product-review>
+    </ng-container>
+    <ng-container *ngIf="plants$ | async as plants">
+      <app-product-slider (addToCart)="addToCart()" [plants]="plants"></app-product-slider>
+    </ng-container>
+  </main>
+  <app-spinner></app-spinner>
+</div>

@@ -1,0 +1,45 @@
+@import "style-variables.scss";
+
+:host {
+  position: relative;
+}
+
+.slider {
+  &-svg {
+    height: 22px;
+    width: 12px;
+    stroke: #fff;
+  }
+
+  &-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    color: #fff;
+    background-color: var(--greyX);
+    opacity: 50%;
+    z-index: 1;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+
+    &::before {
+      display: none;
+    }
+
+    &-left {
+      left: 32px;
+    }
+
+    &-right {
+      right: 32px;
+    }
+  }
+}
+
+.slick-dotted.slick-slider {
+  margin-bottom: 0;
+}

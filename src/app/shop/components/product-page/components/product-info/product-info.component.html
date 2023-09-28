@@ -1,0 +1,60 @@
+<section class="plantcare">
+  <iframe
+    class="plantcare-video"
+    [src]="plantInfo.video | safeUrl"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+  ></iframe>
+  <div class="plantcare-text-container">
+    <h2 class="plantcare-title">{{ plantInfo.name }} likes</h2>
+    <ul class="plantcare-list">
+      <li class="plantcare-item">
+        <div class="plantcare-subtitle">
+          <svg class="plantcare-icon">
+            <use xlink:href="assets/icons/sprite.svg#cloud"></use>
+          </svg>
+          {{ plantInfo.plantCare.light.title }}
+        </div>
+        <p class="plantcare-text">
+          {{ plantInfo.plantCare.light.text }}
+        </p>
+      </li>
+      <li class="plantcare-item">
+        <div class="plantcare-subtitle">
+          <svg class="plantcare-icon">
+            <use xlink:href="assets/icons/sprite.svg#moisture"></use>
+          </svg>
+          {{ plantInfo.plantCare.watering.title }}
+        </div>
+        <p class="plantcare-text">
+          {{ plantInfo.plantCare.watering.text }}
+        </p>
+      </li>
+      <li class="plantcare-item">
+        <div class="plantcare-subtitle">
+          <svg class="plantcare-icon">
+            <use xlink:href="assets/icons/sprite.svg#smile"></use>
+          </svg>
+          {{ plantInfo.plantCare.care.title }}
+        </div>
+        <p class="plantcare-text">
+          {{ plantInfo.plantCare.care.text }}
+        </p>
+      </li>
+    </ul>
+  </div>
+  <div class="charity">
+    <h2 class="charity-title">OUR CHARITY PLANT</h2>
+    <p class="charity-text">
+      We donate 5$ per Lily plant sold to
+      <a class="charity-link" href="https://www.icanyoucantoo.co.uk"
+        >icanyoucantoo</a
+      >
+      , a grassroots initiative that supports young people from non-privileged
+      communities achieve their career dreams.
+    </p>
+  </div>
+</section>
+

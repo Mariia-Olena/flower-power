@@ -1,0 +1,64 @@
+@import "style-variables.scss";
+
+.form {
+  display: grid;
+  margin-top: rem(10);
+
+  &-label {
+    @extend %subHead2;
+    color: var(--green);
+    text-align: center;
+    margin-top: rem(30);
+    margin-bottom: rem(10);
+  }
+
+  &-input {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: rem(20);
+  }
+
+  &-button {
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: rem(30);
+  }
+}
+
+.input {
+  @extend %bodyText;
+  border: 1px solid var(--greyX);
+  border-radius: rem(6);
+  padding: rem(15);
+  width: 100%;
+  margin-top: rem(5);
+
+  &:focus {
+    outline: none;
+    border: 1px solid var(--form-green);
+  }
+
+  &-container {
+    position: relative;
+  }
+
+  &-label {
+    @extend %bodyText;
+    color: var(--darkGreen);
+    margin-left: rem(10);
+  }
+
+  &-error {
+    position: absolute;
+    bottom: rem(-20);
+    right: 0;
+    @extend %bodyText;
+    text-align: right;
+    color: var(--form-red);
+  }
+}
+
+.invalid {
+  border: 1px solid var(--form-red);
+}

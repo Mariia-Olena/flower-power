@@ -1,0 +1,13 @@
+<ul class="filter">
+  <ul *ngFor="let filter of filters" class="filter-list">
+    <ng-container *ngFor="let keyValuePair of filter | keyvalue">
+      <li class="filter-title">{{ keyValuePair.key | titlecase }}</li>
+      <li *ngFor="let option of keyValuePair.value" class="filter-text">
+        <label class="container">{{ option }}
+          <input type="checkbox" (click)="checkFilter(option)"/>
+          <span class="checkmark" [ngClass]="{'checked': selectedFilters.has(option)}" ></span>
+        </label>
+      </li>
+    </ng-container>
+  </ul>
+</ul>

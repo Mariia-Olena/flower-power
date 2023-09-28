@@ -1,0 +1,15 @@
+@import "style-variables.scss";
+
+.main {
+  display: flex;
+  padding: rem(30);
+}
+
+.component {
+  width: 100%;
+  margin-left: rem(10);
+}
+
+.mdc-button {
+  padding: 0;
+}

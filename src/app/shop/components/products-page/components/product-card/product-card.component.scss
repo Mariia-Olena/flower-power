@@ -1,0 +1,61 @@
+@import "style-variables.scss";
+
+.card {
+  &-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-bottom: rem(30);
+  }
+
+  &-link {
+    border: 1px solid var(--greyX);
+    padding: rem(20);
+  }
+
+  &-img {
+    height: 100%;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  &-descr {
+    border: 1px solid var(--lightGrey);
+    width: 100%;
+    position: relative;
+    padding-top: rem(10);
+  }
+
+  &-name {
+    @extend %subHead3;
+    display: block;
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: rem(10);
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+
+  &-button {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    width: max-content;
+    transform: translate(-50%, -50%);
+  }
+
+  &-counter {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    width: max-content;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.price {
+  margin-bottom: rem(40);
+}

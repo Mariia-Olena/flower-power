@@ -1,0 +1,55 @@
+@import "style-variables.scss";
+
+.review {
+  margin-top: rem(70);
+  display: grid;
+
+  &-rating {
+    margin-top: 10px;
+  }
+
+  &-number {
+    @extend %subHead3;
+    display: flex;
+    gap: rem(24);
+  }
+
+  &-list {
+    display: grid;
+    gap: rem(20);
+    grid-template-columns: repeat(5, minmax(295px, 1fr));
+    align-items: start;
+    margin-top: rem(20);
+  }
+
+  &-item {
+    background-color: var(--lightGrey);
+    padding: rem(20);
+  }
+
+  &-name {
+    @extend %subHead3;
+  }
+
+  &-text {
+    @extend %subHead1;
+    color: var(--green);
+    margin-top: rem(10);
+    text-align: justify;
+  }
+
+  &-img {
+    margin-top: rem(10);
+    width: 100%;
+  }
+
+  &-button {
+    text-transform: uppercase;
+    margin-top: rem(50);
+    justify-self: center;
+
+    &:hover {
+      background-color: var(--corn-opacity);
+    }
+  }
+}

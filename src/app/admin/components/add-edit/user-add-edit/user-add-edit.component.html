@@ -1,0 +1,38 @@
+<div class="wrapper">
+  <h1>{{ name | titlecase }} user</h1>
+  <form [formGroup]="form" (submit)="onSubmit(getFormValue())" class="form">
+    <mat-card>
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" />
+        <mat-error *ngIf="form.controls.username.errors?.['required']">
+          Username is required
+        </mat-error>
+        <mat-error *ngIf="form.controls.username.errors?.['minlength']">
+          Username must be at least 3 characters long
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" />
+        <mat-error *ngIf="form.controls.password.errors?.['required']">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="form.controls.password.errors?.['minlength']">
+          Password must be at least 3 characters long
+        </mat-error>
+      </mat-form-field>
+    </mat-card>
+    <div class="buttons">
+      <button mat-flat-button color="primary" type="submit" [disabled]="this.form.touched && !this.form.valid">Submit</button>
+      <button (click)="onCancelButton()" mat-flat-button color="warn">
+        Cancel
+      </button>
+      <button (click)="onResetButton()" mat-flat-button color="accent">
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+
+

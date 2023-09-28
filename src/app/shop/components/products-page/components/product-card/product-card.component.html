@@ -1,0 +1,25 @@
+<div class="card-item">
+  <a [routerLink]="[plant.id]" class="card-link">
+    <img class="card-img" [src]="plant.img" [alt]="plant.name" />
+  </a>
+  <div class="card-descr">
+    <app-rating [size]="'small'"></app-rating>
+    <div class="card-name">
+      <a [routerLink]="[plant.id]">{{ plant.name | titlecase }}</a>
+    </div>
+    <p class="price">{{ plant.price | currency }}</p>
+    <button
+      *ngIf="!plant.isInCart()"
+      (click)="addToCart.emit(plant.id)"
+      class="button card-button"
+    >
+      ADD TO CART
+    </button>
+    <app-counter
+      *ngIf="plant.isInCart()"
+      class="card-counter"
+      [ngModel]="plant.count()"
+      (ngModelChange)="plant.counterChange($event)"
+    ></app-counter>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+@import "style-variables.scss";
+
+.container {
+  display: grid;
+  text-align: center;
+}
+
+.error {
+  position: relative;
+  height: 45vh;
+
+  &-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+  }
+
+  &-title {
+    @extend %notFound;
+    font-size: 35vh;
+    line-height: 0;
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &-subtitle {
+    @extend %header2;
+  }
+
+  &-text {
+    @extend %subHead1;
+    margin-top: rem(10);
+  }
+
+  &-link {
+    @extend %bodyText;
+    color: var(--green);
+    text-decoration: underline;
+    margin-top: rem(20);
+  }
+}

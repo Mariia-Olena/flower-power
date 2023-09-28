@@ -1,0 +1,93 @@
+@import "style-variables.scss";
+
+.background {
+  position: relative;
+
+  ::after {
+    z-index: -1;
+    position: absolute;
+    top: rem(100);
+    content: "";
+    height: 550px;
+    border-right: 550px solid var(--lightGrey);
+  }
+}
+
+.title {
+  @extend %header1;
+  text-align: center;
+  margin: rem(50) 0 rem(20) 0;
+}
+
+.UpSlider {
+  display: flex;
+
+  &-imgBox {
+    display: flex;
+  }
+
+  &-img {
+    height: 750px;
+    width: 500px;
+    object-fit: cover;
+  }
+
+  &-textBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: rem(10);
+  }
+
+  &-title {
+    @extend %header1;
+    padding-left: rem(100);
+  }
+
+  &-text {
+    @extend %subHead1;
+    padding-left: rem(100);
+  }
+}
+
+.slider {
+  &-img {
+    object-fit: cover;
+    height: 550px;
+  }
+
+  &-centerMode {
+    padding: 0 rem(10);
+  }
+
+  &-text {
+    margin-top: rem(20);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-title {
+    @extend %subHead3;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  &-price {
+    width: fit-content;
+  }
+}
+
+@media #{$desktopSD} {
+  .slider-img {
+    height: 470px;
+  }
+}
+
+@media #{$tabletHD} {
+  .slider-img {
+    height: 330px;
+  }
+}

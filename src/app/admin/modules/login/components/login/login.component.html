@@ -1,0 +1,24 @@
+<div class="container">
+  <mat-card class="form">
+    <mat-card-title class="form-title">Login</mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="form">
+        <mat-form-field class="form-field">
+          <mat-label>Login</mat-label>
+          <input matInput formControlName="username" />
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" />
+        </mat-form-field>
+        <ng-container *ngIf="loginForm.errors">
+          <mat-error *ngIf="loginForm.errors['credentials']" class="form-error"
+            >Invalid username or password</mat-error
+          >
+        </ng-container>
+        <button mat-flat-button color="primary" type="submit">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+<app-spinner></app-spinner>

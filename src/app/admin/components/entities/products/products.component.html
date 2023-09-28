@@ -1,0 +1,25 @@
+<app-toolbar
+  (toolbar)="onSubmit($event)"
+  (onAddButtonClick)="onAddButtonClick($event)"
+  [options]="options"
+  [item]="'product'"
+></app-toolbar>
+<app-table
+  [dataSource]="dataSource"
+  [displayedColumns]="displayedColumns"
+  [actionConfig]="actionConfig"
+  (sortChange)="announceSortChange($event)"
+></app-table>
+<mat-paginator class="mat-paginator"
+  [length]="params.length"
+  [pageSize]="params.limit"
+  [pageIndex]="params.pageIndex"
+  [showFirstLastButtons]="true"
+  [hidePageSize]="true"
+  (page)="handlePageEvent($event)"
+>
+</mat-paginator>
+
+<ng-container *ngIf="showModal.value">
+  <app-delete-modal [item]="{name: 'product', value: showModal.name}" (confirmation)="confirm($event, showModal.id)"></app-delete-modal>
+</ng-container>

@@ -1,0 +1,465 @@
+<div class="wrapper">
+  <h1>{{ name | titlecase }} product</h1>
+  <form
+    [formGroup]="form"
+    (submit)="onSubmit(transformFormValue(getFormValue()))"
+    class="form"
+  >
+    <mat-card>
+      <h2>Main Information:</h2>
+
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="form.controls.name.errors?.['required']">
+          Name is required
+        </mat-error>
+        <mat-error *ngIf="form.controls.name.errors?.['minlength']">
+          Name must be at least 3 characters long
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" />
+        <mat-error *ngIf="form.controls.price.errors?.['required']">
+          Price is required
+        </mat-error>
+        <mat-error *ngIf="form.controls.price.errors?.['min']">
+          Price must not be less than 1
+        </mat-error>
+        <mat-error *ngIf="form.controls.price.errors?.['max']">
+          Price must not be greater than 999999
+        </mat-error>
+        <mat-error *ngIf="form.controls.price.errors?.['pattern']">
+          Price must be in this 00 or 0.00 format
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" />
+        <mat-error *ngIf="form.controls.description.errors?.['required']">
+          Description is required
+        </mat-error>
+        <mat-error *ngIf="form.controls.description.errors?.['minlength']">
+          Description must be at least 15 characters long
+        </mat-error>
+      </mat-form-field>
+
+      <ng-container [formGroup]="form.controls.extraInfo">
+        <mat-form-field>
+          <mat-label>Rating</mat-label>
+          <input matInput formControlName="rating" />
+          <mat-error
+            *ngIf="form.controls.extraInfo.controls.rating.errors?.['required']"
+          >
+            Rating is required
+          </mat-error>
+          <mat-error
+            *ngIf="form.controls.extraInfo.controls.rating.errors?.['min']"
+          >
+            Rating must not be less than 0
+          </mat-error>
+          <mat-error
+            *ngIf="form.controls.extraInfo.controls.rating.errors?.['max']"
+          >
+            Rating must not be greater than 5
+          </mat-error>
+          <mat-error
+            *ngIf="form.controls.extraInfo.controls.rating.errors?.['pattern']"
+          >
+            Please enter a valid rating
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Video</mat-label>
+          <input matInput formControlName="video" />
+          <mat-error
+            *ngIf="form.controls.extraInfo.controls.video.errors?.['required']"
+          >
+            Video link is required
+          </mat-error>
+          <mat-error
+            *ngIf="form.controls.extraInfo.controls.video.errors?.['pattern']"
+          >
+            Video link must start with a 'https://www.youtube.com/'
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+    </mat-card>
+    <ng-container [formGroup]="form.controls.extraInfo">
+      <ng-container formArrayName="image">
+        <mat-card>
+          <h2>Images:</h2>
+
+          <div class="half">
+            <ng-container
+              *ngFor="let imageForm of image.controls; let i = index"
+            >
+              <div [formGroup]="getControl('image', i)" class="gap">
+                <mat-form-field class="field">
+                  <mat-label>Image url</mat-label>
+                  <input matInput formControlName="imageUrl" />
+                  <mat-error
+                    *ngIf="image.controls[i].get('imageUrl').errors?.['required']"
+                  >
+                    Image url is required
+                  </mat-error>
+                </mat-form-field>
+
+                <button
+                  color="warn"
+                  mat-icon-button
+                  (click)="delete('image', i)"
+                  class="delete-button"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </ng-container>
+          </div>
+          <button
+            color="primary"
+            mat-icon-button
+            (click)="addImage()"
+            class="add-button"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-card>
+      </ng-container>
+
+      <ng-container formArrayName="size">
+        <mat-card>
+          <h2>Size:</h2>
+
+          <div class="full">
+            <ng-container *ngFor="let sizeForm of size.controls; let i = index">
+              <div [formGroup]="getControl('size', i)" class="gap">
+                <mat-form-field class="field">
+                  <mat-label>Size</mat-label>
+                  <input matInput formControlName="size" />
+                  <mat-error
+                    *ngIf="size.controls[i].get('size').errors?.['required']"
+                  >
+                    Size is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="size.controls[i].get('size').errors?.['pattern']"
+                  >
+                    Size should be in this format '00-00'
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="field">
+                  <mat-label>Price coefficient</mat-label>
+                  <input matInput formControlName="coeff" />
+                  <mat-error
+                    *ngIf="size.controls[i].get('coeff').errors?.['required']"
+                  >
+                    Price coefficient is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="size.controls[i].get('coeff').errors?.['pattern']"
+                  >
+                    Price coefficient should be in this format '0.0'
+                  </mat-error>
+                </mat-form-field>
+
+                <button
+                  color="warn"
+                  mat-icon-button
+                  (click)="delete('size', i)"
+                  class="delete-button"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </ng-container>
+            <button
+              color="primary"
+              mat-icon-button
+              (click)="addSize()"
+              class="add-button"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </ng-container>
+
+      <ng-container formArrayName="potColor">
+        <mat-card>
+          <h2>Pot Color:</h2>
+
+          <div class="half">
+            <ng-container
+              *ngFor="let potColorForm of potColor.controls; let i = index"
+            >
+              <div [formGroup]="getControl('potColor', i)" class="gap">
+                <mat-form-field class="field">
+                  <mat-label>Pot Color</mat-label>
+                  <input matInput formControlName="potColor" />
+                  <mat-error
+                    *ngIf="potColor.controls[i].get('potColor').errors?.['required']"
+                  >
+                    Pot color is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="potColor.controls[i].get('potColor').errors?.['pattern']"
+                  >
+                    Use letters only
+                  </mat-error>
+                </mat-form-field>
+
+                <button
+                  color="warn"
+                  mat-icon-button
+                  (click)="delete('potColor', i)"
+                  class="delete-button"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </ng-container>
+          </div>
+          <button
+            color="primary"
+            mat-icon-button
+            (click)="addPotColor()"
+            class="add-button"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-card>
+      </ng-container>
+
+      <ng-container [formGroup]="form.controls.extraInfo.controls.plantCare">
+        <mat-card>
+          <h2>Plant Care:</h2>
+          <ng-container
+            [formGroup]="
+              form.controls.extraInfo.controls.plantCare.controls.watering
+            "
+          >
+            <h3>Watering</h3>
+            <div class="half">
+              <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="title" />
+                <mat-error
+                  *ngIf="form.controls.extraInfo.controls.plantCare.controls.watering.controls.title.errors?.['required']"
+                >
+                  Title is required
+                </mat-error>
+                <mat-error
+                  *ngIf="form.controls.extraInfo.controls.plantCare.controls.watering.controls.title.errors?.['minlength']"
+                >
+                  Title must be at least 3 characters long
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Text</mat-label>
+                <input matInput formControlName="text" />
+                <mat-error
+                  *ngIf="form.controls.extraInfo.controls.plantCare.controls.watering.controls.text.errors?.['required']"
+                >
+                  Text is required
+                </mat-error>
+                <mat-error
+                  *ngIf="form.controls.extraInfo.controls.plantCare.controls.watering.controls.text.errors?.['minlength']"
+                >
+                  Text must be at least 3 characters long
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </ng-container>
+
+          <ng-container
+            [formGroup]="
+              form.controls.extraInfo.controls.plantCare.controls.light
+            "
+          >
+            <h3>Light</h3>
+            <div class="half">
+              <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="title" />
+                <mat-error
+                  *ngIf="form.controls.extraInfo.controls.plantCare.controls.light.controls.title.errors?.['required']"
+                >
+                  Title is required
+                </mat-error>
+                <mat-error
+                  *ngIf="form.controls.extraInfo.controls.plantCare.controls.light.controls.title.errors?.['minlength']"
+                >
+                  Title must be at least 3 characters long
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Text</mat-label>
+                <input matInput formControlName="text" />
+                <mat-error
+                  *ngIf="form.controls.extraInfo.controls.plantCare.controls.light.controls.text.errors?.['required']"
+                >
+                  Text is required
+                </mat-error>
+                <mat-error
+                  *ngIf="form.controls.extraInfo.controls.plantCare.controls.light.controls.text.errors?.['minlength']"
+                >
+                  Text must be at least 3 characters long
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </ng-container>
+
+          <ng-container
+            [formGroup]="
+              form.controls.extraInfo.controls.plantCare.controls.care
+            "
+          >
+            <h3>Care</h3>
+            <div class="half">
+              <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="title" />
+                <mat-error
+                  *ngIf="form.controls.extraInfo.controls.plantCare.controls.care.controls.title.errors?.['required']"
+                >
+                  Title is required
+                </mat-error>
+                <mat-error
+                  *ngIf="form.controls.extraInfo.controls.plantCare.controls.care.controls.title.errors?.['minlength']"
+                >
+                  Title must be at least 3 characters long
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Text</mat-label>
+                <input matInput formControlName="text" />
+                <mat-error
+                  *ngIf="form.controls.extraInfo.controls.plantCare.controls.care.controls.text.errors?.['required']"
+                >
+                  Text is required
+                </mat-error>
+                <mat-error
+                  *ngIf="form.controls.extraInfo.controls.plantCare.controls.care.controls.text.errors?.['minlength']"
+                >
+                  Text must be at least 3 characters long
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </ng-container>
+        </mat-card>
+      </ng-container>
+
+      <ng-container formArrayName="review">
+        <mat-card>
+          <h2>Review:</h2>
+          <ng-container
+            *ngFor="let reviewForm of review.controls; let i = index"
+          >
+            <div [formGroup]="getControl('review', i)" class="two-rows">
+              <div class="half first">
+                <mat-form-field class="field">
+                  <mat-label>Name</mat-label>
+                  <input matInput formControlName="name" />
+                  <mat-error
+                    *ngIf="review.controls[i].get('name').errors?.['required']"
+                  >
+                    Name is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="review.controls[i].get('name').errors?.['minlength']"
+                  >
+                    Name must be at least 3 characters long
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="field">
+                  <mat-label>Rating</mat-label>
+                  <input matInput formControlName="rating" />
+                  <mat-error
+                    *ngIf="review.controls[i].get('rating').errors?.['required']"
+                  >
+                    Rating is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="review.controls[i].get('rating').errors?.['min']"
+                  >
+                    Rating must not be less than 0
+                  </mat-error>
+                  <mat-error
+                    *ngIf="review.controls[i].get('rating').errors?.['max']"
+                  >
+                    Rating must not be greater than 5
+                  </mat-error>
+                  <mat-error
+                    *ngIf="review.controls[i].get('rating').errors?.['pattern']"
+                  >
+                    Please enter a valid rating
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="half second">
+                <mat-form-field class="field">
+                  <mat-label>Comment</mat-label>
+                  <input matInput formControlName="comment" />
+                  <mat-error
+                    *ngIf="review.controls[i].get('comment').errors?.['required']"
+                  >
+                    Comment is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="review.controls[i].get('comment').errors?.['minlength']"
+                  >
+                    Comment must be at least 3 characters long
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="field">
+                  <mat-label>Photo</mat-label>
+                  <input matInput formControlName="photo" />
+                </mat-form-field>
+              </div>
+              <button
+                color="warn"
+                mat-icon-button
+                (click)="delete('review', i)"
+                class="delete-button icon"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+          </ng-container>
+
+          <button
+            color="primary"
+            mat-icon-button
+            (click)="addReview()"
+            class="add-button"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-card>
+      </ng-container>
+    </ng-container>
+    <div class="buttons">
+      <button mat-flat-button color="primary" type="submit" [disabled]="this.form.touched && !this.form.valid">Submit</button>
+      <button (click)="onCancelButton()" mat-flat-button color="warn">
+        Cancel
+      </button>
+      <button (click)="onResetButton()" mat-flat-button color="accent">
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+
+

@@ -2,7 +2,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:regular,700,900");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Ubuntu:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Bebas+Neue:regular");
-@import "./variable-template.scss";
+@import "tippy.js/dist/tippy.css";
+@import "style-variables.scss";
 
 /*
 *  html5resetcss
@@ -156,18 +157,63 @@ select {
   vertical-align: middle;
 }
 
+//slider
+
+ul.slick-dots {
+  bottom: 10px;
+}
+
+button.slick-next.slick-arrow {
+  position: relative;
+}
+
+button.slick-next.slick-arrow {
+  display: none;
+}
+
+button.slick-next.slick-arrow::before {
+  display: none;
+}
+
+//tooltip
+
+.tippy {
+  &-box {
+    background-color: #fff;
+    color: black;
+    position: absolute;
+  }
+
+  &-arrow {
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+
+  &-content {
+    padding: 0;
+  }
+}
+
+//tag
+
 * {
   box-sizing: border-box;
 }
 
 body {
   font-family: "Roboto", sans-serif;
+  min-height: 100vh;
 }
 
 a {
   color: var(--black);
   text-decoration: none;
   cursor: pointer;
+
+  &:hover {
+    color: var(--black);
+  }
 }
 
 li {
@@ -179,4 +225,58 @@ button {
   padding: 0;
   border: none;
   background-color: inherit;
+}
+
+//class
+
+.container {
+  max-width: 1530px;
+  margin: 0 auto;
+  padding: 0 rem(30);
+  position: relative;
+}
+
+.container-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.button {
+  @extend %fontButton;
+  background-color: var(--corn);
+  border: none;
+  border-radius: 6px;
+  padding: 20px 30px 20px 30px;
+  text-align: center;
+
+  &:hover {
+    background-color: var(--corn-opacity);
+  }
+
+  &[disabled] {
+    cursor: auto;
+    background-color: var(--lightGrey);
+    color: var(--black);
+  }
+}
+
+.price {
+  @extend %subHead1;
+  color: var(--green);
+  margin-top: rem(10);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-paginator {
+  margin-top: rem(20);
 }
