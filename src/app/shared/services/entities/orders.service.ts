@@ -27,7 +27,7 @@ export class OrdersService extends BasedCrudHttpService<APIorder, Order> {
   }
 
   setUpOrder(orderForm: FormGroup, orderProducts: CartItem[]): Order {
-    const { phone, firstName, secondName, country, region, city, address } =
+    const { phone, firstName, secondName, message, country, region, city, address } =
       orderForm.value;
 
     const products: OrderProducts[] = orderProducts.reduce((acc, item) => {
@@ -44,7 +44,7 @@ export class OrdersService extends BasedCrudHttpService<APIorder, Order> {
     return {
       name: firstName + ' ' + secondName,
       phone: phone,
-      message: `${country}, ${region}, ${city}, ${address}`,
+      message: `${country} | ${region} | ${city} | ${address} | ${message}`,
       products: products,
     };
   }

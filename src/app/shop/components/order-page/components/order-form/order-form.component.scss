@@ -47,6 +47,10 @@
     @extend %bodyText;
     color: var(--darkGreen);
     margin-left: rem(10);
+    &::after {
+      content: "＊";
+      color: var(--form-red);
+    }
   }
 
   &-error {
@@ -57,8 +61,19 @@
     text-align: right;
     color: var(--form-red);
   }
+
+  &-message {
+    grid-column: span 2;
+  }
 }
 
 .invalid {
   border: 1px solid var(--form-red);
+}
+
+.not-required {
+  &::after {
+    content: "";
+    display: none;
+  }
 }

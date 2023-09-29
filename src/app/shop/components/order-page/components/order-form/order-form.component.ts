@@ -28,6 +28,7 @@ export class OrderFormComponent implements OnInit {
       Validators.required,
       Validators.minLength(3),
     ]),
+    message: new FormControl(''),
     country: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
@@ -79,6 +80,7 @@ export class OrderFormComponent implements OnInit {
       phone,
       firstName,
       secondName,
+      message,
       country,
       region,
       city,
@@ -90,6 +92,7 @@ export class OrderFormComponent implements OnInit {
       phone,
       firstName,
       secondName,
+      message,
       country,
       region,
       city,

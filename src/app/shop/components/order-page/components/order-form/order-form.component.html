@@ -54,6 +54,16 @@
         Second name should be longer
       </div>
     </div>
+
+    <div class="input-container input-message">
+      <label for="message" class="input-label not-required">Message</label>
+      <textarea 
+        id="message"
+        formControlName="message"
+        class="input"
+        rows="4"
+      ></textarea>
+    </div>
   </div>
 
   <h4 class="form-label">SHIPPING ADDRESS</h4>
@@ -72,7 +82,7 @@
     </div>
 
     <div class="input-container">
-      <label for="region" class="input-label">Region</label>
+      <label for="region" class="input-label not-required">Region</label>
       <input id="region" formControlName="region" class="input" />
     </div>
 

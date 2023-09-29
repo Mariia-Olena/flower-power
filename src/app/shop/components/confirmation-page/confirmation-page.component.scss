@@ -21,13 +21,20 @@
     @extend %header1;
     width: fit-content;
     margin-bottom: rem(10);
-    
+    background-color: white;
+    border-radius: rem(5);
+    box-shadow: 0 0 15px 15px white;
+    padding-right: rem(5);
   }
 
   &-subtitle {
     @extend %subHead3;
     color: var(--green);
-  }
+    background-color: white;
+    border-radius: rem(5);
+    box-shadow: 0 0 15px 12px white;
+    width: max-content;
+  };
 
   &-order {
     text-decoration: underline;
@@ -43,6 +50,10 @@
   &-text {
     @extend %bodyText;
     color: var(--green);
+    background-color: white;
+    border-radius: rem(5);
+    box-shadow: 0 0 15px 12px white;
+    width: max-content;
 
     &::before {
       content: "•";
