@@ -71,11 +71,47 @@
     padding: rem(8) rem(10);
     background-color: var(--white);
     border-radius: 6px;
+    position: relative;
 
     &:hover {
       background-color: var(--corn-opacity);
     }
   }
+}
+
+.tooltip-text {
+  @extend %bodyText;
+  font-size: rem(14);
+  visibility: hidden;
+  width: 120px;
+  background-color: var(--white);
+  text-align: center;
+  border-radius: 4px;
+  border: var(--greyX) 1px solid;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.tooltip-text::before {
+  content: "";
+  position: absolute;
+  border-width: 8px;
+  border-style: solid;
+  border-color: var(--greyX) transparent  transparent  transparent ;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pot-button:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
 
 .counter {
@@ -84,6 +120,17 @@
 
 .selected {
   background-color: var(--corn);
+}
+
+.tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+  display: none;
 }
 
 @media (min-width: 768px) {

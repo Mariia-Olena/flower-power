@@ -1,13 +1,6 @@
-import {
-  AfterContentChecked,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Plant } from '@sharedModule/services/entities/types/product.interface';
+import { NgxTippyService } from 'ngx-tippy-wrapper';
 
 @Component({
   selector: 'app-product',
@@ -24,9 +17,11 @@ export class ProductComponent implements OnInit {
     potColor: '',
   };
 
+  constructor(private tippyService: NgxTippyService) {}
+
   ngOnInit(): void {
-    this.plantParams.size = this.plant.size[0].size
-    this.plantParams.coeff = this.plant.size[0].coeff
-    this.plantParams.potColor = this.plant.potColor[0]
+    this.plantParams.size = this.plant.size[0].size;
+    this.plantParams.coeff = this.plant.size[0].coeff;
+    this.plantParams.potColor = this.plant.potColor[0];
   }
 }

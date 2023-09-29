@@ -27,6 +27,7 @@
             [ngClass]="{ selected: plantParams.size === number.size }"
             class="pot-button"
           >
+            <div class="tooltip-text">Size selection in development</div>
             {{ number.size }}cm
           </button>
         </li>
@@ -41,6 +42,7 @@
             [ngClass]="{ selected: plantParams.potColor === color }"
             class="pot-button"
           >
+            <div class="tooltip-text">Color selection in development</div>
             {{ color | lowercase }}
           </button>
         </li>
