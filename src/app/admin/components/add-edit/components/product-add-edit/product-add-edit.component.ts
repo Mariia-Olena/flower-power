@@ -8,6 +8,7 @@ import {
   ProductForm,
 } from '@sharedModule/services/entities/types/product.interface';
 import { AddEditComponent } from '@admin/components/add-edit/add-edit.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-form',
@@ -19,6 +20,7 @@ export class ProductAddEditComponent extends AddEditComponent<
   Product
 > {
   url = 'products';
+  itemName = 'Product';
 
   form = new FormGroup(
     {
@@ -88,9 +90,10 @@ export class ProductAddEditComponent extends AddEditComponent<
   constructor(
     private productsService: ProductsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
-    super(productsService, route, router);
+    super(productsService, route, router, snackBar);
   }
 
   get image() {

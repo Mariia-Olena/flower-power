@@ -284,3 +284,15 @@ body {
 .not-work-yet {
   color: var(--grey);
 }
+
+mat-snack-bar-container.mat-mdc-snack-bar-container.modal-message {
+  --mdc-snackbar-supporting-text-color: black;
+
+  &.ok {
+    --mdc-snackbar-container-color: #5f7a4280;
+  }
+
+  &.error {
+    --mdc-snackbar-container-color: #f1393980;
+  }
+}

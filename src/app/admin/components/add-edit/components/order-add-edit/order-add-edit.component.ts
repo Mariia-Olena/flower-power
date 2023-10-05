@@ -7,6 +7,7 @@ import {
   APIorder,
   Order,
 } from '@sharedModule/services/entities/types/order.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-order-form',
@@ -15,6 +16,7 @@ import {
 })
 export class OrderAddEditComponent extends AddEditComponent<APIorder, Order> {
   url = 'orders';
+  itemName = 'Order';
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -49,9 +51,10 @@ export class OrderAddEditComponent extends AddEditComponent<APIorder, Order> {
   constructor(
     private ordersService: OrdersService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
-    super(ordersService, route, router);
+    super(ordersService, route, router, snackBar);
   }
 
   get products(): FormArray {

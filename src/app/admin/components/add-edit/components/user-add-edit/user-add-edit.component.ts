@@ -7,6 +7,7 @@ import {
 } from '@sharedModule/services/entities/types/user.interface';
 import { UsersService } from '@sharedModule/services/entities/users.service';
 import { AddEditComponent } from '@admin/components/add-edit/add-edit.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-form',
@@ -15,6 +16,7 @@ import { AddEditComponent } from '@admin/components/add-edit/add-edit.component'
 })
 export class UserAddEditComponent extends AddEditComponent<APIuser, User> {
   url = 'users';
+  itemName = 'User';
 
   form = new FormGroup({
     username: new FormControl('', [
@@ -30,9 +32,10 @@ export class UserAddEditComponent extends AddEditComponent<APIuser, User> {
   constructor(
     private usersService: UsersService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
-    super(usersService, route, router);
+    super(usersService, route, router, snackBar);
   }
 
   setFieldsUpfront(): void {}

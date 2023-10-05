@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BasedCrudHttpService } from '@sharedModule/services/entities/based-crud-http-service';
 import { map, take } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Buttons {
   name: string;
@@ -14,6 +15,7 @@ interface Buttons {
 @Directive()
 export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
   abstract url: string;
+  abstract itemName: string;
   abstract form: FormGroup;
   name: string;
   item: APIentity;
@@ -49,7 +51,8 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
   constructor(
     private entityService: BasedCrudHttpService<APIentity, Entity>,
     private entityRoute: ActivatedRoute,
-    private entityRouter: Router
+    private entityRouter: Router,
+    private entitySnackBar: MatSnackBar
   ) {}
 
   abstract setFieldsUpfront(): void;
@@ -89,16 +92,43 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
 
   onSubmit(body: Entity) {
     if (!this.isEditPage && this.form.valid) {
-      this.entityService.create(body).subscribe((res: APIentity) => {});
+      this.entityService.create(body).subscribe({
+        next: (value: APIentity) => {
+          this.entityRouter.navigate([`/admin/${this.url}`]);
+          this.showModalMessage(`${this.itemName} was successfully created`, 'ok');
+        },
+        error: (error) => {
+          this.showModalMessage('Something went wrong, try again later', 'error');
+        },
+      });
     }
 
     if (this.isEditPage && this.form.valid) {
       this.entityService
         .update(body, this.entityRoute.snapshot.params['id'])
-        .subscribe((res: APIentity) => {});
+        .subscribe({
+          next: (value: APIentity) => {
+            this.entityRouter.navigate([`/admin/${this.url}`]);
+            this.showModalMessage(`${this.itemName} was successfully updated`, 'ok');
+          },
+          error: (error) => {
+            console.log(error, 123);
+            
+            this.showModalMessage('Something went wrong, try again later', 'error');
+          },
+        });
     }
 
     this.form.markAllAsTouched();
+  }
+
+  showModalMessage(message: string, result: string) {
+    this.entitySnackBar.open(message, '', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
+      panelClass: ['modal-message', result]
+    });
   }
 
   ngOnInit(): void {
@@ -123,8 +153,7 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
             data
               ? (this.item = data)
               : this.entityRouter.navigate([`/admin/${this.url}`]);
-          },
-          (error) => {}
+          }
         );
 
     this.setFieldsUpfront();
