@@ -13,7 +13,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent extends BasedCrudComponent<APIuser, User, UserAdmin> {
+export class UsersComponent extends BasedCrudComponent<
+  APIuser,
+  User,
+  UserAdmin
+> {
   options = {
     search: ['username'],
     filter: [
@@ -27,7 +31,7 @@ export class UsersComponent extends BasedCrudComponent<APIuser, User, UserAdmin>
   };
   displayedColumns: string[] = ['id', 'name', 'created', 'edit'];
   params = {
-    limit: 10,
+    limit: 5,
     pageIndex: 0,
     page: 1,
     sort: 'name',

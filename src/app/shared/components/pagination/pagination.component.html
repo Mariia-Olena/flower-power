@@ -1,6 +1,10 @@
 <nav class="pagination">
   <ul class="pagination-list">
-    <li [ngClass]="{ disabled: currentPage === 1 }"  (click)="changePage.emit(currentPage - 1)" class="pagination-item">
+    <li
+      [ngClass]="{ disabled: currentPage === 1 }"
+      (click)="changePage.emit(currentPage - 1)"
+      class="pagination-item"
+    >
       <a
         routerLink="/products"
         [queryParams]="{ page: currentPage - 1 }"
@@ -12,7 +16,11 @@
       </a>
     </li>
 
-    <li *ngIf="currentPage > 2 && pagesCount > 5" (click)="changePage.emit(1)" class="pagination-item">
+    <li
+      *ngIf="currentPage > 2 && pagesCount > 5"
+      (click)="changePage.emit(1)"
+      class="pagination-item"
+    >
       <a
         routerLink="/products"
         [queryParams]="{ page: 1 }"
@@ -22,7 +30,10 @@
       >
     </li>
 
-    <li *ngIf="currentPage > 3 && pagesCount > 5" class="pagination-item pagination-dots">
+    <li
+      *ngIf="currentPage > 3 && pagesCount > 5"
+      class="pagination-item pagination-dots"
+    >
       ...
     </li>
 
@@ -40,11 +51,18 @@
       >
     </li>
 
-    <li *ngIf="currentPage < pagesCount - 2 && pagesCount > 5" class="pagination-item pagination-dots">
+    <li
+      *ngIf="currentPage < pagesCount - 2 && pagesCount > 5"
+      class="pagination-item pagination-dots"
+    >
       ...
     </li>
 
-    <li *ngIf="currentPage < pagesCount - 1 && pagesCount > 5" (click)="changePage.emit(pagesCount)" class="pagination-item">
+    <li
+      *ngIf="currentPage < pagesCount - 1 && pagesCount > 5"
+      (click)="changePage.emit(pagesCount)"
+      class="pagination-item"
+    >
       <a
         routerLink="/products"
         [queryParams]="{ page: pagesCount }"
@@ -54,7 +72,11 @@
       >
     </li>
 
-    <li [ngClass]="{ disabled: currentPage === pagesCount }" (click)="changePage.emit(currentPage + 1)" class="pagination-item">
+    <li
+      [ngClass]="{ disabled: currentPage === pagesCount }"
+      (click)="changePage.emit(currentPage + 1)"
+      class="pagination-item"
+    >
       <a
         routerLink="/products"
         [queryParams]="{ page: currentPage + 1 }"
