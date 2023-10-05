@@ -21,14 +21,22 @@ export class OrdersService extends BasedCrudHttpService<APIorder, Order> {
   private currentOrder = new BehaviorSubject<APIorder>(
     this.storage.get('order')
   );
-  
+
   constructor(private http: HttpClient, private storage: StorageService) {
     super();
   }
 
   setUpOrder(orderForm: FormGroup, orderProducts: CartItem[]): Order {
-    const { phone, firstName, secondName, message, country, region, city, address } =
-      orderForm.value;
+    const {
+      phone,
+      firstName,
+      secondName,
+      message,
+      country,
+      region,
+      city,
+      address,
+    } = orderForm.value;
 
     const products: OrderProducts[] = orderProducts.reduce((acc, item) => {
       return (acc = [
@@ -44,8 +52,16 @@ export class OrdersService extends BasedCrudHttpService<APIorder, Order> {
     return {
       name: firstName + ' ' + secondName,
       phone: phone,
-      message: `${country} | ${region} | ${city} | ${address} | ${message}`,
+      message: message,
       products: products,
+      extraInfo: {
+        address: {
+          country,
+          region,
+          city,
+          address,
+        },
+      },
     };
   }
 

@@ -24,6 +24,25 @@ export class OrderAddEditComponent extends AddEditComponent<APIorder, Order> {
       Validators.maxLength(13),
     ]),
     message: new FormControl('', []),
+    country: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern(/^[a-zA-Z-]+$/),
+    ]),
+    region: new FormControl('', [
+      Validators.minLength(3),
+      Validators.pattern(/^[a-zA-Z-]+$/),
+    ]),
+    city: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern(/^[a-zA-Z-]+$/),
+    ]),
+    address: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern(/^[a-zA-Z-]+$/),
+    ]),
     products: new FormArray([]),
   });
 
@@ -61,6 +80,10 @@ export class OrderAddEditComponent extends AddEditComponent<APIorder, Order> {
 
   setValueInForm(): void {
     this.form.patchValue(this.item);
+    this.form.controls.country.patchValue(this.item.extraInfo.address.country);
+    this.form.controls.region.patchValue(this.item.extraInfo.address.region);
+    this.form.controls.city.patchValue(this.item.extraInfo.address.city);
+    this.form.controls.address.patchValue(this.item.extraInfo.address.address);
   }
 
   onResetButton() {

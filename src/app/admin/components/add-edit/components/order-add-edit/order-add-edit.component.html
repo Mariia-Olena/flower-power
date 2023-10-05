@@ -34,6 +34,64 @@
       </mat-form-field>
     </mat-card>
 
+    <mat-card>
+      <h2>Shipping address:</h2>
+      <div class="half">
+        <mat-form-field>
+          <mat-label>Country</mat-label>
+          <input matInput formControlName="country" />
+          <mat-error *ngIf="form.controls.country.errors?.['required']">
+            Country is required
+          </mat-error>
+          <mat-error *ngIf="form.controls.country.errors?.['minlength']">
+            Country must be at least 3 characters long
+          </mat-error>
+          <mat-error *ngIf="form.controls.country.errors?.['pattern']">
+            Enter a valid Country
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Region</mat-label>
+          <input matInput formControlName="region" />
+          <mat-error *ngIf="form.controls.region.errors?.['minlength']">
+            Region must be at least 3 characters long
+          </mat-error>
+          <mat-error *ngIf="form.controls.region.errors?.['pattern']">
+            Enter a valid Region
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>City</mat-label>
+          <input matInput formControlName="city" />
+          <mat-error *ngIf="form.controls.city.errors?.['required']">
+            City is required
+          </mat-error>
+          <mat-error *ngIf="form.controls.city.errors?.['minlength']">
+            City must be at least 3 characters long
+          </mat-error>
+          <mat-error *ngIf="form.controls.city.errors?.['pattern']">
+            Enter a valid City
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address" />
+          <mat-error *ngIf="form.controls.address.errors?.['required']">
+            Address is required
+          </mat-error>
+          <mat-error *ngIf="form.controls.address.errors?.['minlength']">
+            Address must be at least 3 characters long
+          </mat-error>
+          <mat-error *ngIf="form.controls.address.errors?.['pattern']">
+            Enter a valid Address
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card>
+
     <ng-container formArrayName="products">
       <mat-card>
         <h2>Products:</h2>

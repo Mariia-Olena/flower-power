@@ -20,68 +20,70 @@ export class ProductAddEditComponent extends AddEditComponent<
 > {
   url = 'products';
 
-  form = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    price: new FormControl('', [
-      Validators.required,
-      Validators.min(1),
-      Validators.max(999999),
-      Validators.pattern(/^\d+(\.\d{1,2})?$/),
-    ]),
-    description: new FormControl('', [
-      Validators.required,
-      Validators.minLength(15),
-    ]),
-    extraInfo: new FormGroup({
-      image: new FormArray([]),
-      size: new FormArray([]),
-      potColor: new FormArray([]),
-      rating: new FormControl('', [
+  form = new FormGroup(
+    {
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      price: new FormControl('', [
         Validators.required,
-        Validators.min(0),
-        Validators.max(5),
-        Validators.pattern(/^[0-9.]+$/),
+        Validators.min(1),
+        Validators.max(999999),
+        Validators.pattern(/^\d+(\.\d{1,2})?$/),
       ]),
-      video: new FormControl('', [
+      description: new FormControl('', [
         Validators.required,
-        Validators.pattern(/^https:\/\/www\.youtube\.com\/.*/),
+        Validators.minLength(15),
       ]),
-      plantCare: new FormGroup({
-        watering: new FormGroup({
-          title: new FormControl('', [
-            Validators.required,
-            Validators.minLength(3),
-          ]),
-          text: new FormControl('', [
-            Validators.required,
-            Validators.minLength(3),
-          ]),
+      extraInfo: new FormGroup({
+        image: new FormArray([]),
+        size: new FormArray([]),
+        potColor: new FormArray([]),
+        rating: new FormControl('', [
+          Validators.required,
+          Validators.min(0),
+          Validators.max(5),
+          Validators.pattern(/^[0-9.]+$/),
+        ]),
+        video: new FormControl('', [
+          Validators.required,
+          Validators.pattern(/^https:\/\/www\.youtube\.com\/.*/),
+        ]),
+        plantCare: new FormGroup({
+          watering: new FormGroup({
+            title: new FormControl('', [
+              Validators.required,
+              Validators.minLength(3),
+            ]),
+            text: new FormControl('', [
+              Validators.required,
+              Validators.minLength(3),
+            ]),
+          }),
+          light: new FormGroup({
+            title: new FormControl('', [
+              Validators.required,
+              Validators.minLength(3),
+            ]),
+            text: new FormControl('', [
+              Validators.required,
+              Validators.minLength(3),
+            ]),
+          }),
+          care: new FormGroup({
+            title: new FormControl('', [
+              Validators.required,
+              Validators.minLength(3),
+            ]),
+            text: new FormControl('', [
+              Validators.required,
+              Validators.minLength(3),
+            ]),
+          }),
         }),
-        light: new FormGroup({
-          title: new FormControl('', [
-            Validators.required,
-            Validators.minLength(3),
-          ]),
-          text: new FormControl('', [
-            Validators.required,
-            Validators.minLength(3),
-          ]),
-        }),
-        care: new FormGroup({
-          title: new FormControl('', [
-            Validators.required,
-            Validators.minLength(3),
-          ]),
-          text: new FormControl('', [
-            Validators.required,
-            Validators.minLength(3),
-          ]),
-        }),
+        review: new FormArray([]),
       }),
-      review: new FormArray([]),
-    }),
-    
-  }, [Validators.required]);
+    },
+    [Validators.required]
+  );
 
   constructor(
     private productsService: ProductsService,
@@ -108,9 +110,12 @@ export class ProductAddEditComponent extends AddEditComponent<
   }
 
   addImage() {
-    const imageForm = new FormGroup({
-      imageUrl: new FormControl('', [Validators.required]),
-    }, [Validators.required]);
+    const imageForm = new FormGroup(
+      {
+        imageUrl: new FormControl('', [Validators.required]),
+      },
+      [Validators.required]
+    );
 
     this.image.push(imageForm);
   }

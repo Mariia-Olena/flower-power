@@ -7,6 +7,7 @@ export interface APIorder {
     id: string;
     name: string;
   }[];
+  extraInfo: ExtraInfo;
   createdAt: string;
   updatedAt: string;
   id: string;
@@ -31,4 +32,14 @@ export interface Order {
   phone: string;
   message: string;
   products: OrderProducts[];
+  extraInfo: ExtraInfo;
+}
+
+interface ExtraInfo {
+  address: {
+    country: string;
+    region: string;
+    city: string;
+    address: string;
+  };
 }

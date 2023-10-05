@@ -23,7 +23,7 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
     {
       name: 'submit',
       onClick: () => {
-        this.onSubmit(this.getFormValue())
+        this.onSubmit(this.getFormValue());
       },
       color: 'primary',
       disabled: () => this.form.touched && !this.form.valid,
@@ -31,7 +31,7 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
     {
       name: 'reset',
       onClick: () => {
-        this.onResetButton()
+        this.onResetButton();
       },
       color: 'accent',
       disabled: () => !this.form.dirty,
@@ -39,7 +39,7 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
     {
       name: 'cancel',
       onClick: () => {
-        this.onCancelButton()
+        this.onCancelButton();
       },
       color: 'warn',
       disabled: () => false,
