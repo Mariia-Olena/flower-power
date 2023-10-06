@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   APIorder,
   Order,
+  OrderForm,
 } from '@sharedModule/services/entities/types/order.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -29,21 +30,20 @@ export class OrderAddEditComponent extends AddEditComponent<APIorder, Order> {
     country: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.pattern(/^[a-zA-Z-]+$/),
+      Validators.pattern(/^[a-zA-Z\s-]+$/),
     ]),
     region: new FormControl('', [
       Validators.minLength(3),
-      Validators.pattern(/^[a-zA-Z-]+$/),
+      Validators.pattern(/^^[a-zA-Z\s-]+$/),
     ]),
     city: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.pattern(/^[a-zA-Z-]+$/),
+      Validators.pattern(/^[a-zA-Z\s-]+$/),
     ]),
     address: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.pattern(/^[a-zA-Z-]+$/),
     ]),
     products: new FormArray([]),
   });
@@ -87,6 +87,26 @@ export class OrderAddEditComponent extends AddEditComponent<APIorder, Order> {
     this.form.controls.region.patchValue(this.item.extraInfo.address.region);
     this.form.controls.city.patchValue(this.item.extraInfo.address.city);
     this.form.controls.address.patchValue(this.item.extraInfo.address.address);
+  }
+
+  transformFormValue(formValue: OrderForm): Order {
+    let { name, phone, message, products, country, region, city, address } =
+      formValue;
+
+    return {
+      name,
+      phone,
+      message,
+      products,
+      extraInfo: {
+        address: {
+          country,
+          region,
+          city,
+          address,
+        },
+      },
+    };
   }
 
   onResetButton() {

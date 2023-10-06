@@ -112,8 +112,6 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
             this.showModalMessage(`${this.itemName} was successfully updated`, 'ok');
           },
           error: (error) => {
-            console.log(error, 123);
-            
             this.showModalMessage('Something went wrong, try again later', 'error');
           },
         });

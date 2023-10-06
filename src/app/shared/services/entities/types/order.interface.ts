@@ -43,3 +43,14 @@ interface ExtraInfo {
     address: string;
   };
 }
+
+export interface OrderForm {
+  name: string;
+  phone: string;
+  message: string;
+  products: OrderProducts[];
+  country: string;
+  region: string;
+  city: string;
+  address: string;
+}

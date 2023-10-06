@@ -1,6 +1,6 @@
 <div class="wrapper">
   <h1>{{ name | titlecase }} order</h1>
-  <form [formGroup]="form" (submit)="onSubmit(getFormValue())" class="form">
+  <form [formGroup]="form" (submit)="onSubmit(transformFormValue(getFormValue()))" class="form">
     <mat-card>
       <h2>Customer Information:</h2>
 
@@ -84,9 +84,6 @@
           </mat-error>
           <mat-error *ngIf="form.controls.address.errors?.['minlength']">
             Address must be at least 3 characters long
-          </mat-error>
-          <mat-error *ngIf="form.controls.address.errors?.['pattern']">
-            Enter a valid Address
           </mat-error>
         </mat-form-field>
       </div>

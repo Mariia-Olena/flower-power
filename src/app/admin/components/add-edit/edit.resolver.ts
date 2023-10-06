@@ -11,6 +11,6 @@ export abstract class EditResolver<APIentity, Entity> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<APIentity> {
-    return this.entityService.getOne(route.params?.['id']);
+    return this.entityService.getOne(route.params?.['id']); 
   }
 }
