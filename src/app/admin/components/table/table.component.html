@@ -32,10 +32,16 @@
           </button>
         </ng-container>
       </ng-container>
-      {{ element[column] }}
+      <ng-container *ngIf="column === 'created' || column === 'updated'">
+        {{ element[column] | date:'d MMM. y' }}
+      </ng-container>
+      <ng-container *ngIf="column !== 'created' && column !== 'updated'">
+        {{ element[column] }}
+      </ng-container>
+      
     </td>
   </ng-container>
-
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+

@@ -24,9 +24,7 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
   buttons: Buttons[] = [
     {
       name: 'submit',
-      onClick: () => {
-        this.onSubmit(this.getFormValue());
-      },
+      onClick: () => {},
       color: 'primary',
       disabled: () => this.form.touched && !this.form.valid,
     },
@@ -125,7 +123,7 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
       duration: 3000,
       horizontalPosition: 'right',
       verticalPosition: 'bottom',
-      panelClass: ['modal-message', result]
+      panelClass: ['modal-message', result],
     });
   }
 
@@ -146,13 +144,11 @@ export abstract class AddEditComponent<APIentity, Entity> implements OnInit {
             return null;
           })
         )
-        .subscribe(
-          (data) => {
-            data
-              ? (this.item = data)
-              : this.entityRouter.navigate([`/admin/${this.url}`]);
-          }
-        );
+        .subscribe((data) => {
+          data
+            ? (this.item = data)
+            : this.entityRouter.navigate([`/admin/${this.url}`]);
+        });
 
     this.setFieldsUpfront();
 
