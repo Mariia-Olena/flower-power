@@ -9,6 +9,7 @@
   &-box {
     display: flex;
     justify-content: space-between;
+    gap: rem(20);
   }
 
   &-list {
@@ -89,4 +90,61 @@
 
 .container {
   padding: rem(30);
+}
+
+.dropdown {
+  &-list {
+    margin-bottom: rem(10);
+  }
+
+  &-item {
+    margin-bottom: rem(5);
+  }
+
+  &-title {
+    @extend %subHead2;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: rem(10);
+    display: flex;
+    font-weight: bold; 
+    justify-content: space-between;
+
+    &::after {
+      content: "+";
+      margin-left: rem(10);
+    }
+  }
+
+  &-active {
+    color: var(--green);
+  }
+}
+
+.responsive-dropdown {
+  display: none;
+}
+
+@media #{$tabletSD} {
+  .container {
+    padding: rem(15);
+  }
+
+  .responsive-dropdown {
+    display: block;
+  }
+
+  .responsive-list {
+    display: none;
+  }
+
+  .footer-box {
+    display: block;
+  }
+
+  .footer-list {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 }

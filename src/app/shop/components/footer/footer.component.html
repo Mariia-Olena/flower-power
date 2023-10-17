@@ -1,54 +1,89 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-box">
-      <div class="footer-list">
+      <div class="responsive-list">
         <div class="footer-list footer-list-contacts">
           <p class="footer-item footer-item-bold">General questions 👋🏼</p>
-          <p class="footer-item footer-item">
-            Developer: mariia.stus@gmail.com
-          </p>
-          <p class="footer-item footer-item">Designer: nkyshchenko@gmail.com</p>
-        </div>
-        <div class="footer-list footer-list-contacts">
-          <p class="footer-item footer-item-bold">Plant doctor (support) 🌱</p>
-          <p class="footer-item">Flower-Power AG</p>
+          <p class="footer-item">Developer: mariia.stus@gmail.com</p>
+          <p class="footer-item">Designer: nkyshchenko@gmail.com</p>
           <p class="footer-item">Odesa, Ukraine</p>
         </div>
       </div>
-      <ul class="footer-list">
-        <a class="footer-link not-work-yet">
-          <li class="footer-item">Become a Flower-Power ambassador</li>
-        </a>
-        <a class="footer-link not-work-yet">
-          <li class="footer-item">Company offers</li>
-        </a>
-        <a class="footer-link not-work-yet">
-          <li class="footer-item">Jobs</li>
-        </a>
-        <a class="footer-link not-work-yet">
-          <li class="footer-item">Contact</li>
-        </a>
-        <a class="footer-link not-work-yet">
-          <li class="footer-item">FAQ</li>
-        </a>
+      <ul class="footer-list responsive-list">
+        <li class="footer-item">
+          <a class="footer-link not-work-yet">
+            Become a Flower-Power ambassador
+          </a>
+        </li>
+        <li class="footer-item">
+          <a class="footer-link not-work-yet"> Company offers </a>
+        </li>
+        <li class="footer-item">
+          <a class="footer-link not-work-yet"> Jobs </a>
+        </li>
+        <li class="footer-item">
+          <a class="footer-link not-work-yet"> FAQ </a>
+        </li>
       </ul>
-      <ul class="footer-list">
-        <a class="footer-link not-work-yet">
-          <li class="footer-item">Conditions</li>
-        </a>
-        <a class="footer-link not-work-yet">
-          <li class="footer-item">Shipping conditions</li>
-        </a>
-        <a class="footer-link not-work-yet">
-          <li class="footer-item">Privacy Policy</li>
-        </a>
-        <a class="footer-link not-work-yet">
-          <li class="footer-item">Imprint</li>
-        </a>
-        <a class="footer-link not-work-yet">
-          <li class="footer-item">Download media kit</li>
-        </a>
+      <ul class="footer-list responsive-list">
+        <li class="footer-item">
+          <a class="footer-link not-work-yet"> Conditions </a>
+        </li>
+        <li class="footer-item">
+          <a class="footer-link not-work-yet"> Shipping conditions </a>
+        </li>
+        <li class="footer-item">
+          <a class="footer-link not-work-yet"> Privacy Policy </a>
+        </li>
+        <li class="footer-item">
+          <a class="footer-link not-work-yet"> Imprint </a>
+        </li>
       </ul>
+      <div class="responsive-dropdown">
+        <ul>
+          <li class="footer-item footer-item-bold dropdown">
+            <div (click)="onDropDownClick(1)"  [ngClass]="{'dropdown-active': dropDown.has(1) }"  class="dropdown-title">Contacts</div>
+
+            <ul *ngIf="dropDown.has(1)" class="dropdown-list">
+              <li class="footer-item dropdown-item">Developer: mariia.stus@gmail.com</li>
+              <li class="footer-item dropdown-item">Designer: nkyshchenko@gmail.com</li>
+              <li class="footer-item dropdown-item">Odesa, Ukraine</li>
+            </ul>
+          </li>
+          <li class="footer-item footer-item-bold dropdown">
+            <div (click)="onDropDownClick(2)"  [ngClass]="{'dropdown-active': dropDown.has(2) }"  class="dropdown-title">About</div>
+
+            <ul *ngIf="dropDown.has(2)" class="dropdown-list">
+              <li class="footer-item dropdown-item">
+                <a class="footer-link not-work-yet">Company offers</a>
+              </li>
+              <li class="footer-item dropdown-item">
+                <a class="footer-link not-work-yet">Jobs</a>
+              </li>
+              <li class="footer-item dropdown-item">
+                <a class="footer-link not-work-yet">FAQ</a>
+              </li>
+              <li class="footer-item dropdown-item">
+                <a class="footer-link not-work-yet">Imprint</a>
+              </li>
+            </ul>
+          </li>
+          <li class="footer-item footer-item-bold dropdown">
+            <div (click)="onDropDownClick(3)" [ngClass]="{'dropdown-active': dropDown.has(3) }" class="dropdown-title">Terms</div>
+            <ul *ngIf="dropDown.has(3)" class="dropdown-list">
+              <li class="footer-item dropdown-item">
+                <a class="footer-link not-work-yet">Conditions</a>
+              </li>
+              <li class="footer-item dropdown-item">
+                <a class="footer-link not-work-yet">Shipping conditions</a>
+              </li>
+              <li class="footer-item dropdown-item">
+                <a class="footer-link not-work-yet">Privacy Policy</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
       <div class="footer-list">
         <div class="logo">
           <a routerLink="/" class="link">
@@ -91,3 +126,4 @@
     </div>
   </div>
 </footer>
+
