@@ -13,7 +13,11 @@
           </a>
         </li>
         <li *ngFor="let item of navBar; let first = first" class="item">
-          <a [routerLink]="item.link" class="link" [ngClass]="{'not-work-yet': !first}">
+          <a
+            [routerLink]="item.link"
+            class="link"
+            [ngClass]="{ 'not-work-yet': !first }"
+          >
             {{ item.name | uppercase }}
           </a>
         </li>
@@ -49,6 +53,66 @@
           </a>
         </li>
       </ul>
+
+      <div class="burger">
+        <div class="logo">
+          <a routerLink="/" class="link">
+            <svg class="logo-icon">
+              <use xlink:href="assets/icons/sprite.svg#logo"></use>
+            </svg>
+          </a>
+        </div>
+        <button
+          (click)="burgerMenuIsOpened = !burgerMenuIsOpened"
+          class="burger-button"
+        >
+          <svg class="burger-icon">
+            <use xlink:href="assets/icons/sprite.svg#burger_menu"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div *ngIf="burgerMenuIsOpened" class="burger-menu">
+        <ul class="burger-icon-list">
+          <li class="admin">
+            <a routerLink="admin">
+              <div class="tooltip-text">Go to admin page</div>
+              <svg class="header-icon">
+                <use xlink:href="assets/icons/sprite.svg#log_in"></use>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <button>
+              <svg class="header-icon not-work-yet">
+                <use xlink:href="assets/icons/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </li>
+          <li>
+            <a
+              (click)="burgerMenuIsOpened = false"
+              routerLink="cart"
+            >
+              <svg class="header-icon">
+                <use xlink:href="assets/icons/sprite.svg#cart"></use>
+              </svg>
+            </a>
+          </li>
+        </ul>
+        <ul class="burger-list">
+          <li *ngFor="let item of navBar; let first = first" class="item">
+            <a
+              (click)="burgerMenuIsOpened = false"
+              [routerLink]="item.link"
+              class="burger-link"
+              [ngClass]="{ 'not-work-yet': !first }"
+            >
+              {{ item.name | uppercase }}
+            </a>
+          </li>
+        </ul>
+      </div>
     </nav>
   </div>
 </header>

@@ -2,7 +2,10 @@
 
 .header {
   background-color: var(--lightGrey);
-  position: relative;
+  width: 100vw;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .message {
@@ -13,6 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .nav {
@@ -29,10 +33,6 @@
 
 .list-right {
   justify-content: flex-end;
-}
-
-.logo {
-  margin-right: rem(30);
 }
 
 .link {
@@ -70,6 +70,7 @@ svg.header-icon {
 svg.header-icon.not-work-yet {
   stroke: var(--grey);
 }
+
 .admin {
   position: relative;
 }
@@ -98,7 +99,7 @@ svg.header-icon.not-work-yet {
   position: absolute;
   border-width: 8px;
   border-style: solid;
-  border-color: var(--greyX) transparent  transparent  transparent ;
+  border-color: var(--greyX) transparent transparent transparent;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
@@ -107,4 +108,50 @@ svg.header-icon.not-work-yet {
 .admin:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
+}
+
+.burger {
+  display: none;
+  width: 100%;
+  justify-content: space-between;
+
+  &-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-icon {
+    width: rem(30);
+    height: rem(30);
+    stroke: var(--black, black);
+
+    &:hover {
+      stroke: var(--green);
+    }
+  }
+
+  &-icon-list {
+    display: flex;
+    gap: rem(20);
+  }
+}
+
+@media #{$tabletSD} {
+  .container {
+    padding: rem(15);
+  }
+
+  .nav {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .list {
+    display: none;
+  }
 }

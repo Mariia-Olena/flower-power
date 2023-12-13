@@ -28,6 +28,8 @@ export class HeaderComponent implements OnInit {
     },
   ];
 
+  burgerMenuIsOpened = false;
+
   ngOnInit() {
     this.tippyService.setDefaultProps({
       popperOptions: {
