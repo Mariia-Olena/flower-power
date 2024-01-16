@@ -15,17 +15,18 @@
     </div>
 
     <div class="input-container">
-      <label for="phone" class="input-label">Phone number</label>
+      <label for="phone" class="input-label">Phone number +380</label>
       <input
         id="phone"
         formControlName="phone"
+        placeholder="+380"
         [mask]="'+00 (000) 000-00-00'"
         (input)="onPhoneNumberChange()"
         class="input"
         [ngClass]="{ invalid: showErrors('phone') }"
       />
       <div *ngIf="showErrors('phone')" class="input-error">
-        Enter a valid phone number
+        Enter a valid email phone number
       </div>
     </div>
 
@@ -57,7 +58,7 @@
 
     <div class="input-container input-message">
       <label for="message" class="input-label not-required">Message</label>
-      <textarea 
+      <textarea
         id="message"
         formControlName="message"
         class="input"

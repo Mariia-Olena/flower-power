@@ -63,3 +63,58 @@
     text-decoration: underline;
   }
 }
+
+@media #{$tabletHD} {
+  .plantcare {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "text"
+      "video"
+      " charity";
+
+    &-video {
+      height: rem(500);
+    }
+
+    &-text-container {
+      padding-left: 0;
+    }
+
+    &-title {
+      text-align: center;
+    }
+
+    &-list {
+      margin-top: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: rem(10);
+    }
+  }
+
+  .charity {
+    margin-top: rem(30);
+
+    &-title {
+      text-align: center;
+    }
+
+    &-text {
+      margin: 0;
+    }
+
+    &-link {
+      color: var(--green);
+      text-decoration: underline;
+    }
+  }
+}
+
+@media #{$tablet} {
+  .plantcare {
+    &-video {
+      height: rem(300);
+    }
+  }
+}

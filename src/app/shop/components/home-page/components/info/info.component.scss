@@ -5,7 +5,7 @@
 
   &-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
     gap: rem(30);
   }
 
@@ -63,4 +63,20 @@
 
 .button {
   cursor: auto;
+}
+
+@media #{$tabletHD} {
+  .info {
+    &-list {
+      gap: rem(15);
+    }
+  }
+}
+
+@media #{$tablet} {
+  .info {
+    &-list {
+      grid-template-columns: 1fr;
+    }
+  }
 }

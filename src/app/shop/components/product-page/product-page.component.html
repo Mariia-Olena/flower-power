@@ -10,7 +10,10 @@
       <app-product-review [plantReview]="plantReview"></app-product-review>
     </ng-container>
     <ng-container *ngIf="plants$ | async as plants">
-      <app-product-slider (addToCart)="addToCart()" [plants]="plants"></app-product-slider>
+      <app-product-slider
+        (addToCart)="addToCart()"
+        [plants]="plants"
+      ></app-product-slider>
     </ng-container>
   </main>
   <app-spinner></app-spinner>

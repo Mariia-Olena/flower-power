@@ -4,3 +4,15 @@
   padding-top: rem(50);
   position: relative;
 }
+
+@media #{$desktopSD} {
+  .main {
+    padding-top: rem(30);
+  }
+}
+
+@media #{$tabletSD} {
+  .main {
+    padding-top: 0;
+  }
+}

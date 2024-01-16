@@ -138,10 +138,6 @@ svg.header-icon.not-work-yet {
 }
 
 @media #{$tabletSD} {
-  .container {
-    padding: rem(15);
-  }
-
   .nav {
     height: auto;
     flex-direction: column;
