@@ -25,6 +25,7 @@
     border-radius: rem(5);
     box-shadow: 0 0 15px 15px white;
     padding-right: rem(5);
+    text-align: center;
   }
 
   &-subtitle {
@@ -33,11 +34,13 @@
     background-color: white;
     border-radius: rem(5);
     box-shadow: 0 0 15px 12px white;
-    width: max-content;
-  };
+    width: fit-content;
+    text-align: center;
+  }
 
   &-order {
     text-decoration: underline;
+    
   }
 
   &-box {
@@ -45,6 +48,7 @@
     flex-direction: column;
     gap: rem(10);
     margin-top: rem(20);
+    padding: rem(15)
   }
 
   &-text {
@@ -53,7 +57,7 @@
     background-color: white;
     border-radius: rem(5);
     box-shadow: 0 0 15px 12px white;
-    width: max-content;
+    width: fit-content;
 
     &::before {
       content: "•";

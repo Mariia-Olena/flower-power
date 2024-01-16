@@ -9,7 +9,7 @@
     top: rem(100);
     content: "";
     height: 550px;
-    border-right: 550px solid var(--lightGrey);
+    border-left: 550px solid var(--lightGrey);
   }
 }
 
@@ -20,9 +20,11 @@
 }
 
 .UpSlider {
-  display: flex;
+  display: grid;
+  grid-template-areas: "img text";
 
   &-imgBox {
+    grid-area: img;
     display: flex;
   }
 
@@ -33,6 +35,7 @@
   }
 
   &-textBox {
+    grid-area: text;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -43,11 +46,13 @@
   &-title {
     @extend %header1;
     padding-left: rem(100);
+    text-align: center;
   }
 
   &-text {
     @extend %subHead1;
     padding-left: rem(100);
+    text-align: justify;
   }
 }
 
@@ -84,10 +89,62 @@
   .slider-img {
     height: 470px;
   }
+
+  .background {
+    ::after {
+      display: none;
+    }
+  }
+
+  .UpSlider {
+    grid-template-areas:
+      "text"
+      "img ";
+
+    &-imgBox {
+      justify-content: center;
+    }
+
+    &-img {
+      height: 750px;
+      max-width: 50%;
+    }
+
+    &-textBox {
+      align-items: center;
+      background-color: var(--lightGrey);
+      position: absolute;
+      width: 100%;
+      top: rem(50);
+      padding: rem(15);
+    }
+
+    &-title {
+      padding-left: 0;
+    }
+
+    &-text {
+      padding-left: 0;
+    }
+  }
 }
 
 @media #{$tabletHD} {
   .slider-img {
     height: 330px;
+  }
+}
+
+@media #{$tabletSD} {
+  .UpSlider {
+    &-imgBox {
+      :first-child {
+        max-width: 100%;
+      }
+
+      :last-child {
+        display: none;
+      }
+    }
   }
 }

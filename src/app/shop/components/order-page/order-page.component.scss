@@ -4,3 +4,21 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+@media #{$tabletSD} {
+  .form {
+    grid-area: form;
+  }
+
+  .cart {
+    grid-area: cart;
+  }
+
+  .container {
+    padding: rem(15);
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "cart"
+      "form";
+  }
+}

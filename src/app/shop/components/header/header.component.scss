@@ -2,7 +2,7 @@
 
 .header {
   background-color: var(--lightGrey);
-  width: 100vw;
+  max-width: 100vw;
   position: sticky;
   top: 0;
   z-index: 10;

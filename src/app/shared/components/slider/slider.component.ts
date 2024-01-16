@@ -53,6 +53,20 @@ export class SliderComponent implements OnInit {
               centerPadding: '100px',
             },
           },
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1,
+            },
+          },
+          {
+            breakpoint: 568,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              centerPadding: '0px',
+            },
+          },
         ],
         ...this.options,
       };

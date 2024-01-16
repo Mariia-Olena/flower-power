@@ -1,5 +1,9 @@
 @import "style-variables.scss";
 
+body {
+  min-height: 100vh;
+}
+
 .footer {
   margin-top: rem(30);
   border-top: 1px solid var(--green);
@@ -107,7 +111,7 @@
     cursor: pointer;
     margin-bottom: rem(10);
     display: flex;
-    font-weight: bold; 
+    font-weight: bold;
     justify-content: space-between;
 
     &::after {

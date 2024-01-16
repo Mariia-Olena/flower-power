@@ -44,3 +44,15 @@
     margin-top: rem(20);
   }
 }
+
+@media #{$tabletSD} {
+  .error {
+    &-title {
+      font-size: 55vw;
+    }
+
+    &-img {
+      width: 100vw;
+    }
+  }
+}

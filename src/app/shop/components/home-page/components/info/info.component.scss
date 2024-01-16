@@ -5,7 +5,7 @@
 
   &-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: rem(30);
   }
 
@@ -38,7 +38,7 @@
 }
 
 .quiz {
-  background-image: url('https://images.unsplash.com/photo-1604762524889-3e2fcc145683?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');
+  background-image: url("https://images.unsplash.com/photo-1604762524889-3e2fcc145683?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80");
   background-position: center;
   background-size: cover;
   height: 750px;
@@ -48,7 +48,7 @@
   gap: rem(10);
   align-items: center;
   text-align: center;
-  
+
   &-title {
     @extend %header1;
     color: var(--green);

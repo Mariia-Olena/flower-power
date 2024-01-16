@@ -16,11 +16,6 @@
     align-items: baseline;
   }
 
-  &-filter {
-    @extend %bodyText;
-    margin-left: rem(20);
-  }
-
   &-button {
     border: none;
     background-color: transparent;

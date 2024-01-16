@@ -53,3 +53,9 @@
     padding: rem(5);
   }
 }
+
+@media #{$tabletHD} {
+  .filter {
+    display: none;
+  }
+}
